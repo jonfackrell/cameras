@@ -13,8 +13,11 @@
     <!-- Bootstrap.CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
+    <!-- Custom Theme Style -->
+    <link href="/css/custom.css" rel="stylesheet">
+
     <style>
-        .container{width:100%;padding:0}
+        body { padding: 30px; }
     </style>
     @stack('styles')
 
@@ -31,7 +34,7 @@
 
 <body class="nav-md">
 <div class="container body">
-    <div class="main_container">
+    <div class="main_container row">
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
@@ -51,7 +54,7 @@
 
 
         <!-- page content -->
-        <div class="right_col" role="main">
+        <div class="right_col col-md-8" role="main">
 
 
             <div class="row">
@@ -86,7 +89,7 @@
         <!-- /page content -->
 
         <!-- footer content -->
-        <footer>
+        <footer class="row">
             <div class="pull-right">
                 {{ env('APP_NAME') }}
             </div>
