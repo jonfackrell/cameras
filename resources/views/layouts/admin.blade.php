@@ -25,6 +25,7 @@
     <style>
         body { padding: 30px; }
     </style>
+
     @stack('styles')
 
     <!-- JQuery -->
@@ -36,38 +37,40 @@
     <!-- Bootstrap.JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
+    @stack('header-scripts')
+
 </head>
 
-<body class="nav-md">
-<div class="container body">
+<body class="container">
+
     <div class="main_container row">
-        <div class="col-md-2 left_col sidebar">
-            <div class="left_col scroll-view">
-                <div class="navbar nav_title" style="border: 0;">
-                    <a href="{{ route('admin') }}" class="site_title"><span></span></a>
-                </div>
+        <div class="col-md-2 sidebar">
 
-                <div class="clearfix"></div>
-
-                <br />
-
-                @include('layouts.parts.sidebar')
-
-
+            <div class="navbar nav_title" style="border: 0;">
+                <a href="{{ route('admin') }}" class="site_title"><span></span></a>
             </div>
+
+            <div class="clearfix"></div>
+
+            <br />
+
+            @include('layouts.parts.sidebar')
+
+
+
         </div>
 
 
 
         <!-- page content -->
-        <div class="right_col col-md-8" role="main">
+        <div class="main_col col-md-8" role="main">
 
 
             <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="col-12">
                     <div class="x_panel">
-                        <div class="x_title">
-                            <h2 class="pull-left">@yield('title')</h2>
+                        <div class="x_title row">
+                            <h2 class="col">@yield('title')</h2>
                             
 
                             <div class="clearfix"></div>
@@ -86,27 +89,23 @@
             <br />
 
 
-                    </div>
-                </div>
-            </div>
-
-
         </div>
-        <!-- /page content -->
 
-        <!-- footer content -->
-        <footer class="row">
-            <div class="pull-right">
-                {{ env('APP_NAME') }}
-            </div>
-            <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
+
     </div>
-</div>
+    <!-- /page content -->
+
+    <!-- footer content -->
+    <footer class="row justify-content-end">
+        <div class="col-4">
+            {{ env('APP_NAME') }}
+        </div>
+        <div class="clearfix"></div>
+    </footer>
+    <!-- /footer content -->
 
 
-@stack('custom-scripts')
+@stack('footer-scripts')
 
 
 
