@@ -11,8 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::view('/', 'home');
+
+Route::get('/3d', function(){
+    return redirect()->to('https://maclab.byui.edu/3d/');
 });
 
 Route::get('/admin', 'AdminController@home')->name('admin');
