@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Patron;
 
 class AdminController extends Controller
 {
@@ -89,6 +90,8 @@ class AdminController extends Controller
      */
     public function home()
     {
-        return view('admin.index');
+        $patrons = Patron::all();
+
+        return view('admin.index', compact('patrons'));
     }
 }

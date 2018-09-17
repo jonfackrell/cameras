@@ -10,15 +10,22 @@
 
     <title>@yield('title')</title>
 
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
     <!-- Bootstrap.CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="https://content.byui.edu/file/0af2f055-7202-403e-9894-bb80478aa98c/1/macLab.css">
+    
     <!-- Custom Theme Style -->
     <link href="/css/custom.css" rel="stylesheet">
 
     <style>
         body { padding: 30px; }
     </style>
+
     @stack('styles')
 
     <!-- JQuery -->
@@ -30,44 +37,46 @@
     <!-- Bootstrap.JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
+    @stack('header-scripts')
+
 </head>
 
-<body class="nav-md">
-<div class="container body">
+<body class="container">
+
     <div class="main_container row">
-        <div class="col-md-3 left_col">
-            <div class="left_col scroll-view">
-                <div class="navbar nav_title" style="border: 0;">
-                    <a href="{{ route('admin') }}" class="site_title"><span></span></a>
-                </div>
+        <div class="col-md-2 sidebar">
 
-                <div class="clearfix"></div>
-
-                <br />
-
-                @include('layouts.parts.sidebar')
-
-
+            <div class="navbar nav_title" style="border: 0;">
+                <a href="{{ route('admin') }}" class="site_title"><span></span></a>
             </div>
+
+            <div class="clearfix"></div>
+
+            <br />
+
+            @include('layouts.parts.sidebar')
+
+
+
         </div>
 
 
 
         <!-- page content -->
-        <div class="right_col col-md-8" role="main">
+        <div class="main_col col-md-8" role="main">
 
 
             <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="col-12">
                     <div class="x_panel">
-                        <div class="x_title">
-                            <h2 class="pull-left">@yield('title')</h2>
+                        <div class="x_title row">
+                            <h2 class="col">@yield('title')</h2>
                             
 
                             <div class="clearfix"></div>
 
                         </div>
-                        <div class="x_content">
+                        <div class="x_content row">
                             <br>
 
                             @yield('content')
@@ -80,27 +89,23 @@
             <br />
 
 
-                    </div>
-                </div>
-            </div>
-
-
         </div>
-        <!-- /page content -->
 
-        <!-- footer content -->
-        <footer class="row">
-            <div class="pull-right">
-                {{ env('APP_NAME') }}
-            </div>
-            <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
+
     </div>
-</div>
+    <!-- /page content -->
+
+    <!-- footer content -->
+    <footer class="row justify-content-end">
+        <div class="col-4">
+            {{ env('APP_NAME') }}
+        </div>
+        <div class="clearfix"></div>
+    </footer>
+    <!-- /footer content -->
 
 
-@stack('custom-scripts')
+@stack('footer-scripts')
 
 
 
