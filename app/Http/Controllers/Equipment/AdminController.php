@@ -92,6 +92,6 @@ class AdminController extends Controller
     {
         $patrons = Patron::all();
 
-        return view('admin.index', compact('patrons'));
+        return view('3d.admin.index', compact('patrons'));
     }
 }

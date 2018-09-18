@@ -54,7 +54,7 @@
 
             <br />
 
-            @include('layouts.parts.sidebar')
+            @include('equipment.layouts.parts.sidebar')
 
 
 
