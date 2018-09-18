@@ -17,11 +17,7 @@ class CreateEquipmentTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('barcode');
             $table->string('item');
-            $table->boolean('memory_card')->default(false);
-            $table->unsignedTinyInteger('memory_card_size')->default(0);
-            $table->boolean('battery')->default(false);
-            $table->boolean('trp_head')->default(false);
-            $table->boolean('trp_handle')->default(false);
+            $table->dateTime('is_checked_in')->nullable()->default(NULL);
             $table->timestamps();
         });
     }
