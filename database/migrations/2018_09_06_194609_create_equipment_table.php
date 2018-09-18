@@ -17,7 +17,7 @@ class CreateEquipmentTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('barcode');
             $table->string('item');
-            $table->dateTime('is_checked_in')->nullable()->default(NULL);
+            $table->dateTime('checked_out_at')->nullable()->default(NULL);
             $table->timestamps();
         });
     }

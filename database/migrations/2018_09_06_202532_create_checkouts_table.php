@@ -19,15 +19,15 @@ class CreateCheckoutsTable extends Migration
             $table->integer('equipment_id')->unsigned();
             $table->dateTime('due_at');
             $table->dateTime('checked_out_at');
-            $table->dateTime('checked_in_at');
+            $table->dateTime('checked_in_at')->nullable()->default(NULL);
             $table->integer('checked_out_by')->unsigned();
-            $table->integer('checked_in_by')->unsigned();
-            $table->text('checkout_note')->nullable();
-            $table->text('checkin_note')->nullable();
+            $table->integer('checked_in_by')->unsigned()->nullable()->default(NULL);
+            $table->text('checkout_note')->nullable()->default(NULL);
+            $table->text('checkin_note')->nullable()->default(NULL);
             $table->timestamps();
 
             $table->foreign('patron_id')->references('id')->on('patrons');
-            $table->foreign('equipment_id')->references('id')->on('camera_checkouts');
+            $table->foreign('equipment_id')->references('id')->on('equipment');
             $table->foreign('checked_out_by')->references('id')->on('users');
             $table->foreign('checked_in_by')->references('id')->on('users');
         });
