@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+<<<<<<< HEAD
         $statuses = ['Pending Approval', 'Pending Print', 'Printing', 'Printing Complete', 'Denied'];
 
         $administrator = \App\Models\Role::whereName('administrator')->first();
@@ -255,5 +256,12 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         }
+=======
+        // $this->call(UsersTableSeeder::class);
+        //$users = factory(App\User::class, 10)->create();
+        $patrons = factory(App\Patron::class, 100)->create();
+        $equipment = factory(App\Equipment::class, 100)->create();
+        $checkouts = factory(App\Checkout::class, 20)->create();
+>>>>>>> 0eb885dbcf6660ffec380a7da6ecb0feb1760406
     }
 }
