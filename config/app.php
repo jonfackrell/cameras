@@ -151,6 +151,16 @@ return [
          * Package Service Providers...
          */
 
+        // https://github.com/adamwathan/bootforms
+        AdamWathan\BootForms\BootFormsServiceProvider::class,
+        // https://github.com/subfission/cas/wiki/Installation
+        Subfission\Cas\CasServiceProvider::class,
+        // https://github.com/barryvdh/laravel-snappy
+        // Barryvdh\Snappy\ServiceProvider::class,
+
+        //ConsoleTVs\Charts\ChartsServiceProvider::class,
+
+
         /*
          * Application Service Providers...
          */
@@ -160,8 +170,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        // https://github.com/adamwathan/bootforms
-        AdamWathan\BootForms\BootFormsServiceProvider::class,
+
 
     ],
 
@@ -215,6 +224,13 @@ return [
 
 
         'BootForm' => AdamWathan\BootForms\Facades\BootForm::class,
+        'Cas' => Subfission\Cas\Facades\Cas::class,
+
+        'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+        'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
+
+
+        'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
 
     ],
 

@@ -13,12 +13,12 @@ class AddEquipmentColumnToCameraCheckouts extends Migration
      */
     public function up()
     {
-        Schema::table('camera_checkouts', function (Blueprint $table) {
+        Schema::table('checkouts', function (Blueprint $table) {
             $table->integer('equipment_id')->unsigned();
             $table->dateTime('checked_out_date');
 
 
-            $table->foreign('equipment_id')->references('id')->on('camera_checkouts');
+            $table->foreign('equipment_id')->references('id')->on('checkouts');
         });
     }
 
@@ -29,7 +29,7 @@ class AddEquipmentColumnToCameraCheckouts extends Migration
      */
     public function down()
     {
-        Schema::table('camera_checkouts', function (Blueprint $table) {
+        Schema::table('checkouts', function (Blueprint $table) {
             $table->dropColumn('checked_out_date');
             $table->dropForeign(['equipment_id']);
         });

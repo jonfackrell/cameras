@@ -2,8 +2,15 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Gate;
+use App\Models\Department;
+use App\Models\Permission;
+use App\Models\PrintJob;
+use App\Policies\PrintJobPolicy;
+use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Schema;
+
+//use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -13,7 +20,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+        Department::class => DepartmentPolicy::class,
+        PrintJob::class => PrintJobPolicy::class,
     ];
 
     /**
@@ -21,10 +29,30 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Gate $gate)
     {
+        if(Schema::hasTable('users')) {
+
+            $gate->before(function($user) {
+                if($user->isSuperUser()) {
+                    return true;
+                }
+            });
+        }
+
         $this->registerPolicies();
 
-        //
+        if(Schema::hasTable('permissions') && Schema::hasTable('roles')) {
+            foreach ($this->getPermissions() as $permission){
+                $gate->define($permission->name, function($user) use ($permission){
+                    return $user->hasRole($permission->roles);
+                });
+            }
+        }
+    }
+
+    protected function getPermissions()
+    {
+        return Permission::with('roles')->get();
     }
 }

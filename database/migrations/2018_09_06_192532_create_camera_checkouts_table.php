@@ -13,7 +13,7 @@ class CreateCameraCheckoutsTable extends Migration
      */
     public function up()
     {
-        Schema::create('camera_checkouts', function (Blueprint $table) {
+        Schema::create('checkouts', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('patron_id')->unsigned();
             $table->dateTime('due_date');
@@ -37,6 +37,6 @@ class CreateCameraCheckoutsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('camera_checkouts');
+        Schema::dropIfExists('checkouts');
     }
 }

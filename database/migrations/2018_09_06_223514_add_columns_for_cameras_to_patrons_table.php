@@ -14,7 +14,7 @@ class AddColumnsForCamerasToPatronsTable extends Migration
     public function up()
     {
         Schema::table('patrons', function (Blueprint $table) {
-            $table->text('role');
+            $table->text('role')->nullable();
             $table->dateTime('cameras_access_end_date')->nullable()->default(NULL);
         });
     }
