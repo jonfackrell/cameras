@@ -21,7 +21,7 @@
     <div class="clearfix">&nbsp;</div>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <h2>OPEN COMPUTER LAB</h2>
             <p>The purpose of David O. McKay Library Mac Lab is to provide students with a creative space to help them in their academic pursuits by providing access to software, hardware, and trained lab assistants.</p>
             <p>The Mac Lab provides access to several programs, both commercial and free, that facilitate the creation of digital media, 3D models, and software applications. Some of which are included below. This list is constantly changing to adapt to faculty requirements.</p>
@@ -59,7 +59,48 @@
             </ul>
             <p>See the <a class="bluelink" href="http://library.byui.edu/library-information/library-hours.htm">Library Schedule</a> for Holiday Hours.</p>
         </div>
+    
+        <div class="col-md-6">
+            <div id='workshops' class='events'>
+                <div class='events-heading'>
+                    <h1 class='events-title'>UPCOMING WORKSHOPS</h1>
+                </div>
+                <div class='events-body'></div>
+            </div>
+            <figure>
+                <img class="img-fluid" src="https://content.byui.edu/file/0af2f055-7202-403e-9894-bb80478aa98c/1/3dprintingimage_minus_link.png?.vi=fancy" alt="3d Printing">
+                <figcaption id='link_for_3d_printing'><a class='bluelink' href='https://maclab.byui.edu/3d/'>3D Printing</a></figcaption>
+            </figure>
+        </div>
     </div>
 
 @endsection
+
+@push('header-scripts')
+    <!-- Handlebars.js -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js'></script>
+    <!-- Moment.js -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js'></script>
+    <!-- handlebars temple for workshops -->
+    <script id="workshops-template" type="text/x-handlebars-template">
+        @{{#if title}}
+        <div class="workshop row">
+            <div class="workshop-left">
+                <h3>@{{{date}}}</h3>   
+            </div>
+            <div class="workshop-main">
+                <h3 class="workshop-heading">
+                    <a href="@{{url.public}}" class='bluelink'>@{{title}}</a>
+                </h3>
+                <div class='worshop-body'>
+                    @{{{description}}}
+                    <p>
+                        <em><span>@{{{start_time}}} - @{{{end_time}}}</span> @{{#if location.name}} | @{{{location.name}}}@{{/if }}</em>
+                    </p>
+                </div>
+            </div>
+        </div>
+        @{{/if}}
+    </script>
+@endpush
 

@@ -39,13 +39,26 @@
     <link rel="stylesheet" href="https://library.byui.edu/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://library.byui.edu/css/MegaNavbarBS4.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
     <!-- Custom Website Style -->
     <link rel="stylesheet" href="https://library.byui.edu/assets/css/main.css?id=7723330db7716c52a0d2">
+    <link rel='stylesheet' href='https://content.byui.edu/file/0af2f055-7202-403e-9894-bb80478aa98c/1/macLab.css'>
+    <link rel='stylesheet' href='https://content.byui.edu/file/0af2f055-7202-403e-9894-bb80478aa98c/1/workshops.css'>
+    <link rel='stylesheet' href='https://content.byui.edu/file/0af2f055-7202-403e-9894-bb80478aa98c/1/typography.css'>
+
     <style>
 
     </style>
+
+    @stack('styles')
+
+    
+
+    @stack('header-scripts')
 
 </head>
 <body>
