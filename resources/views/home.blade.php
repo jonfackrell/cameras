@@ -102,5 +102,7 @@
         </div>
         @{{/if}}
     </script>
+    <!-- Workshops -->
+    <script src='https://content.byui.edu/file/0af2f055-7202-403e-9894-bb80478aa98c/1/workshops.js'></script>
 @endpush
 
