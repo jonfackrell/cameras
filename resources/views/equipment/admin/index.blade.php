@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('equipment.layouts.admin')
 
 @section('title')
     Cameras
