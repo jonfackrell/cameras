@@ -26,3 +26,27 @@
 		@endforeach
 	</div>
 @endsection
+
+@push('header-scripts')
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/collect.js/4.0.26/collect.min.js"></script>
+	<script>
+		var patrons = collect({!! $patrons !!});
+
+		var vm = new Vue({
+			el: '#patron_search',
+			data: {
+				patron: ''
+			},
+			watch: {
+				patron: function (newPatron, oldPatron) { this.filterPatrons(); }
+			},
+			methods: {
+				filterPatrons: function() {
+					var filteredPatrons = 0;
+				}
+			}
+		});
+
+	</script>
+@endpush
