@@ -85,10 +85,10 @@
     <script id="workshops-template" type="text/x-handlebars-template">
         @{{#if title}}
         <div class="workshop row">
-            <div class="workshop-left">
+            <div class="workshop-left col-sm-4">
                 <h3>@{{{date}}}</h3>   
             </div>
-            <div class="workshop-main">
+            <div class="workshop-main col-sm-8">
                 <h3 class="workshop-heading">
                     <a href="@{{url.public}}" class='bluelink'>@{{title}}</a>
                 </h3>
