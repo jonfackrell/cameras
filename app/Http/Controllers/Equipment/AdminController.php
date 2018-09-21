@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Equipment;
 
 use Illuminate\Http\Request;
-use App\Patron;
+use App\Models\Patron;
 
 class AdminController extends Controller
 {
@@ -92,6 +92,6 @@ class AdminController extends Controller
     {
         $patrons = Patron::all();
 
-        return view('3d.admin.index', compact('patrons'));
+        return view('equipment.admin.index', compact('patrons'));
     }
 }
