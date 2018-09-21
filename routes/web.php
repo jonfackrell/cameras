@@ -21,7 +21,7 @@ Route::group(['middleware' => ['mail']], function() {
 
 Route::middleware(['mail'])->group(function () {
 
-    /*Route::prefix('3d')->name('3d.')->namespace('Printing')->group(function () {
+    Route::prefix('3d')->name('3d.')->namespace('Printing')->group(function () {
 
         Route::get('/', 'PublicController@index')->name('home');
 
@@ -109,7 +109,7 @@ Route::middleware(['mail'])->group(function () {
         });
 
 
-    });*/
+    });
 
     Route::prefix('equipment')->name('equipment.')->namespace('Equipment')->group(function () {
 
