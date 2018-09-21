@@ -8,7 +8,7 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li class="">
-                    {!! BootForm::open()->action(route('3d.logout'))->post() !!}
+                    {!! BootForm::open()->action(route('logout'))->post() !!}
                     {!! BootForm::submit('Logout')->class('btn btn-danger')->style('margin-top: 12px;') !!}
                     {!! BootForm::close() !!}
                 </li>
