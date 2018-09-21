@@ -13,6 +13,7 @@
 
 /** Publicly Available Routes **/
 Route::view('/', 'home');
+Route::view('/policies', 'policies');
 
 Route::group(['middleware' => ['mail']], function() {
     Auth::routes();
