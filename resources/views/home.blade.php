@@ -8,6 +8,44 @@
     <span> MAC LAB</span>
 @endsection
 
+@section('nav')
+    <div class="row">
+        <div class="col">
+            <a href="{{ route('maclab-policies') }}">
+                <div class="clip-wrap">
+                    <div class="clip-each border-style-thin">
+                    </div>
+                </div>
+                <div>
+                    POLICIES
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a href="{{ route('equipment.home') }}">
+                <div class="clip-wrap">
+                    <div class="clip-each border-style-thin">
+                    </div>
+                </div>
+                <div>
+                    DIGITAL EQUIPMENT
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a href="{{ route('3d.home') }}">
+                <div class="clip-wrap">
+                    <div class="clip-each border-style-thin">
+                    </div>
+                </div>
+                <div>
+                    3D PRINTING
+                </div>
+            </a>
+        </div>
+    </div>
+@endsection
+
 @section('content')
 
 
@@ -29,10 +67,6 @@
     </ul>
     <p>See the <a class="bluelink" href="http://library.byui.edu/library-information/library-hours.htm">Library Schedule</a> for Holiday Hours.</p>
 
-    <figure>
-        <img class="img-fluid" src="https://content.byui.edu/file/0af2f055-7202-403e-9894-bb80478aa98c/1/3dprintingimage_minus_link.png?.vi=fancy" alt="3d Printing">
-        <figcaption id='link_for_3d_printing'><a class='bluelink' href='https://maclab.byui.edu/3d/'>3D Printing</a></figcaption>
-    </figure>
 
 
 @endsection

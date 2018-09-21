@@ -13,7 +13,7 @@
 
 /** Publicly Available Routes **/
 Route::view('/', 'home');
-Route::view('/policies', 'policies');
+Route::view('/policies', 'policies')->name('maclab-policies');
 
 Route::group(['middleware' => ['mail']], function() {
     Auth::routes();
@@ -114,7 +114,7 @@ Route::middleware(['mail'])->group(function () {
 
     Route::prefix('equipment')->name('equipment.')->namespace('Equipment')->group(function () {
 
-        Route::view('/', 'equipment.index');
+        Route::view('/', 'equipment.index')->name('home');
 
         Route::get('/admin', 'AdminController@home')->name('admin');
         // TODO: Add Camera Checkout system here
