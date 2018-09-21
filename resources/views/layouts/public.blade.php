@@ -62,6 +62,34 @@
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
       crossorigin="anonymous"></script>
 
+    <!-- Handlebars.js -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js'></script>
+    <!-- Moment.js -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js'></script>
+    <!-- handlebars temple for workshops -->
+    <script id="workshops-template" type="text/x-handlebars-template">
+        @{{#if title}}
+        <div class="workshop row">
+            <div class="workshop-left col-sm-4">
+                <h3>@{{{date}}}</h3>   
+            </div>
+            <div class="workshop-main col-sm-8">
+                <h3 class="workshop-heading">
+                    <a href="@{{url.public}}" class='bluelink'>@{{title}}</a>
+                </h3>
+                <div class='worshop-body'>
+                    @{{{description}}}
+                    <p>
+                        <em><span>@{{{start_time}}} - @{{{end_time}}}</span> @{{#if location.name}} | @{{{location.name}}}@{{/if }}</em>
+                    </p>
+                </div>
+            </div>
+        </div>
+        @{{/if}}
+    </script>
+    <!-- Workshops -->
+    <script src='https://content.byui.edu/file/0af2f055-7202-403e-9894-bb80478aa98c/1/workshops.js'></script>
+
     @stack('header-scripts')
 
 </head>
@@ -303,9 +331,34 @@
 </div>
 <div class="clearfix">&nbsp;</div>
 
+
 <div class="container">
 
-    @yield('content')
+    <div class="row">
+        <div class="col-md-12">
+            <p>
+                <img class="img-fluid" src="https://content.byui.edu/items/0af2f055-7202-403e-9894-bb80478aa98c/1/maclab-header.jpg?.vi=fancy" alt="Mac Lab: MCK 140A">
+            </p>
+
+        </div>
+    </div>
+
+    <div class="clearfix">&nbsp;</div>
+
+    <div class="row">
+        <div class="col-md-6">
+            @yield('content')
+        </div>
+        <div class="col-md-6">
+            <div id='workshops' class='events'>
+                <div class='events-heading'>
+                    <h1 class='events-title'>UPCOMING WORKSHOPS</h1>
+                </div>
+                <div class='events-body'></div>
+            </div>
+        </div>
+    </div>
+
 
 </div>
 
