@@ -31,10 +31,10 @@
             @foreach($notifications as $notification)
                 <tr data-id="{{ $notification->id }}">
                     <th>
-                        <a href="/printing/admin/notification/{{ $notification->id }}/edit">{{ $notification->display_name }}</a>
+                        <a href="{{ route('3d.notification.edit', ['notification' => $notification]) }}">{{ $notification->display_name }}</a>
                     </th>
                     <td>
-                        <a href="/printing/admin/notification/{{ $notification->id }}/edit">{{ $notification->subject }}</a>
+                        <a href="{{ route('3d.notification.edit', ['notification' => $notification]) }}">{{ $notification->subject }}</a>
                     </td>
                     <td>
                         {!! BootForm::open()->action(route('3d.notification.destroy', $notification->id))->delete() !!}

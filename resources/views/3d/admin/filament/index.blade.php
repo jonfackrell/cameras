@@ -31,7 +31,7 @@
 			@foreach($filaments as $filament)
 				<tr data-id="{{ $filament->id }}">
 					<th>
-						<a href="/admin/filament/{{ $filament->id }}/edit">{{ $filament->name }}</a>
+						<a href="{{ route('3d.filament.edit', ['filament' => $filament]) }}">{{ $filament->name }}</a>
 					</th>
 
 					@foreach($printers as $printer)

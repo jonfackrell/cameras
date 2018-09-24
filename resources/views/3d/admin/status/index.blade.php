@@ -45,7 +45,7 @@
             @foreach($statuses as $status)
                 <tr data-id="{{ $status->id }}">
                     <th>
-                        <a href="/admin/status/{{ $status->id }}/edit">{{ $status->name }}</a>
+                        <a href="{{ route('3d.status.edit', ['status' => $status]) }}">{{ $status->name }}</a>
                     </th>
                     <td>
                         <label>
@@ -122,7 +122,8 @@
                 }
             });
         @if(auth()->guard('web')->user()->isSuperUser() || auth()->guard('web')->user()->can('edit-statuses'))
-            $('input.flat').on('ifChecked', function(event){
+
+        $('input.flat').on('ifChecked', function(event){
                 var $checkbox = $(this);
                 var statusid = $checkbox.closest('tr').data('id');
                 var field = $checkbox.data('field');
@@ -130,7 +131,7 @@
                 data[field] = 1;
                 $.ajax({
                     type: "PUT",
-                    url: '/admin/status/' + statusid,
+                    url: '{{ route('3d.status.index') }}/' + statusid,
                     data: data,
                     dataType: "json",
                     success: function (data) {
@@ -149,7 +150,7 @@
                 data[field] = 0;
                 $.ajax({
                     type: "PUT",
-                    url: '/admin/status/' + statusid,
+                    url: '{{ route('3d.status.index') }}/' + statusid,
                     data: data,
                     dataType: "json",
                     success: function (data) {
@@ -169,7 +170,7 @@
                 data[field] = $select.val();
                 $.ajax({
                     type: "PUT",
-                    url: '/admin/status/' + statusid,
+                    url: '{{ route('3d.status.index') }}/' + statusid,
                     data: data,
                     dataType: "json",
                     success: function (data) {
