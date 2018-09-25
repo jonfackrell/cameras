@@ -37,7 +37,7 @@
                     </form>
                 </li>
             </ul>
-            @if(auth()->check() && strlen(auth()->guard('patrons')->user()->email) > 3)
+            @if(auth()->guard('patrons')->check() && strlen(auth()->guard('patrons')->user()->email) > 3)
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a href="{{ route('register') }}" class="navbar-link">Hi {{ auth()->guard('patrons')->user()->first_name }}!</a>
