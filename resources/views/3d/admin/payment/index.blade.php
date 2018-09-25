@@ -100,7 +100,7 @@
             function togglePrintJobPaymentStatus(id, paymentStatus){
 
                 $.ajax({
-                    url: "{{ route('3d.update.payment.status') }}",
+                    url: "{{ route('3d.payment.update.status') }}",
                     type: "POST",
                     data: {'id': id, 'paid': paymentStatus},
                     success: function(data){
