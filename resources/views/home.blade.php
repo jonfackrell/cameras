@@ -9,39 +9,46 @@
 @endsection
 
 @section('nav')
-    <div class="row">
-        <div class="col">
-            <a href="{{ route('maclab-policies') }}">
-                <div class="clip-wrap">
-                    <div class="clip-each border-style-thin">
-                    </div>
-                </div>
-                <div>
-                    POLICIES
-                </div>
-            </a>
-        </div>
-        <div class="col">
-            <a href="{{ route('equipment.home') }}">
-                <div class="clip-wrap">
-                    <div class="clip-each border-style-thin">
-                    </div>
-                </div>
-                <div>
-                    DIGITAL EQUIPMENT
-                </div>
-            </a>
-        </div>
-        <div class="col">
-            <a href="{{ route('3d.home') }}">
-                <div class="clip-wrap">
-                    <div class="clip-each border-style-thin">
-                    </div>
-                </div>
-                <div>
-                    3D PRINTING
-                </div>
-            </a>
+    <div class="container-fluid"  id="button-container">
+        <div class="container">
+            <div class="row justify-content-around">
+                
+                    <a href="{{ route('equipment.home') }}" class="col-xs-2 btn btn-light">
+                        <div class="clip-wrap">
+                            <div class="clip-each border-style-thin">
+                                <img src="/img/equipment.png" class="nav-icon">
+                            </div>
+                        </div>
+                        <div>
+                            DIGITAL EQUIPMENT
+                        </div>
+                    </a>
+                
+                
+                    <a href="{{ route('3d.home') }}" class="col-xs-2 btn btn-light">
+                        <div class="clip-wrap">
+                            <div class="clip-each border-style-thin">
+                                <img src="/img/3dPrinting.png" class="nav-icon">
+                            </div>
+                        </div>
+                        <div>
+                            3D PRINTING
+                        </div>
+                    </a>
+                
+                
+                    <a href="{{ route('maclab-policies') }}" class="col-xs-2 btn btn-light">
+                        <div class="clip-wrap">
+                            <div class="clip-each border-style-thin">
+                                <img src="/img/policies.png" class="nav-icon">
+                            </div>
+                        </div>
+                        <div>
+                            POLICIES
+                        </div>
+                    </a>
+               
+            </div>
         </div>
     </div>
 @endsection

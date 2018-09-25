@@ -51,7 +51,11 @@
     <link rel='stylesheet' href='https://content.byui.edu/file/0af2f055-7202-403e-9894-bb80478aa98c/1/typography.css'>
 
     <style>
-
+        a.btn.btn-light { background-color: inherit; border: inherit; }
+        #ml-header { background-color: #00A6DC; }
+        img.nav-icon { position: relative; z-index: 10; }
+        .clip-each.border-style-thin:hover { background-color: #00A6DC; }
+        img#chat-image { width: initial; }
     </style>
 
     @stack('styles')
@@ -69,11 +73,11 @@
     <!-- handlebars temple for workshops -->
     <script id="workshops-template" type="text/x-handlebars-template">
         @{{#if title}}
-        <div class="workshop row">
-            <div class="workshop-left col-sm-4">
+        <div class="workshop row justify-content-between">
+            <div class="workshop-left col-lg-4 col-md-12 col-sm-4">
                 <h3>@{{{date}}}</h3>   
             </div>
-            <div class="workshop-main col-sm-8">
+            <div class="workshop-main col-lg-7 col-md-12 col-sm-7">
                 <h3 class="workshop-heading">
                     <a href="@{{url.public}}" class='bluelink'>@{{title}}</a>
                 </h3>
@@ -119,20 +123,21 @@
     </div>
 </div>
 <div class="clearfix">&nbsp;</div>
+<div class="container-fluid" id="ml-header">
+    <div class="container">
+        <div class="row">
+            <a href="/" class="col-md-12">  
+                <img class="img-fluid" src="/img/maclab-header.jpg" alt="Mac Lab: MCK 140A">
+            </a>
+        </div>
+    </div>
+</div>
 
+@yield('nav')
 
 <div class="container">
 
-    <div class="row">
-        <div class="col-md-12">
-            <p>
-                <img class="img-fluid" src="https://content.byui.edu/items/0af2f055-7202-403e-9894-bb80478aa98c/1/maclab-header.jpg?.vi=fancy" alt="Mac Lab: MCK 140A">
-            </p>
-
-        </div>
-    </div>
-
-    @yield('nav')
+    
 
     <div class="clearfix">&nbsp;</div>
 
