@@ -31,7 +31,7 @@
             @foreach($departments as $department)
                 <tr data-id="{{ $department->id }}">
                     <th>
-                        <a href="/printing/admin/department/{{ $department->id }}/edit">{{ $department->name }}</a>
+                        <a href="{{ route('3d.department.edit', ['department' => $department]) }}">{{ $department->name }}</a>
                     </th>
                     <td>
                         {{ $department->created_at->toDayDateTimeString() }}

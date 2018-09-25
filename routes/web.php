@@ -75,7 +75,7 @@ Route::middleware(['mail'])->group(function () {
 
             Route::resource('/patron', 'PatronController');
 
-            Route::post('/update-payment-status', 'PaymentController@updatePaymentStatus');
+            Route::post('/update-payment-status', 'PaymentController@updatePaymentStatus')->name('payment.update.status');
 
             Route::get('download/{filename}', 'PatronController@download')->where('filename', '(.*)')->name('download');
 

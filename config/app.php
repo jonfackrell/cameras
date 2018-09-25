@@ -156,9 +156,9 @@ return [
         // https://github.com/subfission/cas/wiki/Installation
         Subfission\Cas\CasServiceProvider::class,
         // https://github.com/barryvdh/laravel-snappy
-        // Barryvdh\Snappy\ServiceProvider::class,
+        Barryvdh\Snappy\ServiceProvider::class,
 
-        //ConsoleTVs\Charts\ChartsServiceProvider::class,
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
 
 
         /*
@@ -166,7 +166,7 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 

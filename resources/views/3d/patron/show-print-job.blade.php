@@ -87,7 +87,7 @@
                                 Status
                             </th>
                             <td>
-                                {{ $printJob->currentStatus->name or ''}}
+                                {{ $printJob->currentStatus->name ?? ''}}
                             </td>
                         </tr>
                         </tbody>
