@@ -34,7 +34,7 @@
                         <a href="{{ route('3d.user.edit', ['user' => $user]) }}">{{ $user->first_name }} {{ $user->last_name }}</a>
                     </th>
                     <td>
-                        {{ $user->role->label or '' }}
+                        {{ $user->role->label ?? '' }}
                     </td>
                     <td>
                         {{ $user->created_at->toDayDateTimeString() }}

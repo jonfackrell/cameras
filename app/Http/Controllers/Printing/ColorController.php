@@ -105,7 +105,12 @@ class ColorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->authorize('edit-colors');
+
+        $color = Color::findorFail($id);
+        $color->delete();
+
+        return redirect()->back();
     }
 
     /**

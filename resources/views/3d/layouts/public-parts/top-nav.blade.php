@@ -8,7 +8,7 @@
                 <span class="icon-bar" style="color: #ffffff;"></span>
             </button>
             <a class="navbar-brand" href="/">
-                <img alt="" src="{{ $public->where('name', 'LOGO')->first()->value or '' }}" style="height: 28px; width: auto;">
+                <img alt="" src="{{ $public->where('name', 'LOGO')->first()->value ?? '' }}" style="height: 28px; width: auto;">
             </a>
 
         </div>

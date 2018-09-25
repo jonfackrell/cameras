@@ -61,10 +61,10 @@
                                         @if($row->owner->banned == 1)
                                             <i class="fa fa-exclamation-triangle" aria-hidden="true" style="color: red;" title="{{ strip_tags($row->owner->banned_reason) }}"></i>
                                         @endif
-                                        {{ $row->owner->first_name or ''}}
-                                        {{ $row->owner->last_name  or '' }}
+                                        {{ $row->owner->first_name ?? ''}}
+                                        {{ $row->owner->last_name  ?? '' }}
                                         <br />
-                                        <span style="font-weight: bold;margin-right: 6px;">I#: </span>{{ $row->owner->inumber  or '' }}
+                                        <span style="font-weight: bold;margin-right: 6px;">I#: </span>{{ $row->owner->inumber  ?? '' }}
                                         <br />
                                         <small>{{ $row->created_at->tz('America/Denver')->toDayDateTimeString() }}</small>
 
@@ -84,11 +84,11 @@
                                     <td>
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <span style="font-weight: bold;margin-right: 6px;">Name: </span>{{ $row->getFilament->name or '' }}
+                                                <span style="font-weight: bold;margin-right: 6px;">Name: </span>{{ $row->getFilament->name ?? '' }}
                                                 <br />
                                                 <span style="font-weight: bold;margin-right: 6px;">Color: </span>
                                                 <div style="height: 20px; width: 20px; margin-right: 6px; margin-bottom: -5px; display: inline-block;  background-color: #{{ $row->getcolor->hex_code }}" ></div>
-                                                {{ $row->getcolor->name or '' }}
+                                                {{ $row->getcolor->name ?? '' }}
                                             </div>
                                             <div class="col-md-4">
                                                 <span style="font-weight: bold;margin-right: 6px;">Amount: </span>{{ $row->weight }} grams
