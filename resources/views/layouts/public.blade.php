@@ -46,9 +46,8 @@
 
     <!-- Custom Website Style -->
     <link rel="stylesheet" href="https://library.byui.edu/assets/css/main.css?id=7723330db7716c52a0d2">
-    <link rel='stylesheet' href='https://content.byui.edu/file/0af2f055-7202-403e-9894-bb80478aa98c/1/macLab.css'>
-    <link rel='stylesheet' href='https://content.byui.edu/file/0af2f055-7202-403e-9894-bb80478aa98c/1/workshops.css'>
-    <link rel='stylesheet' href='https://content.byui.edu/file/0af2f055-7202-403e-9894-bb80478aa98c/1/typography.css'>
+    <link rel='stylesheet' href='/css/macLab.css'>
+    <link rel='stylesheet' href='/css/workshops.css'>
 
     <style>
         a.btn.btn-light { background-color: inherit; border: inherit; }
@@ -77,7 +76,7 @@
             <div class="workshop-left col-lg-4 col-md-12 col-sm-4">
                 <h3>@{{{date}}}</h3>   
             </div>
-            <div class="workshop-main col-lg-7 col-md-12 col-sm-7">
+            <div class="workshop-main col-lg-8 col-md-12 col-sm-8">
                 <h3 class="workshop-heading">
                     <a href="@{{url.public}}" class='bluelink'>@{{title}}</a>
                 </h3>
@@ -92,7 +91,8 @@
         @{{/if}}
     </script>
     <!-- Workshops -->
-    <script src='https://content.byui.edu/file/0af2f055-7202-403e-9894-bb80478aa98c/1/workshops.js'></script>
+    <!--<script src='https://content.byui.edu/file/0af2f055-7202-403e-9894-bb80478aa98c/1/workshops.js'></script>-->
+    <script src='/js/workshops.js'></script>
 
     @stack('header-scripts')
 
@@ -146,11 +146,11 @@
             @yield('content')
         </div>
         <div class="col-md-6">
-            <div id='workshops' class='events'>
-                <div class='events-heading'>
+            <div id='workshops' class='events row'>
+                <div class='events-heading col-lg-12 col-xs-12'>
                     <h1 class='events-title'>UPCOMING WORKSHOPS</h1>
                 </div>
-                <div class='events-body'></div>
+                <div class='events-body col-lg-12 col-xs-12'></div>
             </div>
         </div>
     </div>
@@ -224,7 +224,10 @@
                         </h2>
                     </section>
                     <div class="social-media-icons" style="margin-bottom: 14px;">
-
+                        <a href="https://www.instagram.com/byui.maclab">
+                            <i class="fab fa-instagram"></i>
+                            <span class="sr-only">Follow the Mac Lab on Instagram</span>
+                        </a>
 
 
                         <a href="https://www.facebook.com/mckaylibrary">

@@ -1,0 +1,67 @@
+body {
+display: block;
+margin: auto;
+    
+}
+* {
+    box-sizing: border-box;
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+}
+
+.row {
+    display: flex;
+}
+
+
+.column {
+    flex: 50%;
+    padding: 30px;
+   
+}
+img{
+   width: 100%;
+   height: auto; 
+}
+
+h1{
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 3px;
+}
+
+p, figcaption{
+    color: #414143;
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+}
+
+/*padding around the entire site*/
+.padding{
+    padding-left: 20px;
+    padding-right: 15px;
+}
+
+/*Links*/
+/* unvisited link */
+a.bluelink:link {
+    color: #08A7DD;
+}
+
+/* visited link */
+a.bluelink:visited {
+    color: #08A7DD;
+}
+
+/* mouse over link */
+a.bluelink:hover {
+    color: #414143;
+}
+
+ul{ 
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+}
+
+#largetext{
+    font-size: 1.2em;
+}

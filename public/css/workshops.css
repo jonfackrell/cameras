@@ -1,0 +1,35 @@
+.events
+{
+	border: 2px solid #414143;
+}
+
+
+.events-heading
+{
+	background-color: #E6E6E6;
+	padding: 10px;
+	text-align: center;
+}
+
+.workshop
+{
+	border-top: 2px solid #414143;
+   padding: 10px;
+}
+
+
+
+
+.workshop-left h3
+{
+	font-weight: lighter;
+   text-transform: uppercase;
+   color: #414143;
+   letter-spacing: 2px;
+   margin-right: 10px;
+}
+
+a
+{
+   text-decoration: none;
+}
