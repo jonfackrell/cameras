@@ -23,7 +23,7 @@ img{
    height: auto; 
 }
 
-h1{
+h1, h2, h3, h4{
     font-family: 'Oswald', sans-serif;
     letter-spacing: 3px;
 }
@@ -56,9 +56,8 @@ a.bluelink:hover {
 }
 
 ul{ 
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
+    padding-left: 20px;
+    list-style-type: square;
     font-family: "Open Sans", Helvetica, Arial, sans-serif;
 }
 
