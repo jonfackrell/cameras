@@ -70,25 +70,21 @@
     <!-- Moment.js -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js'></script>
     <!-- handlebars temple for workshops -->
-    <script id="workshops-template" type="text/x-handlebars-template">
-        @{{#if title}}
-        <div class="workshop row justify-content-between">
-            <div class="workshop-left col-lg-4 col-md-12 col-sm-4">
-                <h3>@{{{date}}}</h3>   
+    <script id="event-template" type="text/x-handlebars-template">
+        <div class="col event-card" onClick="javascript: window.location = '@{{url.public}}';">
+            <div class="card-header">
+                @{{ date }}
             </div>
-            <div class="workshop-main col-lg-8 col-md-12 col-sm-8">
-                <h3 class="workshop-heading">
-                    <a href="@{{url.public}}" class='bluelink'>@{{title}}</a>
-                </h3>
-                <div class='worshop-body'>
-                    @{{{description}}}
-                    <p>
-                        <em><span>@{{{start_time}}} - @{{{end_time}}}</span> @{{#if location.name}} | @{{{location.name}}}@{{/if }}</em>
-                    </p>
+            <div class="card-body">
+                <div class="event-title">
+                    @{{ title }}
                 </div>
+                <div class="event-description">
+                    @{{{ description }}}
+                </div>
+                <i>@{{{start_time}}} - @{{{end_time}}}@{{#if location.name}} <br/>@{{ location.name }}@{{/if}}</i>
             </div>
         </div>
-        @{{/if}}
     </script>
     <!-- Workshops -->
     <!--<script src='https://content.byui.edu/file/0af2f055-7202-403e-9894-bb80478aa98c/1/workshops.js'></script>-->
@@ -137,25 +133,33 @@
 
 <div class="container">
 
-    
-
     <div class="clearfix">&nbsp;</div>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             @yield('content')
-        </div>
-        <div class="col-md-6">
-            <div id='workshops' class='events row'>
-                <div class='events-heading col-lg-12 col-xs-12'>
-                    <h1 class='events-title'>UPCOMING WORKSHOPS</h1>
-                </div>
-                <div class='events-body col-lg-12 col-xs-12'></div>
-            </div>
         </div>
     </div>
 
 
+</div>
+
+@yield('banner')
+
+<div class="clearfix">&nbsp;</div>
+
+<div class="container event-cards" id='workshops'>
+    <div class="row event-header">
+        <div class="col-md-9">
+            <h2 class='events-title' style="font-size: 18px; line-height: 2em; padding-left: 12px;">
+                UPCOMING WORKSHOPS
+            </h2>
+        </div>
+        <div class="col-md-3" style="text-align: right; padding-top: 9px;">
+            <a href="https://byui.libcal.com/calendar/events/?ct=36359" style="padding: 4px 12px 4px 6px; color: #A5216F">SEE ALL EVENTS</a>
+        </div>
+    </div>
+    <div class="row events-body"></div>
 </div>
 
 
@@ -448,5 +452,7 @@
     <div id="chat-container" class="chat-container" role="button" tabindex="0" style="margin: -75px 0px 0px auto; padding: 0px; border-style: solid; border-width: 0px; font-style: normal; font-weight: normal; font-variant: normal; list-style: none outside none; letter-spacing: normal; line-height: normal; text-decoration: none; vertical-align: baseline; white-space: normal; word-spacing: normal; background-repeat: repeat-x; background-position: left bottom; background-color: #A5216F; border-color: transparent; border-radius: 2px; width: 40px; height: 178px; cursor: pointer; display: block; z-index: 107158; position: fixed; top: 50%; bottom: auto; left: auto; right: 0px;">
         <img src="https://library.byui.edu/images/live-chat.png" id="chat-image" alt="Chat with a Librarian" class="chat-image" style="margin: 0px; padding: 0px; border-style: none; border-width: 0px; font-style: normal; font-weight: normal; font-variant: normal; list-style: none outside none; letter-spacing: normal; line-height: normal; text-decoration: none; vertical-align: baseline; white-space: normal; word-spacing: normal; position: absolute; z-index: 600; left: 3px; top: 7px;">
     </div>
-</a></body>
+</a>
+@stack('footer-scripts')
+</body>
 </html>

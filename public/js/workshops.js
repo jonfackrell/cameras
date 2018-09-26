@@ -26,7 +26,7 @@ $(function(){
 						success: function(data){
 							if(data.events.length > 0){
 								var $calendarContainer = $('#workshops');
-								var source   = $("#workshops-template").html();
+								var source   = $("#event-template").html();
 								// Build Handlebars template
 								var eventTemplate = Handlebars.compile(source);
 								// Loop through events
