@@ -55,6 +55,7 @@
         img.nav-icon { position: relative; z-index: 10; }
         .clip-each.border-style-thin:hover { background-color: #00A6DC; }
         img#chat-image { width: initial; }
+        .infographic { border: #525252 solid; }
     </style>
 
     @stack('styles')
@@ -99,6 +100,7 @@
 
 
 <div class="clearfix">&nbsp;</div>
+<div class="clearfix">&nbsp;</div>
 
 <div class="container breadcrumbs">
     <div class="row">
@@ -121,11 +123,11 @@
 <div class="clearfix">&nbsp;</div>
 <div class="container-fluid" id="ml-header">
     <div class="container">
-        <div class="row">
-            <a href="/" class="col-md-12">  
-                <img class="img-fluid" src="/img/maclab-header.jpg" alt="Mac Lab: MCK 140A">
-            </a>
-        </div>
+        <a href="/" class="row">
+            <span class="col-2">  
+                <img class="col-12 img-fluid" src="/img/ml-logo-lt.png" alt="Mac Lab: MCK 140A">
+            </span>
+        </a>
     </div>
 </div>
 

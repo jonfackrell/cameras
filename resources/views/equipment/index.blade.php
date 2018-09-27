@@ -8,6 +8,62 @@
     <span> DIGITAL EQUIPMENT</span>
 @endsection
 
+
+@section('content')
+
+
+            
+    <h2>DIGITAL EQUIPMENT</h2>
+
+    <div class="clearfix">&nbsp;</div>
+
+    <ul>
+        <li><h4>Available Equipment (Upon Authorization):</h4>video cameras, digital cameras &amp; tripods</li>
+    </ul>
+
+    <div class="clearfix">&nbsp;</div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Students:</h4>
+
+            <div class="clearfix">&nbsp;</div>
+            <!-- TODO: add student infographic -->
+            <div class="infographic" style="height: 375px;"></div>
+            <div class="clearfix">&nbsp;</div>
+
+            <p>In order for students to check out camera equipment, it must be for academic use. Additionally, teacher approval is required for students to check out equipment. Students can have equipment for 24 hours after agreeing to our terms and conditions. To check out equipment for a longer period of time, it must be specified.</p>
+        </div>
+        <div class="col-md-6">
+            <h4>Staff/Faculty:</h4>
+
+            <div class="clearfix">&nbsp;</div>
+            <!-- TODO: add faculty infographic -->
+            <div class="infographic" style="height: 375px;"></div>
+            <div class="clearfix">&nbsp;</div>
+
+            <p>Available at any time for rentals. Staff/faculty cannot use camera equipment for personal use, it must be for academic purposes. Staff/faculty can have equipment after agreeing to our terms and conditions.</p>
+            <p id="largetext">Faculty can add students or request camera equipment using this link: <a class="bluelink" href="https://abish.byui.edu/cameras/index.cfm/authorize">Camera Authorization</a></p>
+            <p><strong> Disclaimer:</strong> If the link is not working, faculty can email cameras@byui.edu to approve students. For questions or concerns feel free to contact us.</p>
+        </div>
+    </div>
+
+    <div class="clearfix">&nbsp;</div>
+            
+    <h2>IN HOUSE EQUIPMENT</h2>
+
+    <div class="clearfix">&nbsp;</div>
+
+    <ul>
+        <li><h4>Available Equipment:</h4>headphones, Wacom tablets, HDMI cables, etc.</li>
+    </ul>
+
+    <div class="clearfix">&nbsp;</div>
+    
+
+@endsection
+
+
 @section('banner')
     <div class="clearfix">&nbsp;</div>
     <div class="container" id="slideContainer">
@@ -38,23 +94,6 @@
     </div>
 @endsection
 
-@section('content')
-
-
-            
-    <h2>DIGITAL EQUIPMENT</h2>
-    <p><strong>Available Equipment:</strong> headphones, Wacom tablets, HDMI cables, etc.</p>
-    
-    <p><strong>Available Equipment (Upon Authorization):</strong> video cameras, digital cameras &amp; tripods</p>
-
-    <p><strong>Students:</strong> In order for students to check out camera equipment, it must be for academic use. Additionally, teacher approval is required for students to check out equipment. Students can have equipment for 24 hours after agreeing to our terms and conditions. To check out equipment for a longer period of time, it must be specified.</p>
-    <p><strong>Staff/Faculty:</strong> Available at any time for rentals. Staff/faculty cannot use camera equipment for personal use, it must be for academic purposes. Staff/faculty can have equipment after agreeing to our terms and conditions.</p>
-    <p id="largetext">Faculty can add students or request camera equipment using this link: <a class="bluelink" href="https://abish.byui.edu/cameras/index.cfm/authorize">Camera Authorization</a></p>
-    <p><strong> Disclaimer:</strong> If the link is not working, faculty can email cameras@byui.edu to approve students. For questions or concerns feel free to contact us.</p>
-            
-
-
-@endsection
 
 @push('styles')
 

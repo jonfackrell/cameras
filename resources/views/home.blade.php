@@ -66,10 +66,10 @@
     <h2>OPEN COMPUTER LAB</h2>
     <p>The purpose of David O. McKay Library Mac Lab is to provide students with a creative space to help them in their academic pursuits by providing access to software, hardware, and trained lab assistants. The Mac Lab provides access to several programs, both commercial and free, that facilitate the creation of digital media, 3D models, and software applications. Some of which are included below. This list is constantly changing to adapt to faculty requirements.</p>
     <ul>
-        <li><h3>Adobe Creative Cloud Applications:</h3>Illustrator, Photoshop, InDesign, Premiere Pro, Acrobat, XD, and many others.</li>
-        <li><h3>3D Printing:</h3>Cura, Maya, Inventor</li>
-        <li><h3>Microsoft Office:</h3>Word, PowerPoint, Excel</li>
-        <li><h3>Software Development:</h3>XCode, BBEdit, RStudio, NetBeans, Cyberduck</li>
+        <li><h4>Adobe Creative Cloud Applications:</h4>Illustrator, Photoshop, InDesign, Premiere Pro, Acrobat, XD, and many others.</li>
+        <li><h4>3D Printing:</h4>Cura, Maya, Inventor</li>
+        <li><h4>Microsoft Office:</h4>Word, PowerPoint, Excel</li>
+        <li><h4>Software Development:</h4>XCode, BBEdit, RStudio, NetBeans, Cyberduck</li>
     </ul>
          
     
