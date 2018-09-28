@@ -14,6 +14,7 @@
 /** Publicly Available Routes **/
 Route::view('/', 'home');
 Route::view('/policies', 'policies')->name('maclab-policies');
+Route::view('/contacts', 'contacts')->name('maclab-contacts');
 
 Route::group(['middleware' => ['mail']], function() {
     Auth::routes();

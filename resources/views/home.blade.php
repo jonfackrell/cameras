@@ -47,6 +47,18 @@
                             POLICIES
                         </div>
                     </a>
+
+
+                    <a href="{{ route('maclab-contacts') }}" class="col-3 btn btn-light">
+                        <div class="clip-wrap">
+                            <div class="clip-each border-style-thin">
+                                <img src="/img/contacts.png" class="nav-icon">
+                            </div>
+                        </div>
+                        <div>
+                            CONTACTS
+                        </div>
+                    </a>
                
             </div>
         </div>
