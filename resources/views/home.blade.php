@@ -55,7 +55,7 @@
 
 @section('content')
 
-    <div class="clearfix">&nbsp;</div>
+    
     <div id="hours-container" class="container" style="text-align: center;">
         <a href="https://byui.libcal.com/hours/">
             <h2 id="hours-button">Today's Hours: 7am - 11:30pm</h2>
@@ -63,7 +63,11 @@
     </div>
     <div class="clearfix">&nbsp;</div>
 
-    <h2>OPEN COMPUTER LAB</h2>
+    <!-- TODO: add What we do infographic -->
+    <div class="infographic" style="height: 375px;"></div>
+    <div class="clearfix">&nbsp;</div>
+
+    <!--<h2>OPEN COMPUTER LAB</h2>-->
     <p>The purpose of David O. McKay Library Mac Lab is to provide students with a creative space to help them in their academic pursuits by providing access to software, hardware, and trained lab assistants. The Mac Lab provides access to several programs, both commercial and free, that facilitate the creation of digital media, 3D models, and software applications. Some of which are included below. This list is constantly changing to adapt to faculty requirements.</p>
     <ul>
         <li><h4>Adobe Creative Cloud Applications:</h4>Illustrator, Photoshop, InDesign, Premiere Pro, Acrobat, XD, and many others.</li>
