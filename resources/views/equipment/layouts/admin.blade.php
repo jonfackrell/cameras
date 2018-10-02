@@ -47,7 +47,7 @@
         <div class="col-md-2 sidebar">
 
             <div class="navbar nav_title" style="border: 0;">
-                <a href="{{ route('admin') }}" class="site_title"><span></span></a>
+                <a href="{{ route('equipment.admin') }}" class="site_title"><span></span></a>
             </div>
 
             <div class="clearfix"></div>
