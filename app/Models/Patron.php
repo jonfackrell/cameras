@@ -33,4 +33,8 @@ class Patron extends Authenticatable
         return in_array($this->attributes['email'], explode(',', env('SUPER')));
     }
 
+    public function checkouts() {
+        return $this->hasMany('App\Models\Checkout');
+    }
+
 }

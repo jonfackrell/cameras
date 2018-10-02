@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Checkout extends Model
 {
@@ -14,4 +15,13 @@ class Checkout extends Model
     protected $fillable = [
         'checked_out_at', 'checked_in_at', 'checkout_note', 'checkin_note',
     ];
+
+    public function getCheckedOutDate() {
+    	$date = Carbon::parse($this->checked_out_at);
+        return $date->format('M d Y');
+	}
+
+	public function patron() {
+		return $this->belongsTo('App\Models\Patron');
+	}
 }
