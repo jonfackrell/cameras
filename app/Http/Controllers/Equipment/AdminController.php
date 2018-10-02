@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Equipment;
 
 use Illuminate\Http\Request;
 use App\Models\Patron;
+use App\Models\Checkout;
 
 class AdminController extends Controller
 {
@@ -46,7 +47,10 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-        //
+        $patron = Patron::where('id', $id)->first();
+        $checkouts = Checkout::where('patron_id', $id)->get();
+
+        return view('equipment.admin.show-patron', compact('patron', 'checkouts'));
     }
 
     /**
@@ -90,7 +94,30 @@ class AdminController extends Controller
      */
     public function home()
     {
-        $patrons = Patron::all();
+        $patrons = [];
+
+        return view('equipment.admin.index', compact('patrons'));
+    }
+
+    /**
+     * Update the home page.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateHome(Request $request)
+    {
+        $patrons = [];
+
+        $newType = $request->get('type');
+        $newSearch = $request->get('search');
+
+        if ($newSearch == ''){
+            $patrons = Patron::all();
+        }
+        else {
+            $patrons = Patron::where($newType, $newSearch)->get();
+        }
 
         return view('equipment.admin.index', compact('patrons'));
     }

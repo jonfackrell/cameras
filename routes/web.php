@@ -116,6 +116,8 @@ Route::middleware(['mail'])->group(function () {
         Route::view('/', 'equipment.index');
 
         Route::get('/admin', 'AdminController@home')->name('admin');
+        Route::post('/admin', 'AdminController@updateHome')->name('admin');
+        Route::get('/admin/{id}', 'AdminController@show')->name('admin.show-patron');
         // TODO: Add Camera Checkout system here
 
     });
