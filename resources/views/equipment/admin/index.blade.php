@@ -1,7 +1,7 @@
 @extends('equipment.layouts.admin')
 
 @section('title')
-    Cameras
+    Search
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
 				{!! BootForm::select('&nbsp', 'type')->options(['inumber' => 'I-number', 'first_name' => 'First Name', 'last_name' => 'Last Name'])->select('inumber') !!}
 			</div>
 			<div class="col"> 
-				{!! BootForm::text('Search for a Patron', 'search')->attribute('v-model:value', 'patron') !!}
+				{!! BootForm::text('&nbsp', 'search')->attribute('v-model:value', 'patron') !!}
 			</div>
 			</div>
 			{!! BootForm::close() !!}

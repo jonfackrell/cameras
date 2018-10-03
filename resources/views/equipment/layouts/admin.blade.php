@@ -20,10 +20,11 @@
     <link rel="stylesheet" href="https://content.byui.edu/file/0af2f055-7202-403e-9894-bb80478aa98c/1/macLab.css">
     
     <!-- Custom Theme Style -->
-    <link href="/css/custom.css" rel="stylesheet">
+    <link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
 
     <style>
         body { padding: 30px; }
+        a { color: inherit; }
     </style>
 
     @stack('styles')
@@ -43,11 +44,11 @@
 
 <body class="container">
 
-    <div class="main_container row">
+    <div class="row">
         <div class="col-md-2 sidebar">
 
             <div class="navbar nav_title" style="border: 0;">
-                <a href="{{ route('equipment.admin') }}" class="site_title"><span></span></a>
+                <a href="{{ route('equipment.admin') }}" class="site_title"><h3>Equipment</h3></a>
             </div>
 
             <div class="clearfix"></div>
@@ -68,21 +69,16 @@
 
             <div class="row">
                 <div class="col-12">
-                    <div class="x_panel">
-                        <div class="x_title row">
-                            <h2 class="col">@yield('title')</h2>
-                            
+                    <div class="x_title row">
+                        <h2 class="col">@yield('title')</h2>
 
-                            <div class="clearfix"></div>
-
-                        </div>
-                        <div class="x_content row">
-                            <br>
-
-                            @yield('content')
-
-                        </div>
                     </div>
+                    <div class="x_content row">
+
+                        @yield('content')
+
+                    </div>
+                    
                 </div>
 
             </div>
