@@ -20,7 +20,7 @@
                             </div>
                         </div>
                         <div>
-                            DIGITAL EQUIPMENT
+                            <small>DIGITAL</small><br/> EQUIPMENT
                         </div>
                     </a>
                 
@@ -32,7 +32,7 @@
                             </div>
                         </div>
                         <div>
-                            3D PRINTING
+                            <small>3D</small><br/> PRINTING
                         </div>
                     </a>
                 
@@ -44,7 +44,7 @@
                             </div>
                         </div>
                         <div>
-                            POLICIES
+                            <small>OUR</small><br/> POLICIES
                         </div>
                     </a>
 
@@ -56,7 +56,7 @@
                             </div>
                         </div>
                         <div>
-                            CONTACTS
+                            <small>OUR</small><br/> CONTACTS
                         </div>
                     </a>
                
