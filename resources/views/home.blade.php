@@ -76,7 +76,9 @@
     <div class="clearfix">&nbsp;</div>
 
     <!-- TODO: add What we do infographic -->
-    <div class="infographic" style="height: 375px;"></div>
+    <div class="infographic">
+        <img class="img-fluid" src="/img/what-we-do-info.png" alt="What We Do Inforgraphic" style="max-height: 375px; width: auto;"></a>
+    </div>
     <div class="clearfix">&nbsp;</div>
 
     <!--<h2>OPEN COMPUTER LAB</h2>-->

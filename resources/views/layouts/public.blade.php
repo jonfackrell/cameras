@@ -55,7 +55,7 @@
         img.nav-icon { position: relative; z-index: 10; }
         .clip-each.border-style-thin:hover { background-color: #00A6DC; }
         img#chat-image { width: initial; }
-        .infographic { border: #525252 solid; }
+        /*.infographic { border: #525252 solid; }*/
     </style>
 
     @stack('styles')

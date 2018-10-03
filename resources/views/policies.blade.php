@@ -12,14 +12,12 @@
     <h2>POLICIES</h2>
     <div class="clearfix">&nbsp;</div>  
     <!-- TODO: add policies infographic -->
-    <div class="infographic" style="height: 375px;"></div>
+    <div class="infographic">
+        <img class="img-fluid" src="/img/policies-info.png" alt="Policies Inforgraphic" style="max-height: 525px; width: auto;"></a>
+    </div>
     <div class="clearfix">&nbsp;</div>       
     
-    <p><strong>One computer per person</strong></p>
-    <p><strong>We cannot assist you if you do not have a user name and password</strong></p>
-    <p><strong>No food or drink</strong></p>
-    <p><strong>Please take all phone/skype calls to the Commons to help keep noise level to a minimum</strong></p>
-    <p><strong>If you leave your computer for 30 minutes you will be logged off and your belongings brought to Lost and Found</strong></p>
+    
 
 
 @endsection

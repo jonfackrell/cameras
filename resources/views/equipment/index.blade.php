@@ -28,8 +28,10 @@
             <h4>Students:</h4>
 
             <div class="clearfix">&nbsp;</div>
-            <!-- TODO: add student infographic -->
-            <div class="infographic" style="height: 375px;"></div>
+            
+            <div class="infographic">
+                <img class="img-fluid" src="/img/stu-check-out-info.png" alt="Student Check Out Inforgraphic"></a>
+            </div>
             <div class="clearfix">&nbsp;</div>
 
             <p>In order for students to check out camera equipment, it must be for academic use. Additionally, teacher approval is required for students to check out equipment. Students can have equipment for 24 hours after agreeing to our terms and conditions. To check out equipment for a longer period of time, it must be specified.</p>
@@ -38,8 +40,10 @@
             <h4>Staff/Faculty:</h4>
 
             <div class="clearfix">&nbsp;</div>
-            <!-- TODO: add faculty infographic -->
-            <div class="infographic" style="height: 375px;"></div>
+            
+            <div class="infographic">
+                <img class="img-fluid" src="/img/fac-check-out-info.png" alt="Faculty Check Out Inforgraphic"></a>
+            </div>
             <div class="clearfix">&nbsp;</div>
 
             <p>Available at any time for rentals. Staff/faculty cannot use camera equipment for personal use, it must be for academic purposes. Staff/faculty can have equipment after agreeing to our terms and conditions.</p>
