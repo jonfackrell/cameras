@@ -28,12 +28,12 @@ class PatronAuth
             }
 
             auth()->guard('patrons')->login($user);
-            update.patron.info
-            if((\Route::currentRouteName() != '3d.register' || \Route::currentRouteName() != '3d.update.patron.info') && strlen(auth()->guard('patrons')->user()->email) < 3){
+
+            if((\Route::currentRouteName() != '3d.register' && \Route::currentRouteName() != '3d.update.patron.info') && strlen(auth()->guard('patrons')->user()->email) < 3){
                return redirect()->to( route('3d.register') );
             }
         }else{
-            if((\Route::currentRouteName() != '3d.register' || \Route::currentRouteName() != '3d.update.patron.info') && strlen(auth()->guard('patrons')->user()->email) < 3){
+            if((\Route::currentRouteName() != '3d.register' && \Route::currentRouteName() != '3d.update.patron.info') && strlen(auth()->guard('patrons')->user()->email) < 3){
                 return redirect()->to( route('3d.register') );
             }
         }

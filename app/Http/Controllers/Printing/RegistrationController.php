@@ -40,6 +40,6 @@ class RegistrationController extends Controller
         $user->fill($request->all());
         $user->save();
 
-        return redirect()->route('3d.options');
+        return redirect()->to(route('3d.options'));
     }
 }
