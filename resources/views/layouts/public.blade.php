@@ -123,8 +123,8 @@
 <div class="clearfix">&nbsp;</div>
 <div class="container-fluid" id="ml-header">
     <div class="container">
-        <a href="/" class="row">
-            <span class="col-lg-2 col-md-3 col-4">  
+        <a href="/" class="row justify-content-center">
+            <span class="col-lg-3 col-md-4 col-5">  
                 <img class="col-12 img-fluid" src="/img/ml-logo-lt.png" alt="Mac Lab: MCK 140A">
             </span>
         </a>

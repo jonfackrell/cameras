@@ -25,7 +25,6 @@ img{
 
 h1, h2, h3, h4{
     font-family: 'Oswald', sans-serif;
-    letter-spacing: 3px;
 }
 
 p, figcaption{
@@ -56,10 +55,12 @@ a.bluelink:hover {
 }
 
 ul{ 
-    padding-left: 20px;
-    list-style-type: square;
+    padding-left: 0px;
+    list-style-type: none;
     font-family: "Open Sans", Helvetica, Arial, sans-serif;
 }
+
+li { padding-top: 10px; }
 
 #largetext{
     font-size: 1.2em;

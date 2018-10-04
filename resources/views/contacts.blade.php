@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <h2>CONTACTS</h2>
+    <h2>CONTACT US</h2>
     <div class="clearfix">&nbsp;</div>  
     <!-- TODO: add contact info -->
     <div class="row">
@@ -48,6 +48,8 @@
             </div>
         </div>
     </div>
+
+    <div class="clearfix">&nbsp;</div>  
 
 @endsection
 

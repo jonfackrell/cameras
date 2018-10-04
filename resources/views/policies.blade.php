@@ -9,7 +9,6 @@
 @endsection
 
 @section('content')
-    <h2>POLICIES</h2>
     <div class="clearfix">&nbsp;</div>  
     <!-- TODO: add policies infographic -->
     <div class="infographic">

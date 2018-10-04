@@ -21,11 +21,9 @@
         <li><h4>Available Equipment (Upon Authorization):</h4>video cameras, digital cameras &amp; tripods</li>
     </ul>
 
-    <div class="clearfix">&nbsp;</div>
 
     <div class="row">
         <div class="col-md-6">
-            <h4>Students:</h4>
 
             <div class="clearfix">&nbsp;</div>
             
@@ -34,10 +32,8 @@
             </div>
             <div class="clearfix">&nbsp;</div>
 
-            <p>In order for students to check out camera equipment, it must be for academic use. Additionally, teacher approval is required for students to check out equipment. Students can have equipment for 24 hours after agreeing to our terms and conditions. To check out equipment for a longer period of time, it must be specified.</p>
         </div>
         <div class="col-md-6">
-            <h4>Staff/Faculty:</h4>
 
             <div class="clearfix">&nbsp;</div>
             
@@ -45,10 +41,9 @@
                 <img class="img-fluid" src="/img/fac-check-out-info.png" alt="Faculty Check Out Inforgraphic"></a>
             </div>
             <div class="clearfix">&nbsp;</div>
-
-            <p>Available at any time for rentals. Staff/faculty cannot use camera equipment for personal use, it must be for academic purposes. Staff/faculty can have equipment after agreeing to our terms and conditions.</p>
-            <p id="largetext">Faculty can add students or request camera equipment using this link: <a class="bluelink" href="https://abish.byui.edu/cameras/index.cfm/authorize">Camera Authorization</a></p>
-            <p><strong> Disclaimer:</strong> If the link is not working, faculty can email cameras@byui.edu to approve students. For questions or concerns feel free to contact us.</p>
+            <div class="row justify-content-center">
+                <a class="btn" href="https://abish.byui.edu/cameras/index.cfm/authorize"><button id='authorization' class="btn btn-default authorization">Click Here for Authorization</button></a>
+            </div>
         </div>
     </div>
 
@@ -103,10 +98,18 @@
 
 @endpush
 <style>
-    #slideContainer{
-        background-color: #525252;   
+    #authorization { 
+        background-color: #a9d04c;
+        border-color: #a9d04c; 
     }
-    #slideViewer{
+
+    #authorization:hover {
+        opacity: .8;
+    }
+
+    #slideContainer {   
+    }
+    #slideViewer {
         border: #fff solid;
         position: relative;
         margin: auto;
@@ -114,12 +117,12 @@
         padding-left: 0;
         background-color: white;
     }
-    .slideShow{
+    .slideShow {
         display: block;
         width: 10000px;
     }
-    .slideShowButton{
-        background-color: #000;
+    .slideShowButton {
+        background-color: transparent;
         color: #fff;
         padding: 8px 16px;
         cursor: pointer;
@@ -128,18 +131,18 @@
         top: 50%;
         transform: translate(0%, -50%);
         z-index: 10;
+        text-shadow: 0px 0px 5px #888;
     }
-    .slideShowButton:hover{
-        color: #000;
-        background-color: #ccc;
+    .slideShowButton:hover {
+        text-shadow: 0px 0px 5px #525252;
     }
-    .right{
+    .right {
         right: 0%;
     }
-    .left{
+    .left {
         left: 0%;
     }
-    .slides{
+    .slides {
         float: left;
         width:   100%;
         max-width: 1140px;
