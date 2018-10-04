@@ -29,11 +29,11 @@ class PatronAuth
 
             auth()->guard('patrons')->login($user);
 
-            if(\Route::currentRouteName() != 'register' && strlen(auth()->guard('patrons')->user()->email) < 3){
+            if(\Route::currentRouteName() != '3d.register' && strlen(auth()->guard('patrons')->user()->email) < 3){
                return redirect()->to( route('3d.register') );
             }
         }else{
-            if(\Route::currentRouteName() != 'register' && strlen(auth()->guard('patrons')->user()->email) < 3){
+            if(\Route::currentRouteName() != '3d.register' && strlen(auth()->guard('patrons')->user()->email) < 3){
                 return redirect()->to( route('3d.register') );
             }
         }
