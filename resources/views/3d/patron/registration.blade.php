@@ -6,7 +6,7 @@
 
 @section('content')
 
-    {!! BootForm::open()->action(route('3d.register'))->put() !!}
+    {!! BootForm::open()->action(route('3d.update.patron.info'))->put() !!}
     {!! BootForm::bind($user) !!}
     {!! BootForm::text('First Name', 'first_name')->required() !!}
     {!! BootForm::text('Last Name', 'last_name')->required() !!}

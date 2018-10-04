@@ -105,7 +105,7 @@ Route::middleware(['mail'])->group(function () {
             Route::delete('/history/{id}', 'PatronController@destroy')->name('job.delete');
 
             Route::get('/register', 'RegistrationController@edit')->name('register');
-            Route::put('/register', 'RegistrationController@update')->name('register');
+            Route::put('/register', 'RegistrationController@update')->name('update.patron.info');
         });
 
 
