@@ -5,7 +5,7 @@
 @endsection
 
 @section('breadcrumbs')
-    <span> CONTACTS</span>
+    <span> CONTACT US</span>
 @endsection
 
 @section('content')
@@ -18,7 +18,7 @@
             <div class="clearfix">&nbsp;</div> 
             <div class="row">
                 <p class="col-12">
-                    mckaymaclab@byui.edu
+                    <a href='mailto:mckaymaclab@byui.edu'>mckaymaclab@byui.edu</a>
                 </p>
             </div>
         </div>

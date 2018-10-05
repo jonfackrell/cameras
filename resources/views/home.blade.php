@@ -56,7 +56,7 @@
                             </div>
                         </div>
                         <div>
-                            <small>OUR</small><br/> CONTACTS
+                            <small>CONTACT</small><br/> US
                         </div>
                     </a>
                
@@ -96,6 +96,7 @@
 @push('footer-scripts')
 
 <script type="text/javascript">
+    // get today's hours
     var t=$("#hours-button");
     $.ajax({
         url:"https://api3.libcal.com/api_hours_today.php?iid=4251&lid=0&format=json&systemTime=0", 
