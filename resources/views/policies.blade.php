@@ -5,7 +5,7 @@
 @endsection
 
 @section('breadcrumbs')
-    <span> POLICIES</span>
+    <span> OUR POLICIES</span>
 @endsection
 
 @section('content')
