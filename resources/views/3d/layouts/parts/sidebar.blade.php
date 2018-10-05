@@ -44,6 +44,7 @@
                 </ul>
             </li>
             @endif
+            <li><a href="{{ route('equipment.admin') }}"><i class="fa fa-camera"></i> Equipment</a></li>
         </ul>
     </div>
     <div class="menu_section">
