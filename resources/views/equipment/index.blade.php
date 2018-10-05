@@ -25,7 +25,7 @@
     <div class="row">
         <div class="col-md-6">
 
-            <div class="clearfix">&nbsp;</div>
+            
             
             <div class="infographic">
                 <img class="img-fluid" src="/img/stu-check-out-info.png" alt="Student Check Out Inforgraphic"></a>
@@ -35,7 +35,7 @@
         </div>
         <div class="col-md-6">
 
-            <div class="clearfix">&nbsp;</div>
+            
             
             <div class="infographic">
                 <img class="img-fluid" src="/img/fac-check-out-info.png" alt="Faculty Check Out Inforgraphic"></a>
@@ -98,6 +98,9 @@
 
 @endpush
 <style>
+    nav#main_navbar { max-height: 30px; }
+    .container.breadcrumbs { max-height: 38px; }
+
     #authorization { 
         background-color: #a9d04c;
         border-color: #a9d04c; 

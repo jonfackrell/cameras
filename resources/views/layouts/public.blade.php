@@ -47,7 +47,6 @@
     <!-- Custom Website Style -->
     <link rel="stylesheet" href="https://library.byui.edu/assets/css/main.css?id=7723330db7716c52a0d2">
     <link rel='stylesheet' href='/css/macLab.css'>
-    <link rel='stylesheet' href='/css/workshops.css'>
 
     <style>
         a.btn.btn-light { background-color: inherit; border: inherit; }
@@ -99,7 +98,7 @@
 @include('layouts.parts.library-top-nav')
 
 
-<div class="clearfix">&nbsp;</div>
+
 <div class="clearfix">&nbsp;</div>
 
 <div class="container breadcrumbs">
