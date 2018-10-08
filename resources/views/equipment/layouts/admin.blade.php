@@ -17,6 +17,7 @@
     <!-- Bootstrap.CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="https://library.byui.edu/assets/css/main.css?id=7723330db7716c52a0d2">
     <link rel="stylesheet" href="https://content.byui.edu/file/0af2f055-7202-403e-9894-bb80478aa98c/1/macLab.css">
     
     <!-- Custom Theme Style -->
