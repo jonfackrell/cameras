@@ -9,11 +9,12 @@
 @endsection
 
 @section('nav')
+    <div class="clearfix">&nbsp;</div>
     <div class="container-fluid"  id="button-container">
         <div class="container">
             <div class="row justify-content-center">
                 
-                    <a href="{{ route('equipment.home') }}" class="col-3 btn btn-light">
+                    <a href="{{ route('equipment.home') }}" class="col-2 btn btn-light">
                         <div class="clip-wrap">
                             <div class="clip-each border-style-thin">
                                 <img src="/img/equipment.png" class="nav-icon">
@@ -25,7 +26,7 @@
                     </a>
                 
                 
-                    <a href="{{ route('3d.home') }}" class="col-3 btn btn-light">
+                    <a href="{{ route('3d.home') }}" class="col-2 btn btn-light">
                         <div class="clip-wrap">
                             <div class="clip-each border-style-thin">
                                 <img src="/img/3dPrinting.png" class="nav-icon">
@@ -37,7 +38,7 @@
                     </a>
                 
                 
-                    <a href="{{ route('maclab-policies') }}" class="col-3 btn btn-light">
+                    <a href="{{ route('maclab-policies') }}" class="col-2 btn btn-light">
                         <div class="clip-wrap">
                             <div class="clip-each border-style-thin">
                                 <img src="/img/policies.png" class="nav-icon">
@@ -49,7 +50,7 @@
                     </a>
 
 
-                    <a href="{{ route('maclab-contacts') }}" class="col-3 btn btn-light">
+                    <a href="{{ route('maclab-contacts') }}" class="col-2 btn btn-light">
                         <div class="clip-wrap">
                             <div class="clip-each border-style-thin">
                                 <img src="/img/contacts.png" class="nav-icon">
@@ -68,11 +69,7 @@
 @section('content')
 
     
-    <div id="hours-container" class="container" style="text-align: center;">
-        <a href="https://byui.libcal.com/hours/">
-            <h2 id="hours-button">Today's Hours: 7am - 11:30pm</h2>
-        </a>
-    </div>
+    
     <div class="clearfix">&nbsp;</div>
 
     <!-- TODO: add What we do infographic -->
@@ -93,26 +90,7 @@
     
 @endsection
 
-@push('footer-scripts')
 
-<script type="text/javascript">
-    // get today's hours
-    var t=$("#hours-button");
-    $.ajax({
-        url:"https://api3.libcal.com/api_hours_today.php?iid=4251&lid=0&format=json&systemTime=0", 
-        type:"GET", 
-        dataType:"jsonp", 
-        timeout:3e3, 
-        success:function(n){ 
-            var e=n.locations[0]; 
-            if(1==e.times.currently_open?t.html("Today's Hours: "+e.rendered):t.html("Closed"),n.hasOwnProperty("NOTICE")){
-                var o='<br /><span style="font-size: 11px;">'+n.NOTICE+"</span>";
-                t.append(o)
-            }
-            t.parents("div#hours-container").show()
-        },
-        error:function(n,e,o){t.parents("div#hours-container").hide()}});
-</script>
 
-@endpush
+
 

@@ -50,10 +50,12 @@
 
     <style>
         a.btn.btn-light { background-color: inherit; border: inherit; }
-        #ml-header { background-color: #00A6DC; }
+        #ml-header { background-color: #ebebeb; }
         img.nav-icon { position: relative; z-index: 10; }
         .clip-each.border-style-thin:hover { background-color: #00A6DC; }
         img#chat-image { width: initial; }
+        .green { color: #a9d04c; }
+        div#button-container { background-color: transparent; }
         /*.infographic { border: #525252 solid; }*/
     </style>
 
@@ -123,8 +125,8 @@
 <div class="container-fluid" id="ml-header">
     <div class="container">
         <a href="/" class="row justify-content-center">
-            <span class="col-lg-3 col-md-4 col-5">  
-                <img class="col-12 img-fluid" src="/img/ml-logo-lt.png" alt="Mac Lab: MCK 140A">
+            <span class="col-lg-5 col-md-6 col-7">  
+                <img class="img-fluid" src="/img/ml-logo.png" alt="Mac Lab: MCK 140A">
             </span>
         </a>
     </div>
@@ -156,8 +158,8 @@
                 UPCOMING WORKSHOPS
             </h2>
         </div>
-        <div class="col-md-3" style="text-align: right; padding-top: 9px;">
-            <a href="https://byui.libcal.com/calendar/events/?ct=36359" style="padding: 4px 12px 4px 6px; color: #A5216F">SEE ALL EVENTS</a>
+        <div class="col-md-3 green" style="text-align: right; padding-top: 9px;">
+            <a href="https://byui.libcal.com/calendar/events/?ct=36359" style="padding: 4px 12px 4px 6px;">SEE ALL EVENTS</a>
         </div>
     </div>
     <div class="row events-body"></div>
