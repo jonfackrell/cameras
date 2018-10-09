@@ -66,7 +66,7 @@
 @section('banner')
     <div class="clearfix">&nbsp;</div>
     <div class="container" id="slideContainer">
-        <div id="slideViewer" class="col-8">
+        <div id="slideViewer" class="col-5">
             <div class="slideShow">
                 <!-- Cameras -->
                 <figure class="slides"><a class="bluelink" href="https://www.usa.canon.com/internet/portal/us/home/products/details/camcorders/consumer/vixia/vixia-hf-r700"><img class="img-fluid" src="/img/vixia.gif" alt="Cannon VIXIA HF R700"></a>
