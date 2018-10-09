@@ -9,9 +9,8 @@
 @endsection
 
 @section('content')
-    <h2>CONTACT US</h2>
+    <!-- <h2>CONTACT US</h2> -->
     <div class="clearfix">&nbsp;</div>  
-    <!-- TODO: add contact info -->
     <div class="row">
         <div class="col-md col-sm-6 contact">
             <i class="fa fa-envelope fa-3x green"></i> 
@@ -56,8 +55,15 @@
         </div>
     </div>
 
-    <div class="clearfix">&nbsp;</div>  
+    
 
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-9 col-12">
+            <img class="img-fluid" src="/img/map.png" alt="Map of the First Floor West Wing"></a>
+        </div>
+    </div>
+
+    <div class="clearfix">&nbsp;</div>  
 @endsection
 
 @push('styles')

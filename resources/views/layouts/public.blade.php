@@ -125,7 +125,7 @@
 <div class="container-fluid" id="ml-header">
     <div class="container">
         <a href="/" class="row justify-content-center">
-            <span class="col-lg-5 col-md-6 col-7">  
+            <span class="col-lg-5 col-md-7 col-sm-9 col-10">  
                 <img class="img-fluid" src="/img/ml-logo.png" alt="Mac Lab: MCK 140A">
             </span>
         </a>

@@ -14,7 +14,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 
-                    <a href="{{ route('equipment.home') }}" class="col-2 btn btn-light">
+                    <a href="{{ route('equipment.home') }}" class="col-lg-2 col-sm-3 col-6 btn btn-light">
                         <div class="clip-wrap">
                             <div class="clip-each border-style-thin">
                                 <img src="/img/equipment.png" class="nav-icon">
@@ -26,7 +26,7 @@
                     </a>
                 
                 
-                    <a href="{{ route('3d.home') }}" class="col-2 btn btn-light">
+                    <a href="{{ route('3d.home') }}" class="col-lg-2 col-sm-3 col-6 btn btn-light">
                         <div class="clip-wrap">
                             <div class="clip-each border-style-thin">
                                 <img src="/img/3dPrinting.png" class="nav-icon">
@@ -38,7 +38,7 @@
                     </a>
                 
                 
-                    <a href="{{ route('maclab-policies') }}" class="col-2 btn btn-light">
+                    <a href="{{ route('maclab-policies') }}" class="col-lg-2 col-sm-3 col-6 btn btn-light">
                         <div class="clip-wrap">
                             <div class="clip-each border-style-thin">
                                 <img src="/img/policies.png" class="nav-icon">
@@ -50,7 +50,7 @@
                     </a>
 
 
-                    <a href="{{ route('maclab-contacts') }}" class="col-2 btn btn-light">
+                    <a href="{{ route('maclab-contacts') }}" class="col-lg-2 col-sm-3 col-6 btn btn-light">
                         <div class="clip-wrap">
                             <div class="clip-each border-style-thin">
                                 <img src="/img/contacts.png" class="nav-icon">
@@ -73,8 +73,10 @@
     <div class="clearfix">&nbsp;</div>
 
     <!-- TODO: add What we do infographic -->
-    <div class="infographic">
-        <img class="img-fluid" src="/img/what-we-do-info.png" alt="What We Do Inforgraphic" style="max-height: 375px; width: auto;"></a>
+    <div class="row justify-content-center infographic">
+        <div class="col-lg-10 col-12">
+            <img class="img-fluid" src="/img/what-we-do-info.png" alt="What We Do Inforgraphic" style="max-height: 375px; width: auto;"></a>
+        </div>
     </div>
     <div class="clearfix">&nbsp;</div>
 
