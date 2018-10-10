@@ -10,8 +10,8 @@
     <!-- Social Media Metatags -->
     <meta property="og:site_name" content="Library Mac Lab">
     <meta property="og:title" content="Library Mac Lab">
-    <meta property="og:description" content="The David O. McKay Library serves university and community patrons with a vast book collection, hundreds of databases, and much more. The building also houses university archives, a special exhibition area, and instructional technology labs.">
-    <meta property="og:image" content="http://library.byui.edu/img/mckay-library-outside-west-wing.png">
+    <meta property="og:description" content="The purpose of David O. McKay Library Mac Lab is to provide students with a creative space to help them in their academic pursuits by providing access to software, hardware, and trained lab assistants. The Mac Lab provides access to several programs, both commercial and free, that facilitate the creation of digital media, 3D models, and software applications.">
+    <meta property="og:image" content="{{ asset('/img/what-we-do-info.png') }}">
     <meta property="og:url" content="http://maclab.byui.edu/">
     <meta name="twitter:card" content="summary_large_image">
 
@@ -46,7 +46,7 @@
 
     <!-- Custom Website Style -->
     <link rel="stylesheet" href="https://library.byui.edu/assets/css/main.css?id=7723330db7716c52a0d2">
-    <link rel='stylesheet' href='/css/macLab.css'>
+    <link rel='stylesheet' href='{{ asset("/css/macLab.css") }}'>
 
     <style>
         a.btn.btn-light { background-color: inherit; border: inherit; }
@@ -90,7 +90,7 @@
     </script>
     <!-- Workshops -->
     <!--<script src='https://content.byui.edu/file/0af2f055-7202-403e-9894-bb80478aa98c/1/workshops.js'></script>-->
-    <script src='/js/workshops.js'></script>
+    <script src='{{ asset("/js/workshops.js") }}'></script>
 
     @stack('header-scripts')
 
@@ -126,7 +126,7 @@
     <div class="container">
         <a href="/" class="row justify-content-center">
             <span class="col-lg-5 col-md-7 col-sm-9 col-10">  
-                <img class="img-fluid" src="/img/ml-logo.png" alt="Mac Lab: MCK 140A">
+                <img class="img-fluid" src="{{ asset('/img/ml-logo.png') }}" alt="Mac Lab: MCK 140A">
             </span>
         </a>
     </div>

@@ -28,7 +28,7 @@
             
             
             <div class="infographic">
-                <img class="img-fluid" src="/img/stu-check-out-info.png" alt="Student Check Out Inforgraphic"></a>
+                <img class="img-fluid" src="{{ asset('/img/stu-check-out-info.png') }}" alt="Student Check Out Inforgraphic"></a>
             </div>
             <div class="clearfix">&nbsp;</div>
 
@@ -38,7 +38,7 @@
             
             
             <div class="infographic">
-                <img class="img-fluid" src="/img/fac-check-out-info.png" alt="Faculty Check Out Inforgraphic"></a>
+                <img class="img-fluid" src="{{ asset('/img/fac-check-out-info.png') }}" alt="Faculty Check Out Inforgraphic"></a>
             </div>
             <div class="clearfix">&nbsp;</div>
             <div class="row justify-content-center">
@@ -69,10 +69,10 @@
         <div id="slideViewer" class="col-lg-5 col-md-6 col-8">
             <div class="slideShow">
                 <!-- Cameras -->
-                <figure class="slides"><a class="bluelink" href="https://www.usa.canon.com/internet/portal/us/home/products/details/camcorders/consumer/vixia/vixia-hf-r700"><img class="img-fluid" src="/img/vixia.gif" alt="Cannon VIXIA HF R700"></a>
+                <figure class="slides"><a class="bluelink" href="https://www.usa.canon.com/internet/portal/us/home/products/details/camcorders/consumer/vixia/vixia-hf-r700"><img class="img-fluid" src="{{ asset('/img/vixia.gif') }}" alt="Cannon VIXIA HF R700"></a>
                     <figcaption><strong>Cannon VIXIA HF R700</strong><br> Click <a class="bluelink" href="https://www.usa.canon.com/internet/portal/us/home/products/details/camcorders/consumer/vixia/vixia-hf-r700">here</a> for more information.</figcaption>
                 </figure>
-                <figure class="slides"><a class="bluelink" href="https://shop.usa.canon.com/shop/en/catalog/powershot-sx60-hs?utm_source=google&amp;utm_medium=Product_Search&amp;utm_campaign=Google_Product_Feed&amp;cm_mmc=GA-_-Digital_Point_&amp;_Shoot_Cameras-_-G_Canon_Product+Listing+Ads-_-35697&amp;gclid=CjwKCAjwzoDXBRBbEiwAGZRIeBOQ8uR0-AkAYn8-AolqhMJrv6hNAvBdADlVGnT8NEjCd2l6-dy7nhoClEIQAvD_BwE"><img class="img-fluid" src="/img/powershot.jpg" alt="Cannon PowerShot SX60 HS"></a>
+                <figure class="slides"><a class="bluelink" href="https://shop.usa.canon.com/shop/en/catalog/powershot-sx60-hs?utm_source=google&amp;utm_medium=Product_Search&amp;utm_campaign=Google_Product_Feed&amp;cm_mmc=GA-_-Digital_Point_&amp;_Shoot_Cameras-_-G_Canon_Product+Listing+Ads-_-35697&amp;gclid=CjwKCAjwzoDXBRBbEiwAGZRIeBOQ8uR0-AkAYn8-AolqhMJrv6hNAvBdADlVGnT8NEjCd2l6-dy7nhoClEIQAvD_BwE"><img class="img-fluid" src="{{ asset('/img/powershot.jpg') }}" alt="Cannon PowerShot SX60 HS"></a>
                     <figcaption><strong>Cannon PowerShot SX60 HS</strong><br> Click <a class="bluelink" href="https://shop.usa.canon.com/shop/en/catalog/powershot-sx60-hs?utm_source=google&amp;utm_medium=Product_Search&amp;utm_campaign=Google_Product_Feed&amp;cm_mmc=GA-_-Digital_Point_&amp;_Shoot_Cameras-_-G_Canon_Product+Listing+Ads-_-35697&amp;gclid=CjwKCAjwzoDXBRBbEiwAGZRIeBOQ8uR0-AkAYn8-AolqhMJrv6hNAvBdADlVGnT8NEjCd2l6-dy7nhoClEIQAvD_BwE&#10;">here</a> for more information.</figcaption>
                 </figure>
                 <!-- Tablets -->
@@ -83,7 +83,7 @@
                     <figcaption><strong>Wacom Cintiq Pro</strong><br> Click <a class="bluelink" href="https://www.wacom.com/en-us/products/pen-tablets/wacom-intuos-pro">here</a> for more information.</figcaption>
                 </figure>
                 <!-- First Slide Repeat -->
-                <figure class="slides"><a class="bluelink" href="https://www.usa.canon.com/internet/portal/us/home/products/details/camcorders/consumer/vixia/vixia-hf-r700"><img class="img-fluid" src="/img/vixia.gif" alt="Cannon VIXIA HF R700"></a>
+                <figure class="slides"><a class="bluelink" href="https://www.usa.canon.com/internet/portal/us/home/products/details/camcorders/consumer/vixia/vixia-hf-r700"><img class="img-fluid" src="{{ asset('/img/vixia.gif') }}" alt="Cannon VIXIA HF R700"></a>
                     <figcaption><strong>Cannon VIXIA HF R700</strong><br> Click <a class="bluelink" href="https://www.usa.canon.com/internet/portal/us/home/products/details/camcorders/consumer/vixia/vixia-hf-r700">here</a> for more information.</figcaption>
                 </figure>
             </div>
