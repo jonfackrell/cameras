@@ -59,7 +59,9 @@
 
     <div class="row justify-content-center">
         <div class="col-lg-7 col-md-9 col-12">
-            <img class="img-fluid" src="{{ asset('/img/map.png') }}" alt="Map of the First Floor West Wing"></a>
+            <div class="row justify-content-center"><div class="col-10">
+                <img class="img-fluid" src="{{ asset('/img/map.png') }}" alt="Map of the First Floor West Wing"></a>
+            </div></div>
         </div>
     </div>
 

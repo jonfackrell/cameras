@@ -126,7 +126,10 @@
     <div class="container">
         <a href="/" class="row justify-content-center">
             <span class="col-lg-5 col-md-7 col-sm-9 col-10">  
-                <img class="img-fluid" src="{{ asset('/img/ml-logo.png') }}" alt="Mac Lab: MCK 140A">
+                <span class="row justify-content-center">
+                <span class="col-12">
+                    <img class="img-fluid" src="{{ asset('/img/ml-logo.png') }}" alt="Mac Lab: MCK 140A">
+                </span></span>
             </span>
         </a>
     </div>
