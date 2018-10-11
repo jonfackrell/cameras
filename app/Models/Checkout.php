@@ -21,7 +21,19 @@ class Checkout extends Model
         return $date->format('M d Y');
 	}
 
+    public function getCheckedInDate() {
+        if(is_null($this->checked_in_at)){
+            return ' ';
+        }
+        $date = Carbon::parse($this->checked_in_at);
+        return $date->format('M d Y');
+    }
+
 	public function patron() {
 		return $this->belongsTo('App\Models\Patron');
 	}
+
+    public function equipment() {
+        return $this->belongsTo('App\Models\Equipment');
+    }
 }
