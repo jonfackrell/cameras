@@ -21,7 +21,7 @@
             @foreach($printJobs as $key => $printJob)
                 <tr data-id="{{ $printJob->id }}">
                     <td>
-                        <a href="{{ route('3d.show', $printJob->id) }}">{{ $printJob->original_filename  or '' }}</a>
+                        <a href="{{ route('3d.show', $printJob->id) }}">{{ $printJob->original_filename  ?? '' }}</a>
                         <br>
                         <small>{{ $printJob->created_at->toDayDateTimeString() }}</small>
                     </td>
@@ -34,7 +34,7 @@
                         @endif
                     </td>
                     <td>
-                        <button type="button" class="btn @if($printJob->completed <> 1) btn-success @else btn-info @endif  btn-sm">{{ $printJob->currentStatus->name or '' }}</button>
+                        <button type="button" class="btn @if($printJob->completed <> 1) btn-success @else btn-info @endif  btn-sm">{{ $printJob->currentStatus->name ?? '' }}</button>
                     </td>
                     <td>
                         $ {{ money_format('%i', $printJob->total_cost) }}

@@ -24,7 +24,7 @@
                         @if($patron->banned == 1)
                             <i class="fa fa-exclamation-triangle" aria-hidden="true" style="color: red;" title="{{ strip_tags($patron->banned_reason) }}"></i>
                         @endif
-                        <a href="/printing/admin/patron/{{ $patron->id }}/edit">{{ $patron->first_name }} {{ $patron->last_name }}</a>
+                        <a href="{{ route('3d.patron.edit', ['patron' => $patron]) }}">{{ $patron->first_name }} {{ $patron->last_name }}</a>
                     </th>
                     <td>
                         {{ $patron->email }}

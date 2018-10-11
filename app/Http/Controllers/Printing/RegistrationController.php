@@ -36,10 +36,10 @@ class RegistrationController extends Controller
             'inumber' => 'required',
         ], ['email.regex' => 'You must use a valid @byui.edu email adress.'])->validate();
 
-        $user = \App\Models\Patron::whereNetid($request->get('netid'))->first();
+        $user = \App\Models\Patron::where('netid', $request->get('netid'))->first();
         $user->fill($request->all());
         $user->save();
 
-        return redirect('/');
+        return redirect()->to(route('3d.options'));
     }
 }

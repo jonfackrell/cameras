@@ -33,7 +33,7 @@
 			@foreach($printers as $printer)
 				<tr data-id="{{ $printer->id }}">
 					<th>
-						<a href="/admin/printer/{{ $printer->id }}/edit">{{ $printer->name }}</a>
+						<a href="{{ route('3d.printer.edit', ['printer' => $printer]) }}">{{ $printer->name }}</a>
 					</th>
 					<td>
 

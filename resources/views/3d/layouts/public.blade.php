@@ -40,7 +40,7 @@
         }
     </style>
 
-    {!! $public->where('name', 'HEADER_CSS')->first()->value or '' !!}
+    {!! $public->where('name', 'HEADER_CSS')->first()->value ?? '' !!}
 
 
     @stack('styles')
@@ -143,7 +143,7 @@
 
 @stack('scripts')
 
-{!! $public->where('name', 'FOOTER_JS')->first()->value or '' !!}
+{!! $public->where('name', 'FOOTER_JS')->first()->value ?? '' !!}
 <!-- IP: {{ Request::server('HTTP_REFERER') }}-->
 </body>
 </html>

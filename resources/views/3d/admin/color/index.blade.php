@@ -25,7 +25,7 @@
             @foreach($colors as $color)
                 <tr data-id="{{ $color->id }}">
                     <th>
-                        <a href="/admin/color/{{ $color->id }}/edit">{{ $color->name }}</a>
+                        <a href="{{ route('3d.color.edit', ['color' => $color]) }}">{{ $color->name }}</a>
                     </th>
                     <td>
                         @if(auth()->guard('web')->user()->isSuperUser() || auth()->guard('web')->user()->can('delete-colors'))

@@ -13,6 +13,8 @@
 
 /** Publicly Available Routes **/
 Route::view('/', 'home');
+Route::view('/policies', 'policies')->name('maclab-policies');
+Route::view('/contacts', 'contacts')->name('maclab-contacts');
 
 Route::group(['middleware' => ['mail']], function() {
     Auth::routes();
@@ -75,7 +77,7 @@ Route::middleware(['mail'])->group(function () {
 
             Route::resource('/patron', 'PatronController');
 
-            Route::post('/update-payment-status', 'PaymentController@updatePaymentStatus');
+            Route::post('/update-payment-status', 'PaymentController@updatePaymentStatus')->name('payment.update.status');
 
             Route::get('download/{filename}', 'PatronController@download')->where('filename', '(.*)')->name('download');
 
@@ -105,7 +107,7 @@ Route::middleware(['mail'])->group(function () {
             Route::delete('/history/{id}', 'PatronController@destroy')->name('job.delete');
 
             Route::get('/register', 'RegistrationController@edit')->name('register');
-            Route::put('/register', 'RegistrationController@update')->name('register');
+            Route::put('/register', 'RegistrationController@update')->name('update.patron.info');
         });
 
 
@@ -113,7 +115,7 @@ Route::middleware(['mail'])->group(function () {
 
     Route::prefix('equipment')->name('equipment.')->namespace('Equipment')->group(function () {
 
-        Route::view('/', 'equipment.index');
+        Route::view('/', 'equipment.index')->name('home');
 
         Route::group(['middleware' => ['auth']], function() {
             Route::get('/admin', 'AdminController@home')->name('admin');

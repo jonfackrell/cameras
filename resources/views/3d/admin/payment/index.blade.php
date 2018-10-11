@@ -37,7 +37,7 @@
                 @foreach($printJobs as $key => $printJob)
                     <tr data-id="{{ $printJob->id }}">
                         <td>
-                            <a>{{ $printJob->owner->first_name  or '' }} {{ $printJob->owner->last_name  or '' }}</a>
+                            <a>{{ $printJob->owner->first_name ?? '' }} {{ $printJob->owner->last_name  ?? '' }}</a>
                             <br>
                             <small>{{ $printJob->created_at->toDayDateTimeString() }}</small>
                         </td>
@@ -100,7 +100,7 @@
             function togglePrintJobPaymentStatus(id, paymentStatus){
 
                 $.ajax({
-                    url: "/update-payment-status",
+                    url: "{{ route('3d.payment.update.status') }}",
                     type: "POST",
                     data: {'id': id, 'paid': paymentStatus},
                     success: function(data){

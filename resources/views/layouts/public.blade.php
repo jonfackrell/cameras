@@ -10,8 +10,8 @@
     <!-- Social Media Metatags -->
     <meta property="og:site_name" content="Library Mac Lab">
     <meta property="og:title" content="Library Mac Lab">
-    <meta property="og:description" content="The David O. McKay Library serves university and community patrons with a vast book collection, hundreds of databases, and much more. The building also houses university archives, a special exhibition area, and instructional technology labs.">
-    <meta property="og:image" content="http://library.byui.edu/img/mckay-library-outside-west-wing.png">
+    <meta property="og:description" content="The purpose of David O. McKay Library Mac Lab is to provide students with a creative space to help them in their academic pursuits by providing access to software, hardware, and trained lab assistants. The Mac Lab provides access to several programs, both commercial and free, that facilitate the creation of digital media, 3D models, and software applications.">
+    <meta property="og:image" content="{{ asset('/img/what-we-do-info.png') }}">
     <meta property="og:url" content="http://maclab.byui.edu/">
     <meta name="twitter:card" content="summary_large_image">
 
@@ -46,12 +46,17 @@
 
     <!-- Custom Website Style -->
     <link rel="stylesheet" href="https://library.byui.edu/assets/css/main.css?id=7723330db7716c52a0d2">
-    <link rel='stylesheet' href='https://content.byui.edu/file/0af2f055-7202-403e-9894-bb80478aa98c/1/macLab.css'>
-    <link rel='stylesheet' href='https://content.byui.edu/file/0af2f055-7202-403e-9894-bb80478aa98c/1/workshops.css'>
-    <link rel='stylesheet' href='https://content.byui.edu/file/0af2f055-7202-403e-9894-bb80478aa98c/1/typography.css'>
+    <link rel='stylesheet' href='{{ asset("/css/macLab.css") }}'>
 
     <style>
-
+        a.btn.btn-light { background-color: inherit; border: inherit; }
+        #ml-header { background-color: #ebebeb; }
+        img.nav-icon { position: relative; z-index: 10; }
+        .clip-each.border-style-thin:hover { background-color: #00A6DC; }
+        img#chat-image { width: initial; }
+        .green { color: #a9d04c; }
+        div#button-container { background-color: transparent; }
+        /*.infographic { border: #525252 solid; }*/
     </style>
 
     @stack('styles')
@@ -62,223 +67,38 @@
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
       crossorigin="anonymous"></script>
 
+    <!-- Handlebars.js -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js'></script>
+    <!-- Moment.js -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js'></script>
+    <!-- handlebars temple for workshops -->
+    <script id="event-template" type="text/x-handlebars-template">
+        <div class="col event-card" onClick="javascript: window.location = '@{{url.public}}';">
+            <div class="card-header">
+                @{{ date }}
+            </div>
+            <div class="card-body">
+                <div class="event-title">
+                    @{{ title }}
+                </div>
+                <div class="event-description">
+                    @{{{ description }}}
+                </div>
+                <i>@{{{start_time}}} - @{{{end_time}}}@{{#if location.name}} <br/>@{{ location.name }}@{{/if}}</i>
+            </div>
+        </div>
+    </script>
+    <!-- Workshops -->
+    <!--<script src='https://content.byui.edu/file/0af2f055-7202-403e-9894-bb80478aa98c/1/workshops.js'></script>-->
+    <script src='{{ asset("/js/workshops.js") }}'></script>
+
     @stack('header-scripts')
 
 </head>
 <body>
-<!--
-<div style="background-color: #FBE68C;">
-<p style="text-align: center; padding: 10px; margin: 0px; color: #AD0C20;">
-    If you experience problems logging into the library databases, call 208-496-1411 or email <a href="mailto:byuisupportcenter@byui.edu">byuisupportcenter@byui.edu</a> and let them know CAS is unavailable.
-</p>
-</div>
--->
-<div id="top-nav-bar" class="container-fluid sticky-top">
 
-    <nav class="navbar navbar-expand-lg navbar-dark" id="main_navbar" role="navigation">
-        <div class="container">
-            <span class="navbar-brand-container">
-                <a class="navbar-brand" href="http://www.byui.edu">
-                    <img src="https://library.byui.edu/img/byui-logo-white.png" class="d-inline-block align-top" style="height: 60px; width: 72px;" alt="BYU-Idaho Home">
-                </a>
-                <a class="navbar-brand" href="https://library.byui.edu/" style="">
-                    <img src="https://library.byui.edu/img/mckay-library-logo-white.png" class="d-inline-block align-top" style="height: 60px; width: 245px;" alt="David O. McKay Library Home">
-                </a>
-            </span>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-brand_size_lg" aria-controls="navbar-brand_size_lg" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbar-brand_size_lg">
-                <!--left side-->
-                <ul class="nav navbar-nav navbar-right">
+@include('layouts.parts.library-top-nav')
 
-                    <li class="nav-item dropdown">
-                        <a data-toggle="collapse" href="#research-tools" class="dropdown-toggle collapsed" id="research-tools-menu"> Research Tools</a>
-                        <div class="dropdown-menu col-md-6 virtual-library-tour-research-tools" id="research-tools">
-                            <div class="p-3">
-                                <div class="container">
-                                    <div class="row mb-2">
-                                        <div class="col">
-                                            <h2>Search</h2>
-                                            <ul>
-                                                <li>
-                                                    <a href="http://hip.byui.edu/">
-                                                        Catalog
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="https://libguides.byui.edu/az.php">
-                                                        Databases
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="http://sfx.lib.byu.edu/byuidaho/az/">
-                                                        Journals by Title
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="http://www.worldcat.org/">
-                                                        WorldCat
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col">
-                                            <h2>Help</h2>
-                                            <ul>
-                                                <li>
-                                                    <a href="https://library.byui.edu/begin-your-research">
-                                                        Begin Your Research
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="https://libguides.byui.edu/citations">
-                                                        Citing Sources
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="http://libguides.byui.edu/">
-                                                        Research Guides
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="https://byui.libcal.com/appointments/">
-                                                        Meet with a Librarian
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <hr />
-                                    <div class="row mb-2">
-                                        <div class="col">
-                                            <a href="http://refworks.proquest.com/">
-                                                <img src="https://library.byui.edu/img/refworks.jpg" alt="RefWorks Login" style="width: 100%; height: auto;">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a data-toggle="collapse" href="#use-your-library" class="dropdown-toggle collapsed" id="use-library-menu"> USE YOUR LIBRARY</a>
-                        <div class="dropdown-menu col col-md-3 virtual-library-tour-use-library" id="use-your-library">
-                            <div class="p-3">
-                                <div class="container">
-                                    <div class="row mb-2">
-                                        <div class="col">
-                                            <ul>
-                                                <li>
-                                                    <a href="https://illiad.lib.byu.edu/illiad/IDA/">
-                                                        InterLibrary Loan
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="https://maclab.byui.edu">
-                                                        Mac Lab & 3D Printing
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="https://library.byui.edu/new-books">
-                                                        New Books
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="http://hip.byui.edu/ipac20/ipac.jsp?profile=mck&menu=account&ts=1245939093723#focus">
-                                                        Renew Materials
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="https://abish.byui.edu/library/ill-requests/index.cfm/requestform">
-                                                        Request a Purchase
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="http://scheduling.byui.edu/Login.aspx">
-                                                        Reserve a Study Room
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="http://www.byui.edu/special-collections">
-                                                        Special Collections
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="http://byui.ask.libraryh3lp.com/questions/36032">
-                                                        Wireless Printing
-                                                    </a>
-                                                </li>
-                                                <!--
-                                                <li>
-                                                    <a href="#">
-                                                        Software
-                                                    </a>
-                                                </li>
-                                                -->
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a data-toggle="collapse" href="#about" class="dropdown-toggle collapsed" id="contact-menu">About</a>
-                        <div class="dropdown-menu col col-md-3 virtual-library-tour-contact" id="about">
-                            <div class="p-3">
-                                <div class="container">
-                                    <div class="row mb-2">
-                                        <div class="col">
-                                            <ul>
-                                                <li>
-                                                    <a href="https://byui.libcal.com/">
-                                                        Calendar
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="https://library.byui.edu/contact">
-                                                        Contact
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="https://byui.libcal.com/hours/">
-                                                        Hours
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="https://library.byui.edu/maps">
-                                                        Maps
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="https://library.byui.edu/policies">
-                                                        Policies
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="http://abish.byui.edu/library/stats/">
-                                                        Stats
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-
-</div>
 
 
 <div class="clearfix">&nbsp;</div>
@@ -302,11 +122,50 @@
     </div>
 </div>
 <div class="clearfix">&nbsp;</div>
+<div class="container-fluid" id="ml-header">
+    <div class="container">
+        <a href="/" class="row justify-content-center">
+            <span class="col-lg-5 col-md-7 col-sm-9 col-10">  
+                <span class="row justify-content-center">
+                <span class="col-12">
+                    <img class="img-fluid" src="{{ asset('/img/ml-logo.png') }}" alt="Mac Lab: MCK 140A">
+                </span></span>
+            </span>
+        </a>
+    </div>
+</div>
+
+@yield('nav')
 
 <div class="container">
 
-    @yield('content')
+    <div class="clearfix">&nbsp;</div>
 
+    <div class="row">
+        <div class="col-md-12">
+            @yield('content')
+        </div>
+    </div>
+
+
+</div>
+
+@yield('banner')
+
+<div class="clearfix">&nbsp;</div>
+
+<div class="container event-cards" id='workshops'>
+    <div class="row event-header">
+        <div class="col-md-9">
+            <h2 class='events-title' style="font-size: 18px; line-height: 2em; padding-left: 12px;">
+                UPCOMING WORKSHOPS
+            </h2>
+        </div>
+        <div class="col-md-3 green" style="text-align: right; padding-top: 9px;">
+            <a href="https://byui.libcal.com/calendar/events/?ct=36359" style="padding: 4px 12px 4px 6px;">SEE ALL EVENTS</a>
+        </div>
+    </div>
+    <div class="row events-body"></div>
 </div>
 
 
@@ -375,7 +234,10 @@
                         </h2>
                     </section>
                     <div class="social-media-icons" style="margin-bottom: 14px;">
-
+                        <a href="https://www.instagram.com/byui.maclab">
+                            <i class="fab fa-instagram"></i>
+                            <span class="sr-only">Follow the Mac Lab on Instagram</span>
+                        </a>
 
 
                         <a href="https://www.facebook.com/mckaylibrary">
@@ -596,5 +458,7 @@
     <div id="chat-container" class="chat-container" role="button" tabindex="0" style="margin: -75px 0px 0px auto; padding: 0px; border-style: solid; border-width: 0px; font-style: normal; font-weight: normal; font-variant: normal; list-style: none outside none; letter-spacing: normal; line-height: normal; text-decoration: none; vertical-align: baseline; white-space: normal; word-spacing: normal; background-repeat: repeat-x; background-position: left bottom; background-color: #A5216F; border-color: transparent; border-radius: 2px; width: 40px; height: 178px; cursor: pointer; display: block; z-index: 107158; position: fixed; top: 50%; bottom: auto; left: auto; right: 0px;">
         <img src="https://library.byui.edu/images/live-chat.png" id="chat-image" alt="Chat with a Librarian" class="chat-image" style="margin: 0px; padding: 0px; border-style: none; border-width: 0px; font-style: normal; font-weight: normal; font-variant: normal; list-style: none outside none; letter-spacing: normal; line-height: normal; text-decoration: none; vertical-align: baseline; white-space: normal; word-spacing: normal; position: absolute; z-index: 600; left: 3px; top: 7px;">
     </div>
-</a></body>
+</a>
+@stack('footer-scripts')
+</body>
 </html>
