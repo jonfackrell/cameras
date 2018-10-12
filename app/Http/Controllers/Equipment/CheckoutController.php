@@ -1,8 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Equipment;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+
+use App\Models\Checkout;
+use App\Models\Equipment;
 
 class CheckoutController extends Controller
 {
@@ -80,5 +84,37 @@ class CheckoutController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Check in equipment for a Patron
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  Patron  $patron
+     * @return \Illuminate\Http\Response
+     */
+    public function checkin(Request $request, $patron)
+    {
+        $equipment = $request->get('equipment');
+        if (!empty($equipment)){
+            foreach ($equipment as $id) {
+                $item = Equipment::whereFirst('id', $id);
+                $item->checked_in_at = Carbon::now();
+            }
+        }
+        return redirect()->to( route('equipment.admin.patron.show', $patron->id) );
+    }
+
+    /**
+     * Check out equipment for a Patron
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  Patron  $patron
+     * @return \Illuminate\Http\Response
+     */
+    public function checkout(Request $request, $patron)
+    {
+        
+        return redirect()->to( route('equipment.admin.patron.show', $patron->id) );
     }
 }

@@ -23,6 +23,7 @@
     
     <!-- Custom Theme Style -->
     <link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/macLab.css') }}" rel="stylesheet">
 
     <style>
         body { padding: 30px; }
@@ -67,7 +68,7 @@
 
 
         <!-- page content -->
-        <div class="main_col col-md-8" role="main">
+        <div class="main_col col-md-10" role="main">
 
 
             <div class="row">

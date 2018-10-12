@@ -21,6 +21,11 @@ class Checkout extends Model
         return $date->format('M d Y');
 	}
 
+    public function getDueDate() {
+        $date = Carbon::parse($this->due_at);
+        return $date->format('M d Y');
+    }
+
     public function getCheckedInDate() {
         if(is_null($this->checked_in_at)){
             return ' ';

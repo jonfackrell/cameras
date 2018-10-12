@@ -49,7 +49,7 @@ class AdminController extends Controller
     {
         $patron->load('checkouts');
 
-        return view('equipment.admin.show-patron', compact('patron'));
+        return view('equipment.admin.patron.show', compact('patron'));
     }
 
     /**
