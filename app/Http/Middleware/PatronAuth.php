@@ -49,7 +49,7 @@ class PatronAuth
                 ]);
 
             // Here the code for successful request
-            
+
             $byuiUser = json_decode($response->getBody());
 
             $user->first_name = $byuiUser->prefferedName;
