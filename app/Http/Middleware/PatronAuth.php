@@ -22,12 +22,6 @@ class PatronAuth
         if(\Auth::guard('patrons')->guest()){
             cas()->authenticate();
 
-            /*$user = \App\Models\Patron::whereNetid(cas()->getCurrentUser())->first();
-            if(is_null($user)){
-                $user = \App\Models\Patron::create([
-                    'netid' => cas()->getCurrentUser()
-                ]);
-            }*/
             $user = Patron::firstOrNew(['netid' => cas()->getCurrentUser()]);
 
             $username = "byui:$user->netid";
@@ -55,8 +49,7 @@ class PatronAuth
                 ]);
 
             // Here the code for successful request
-
-            // TODO: Actually do something with this rather than dump it to the screen
+            
             $byuiUser = json_decode($response->getBody());
 
             $user->first_name = $byuiUser->prefferedName;
@@ -70,11 +63,8 @@ class PatronAuth
 
             $user->save();
 
-
             auth()->guard('patrons')->login($user);
-            /*if((\Route::currentRouteName() != '3d.register' && \Route::currentRouteName() != '3d.update.patron.info') && strlen(auth()->guard('patrons')->user()->email) < 3){
-               return redirect()->to( route('3d.register') );
-            }*/
+
         }
 
         return $next($request);
