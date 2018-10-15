@@ -19,6 +19,7 @@ class CouponController extends Controller
         $coupons = Coupon::whereDepartment(auth()->guard('web')->user()->department)
                             ->where('expiration_at', '>', Carbon::now('America/Denver')->toDateString())
                             ->orderBy('expiration_at', 'ASC')
+                            ->orderBy('code', 'ASC')
                             ->paginate(20);
         return view('3d.admin.coupons.index', compact('coupons'));
     }
