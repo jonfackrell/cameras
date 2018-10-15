@@ -43,7 +43,7 @@
 						{{ $coupon->expiration_at->toDateString() }}
                     </td>
                     <td>
-						{{ isset($coupon->used_at)?$coupon->used_at->toDateString():'' }}
+						{{ (isset($coupon->redeemed_at) && !is_null($coupon->redeemed_at))?$coupon->redeemed_at->toDateString():'' }}
                     </td>
 					<td>
 						@if(auth()->guard('web')->user()->isSuperUser() || auth()->guard('web')->user()->can('update-pricing'))
