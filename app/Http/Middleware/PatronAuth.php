@@ -2,7 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Patron;
 use Closure;
+use GuzzleHttp\Psr7;
+use GuzzleHttp\Exception\RequestException;
 
 class PatronAuth
 {
@@ -25,7 +28,7 @@ class PatronAuth
                     'netid' => cas()->getCurrentUser()
                 ]);
             }*/
-            $user = User::firstOrNew(['netid' => cas()->getCurrentUser()]);
+            $user = Patron::firstOrNew(['netid' => cas()->getCurrentUser()]);
 
             $username = "byui:$user->netid";
 
@@ -63,6 +66,7 @@ class PatronAuth
             }else{
                 $user->email = $byuiUser->workContact->email;
             }
+            $user->roles = $byuiUser->roles;
 
             $user->save();
 
