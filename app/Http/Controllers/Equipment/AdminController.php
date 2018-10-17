@@ -48,8 +48,9 @@ class AdminController extends Controller
     public function show($patron)
     {
         $patron->load('checkouts');
+        $message = '';
 
-        return view('equipment.admin.patron.show', compact('patron'));
+        return view('equipment.admin.patron.show', compact('patron', 'message'));
     }
 
     /**

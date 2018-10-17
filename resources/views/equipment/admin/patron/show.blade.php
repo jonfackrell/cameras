@@ -19,7 +19,9 @@
 				{!! BootForm::open()->post()->action(route('equipment.checkout', $patron->id)) !!}
 				{!! BootForm::text('&nbsp', 'search') !!}
 				{!! BootForm::close() !!}
-				
+				@if (!empty($message))
+					<p>{{ $message }}</p>
+				@endif
 			</div>
 			<div class="col-md">
 				<h3>History</h3>

@@ -17,7 +17,9 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        //
+        //$checkouts = Checkout::all();
+
+        return view('equipment.admin.history');
     }
 
     /**
@@ -95,11 +97,14 @@ class CheckoutController extends Controller
      */
     public function checkin(Request $request, $patron)
     {
+        
         $equipment = $request->get('equipment');
-        if (!empty($equipment)){
+        
+        if (count($equipment) > 0){
             foreach ($equipment as $id) {
-                $item = Equipment::whereFirst('id', $id);
+                $item = Checkout::where('id', $id)->get()->first();
                 $item->checked_in_at = Carbon::now();
+                $item->save();
             }
         }
         return redirect()->to( route('equipment.admin.patron.show', $patron->id) );
@@ -114,7 +119,29 @@ class CheckoutController extends Controller
      */
     public function checkout(Request $request, $patron)
     {
+        $query = $request->get('search');
+        $equipment = Equipment::where('item', $query)->get()->first();
+
+        $checked_out = Checkout::where('checked_in_at', NULL)->where('equipment_id', $equipment->id)->get();
+
+        if (count($checked_out) <= 0) {
+            $checkout = new Checkout;
+            $checkout->equipment_id = $equipment->id;
+            $checkout->patron_id = $patron->id;
+            $checkout->checked_out_at = Carbon::now();
+            $checkout->due_at = Carbon::now()->addDays(1);
+            $checkout->checked_out_by = 1; //auth()->guard('admin')->user()->id;
+            $checkout->save();
+
+            return redirect()->to( route('equipment.admin.patron.show', $patron->id) );
+        }
+        else {
+            $patron->load('checkouts');
+            $message = 'Warning: The item '. $equipment->item . ' is already checked out. Please check it back in before checking it out again';
+
+            return view('equipment.admin.patron.show', compact('patron', 'message'));
+        }
         
-        return redirect()->to( route('equipment.admin.patron.show', $patron->id) );
+        
     }
 }

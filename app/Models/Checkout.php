@@ -16,9 +16,13 @@ class Checkout extends Model
         'checked_out_at', 'checked_in_at', 'checkout_note', 'checkin_note',
     ];
 
+    protected $dates = [
+        'checked_out_at', 'checked_in_at',
+    ];
+
     public function getCheckedOutDate() {
-    	$date = Carbon::parse($this->checked_out_at);
-        return $date->format('M d Y');
+    	
+        return $this->checked_out_at->tz('America/Denver')->format('M d Y');
 	}
 
     public function getDueDate() {
