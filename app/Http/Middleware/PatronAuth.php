@@ -59,6 +59,7 @@ class PatronAuth
             }else{
                 $user->email = $byuiUser->workContact->email;
             }
+            $user->inumber = $byuiUser->userId;
             $user->roles = $byuiUser->roles;
 
             $user->save();
