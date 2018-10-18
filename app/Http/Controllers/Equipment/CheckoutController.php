@@ -98,15 +98,8 @@ class CheckoutController extends Controller
     public function checkin(Request $request, $patron)
     {
         
-        $equipment = $request->get('equipment');
-        
-        if (count($equipment) > 0){
-            foreach ($equipment as $id) {
-                $item = Checkout::where('id', $id)->get()->first();
-                $item->checked_in_at = Carbon::now();
-                $item->save();
-            }
-        }
+        Checkout::whereIn('id', $request->get('equipment', []))->update(['checked_in_at' => Carbon::now()]);
+
         return redirect()->to( route('equipment.admin.patron.show', $patron->id) );
     }
 
@@ -130,7 +123,7 @@ class CheckoutController extends Controller
             $checkout->patron_id = $patron->id;
             $checkout->checked_out_at = Carbon::now();
             $checkout->due_at = Carbon::now()->addDays(1);
-            $checkout->checked_out_by = 1; //auth()->guard('admin')->user()->id;
+            $checkout->checked_out_by = auth()->guard('web')->user()->id;
             $checkout->save();
 
             return redirect()->to( route('equipment.admin.patron.show', $patron->id) );
