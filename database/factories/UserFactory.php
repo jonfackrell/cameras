@@ -25,7 +25,7 @@
     ];
 });*/
 
-$factory->define(App\Patron::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Patron::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
@@ -36,12 +36,12 @@ $factory->define(App\Patron::class, function (Faker\Generator $faker) {
         'netid' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
-        'role' => $faker->randomElement($array = array ('STU', 'FAC')),
+        'roles' => $faker->randomElement($array = array ('STU', 'FAC')),
         'cameras_access_end_date' => $faker->optional()->dateTimeInInterval($startDate = 'now', $interval = '+ 5 years', $timezone = 'UTC')
     ];
 });
 
-$factory->define(App\Checkout::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Checkout::class, function (Faker\Generator $faker) {
     return [
     	'patron_id' => $faker->numberBetween(1, 100),
     	'equipment_id' => $faker->numberBetween(1, 100),
@@ -52,7 +52,7 @@ $factory->define(App\Checkout::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Equipment::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Equipment::class, function (Faker\Generator $faker) {
     return [
         'barcode' => $faker->unique()->ean8,
         'item' => $faker->unique()->bothify('???-###')
