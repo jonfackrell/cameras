@@ -17,26 +17,8 @@ class Checkout extends Model
     ];
 
     protected $dates = [
-        'checked_out_at', 'checked_in_at',
+        'checked_out_at', 'checked_in_at', 'due_at',
     ];
-
-    public function getCheckedOutDate() {
-    	
-        return $this->checked_out_at->tz('America/Denver')->format('M d Y');
-	}
-
-    public function getDueDate() {
-        $date = Carbon::parse($this->due_at);
-        return $date->format('M d Y');
-    }
-
-    public function getCheckedInDate() {
-        if(is_null($this->checked_in_at)){
-            return ' ';
-        }
-        $date = Carbon::parse($this->checked_in_at);
-        return $date->format('M d Y');
-    }
 
 	public function patron() {
 		return $this->belongsTo('App\Models\Patron');

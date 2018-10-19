@@ -27,14 +27,14 @@
 				<h3>History</h3>
 				{!! BootForm::open()->post()->action(route('equipment.checkin', $patron->id)) !!}
 				@foreach ($patron->checkouts as $checkout)
-					@if ($checkout->getCheckedInDate() == ' ')
+					@if ($checkout->checked_in_at == NULL)
 						<div class="row">
 							<h5 class="col"> {{ $checkout->equipment->item }}</h5>
 							<h5 class="col"> {{ $checkout->equipment->barcode }}</h5>
 						</div>
 						<div class="row">
-							<h6 class="col"><strong>Out:</strong> {{ $checkout->getCheckedOutDate() }}</h6>
-							<h6 class="col"><strong>Due:</strong> {{ $checkout->getDueDate() }}</h6>				
+							<h6 class="col"><strong>Out:</strong> {{ $checkout->checked_out_at->tz('America/Denver')->format('M d Y') }}</h6>
+							<h6 class="col"><strong>Due:</strong> {{ $checkout->due_at->tz('America/Denver')->format('M d Y') }}</h6>				
 							<div class="col-1"> 
 								{!! BootForm::checkbox("&nbsp;", "equipment[]")->value($checkout->id ) !!}
 							</div>

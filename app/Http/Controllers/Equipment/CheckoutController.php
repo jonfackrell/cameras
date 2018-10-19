@@ -17,9 +17,9 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        //$checkouts = Checkout::all();
+        $checkouts = Checkout::with(['patron', 'equipment'])->orderBy('checked_out_at', 'desc')->get();
 
-        return view('equipment.admin.history');
+        return view('equipment.admin.history', compact('checkouts'));
     }
 
     /**
@@ -98,7 +98,7 @@ class CheckoutController extends Controller
     public function checkin(Request $request, $patron)
     {
         
-        Checkout::whereIn('id', $request->get('equipment', []))->update(['checked_in_at' => Carbon::now()]);
+        Checkout::whereIn('id', $request->get('equipment', []))->update(['checked_in_at' => Carbon::now(), 'checked_in_by' => auth()->guard('web')->user()->id]);
 
         return redirect()->to( route('equipment.admin.patron.show', $patron->id) );
     }
