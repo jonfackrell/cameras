@@ -36,7 +36,7 @@
 					{{ $checkout->checked_out_at->tz('America/Denver')->format('M d Y') }}
 				</div>
 				<div class="col">
-					{{ $checkout->due_at->tz('America/Denver')->format('M d Y') }}
+					{{ $checkout->due_at->tz('America/Denver')->format('M d Y H:i') }}
 				</div>
 				@if ($checkout->checked_in_at == NULL)
 				<div class="col">

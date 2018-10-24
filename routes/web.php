@@ -122,8 +122,10 @@ Route::middleware(['mail'])->group(function () {
             Route::post('/admin', 'AdminController@updateHome')->name('admin');
             Route::get('/admin/checkouts', 'CheckoutController@index')->name('admin.checkouts');
             Route::get('/admin/{patron}', 'AdminController@show')->name('admin.patron.show');
-            Route::post('/admin/{patron}/checkin', 'CheckoutController@checkin')->name('checkin');
-            Route::post('/admin/{patron}/checkout', 'CheckoutController@checkout')->name('checkout');
+            Route::post('/admin/{patron}', 'AdminController@updateShow')->name('admin.patron.show');
+            Route::post('/admin/{patron}/checkin', 'CheckoutController@checkin')->name('admin.checkin');
+            Route::post('/admin/{patron}/checkout', 'CheckoutController@checkout')->name('admin.checkout');
+            Route::get('/admin/{patron}/checkout/{equipment}', 'CheckoutController@create')->name('admin.checkout.create');
 
         });
         // TODO: Add Camera Checkout system here

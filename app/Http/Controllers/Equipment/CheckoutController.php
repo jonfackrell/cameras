@@ -25,11 +25,14 @@ class CheckoutController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * 
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($patron, $equipment)
     {
-        //
+        $extras = [];
+
+        return view('equipment.admin.checkout.create', compact('patron'));
     }
 
     /**
@@ -89,6 +92,42 @@ class CheckoutController extends Controller
     }
 
     /**
+     * Check out equipment for a Patron
+     *
+     * @param  Equipment  $equipment
+     * @param  Patron  $patron
+     * @return \Illuminate\Http\Response
+     */
+    public function validateCheckout($query, $equipment, $patron)
+    {
+        $patron->load('checkouts');
+
+        if (empty($query)) {
+            $message = 'The item must not be empty';
+
+            return view('equipment.admin.patron.show', compact('patron', 'message'));
+        }
+
+        if (empty($equipment)) {
+            $message = 'Warning: The item \''. $query . '\' is not in the system. Please add the item to the system or try checking out a different one';
+
+            return view('equipment.admin.patron.show', compact('patron', 'message'));
+        } 
+        
+        $checked_out = Checkout::where('checked_in_at', NULL)->where('equipment_id', $equipment->id)->get();
+
+        if (count($checked_out) > 0) { 
+            $message = 'Warning: The item '. $equipment->item . ' is already checked out. Please check it back in before checking it out again';
+
+            return view('equipment.admin.patron.show', compact('patron', 'message'));
+        }
+
+        
+
+        return false;
+    }
+
+    /**
      * Check in equipment for a Patron
      *
      * @param  \Illuminate\Http\Request  $request
@@ -115,26 +154,28 @@ class CheckoutController extends Controller
         $query = $request->get('search');
         $equipment = Equipment::where('item', $query)->get()->first();
 
-        $checked_out = Checkout::where('checked_in_at', NULL)->where('equipment_id', $equipment->id)->get();
+        $unvalid = $this->validateCheckout($query, $equipment, $patron);
+        if (!$unvalid){
 
-        if (count($checked_out) <= 0) {
             $checkout = new Checkout;
             $checkout->equipment_id = $equipment->id;
             $checkout->patron_id = $patron->id;
             $checkout->checked_out_at = Carbon::now();
-            $checkout->due_at = Carbon::now()->addDays(1);
+
+            if ($equipment->group == 'in-house'){ 
+                $checkout->due_at = Carbon::today()->addHours(5)->addMinutes(30);
+            }
+            else{
+                $checkout->due_at = Carbon::now()->addDays(1);
+            }
             $checkout->checked_out_by = auth()->guard('web')->user()->id;
             $checkout->save();
 
             return redirect()->to( route('equipment.admin.patron.show', $patron->id) );
         }
         else {
-            $patron->load('checkouts');
-            $message = 'Warning: The item '. $equipment->item . ' is already checked out. Please check it back in before checking it out again';
-
-            return view('equipment.admin.patron.show', compact('patron', 'message'));
+            return $unvalid;
         }
-        
-        
+
     }
 }

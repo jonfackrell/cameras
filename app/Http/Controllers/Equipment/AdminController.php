@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Equipment;
 use Illuminate\Http\Request;
 use App\Models\Patron;
 use App\Models\Checkout;
+use App\Models\Equipment;
 
 class AdminController extends Controller
 {
@@ -49,8 +50,35 @@ class AdminController extends Controller
     {
         $patron->load('checkouts');
         $message = '';
+        $equipment = [];
 
-        return view('equipment.admin.patron.show', compact('patron', 'message'));
+        return view('equipment.admin.patron.show', compact('patron', 'message', 'equipment'));
+    }
+
+    /**
+     * Update the home page.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateShow(Request $request, $patron)
+    {
+        $message = '';
+        $equipment = [];
+
+        $newSearch = $request->get('search');
+
+        $equipment = Equipment::where('barcode', 'like', '%' . $newSearch . '%')
+        ->orWhere('item', 'like', '%' . $newSearch . '%')->get();
+
+        if (sizeof($equipment) == 1) {
+            return redirect()->to( route('equipment.admin.checkout.create', ['patron' => $patron->id, 'equipment' => $equipment[0]->id]) );
+        }
+        elseif (sizeof($equipment) == 0) {
+            $message = 'No equipment found with search: ' . $newSearch;
+        }
+        return view('equipment.admin.patron.show', compact('patron', 'message', 'equipment'));
     }
 
     /**
@@ -95,8 +123,9 @@ class AdminController extends Controller
     public function home()
     {
         $patrons = [];
+        $message = '';
 
-        return view('equipment.admin.index', compact('patrons'));
+        return view('equipment.admin.index', compact('patrons', 'message'));
     }
 
     /**
@@ -108,17 +137,21 @@ class AdminController extends Controller
     public function updateHome(Request $request)
     {
         $patrons = [];
+        $message = '';
 
-        $newType = $request->get('type');
         $newSearch = $request->get('search');
 
-        if ($newSearch == ''){
-            $patrons = Patron::all();
+        $patrons = Patron::where('first_name', 'like', '%' . $newSearch . '%')
+        ->orWhere('last_name', 'like', '%' . $newSearch . '%')
+        ->orWhere('inumber', 'like', '%' . $newSearch . '%')->get();
+
+        if (sizeof($patrons) == 1) {
+            return redirect()->to( route('equipment.admin.patron.show', $patrons[0]->id) );
         }
-        else {
-            $patrons = Patron::where($newType, $newSearch)->get();
+        elseif (sizeof($patrons) == 0) {
+            $message = 'No patron found with search: ' . $newSearch;
         }
 
-        return view('equipment.admin.index', compact('patrons'));
+        return view('equipment.admin.index', compact('patrons', 'message'));
     }
 }
