@@ -70,7 +70,8 @@ class AdminController extends Controller
         $newSearch = $request->get('search');
 
         $equipment = Equipment::where('barcode', 'like', '%' . $newSearch . '%')
-        ->orWhere('item', 'like', '%' . $newSearch . '%')->get();
+        ->orWhere('item', 'like', '%' . $newSearch . '%')
+        ->where('checked_out_at', NULL)->get();
 
         if (sizeof($equipment) == 1) {
             return redirect()->to( route('equipment.admin.checkout.create', ['patron' => $patron->id, 'equipment' => $equipment[0]->id]) );

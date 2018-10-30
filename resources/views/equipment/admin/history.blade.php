@@ -33,7 +33,7 @@
 					{{ $checkout->equipment->item }}
 				</div>
 				<div class="col">
-					{{ $checkout->checked_out_at->tz('America/Denver')->format('M d Y') }}
+					{{ $checkout->checked_out_at->tz('America/Denver')->format('M d Y H:i') }}
 				</div>
 				<div class="col">
 					{{ $checkout->due_at->tz('America/Denver')->format('M d Y H:i') }}
@@ -44,7 +44,7 @@
 				</div>
 				@else
 				<div class="col">
-					{{ $checkout->checked_in_at->tz('America/Denver')->format('M d Y') }}
+					{{ $checkout->checked_in_at->tz('America/Denver')->format('M d Y H:i') }}
 				</div>
 				@endif
 			</div>

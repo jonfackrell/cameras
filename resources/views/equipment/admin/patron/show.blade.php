@@ -72,6 +72,7 @@
 						</div>
 					@endif
 				@endforeach
+				{!! BootForm::textarea("&nbsp;", 'note')->rows(3) !!}
 				{!! BootForm::submit('Check In') !!}
 				{!! BootForm::close() !!}
 			</div>

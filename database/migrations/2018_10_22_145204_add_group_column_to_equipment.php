@@ -15,6 +15,8 @@ class AddGroupColumnToEquipment extends Migration
     {
         Schema::table('equipment', function (Blueprint $table) {
             $table->string('group')->nullable();
+            $table->string('type')->nullable();
+            $table->string('description')->nullable();
         });
     }
 
@@ -27,6 +29,8 @@ class AddGroupColumnToEquipment extends Migration
     {
         Schema::table('equipment', function (Blueprint $table) {
             $table->dropColumn('group');
+            $table->dropColumn('type');
+            $table->dropColumn('description');
         });
     }
 }
