@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Equipment;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+
 use App\Models\Patron;
 use App\Models\Checkout;
 use App\Models\Equipment;
@@ -52,6 +54,13 @@ class AdminController extends Controller
         $message = '';
         $equipment = [];
 
+        if ($patron->canCheckout('digital') === false){
+            $message = 'Patron doesn\'t have aproval to use digital equipment';
+        }
+
+        //if ($patron->cameras_access_end_date < Carbon::now())
+        //    $message = 'Patron doesn\'t have aproval to use digital equipment';
+
         return view('equipment.admin.patron.show', compact('patron', 'message', 'equipment'));
     }
 
@@ -69,9 +78,28 @@ class AdminController extends Controller
 
         $newSearch = $request->get('search');
 
-        $equipment = Equipment::where('barcode', 'like', '%' . $newSearch . '%')
-        ->orWhere('item', 'like', '%' . $newSearch . '%')
-        ->where('checked_out_at', NULL)->get();
+        if ($patron->cameras_access_end_date < Carbon::now()) {
+            $message = 'Patron doesn\'t have aproval to use digital equipment';
+
+            if (empty($newSearch)) {
+                $equipment = Equipment::where('checked_out_at', NULL)->where('group', '!=', 'digital')->get();
+            }
+            else {
+                $equipment = Equipment::where('barcode', 'like', '%' . $newSearch . '%')
+                ->orWhere('item', 'like', '%' . $newSearch . '%')->where('checked_out_at', NULL)->where('group', '!=', 'digital')->get();
+            }
+        }
+        else {
+            if (empty($newSearch)) {
+                $equipment = Equipment::where('checked_out_at', NULL)->get();
+            }
+            else {
+                $equipment = Equipment::where('barcode', 'like', '%' . $newSearch . '%')
+                ->orWhere('item', 'like', '%' . $newSearch . '%')
+                ->where('checked_out_at', NULL)->get();
+            }
+        }
+        
 
         if (sizeof($equipment) == 1) {
             return redirect()->to( route('equipment.admin.checkout.create', ['patron' => $patron->id, 'equipment' => $equipment[0]->id]) );

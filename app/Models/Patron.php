@@ -37,4 +37,12 @@ class Patron extends Authenticatable
         return $this->hasMany('App\Models\Checkout');
     }
 
+    public function canCheckout($equipmentGroup) {
+
+        if($equipmentGroup == 'digital' && $this->cameras_access_end_date >= \Carbon\Carbon::now()){
+            return true;
+        }
+        return false;
+    }
+
 }

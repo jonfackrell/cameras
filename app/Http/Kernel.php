@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'patron.auth' => \App\Http\Middleware\PatronAuth::class,
         'database' => \App\Http\Middleware\Database::class,
         'mail' => \App\Http\Middleware\MailOverride::class,
+        'checkout.auth' => \App\Http\Middleware\CheckoutAuth::class,
     ];
 }
