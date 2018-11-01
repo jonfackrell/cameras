@@ -24,7 +24,7 @@
 		
 		@foreach ( $patrons as $patron )
 			<a class="row" id="{{ $patron->id }}" href="{{ route('equipment.admin.patron.show', $patron->id) }}">
-				<h6 class="col-2">{{ $patron->role }}</h6>
+				<h6 class="col-2">{{ $patron->getRole() }}</h6>
 				<h6 class="col-5">{{ $patron->getFullNameAttribute() }}</h6>
 				<h6 class="col-5">{{ $patron->email }}</h6>
 			</a>

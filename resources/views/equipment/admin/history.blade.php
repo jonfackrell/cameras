@@ -10,7 +10,10 @@
 			<div class="col">
 				<h3>Patron</h3>
 			</div>
-			<div class="col">
+			<div class="col-1">
+				<h3>Role</h3>
+			</div>
+			<div class="col-2">
 				<h3>Equipment</h3>
 			</div>
 			<div class="col">
@@ -29,7 +32,10 @@
 				<div class="col">
 					{{ $checkout->patron->getFullNameAttribute() }}
 				</div>
-				<div class="col">
+				<div class="col-1">
+					{{ $checkout->patron->getRole() }}
+				</div>
+				<div class="col-2">
 					{{ $checkout->equipment->item }}
 				</div>
 				<div class="col">
@@ -49,5 +55,7 @@
 				@endif
 			</div>
 		@endforeach
+
+		{{ $checkouts->links() }}
 	</div>
 @endsection

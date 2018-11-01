@@ -34,6 +34,19 @@ class Patron extends Authenticatable
 
 	}
 
+    public function getRole() {
+        $role = 'NA';
+
+        if (in_array('FAC', $this->roles)){
+            $role = 'FAC';
+        }
+        else if (in_array('STU', $this->roles)){
+            $role = 'STU';
+        }
+
+        return $role;
+    }
+
 	public function sendDifferentFileNotification($token)
     {
         $this->notify(new sendDifferentFileNotification($token));

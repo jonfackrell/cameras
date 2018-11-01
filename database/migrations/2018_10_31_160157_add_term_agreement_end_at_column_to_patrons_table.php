@@ -16,6 +16,7 @@ class AddTermAgreementEndAtColumnToPatronsTable extends Migration
         Schema::table('patrons', function (Blueprint $table) {
             $table->dateTime('term_agreement_end_at')->nullable()->default(NULL);
             $table->renameColumn('cameras_access_end_date', 'cameras_access_end_at');
+            $table->unsignedSmallInteger('checkout_period')->default(1);
         });
     }
 
@@ -29,6 +30,7 @@ class AddTermAgreementEndAtColumnToPatronsTable extends Migration
         Schema::table('patrons', function (Blueprint $table) {
             $table->dropColumn('term_agreement_end_at');
             $table->renameColumn('cameras_access_end_at', 'cameras_access_end_date');
+            $table->dropColumn('checkout_period');
         });
     }
 }

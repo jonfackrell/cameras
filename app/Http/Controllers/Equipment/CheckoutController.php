@@ -17,7 +17,7 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        $checkouts = Checkout::with(['patron', 'equipment'])->orderBy('checked_out_at', 'desc')->get();
+        $checkouts = Checkout::with(['patron', 'equipment'])->orderBy('checked_out_at', 'desc')->paginate(25);
 
         return view('equipment.admin.history', compact('checkouts'));
     }
