@@ -17,6 +17,9 @@
                     @can('view-colors')
                         <li><a href="{{ route('3d.color.index') }}">Colors</a></li>
                     @endcan
+                    @if(auth()->guard('web')->user()->can('update-pricing'))
+                        <li><a href="{{ route('3d.coupons.index') }}">Coupons</a></li>
+                    @endif
                     @can('view-departments')
                         <li><a href="{{ route('3d.department.index') }}">Departments</a></li>
                     @endcan
