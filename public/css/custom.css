@@ -6,3 +6,12 @@
 	background-color: #17A9E0;
 	min-height: 100%;
 }
+
+.late {
+	color: #ff8888;
+}
+
+.warning {
+	color: #fff;
+	background-color: #ff8888;
+}

@@ -128,7 +128,7 @@ Route::middleware(['mail'])->group(function () {
                 Route::post('/admin/{patron}/checkout/{equipment}', 'CheckoutController@store')->name('admin.checkout.create');
                 Route::get('/admin/{patron}/checkout/{equipment}', 'CheckoutController@create')->name('admin.checkout.create');
             });
-
+            Route::get('/admin/checkout/{checkout}', 'CheckoutController@show')->name('admin.checkout.show');
         });
         // TODO: Add Camera Checkout system here
 

@@ -44,4 +44,8 @@ class User extends Authenticatable
         $this->notify(new SetNewPasswordNotification($token));
     }
 
+    public function getFullNameAttribute() {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
 }

@@ -131,23 +131,23 @@ class CheckoutController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Checkout  $checkout
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($checkout)
     {
-        //
+        return view('equipment.admin.checkout.show', compact('checkout'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Checkout  $checkout
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($checkout)
     {
-        //
+        return view('equipment.admin.checkout.edit', compact('checkout'));
     }
 
     /**
