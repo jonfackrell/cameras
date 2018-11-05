@@ -14,31 +14,33 @@
 		</div>
 		<div class="clearfix"></div>
 		<div class="row">
-			<div class="col-md">
-				<h3>Check Out</h3>
-				{!! BootForm::open()->post()->action(route('equipment.admin.patron.show', $patron->id)) !!}
-				{!! BootForm::text('&nbsp', 'search')->placeholder('item or barcode') !!}
-				{!! BootForm::close() !!}
+			<div class="col-md">				
+				@if ($patron->areTermsAgreed())
+					<h3>Check Out</h3>
+					{!! BootForm::open()->post()->action(route('equipment.admin.patron.show', $patron->id)) !!}
+					{!! BootForm::text('&nbsp', 'search')->placeholder('item or barcode') !!}
+					{!! BootForm::close() !!}
 
-				@if (sizeof($equipment) > 0)
-					<div class="row">
-						<h5 class="col">Item</h5>
-						<h5 class="col">Barcode</h5>
-					</div>
+					@if (sizeof($equipment) > 0)
+						<div class="row">
+							<h5 class="col">Item</h5>
+							<h5 class="col">Barcode</h5>
+						</div>
+					@endif
+					
+					@foreach ( $equipment as $equipmenti )
+						<a class="row" id="{{ $equipmenti->id }}" href="{{ route('equipment.admin.checkout.create', ['patron' => $patron->id, 'equipment' => $equipmenti->id]) }}">
+							<h6 class="col">{{ $equipmenti->item }}</h6>
+							<h6 class="col">{{ $equipmenti->barcode }}</h6>
+						</a>
+					@endforeach
 				@endif
-				
-				@foreach ( $equipment as $equipmenti )
-					<a class="row" id="{{ $equipmenti->id }}" href="{{ route('equipment.admin.checkout.create', ['patron' => $patron->id, 'equipment' => $equipmenti->id]) }}">
-						<h6 class="col">{{ $equipmenti->item }}</h6>
-						<h6 class="col">{{ $equipmenti->barcode }}</h6>
-					</a>
-				@endforeach
 
 				@if (!empty($message))
-					<p>{{ $message }}</p>
+					<p class="warning">{{ $message }}</p>
 				@endif
 			</div>
-			<div class="col-md">
+			<div class="col-md">				
 				<h3>Digital</h3>
 				{!! BootForm::open()->post()->action(route('equipment.admin.checkin', $patron->id)) !!}
 				@foreach ($patron->checkouts as $checkout)

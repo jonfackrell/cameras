@@ -54,7 +54,10 @@ class AdminController extends Controller
         $message = '';
         $equipment = [];
 
-        if ($patron->canCheckout('digital') === false){
+        if ($patron->canCheckout('in-house') === false){
+            $message = 'Patron must agree to terms before checking out any equipment';
+        }
+        else if ($patron->canCheckout('digital') === false){
             $message = 'Patron doesn\'t have aproval to use digital equipment';
         }
 
@@ -78,7 +81,20 @@ class AdminController extends Controller
 
         $newSearch = $request->get('search');
 
-        if ($patron->cameras_access_end_date < Carbon::now()) {
+        $canDigital = $patron->canCheckout('digital');
+        $canInHouse = $patron->canCheckout('in-house');
+
+        if ($canInHouse && $canDigital) {
+            if (empty($newSearch)) {
+                $equipment = Equipment::where('checked_out_at', NULL)->get();
+            }
+            else {
+                $equipment = Equipment::where('barcode', 'like', '%' . $newSearch . '%')
+                ->orWhere('item', 'like', '%' . $newSearch . '%')
+                ->where('checked_out_at', NULL)->get();
+            }
+        }
+        else if (!$canDigital) {
             $message = 'Patron doesn\'t have aproval to use digital equipment';
 
             if (empty($newSearch)) {
@@ -89,16 +105,7 @@ class AdminController extends Controller
                 ->orWhere('item', 'like', '%' . $newSearch . '%')->where('checked_out_at', NULL)->where('group', '!=', 'digital')->get();
             }
         }
-        else {
-            if (empty($newSearch)) {
-                $equipment = Equipment::where('checked_out_at', NULL)->get();
-            }
-            else {
-                $equipment = Equipment::where('barcode', 'like', '%' . $newSearch . '%')
-                ->orWhere('item', 'like', '%' . $newSearch . '%')
-                ->where('checked_out_at', NULL)->get();
-            }
-        }
+        
         
 
         if (sizeof($equipment) == 1) {

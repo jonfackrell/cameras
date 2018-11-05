@@ -8,10 +8,11 @@
 }
 
 .late {
-	color: #ff8888;
+	color: #a33;
 }
 
 .warning {
 	color: #fff;
-	background-color: #ff8888;
+	background-color: #a33;
+	padding: 10px;
 }
