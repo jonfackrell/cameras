@@ -117,6 +117,12 @@ Route::middleware(['mail'])->group(function () {
 
         Route::view('/', 'equipment.index')->name('home');
 
+        Route::group(['middleware' => ['cas.auth', 'patron.auth']], function() {
+            Route::get('/terms', 'PatronController@terms')->name('patron.terms');
+            Route::post('/terms', 'PatronController@updateTerms')->name('patron.terms');
+            Route::get('/profile', 'PatronController@profile')->name('patron.profile');
+        });
+
         Route::group(['middleware' => ['auth']], function() {
             Route::get('/admin', 'AdminController@home')->name('admin');
             Route::post('/admin', 'AdminController@updateHome')->name('admin');

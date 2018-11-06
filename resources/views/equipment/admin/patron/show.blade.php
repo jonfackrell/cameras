@@ -10,6 +10,11 @@
 			<div class="col">
 				<h5>{{ $patron->email }}</h5>
 				<h5>{{ $patron->inumber }}</h5>
+				@if ($patron->areTermsAgreed())
+				<h5 class="green col-3">{{ $patron->getCheckoutPeriodText() }}</h5>
+				@else
+				<h5 class="warning col-3">{{ $patron->getCheckoutPeriodText() }}</h5>
+				@endif
 			</div>
 		</div>
 		<div class="clearfix"></div>
