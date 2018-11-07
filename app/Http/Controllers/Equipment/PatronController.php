@@ -111,8 +111,9 @@ class PatronController extends Controller
     public function terms()
     {
         $patron = Patron::where('id', auth()->guard('patrons')->user()->id)->first();
+        $date = Date::first()->end_at;
 
-        return view('equipment.patron.terms', compact('patron'));
+        return view('equipment.patron.terms', compact('patron', 'date'));
     }
 
     /**

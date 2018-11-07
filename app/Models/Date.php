@@ -9,4 +9,8 @@ class Date extends Model
     protected $fillable = [
         'description', 'end_at'
     ];
+
+    protected $dates = [
+        'end_at'
+    ];
 }

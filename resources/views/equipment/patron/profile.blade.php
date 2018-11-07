@@ -1,11 +1,7 @@
-@extends('layouts.public')
+@extends('equipment.layouts.patron')
 
 @section('title')
     {{ $patron->getFullNameAttribute() }}
-@endsection
-
-@section('breadcrumbs')
-    <span> PROFILE</span>
 @endsection
 
 
