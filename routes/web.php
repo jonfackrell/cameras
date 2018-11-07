@@ -127,6 +127,8 @@ Route::middleware(['mail'])->group(function () {
             Route::get('/admin', 'AdminController@home')->name('admin');
             Route::post('/admin', 'AdminController@updateHome')->name('admin');
             Route::get('/admin/checkouts', 'CheckoutController@index')->name('admin.checkouts');
+            Route::post('/admin/checkouts', 'CheckoutController@updateIndex')->name('admin.checkouts');
+            Route::get('/admin/checkouts/{type}', 'CheckoutController@index')->name('admin.checkouts.type');
             Route::get('/admin/{patron}', 'AdminController@show')->name('admin.patron.show');
             Route::post('/admin/{patron}', 'AdminController@updateShow')->name('admin.patron.show');
             Route::post('/admin/{patron}/checkin', 'CheckoutController@checkin')->name('admin.checkin');

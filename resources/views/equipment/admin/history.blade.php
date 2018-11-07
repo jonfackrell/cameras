@@ -6,6 +6,14 @@
 
 @section('content')
 	<div class="col-12">
+		{!! BootForm::open()->post()->action(route('equipment.admin.checkouts')) !!}
+		{!! BootForm::hidden('type')->value($type) !!}
+		<div class="row">
+			<div class="col-md-6"> 
+				{!! BootForm::text('&nbsp', 'search')->placeholder('first name, last name, or i-number') !!}
+			</div>
+		</div>
+		{!! BootForm::close() !!}
 		<div class="row">
 			<div class="col-2">
 				<h3>Patron</h3>
@@ -65,13 +73,16 @@
 				</div>
 				@endif
 				<div class="col-1">
-					@if (!empty($checkout->checked_out_by))
+					@if (!empty($checkout->checked_in_by))
 					{{ $checkout->who_checked_in->getFullNameAttribute() }}
+					@else
+					NA
 					@endif
 				</div>
 			</a>
 		@endforeach
 
 		{{ $checkouts->links() }}
+
 	</div>
 @endsection

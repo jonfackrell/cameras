@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Equipment;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
+use App\Models\Patron;
 use App\Models\Checkout;
 use App\Models\Equipment;
 
@@ -15,11 +16,59 @@ class CheckoutController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($type = 'all')
     {
-        $checkouts = Checkout::with(['patron', 'equipment'])->orderBy('checked_out_at', 'desc')->paginate(25);
+        $checkouts = Checkout::with(['patron', 'equipment'])->orderBy('checked_out_at', 'desc');
 
-        return view('equipment.admin.history', compact('checkouts'));
+        $checkouts = $this->filterCheckoutsByType($checkouts, $type);
+
+        $checkouts = $checkouts->paginate(25);
+
+        return view('equipment.admin.history', compact('checkouts', 'type'));
+    }
+
+    /**
+     * Update the home page.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateIndex(Request $request)
+    {
+        // TODO: FIX THE SEARCH FUNCTION
+        $newSearch = $request->get('search');
+
+        $patrons = Patron::where('first_name', 'like', '%' . $newSearch . '%')
+        ->orWhere('last_name', 'like', '%' . $newSearch . '%')
+        ->orWhere('inumber', 'like', '%' . $newSearch . '%')
+        ->select('id')->get();
+        
+        $checkouts = [];
+
+        $checkouts = Checkout::with(['patron', 'equipment'])
+        ->orderBy('checked_out_at', 'desc')
+        ->whereIn('patron_id', $patrons);
+
+        //print_r($patrons); die();
+        $type = $request->get('type');
+
+        $checkouts = $this->filterCheckoutsByType($checkouts, $type);
+
+        $checkouts = $checkouts->paginate(25);
+
+        return view('equipment.admin.history', compact('checkouts', 'type'));
+    }
+
+    private function filterCheckoutsByType($checkouts, $type)
+    {
+        if ($type == 'in') {
+            $checkouts = $checkouts->where('checked_in_at', '!=', null);
+        }
+        else if ($type == 'out') {
+            $checkouts = $checkouts->where('checked_in_at', '=', null);
+        }
+
+        return $checkouts;
     }
 
     /**
@@ -219,24 +268,11 @@ class CheckoutController extends Controller
     public function checkin(Request $request, $patron)
     {
         $checkouts = Checkout::whereIn('id', $request->get('equipment', []));
-
-        // prevent checkin
-        //$equipment = Equipment::where('id', $checkouts[0]->equipment_id);
-        //$equipment->is_checked_in = TRUE;
-        //$equipment->save();
         
         $checkouts->update(['checked_in_at' => Carbon::now(), 'checked_in_by' => auth()->guard('web')->user()->id, 'checkin_note' => $request->get('note')]);
 
         Equipment::whereIn('id', $checkouts->pluck('equipment_id'))->update(['checked_out_at' => NULL]);
-        /** WHY DOES THIS NOT WORK? **/
-        // foreach ($checkouts as $checkout) {
-        //     $equipment = Equipment::where('id', $checkout->equipment_id);
-        //     $equipment->is_checked_in = TRUE;
-        //     $equipment->save();
-        // }
-
-
-
+        
         return redirect()->to( route('equipment.admin.patron.show', $patron->id) );
     }
 

@@ -73,10 +73,14 @@
 
             <div class="row">
                 <div class="col-12">
+
+                    @include('equipment.layouts.parts.header')
+                    
                     <div class="x_title row">
                         <h2 class="col">@yield('title')</h2>
 
                     </div>
+
                     <div class="x_content row">
 
                         @yield('content')
