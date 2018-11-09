@@ -6,8 +6,7 @@
 
 @section('content')
 	<div class="col-12">
-		{!! BootForm::open()->post()->action(route('equipment.admin.checkouts')) !!}
-		{!! BootForm::hidden('type')->value($type) !!}
+		{!! BootForm::open()->post()->action(route('equipment.admin.checkouts', ['type' => $type])) !!}
 		<div class="row">
 			<div class="col-md-6"> 
 				{!! BootForm::text('&nbsp', 'search')->placeholder('first name, last name, or i-number') !!}
@@ -44,7 +43,7 @@
 					{{ $checkout->patron->getFullNameAttribute() }}
 				</div>
 				<div class="col-2">
-					{{ $checkout->equipment->item }}
+					{{ $checkout->equipment->getDisplayName() }}
 				</div>
 				<div class="col-2">
 					{{ $checkout->checked_out_at->tz('America/Denver')->format('M d Y H:i') }}

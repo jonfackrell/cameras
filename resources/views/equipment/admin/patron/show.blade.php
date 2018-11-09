@@ -35,7 +35,7 @@
 					
 					@foreach ( $equipment as $equipmenti )
 						<a class="row" id="{{ $equipmenti->id }}" href="{{ route('equipment.admin.checkout.create', ['patron' => $patron->id, 'equipment' => $equipmenti->id]) }}">
-							<h6 class="col">{{ $equipmenti->item }}</h6>
+							<h6 class="col">{{ $equipmenti->getDisplayName() }}</h6>
 							<h6 class="col">{{ $equipmenti->barcode }}</h6>
 						</a>
 					@endforeach
@@ -51,7 +51,7 @@
 				@foreach ($patron->checkouts as $checkout)
 					@if ($checkout->checked_in_at == NULL && $checkout->equipment->group == 'digital')
 						<div class="row">
-							<h5 class="col"> {{ $checkout->equipment->item }}</h5>
+							<h5 class="col"> {{ $checkout->equipment->getDisplayName() }}</h5>
 							<h5 class="col"> {{ $checkout->equipment->barcode }}</h5>
 						</div>
 						<div class="row">
@@ -67,7 +67,7 @@
 				@foreach ($patron->checkouts as $checkout)
 					@if ($checkout->checked_in_at == NULL && $checkout->equipment->group == 'in-house')
 						<div class="row">
-							<h5 class="col"> {{ $checkout->equipment->item }}</h5>
+							<h5 class="col"> {{ $checkout->equipment->getDisplayName() }}</h5>
 							<h5 class="col"> {{ $checkout->equipment->barcode }}</h5>
 						</div>
 						<div class="row">

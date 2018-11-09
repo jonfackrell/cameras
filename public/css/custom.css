@@ -22,3 +22,11 @@
 	background-color: #3a3;
 	padding: 10px;
 }
+
+.stats-btn {
+	font-size: 3em;
+}
+
+.light {
+	background-color: #f8f9fa;
+}

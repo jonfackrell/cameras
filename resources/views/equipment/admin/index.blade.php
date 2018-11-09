@@ -4,6 +4,10 @@
     Search
 @endsection
 
+@section('banner')
+	@include('equipment.layouts.parts.stats-banner')
+@endsection
+
 @section('content')
 	<div id="patron_search" class="col-lg-6">
         

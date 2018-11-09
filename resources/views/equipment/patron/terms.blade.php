@@ -9,9 +9,11 @@
 
 	<p>Please read and agree to all of the following terms and conditions. Terms and conditions apply to all renters (students and employees). This agreement will be valid until {{ $date->tz('America/Denver')->format('M d Y') }}. </p>
 
-	<h4>Digital Equipment</h4>
+	<h4>Camera Equipment</h4>
 
 	<p>You are responsible for any repair / replacement if any items you checkout are damaged.</p>
+
+	<p>You can only check out and return equipment for yourself.</p>
 
 	<p>A fee of $10 per day will be charged to your acount for any late items.</p>
 

@@ -33,12 +33,12 @@ class CheckoutController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function updateIndex(Request $request)
+    public function updateIndex(Request $request, $type = 'all')
     {
         // TODO: FIX THE SEARCH FUNCTION
         $newSearch = $request->get('search');
 
-        $patrons = Patron::where('first_name', 'like', '%' . $newSearch . '%')
+        $patron_ids = Patron::where('first_name', 'like', '%' . $newSearch . '%')
         ->orWhere('last_name', 'like', '%' . $newSearch . '%')
         ->orWhere('inumber', 'like', '%' . $newSearch . '%')
         ->select('id')->get();
@@ -47,10 +47,7 @@ class CheckoutController extends Controller
 
         $checkouts = Checkout::with(['patron', 'equipment'])
         ->orderBy('checked_out_at', 'desc')
-        ->whereIn('patron_id', $patrons);
-
-        //print_r($patrons); die();
-        $type = $request->get('type');
+        ->whereIn('patron_id', $patron_ids);
 
         $checkouts = $this->filterCheckoutsByType($checkouts, $type);
 
@@ -61,11 +58,22 @@ class CheckoutController extends Controller
 
     private function filterCheckoutsByType($checkouts, $type)
     {
-        if ($type == 'in') {
+        $type = strtolower($type);
+
+        if (stripos($type, '-in') !== false) { 
             $checkouts = $checkouts->where('checked_in_at', '!=', null);
         }
-        else if ($type == 'out') {
+        else if (stripos($type, '-out') !== false) {
             $checkouts = $checkouts->where('checked_in_at', '=', null);
+        }
+
+        if (stripos($type, 'in-house') !== false) {
+            $equipment_ids = Equipment::where('group', 'in-house')->select('id')->get();
+            $checkouts = $checkouts->whereIn('equipment_id', $equipment_ids);
+        }
+        else if (stripos($type, 'digital') !== false) {
+            $equipment_ids = Equipment::where('group', 'digital')->select('id')->get();
+            $checkouts = $checkouts->whereIn('equipment_id', $equipment_ids);
         }
 
         return $checkouts;

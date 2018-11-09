@@ -69,12 +69,18 @@
 
         <!-- page content -->
         <div class="main_col col-md-10" role="main">
-
-
-            <div class="row">
+            <div class="row light">
                 <div class="col-12">
 
                     @include('equipment.layouts.parts.header')
+
+                    @yield('banner')
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
                     
                     <div class="x_title row">
                         <h2 class="col">@yield('title')</h2>

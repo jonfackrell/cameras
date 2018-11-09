@@ -7,7 +7,7 @@
 @section('content')
 	<div class="col-12">
 		<div class="row">
-			<h5 class="col">{{ $equipment->item }}</h5>
+			<h5 class="col">{{ $equipment->getDisplayName() }}</h5>
 		</div>
 		<div class="row"> 
 			<div class="col-8"> 

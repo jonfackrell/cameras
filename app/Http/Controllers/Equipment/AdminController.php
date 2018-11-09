@@ -161,7 +161,12 @@ class AdminController extends Controller
         $patrons = [];
         $message = '';
 
-        return view('equipment.admin.index', compact('patrons', 'message'));
+        $cameraOut = Equipment::where('group', 'digital')
+        ->where('checked_out_at', '!=', null)->get();
+        $inHouseOut = Equipment::where('group', 'in-house')
+        ->where('checked_out_at', '!=', null)->get();
+
+        return view('equipment.admin.index', compact('patrons', 'message', 'cameraOut', 'inHouseOut'));
     }
 
     /**
@@ -188,6 +193,11 @@ class AdminController extends Controller
             $message = 'No patron found with search: ' . $newSearch;
         }
 
-        return view('equipment.admin.index', compact('patrons', 'message'));
+        $cameraOut = Equipment::where('group', 'digital')
+        ->where('checked_out_at', '!=', null)->get();
+        $inHouseOut = Equipment::where('group', 'in-house')
+        ->where('checked_out_at', '!=', null)->get();
+
+        return view('equipment.admin.index', compact('patrons', 'message', 'cameraOut', 'inHouseOut'));
     }
 }
