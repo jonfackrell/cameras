@@ -34,7 +34,7 @@ Route::middleware(['mail'])->group(function () {
             Route::resource('/admin/department', 'DepartmentController');
 
             Route::post('/admin/filament/sort', 'FilamentController@sort')->name('filament.sort');
-            Route::post('/admin/filament/{id}/toggle-printer', 'FilamentController@togglePrinter')->name('filament.toggle-printer');
+            Route::post('/admin/filament/toggle-printer', 'FilamentController@togglePrinter')->name('filament.toggle-printer');
             Route::get('/admin/filament/{filamentid}/printer/{printerid}/colors', 'FilamentController@showColorManager')->name('filament.color-manager');
             Route::post('/admin/filament/{filamentid}/printer/{printerid}/colors', 'FilamentController@updateColorManager')->name('filament.color-manager');
             Route::get('/admin/filament/{filamentid}/printer/{printerid}/pricing', 'FilamentController@showPricingManager')->name('filament.pricing-manager');
