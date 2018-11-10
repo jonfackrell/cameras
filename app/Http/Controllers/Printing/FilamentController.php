@@ -138,10 +138,10 @@ class FilamentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function togglePrinter(Request $request, $id)
+    public function togglePrinter(Request $request)
     {
         $this->authorize('edit-printers');
-        $filament = Filament::findOrFail($id);
+        $filament = Filament::findOrFail($this->get('id'));
         if($request->get('action') == "true"){
             $filament->printers()->attach($request->get('printerid'));
         }else{
