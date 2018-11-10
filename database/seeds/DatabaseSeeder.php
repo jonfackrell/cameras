@@ -257,8 +257,8 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        $equipment = factory(App\Equipment::class, 100)->create();
-        $checkouts = factory(App\Checkout::class, 20)->create();
+        $equipment = factory(App\Models\Equipment::class, 100)->create();
+        $checkouts = factory(App\Models\Checkout::class, 20)->create();
 
     }
 }
