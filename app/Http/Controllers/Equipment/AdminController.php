@@ -57,12 +57,12 @@ class AdminController extends Controller
         if ($patron->canCheckout('in-house') === false){
             $message = 'Patron must agree to terms before checking out any equipment';
         }
-        else if ($patron->canCheckout('digital') === false){
-            $message = 'Patron doesn\'t have aproval to use digital equipment';
+        else if ($patron->canCheckout('camera') === false){
+            $message = 'Patron doesn\'t have aproval to use camera equipment';
         }
 
         //if ($patron->cameras_access_end_date < Carbon::now())
-        //    $message = 'Patron doesn\'t have aproval to use digital equipment';
+        //    $message = 'Patron doesn\'t have aproval to use camera equipment';
 
         return view('equipment.admin.patron.show', compact('patron', 'message', 'equipment'));
     }
@@ -81,7 +81,7 @@ class AdminController extends Controller
 
         $newSearch = $request->get('search');
 
-        $canDigital = $patron->canCheckout('digital');
+        $canDigital = $patron->canCheckout('camera');
         $canInHouse = $patron->canCheckout('in-house');
 
         if ($canInHouse && $canDigital) {
@@ -95,14 +95,14 @@ class AdminController extends Controller
             }
         }
         else if (!$canDigital) {
-            $message = 'Patron doesn\'t have aproval to use digital equipment';
+            $message = 'Patron doesn\'t have aproval to use camera equipment';
 
             if (empty($newSearch)) {
-                $equipment = Equipment::where('checked_out_at', NULL)->where('group', '!=', 'digital')->get();
+                $equipment = Equipment::where('checked_out_at', NULL)->where('group', '!=', 'camera')->get();
             }
             else {
                 $equipment = Equipment::where('barcode', 'like', '%' . $newSearch . '%')
-                ->orWhere('item', 'like', '%' . $newSearch . '%')->where('checked_out_at', NULL)->where('group', '!=', 'digital')->get();
+                ->orWhere('item', 'like', '%' . $newSearch . '%')->where('checked_out_at', NULL)->where('group', '!=', 'camera')->get();
             }
         }
         
@@ -161,7 +161,7 @@ class AdminController extends Controller
         $patrons = [];
         $message = '';
 
-        $cameraOut = Equipment::where('group', 'digital')
+        $cameraOut = Equipment::where('group', 'camera')
         ->where('checked_out_at', '!=', null)->get();
         $inHouseOut = Equipment::where('group', 'in-house')
         ->where('checked_out_at', '!=', null)->get();
@@ -193,7 +193,7 @@ class AdminController extends Controller
             $message = 'No patron found with search: ' . $newSearch;
         }
 
-        $cameraOut = Equipment::where('group', 'digital')
+        $cameraOut = Equipment::where('group', 'camera')
         ->where('checked_out_at', '!=', null)->get();
         $inHouseOut = Equipment::where('group', 'in-house')
         ->where('checked_out_at', '!=', null)->get();

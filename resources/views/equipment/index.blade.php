@@ -13,7 +13,7 @@
 
 
             
-    <h2>DIGITAL EQUIPMENT</h2>
+    <h2>CAMERA EQUIPMENT</h2>
 
     <div class="clearfix">&nbsp;</div>
 

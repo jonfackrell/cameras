@@ -50,7 +50,7 @@ class Patron extends Authenticatable
     public function getCheckoutPeriodText() {
         $period = $this->checkout_period . ' days';
 
-        if (!$this->canCheckout('digital', true)) {
+        if (!$this->canCheckout('camera', true)) {
             $period = 'In-house Only';
         }
         else if ($this->checkout_period == 1) {
@@ -88,13 +88,13 @@ class Patron extends Authenticatable
 
     public function canCheckout($equipmentGroup, $skipTerms = false) {
         if($skipTerms) {
-            if ($equipmentGroup == 'digital' && $this->cameras_access_end_at >= \Carbon\Carbon::now()) {
+            if ($equipmentGroup == 'camera' && $this->cameras_access_end_at >= \Carbon\Carbon::now()) {
                 return true;
             }
         }
 
         if ($this->areTermsAgreed()) {
-            if ($equipmentGroup == 'digital' && $this->cameras_access_end_at >= \Carbon\Carbon::now()) {
+            if ($equipmentGroup == 'camera' && $this->cameras_access_end_at >= \Carbon\Carbon::now()) {
                 return true;
             }
             else if ($equipmentGroup == 'in-house') {

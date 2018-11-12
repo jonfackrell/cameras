@@ -67,6 +67,11 @@ ul{
 
 li { padding-top: 10px; }
 
+.bullets {
+    list-style-type: disc;
+    padding-left: 18px;
+}
+
 #largetext{
     font-size: 1.2em;
 }

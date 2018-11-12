@@ -1,7 +1,7 @@
 <!-- stats-banner -->
 <div class="row justify-content-start light">
                 
-    <a href="{{ route('equipment.admin.checkouts', ['type' => 'digital-out']) }}" class="col-lg-2 col-sm-3 col-6 btn btn-light">
+    <a href="{{ route('equipment.admin.checkouts', ['type' => 'camera-out']) }}" class="col-lg-2 col-sm-3 col-6 btn btn-light">
         <div class="clip-wrap stats-btn">
             {{ count($cameraOut) }}
         </div>

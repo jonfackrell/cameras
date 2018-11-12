@@ -11,22 +11,25 @@
 
 	<h4>Camera Equipment</h4>
 
-	<p>You are responsible for any repair / replacement if any items you checkout are damaged.</p>
+	<ul class="bullets">
+		<li>You are responsible for any repair / replacement if any items you checkout are damaged.</li>
 
-	<p>You can only check out and return equipment for yourself.</p>
+		<li>You can only check out and return equipment for yourself.</li>
 
-	<p>A fee of $10 per day will be charged to your acount for any late items.</p>
+		<li>A fee of $10 per day will be charged to your acount for any late items.</li>
+	</ul>
 
 	<h4>In-house Equipment</h4>
 
-	<p>The equipment must stay in the library at all times.</p> 
+	<ul class="bullets">
+		<li>The equipment must stay in the library at all times.</li> 
 
-	<p>The equimpent may be on any floor in the library. This exclude any tablets and their pens.</p>
+		<li>The equimpent may be on any floor in the library. This exclude any tablets and their pens.</li>
 
-	<p>All tablets and pens must stay in the Mac Lab.</p>
+		<li>All tablets and pens must stay in the Mac Lab.</li>
 
-	<p>The equipment is due back 15 minutes before the library closes.</p>
-
+		<li>The equipment is due back 15 minutes before the library closes.</li>
+	</ul>
 	{!! BootForm::open()->post()->action(route('equipment.patron.terms')) !!}
 	{!! BootForm::submit('I AGREE') !!}
 	{!! BootForm::close() !!}

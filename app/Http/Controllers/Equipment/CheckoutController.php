@@ -71,8 +71,8 @@ class CheckoutController extends Controller
             $equipment_ids = Equipment::where('group', 'in-house')->select('id')->get();
             $checkouts = $checkouts->whereIn('equipment_id', $equipment_ids);
         }
-        else if (stripos($type, 'digital') !== false) {
-            $equipment_ids = Equipment::where('group', 'digital')->select('id')->get();
+        else if (stripos($type, 'camera') !== false) {
+            $equipment_ids = Equipment::where('group', 'camera')->select('id')->get();
             $checkouts = $checkouts->whereIn('equipment_id', $equipment_ids);
         }
 
@@ -301,7 +301,7 @@ class CheckoutController extends Controller
             $checkout->due_at = Carbon::tomorrow('America/Denver')->subMinutes(30)->tz('UTC');
         }
         else {
-            $checkout->due_at = Carbon::now()->addDays(1);
+            $checkout->due_at = Carbon::now()->addDays($patron->checkout_period);
         }
 
         $checkout->checked_out_by = auth()->guard('web')->user()->id;

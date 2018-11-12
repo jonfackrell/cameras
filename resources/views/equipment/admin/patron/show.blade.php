@@ -46,10 +46,10 @@
 				@endif
 			</div>
 			<div class="col-md">				
-				<h3>Digital</h3>
+				<h3>Camera</h3>
 				{!! BootForm::open()->post()->action(route('equipment.admin.checkin', $patron->id)) !!}
 				@foreach ($patron->checkouts as $checkout)
-					@if ($checkout->checked_in_at == NULL && $checkout->equipment->group == 'digital')
+					@if ($checkout->checked_in_at == NULL && $checkout->equipment->group == 'camera')
 						<div class="row">
 							<h5 class="col"> {{ $checkout->equipment->getDisplayName() }}</h5>
 							<h5 class="col"> {{ $checkout->equipment->barcode }}</h5>
