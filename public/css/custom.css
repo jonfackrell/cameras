@@ -8,12 +8,13 @@
 }
 
 .late {
-	color: #a33;
+	color: #c33;
+	font-weight: bolder;
 }
 
 .warning {
 	color: #fff;
-	background-color: #a33;
+	background-color: #c33;
 	padding: 10px;
 }
 

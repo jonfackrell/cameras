@@ -60,6 +60,7 @@
 			</h4>
 		</div>
 		<div class="row">
+			@if (!is_null($checkout->equipment->item))
 			<div class="col-md-3">
 				<div class="row">
 					<h5 class="col-12">Item</h5>
@@ -70,6 +71,8 @@
 					</div>
 				</div>
 			</div>
+			@endif
+			@if (!is_null($checkout->equipment->barcode))
 			<div class="col-md-3">
 				<div class="row">
 					<h5 class="col-12">Barcode</h5>
@@ -80,7 +83,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-6">
+			@endif
+			<div class="col-md">
 				<div class="row">
 					<h5 class="col-12">Description</h5>
 				</div>

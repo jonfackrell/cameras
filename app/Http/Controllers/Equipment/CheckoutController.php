@@ -56,6 +56,13 @@ class CheckoutController extends Controller
         return view('equipment.admin.history', compact('checkouts', 'type'));
     }
 
+    /**
+     * Filters checkouts based on the Collection of Checkouts and type
+     *
+     * @param  Collection of Checkouts  $checkouts
+     * @param  str $type
+     * @return Collection of Checkouts
+     */
     private function filterCheckoutsByType($checkouts, $type)
     {
         $type = strtolower($type);

@@ -1,7 +1,17 @@
 <!-- sidebar menu -->
-<a class="row btn btn-default sidebar-btn" href="{{ route('equipment.admin') }}"><span class="col-3"><i class="fa fa-home" aria-hidden="true"></i></span><span class="col">Home</span></a>
-<a class="row btn btn-default sidebar-btn" href="{{ route('3d.admin') }}"><span class="col-3"><i class="fa fa-cube" aria-hidden="true"></i></span><span class="col">3d Printing</span></a>
-<a class="row btn btn-default sidebar-btn" href="{{ route('equipment.admin.checkouts', ['type' => 'camera-in']) }}"><span class="col-3"><i class="fa fa-history" aria-hidden="true"></i></span><span class="col">Camera History</span></a>
-<a class="row btn btn-default sidebar-btn" href="{{ route('equipment.admin.checkouts', ['type' => 'in-house-in']) }}"><span class="col-3"><i class="fa fa-history" aria-hidden="true"></i></span><span class="col">In House History</span></a>
+<div id="menu">
+	<div class="row btn btn-default sidebar-btn"> <span><i class="fa fa-list" aria-hidden="true"></i> Menu <i class="fa fa-chevron-down"></i></span></div>
+</div>
+<div id="menuOpts">
+	<a class="row btn btn-default sidebar-btn" href="{{ route('equipment.admin') }}"><span><i class="fa fa-home" aria-hidden="true"></i> Home</span></a>
+	<a class="row btn btn-default sidebar-btn" href="{{ route('3d.admin') }}"><span><i class="fa fa-cube" aria-hidden="true"></i> 3d Printing</span></a>
+	<div class="row btn btn-default sidebar-btn" id="history"><span><i class="fa fa-history" aria-hidden="true"></i> History <i class="fa fa-chevron-down"></i></span></div>
+	<div id="historyOpts">
+		
+		<a class="row btn btn-default sidebar-btn" href="{{ route('equipment.admin.checkouts', ['type' => 'camera-in']) }}"><span>&emsp;<i class="fa fa-camera" aria-hidden="true"></i> Camera</span></a>
+		<a class="row btn btn-default sidebar-btn" href="{{ route('equipment.admin.checkouts', ['type' => 'in-house-in']) }}"><span>&emsp;<i class="fa fa-headphones" aria-hidden="true"></i> In House</span></a>
+
+	</div>
+</div>
 
 <!-- end sidebar menu -->

@@ -45,43 +45,65 @@
 					<p class="warning">{{ $message }}</p>
 				@endif
 			</div>
-			<div class="col-md">				
-				<h3>Camera</h3>
-				{!! BootForm::open()->post()->action(route('equipment.admin.checkin', $patron->id)) !!}
-				@foreach ($patron->checkouts as $checkout)
-					@if ($checkout->checked_in_at == NULL && $checkout->equipment->group == 'camera')
+			<div class="col-md">
+				
+				@if (sizeof($cameras) > 0 || sizeof($inHouses) > 0)	
+					{!! BootForm::open()->post()->action(route('equipment.admin.checkin', $patron->id)) !!}
+
+					@if (sizeof($cameras) > 0)				
+						<h3>Camera</h3>
+					@endif
+
+					@foreach ($cameras as $checkout)
 						<div class="row">
 							<h5 class="col"> {{ $checkout->equipment->getDisplayName() }}</h5>
+							@if (!is_null($checkout->equipment->barcode))
 							<h5 class="col"> {{ $checkout->equipment->barcode }}</h5>
+							@endif
+							<div class="col-1"></div>
 						</div>
 						<div class="row">
 							<h6 class="col"><strong>Out:</strong> {{ $checkout->checked_out_at->tz('America/Denver')->format('M d Y') }}</h6>
-							<h6 class="col"><strong>Due:</strong> {{ $checkout->due_at->tz('America/Denver')->format('M d Y') }}</h6>				
+							@if ($checkout->isLate())
+							<h6 class="col late"><strong>Due:</strong> {{ $checkout->due_at->tz('America/Denver')->format('M d Y') }}</h6>
+							@else
+							<h6 class="col"><strong>Due:</strong> {{ $checkout->due_at->tz('America/Denver')->format('M d Y') }}</h6>
+							@endif				
 							<div class="col-1"> 
 								{!! BootForm::checkbox("&nbsp;", "equipment[]")->value($checkout->id ) !!}
 							</div>
 						</div>
+					@endforeach
+
+					@if (sizeof($inHouses) > 0)	
+						<h3>In House</h3>
 					@endif
-				@endforeach
-				<h3>In House</h3>
-				@foreach ($patron->checkouts as $checkout)
-					@if ($checkout->checked_in_at == NULL && $checkout->equipment->group == 'in-house')
+
+					@foreach ($inHouses as $checkout)
 						<div class="row">
 							<h5 class="col"> {{ $checkout->equipment->getDisplayName() }}</h5>
+							@if (!is_null($checkout->equipment->barcode))
 							<h5 class="col"> {{ $checkout->equipment->barcode }}</h5>
+							@endif
+							<div class="col-1"></div>
 						</div>
 						<div class="row">
 							<h6 class="col"><strong>Out:</strong> {{ $checkout->checked_out_at->tz('America/Denver')->format('M d Y') }}</h6>
-							<h6 class="col"><strong>Due:</strong> {{ $checkout->due_at->tz('America/Denver')->format('M d Y') }}</h6>				
+							@if ($checkout->isLate())
+							<h6 class="col late"><strong>Due:</strong> {{ $checkout->due_at->tz('America/Denver')->format('M d Y') }}</h6>
+							@else
+							<h6 class="col"><strong>Due:</strong> {{ $checkout->due_at->tz('America/Denver')->format('M d Y') }}</h6>
+							@endif				
 							<div class="col-1"> 
 								{!! BootForm::checkbox("&nbsp;", "equipment[]")->value($checkout->id ) !!}
 							</div>
 						</div>
-					@endif
-				@endforeach
-				{!! BootForm::textarea("&nbsp;", 'note')->rows(3) !!}
-				{!! BootForm::submit('Check In') !!}
-				{!! BootForm::close() !!}
+					@endforeach
+
+					{!! BootForm::textarea("&nbsp;", 'note')->rows(3) !!}
+					{!! BootForm::submit('Check In') !!}
+					{!! BootForm::close() !!}
+				@endif
 			</div>
 		</div>
 	</div>

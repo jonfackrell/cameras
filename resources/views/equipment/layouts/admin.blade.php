@@ -29,6 +29,14 @@
         body { padding: 30px; }
         a { color: inherit; } 
         a.sidebar-btn { text-align: left; }
+        #historyOpts { display: none; }
+        #menu { display: none; }
+        #menuOpts { display: block; }
+
+        @media only screen and (max-width: 767px) {
+            #menu { display: block; }
+            #menuOpts { display: none; }
+        }
     </style>
 
     @stack('styles')
@@ -49,7 +57,7 @@
 <body class="container">
 
     <div class="row">
-        <div class="col-md-2 sidebar">
+        <div class="col-lg-2 col-md-3 sidebar">
 
             <div class="navbar nav_title" style="border: 0;">
                 <a href="{{ route('equipment.admin') }}" class="site_title"><h3>Equipment</h3></a>
@@ -68,7 +76,7 @@
 
 
         <!-- page content -->
-        <div class="main_col col-md-10" role="main">
+        <div class="main_col col-md" role="main">
             <div class="row light">
                 <div class="col-12">
 
@@ -122,7 +130,13 @@
 <script>
 
     $(function(){
+        $('#history').click(function() {
+            $('#historyOpts').toggle('slow');
+        });
 
+        $('#menu').click(function() {
+            $('#menuOpts').toggle('slow');
+        });
     });
 </script>
 

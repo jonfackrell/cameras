@@ -61,10 +61,10 @@ class AdminController extends Controller
             $message = 'Patron doesn\'t have aproval to use camera equipment';
         }
 
-        //if ($patron->cameras_access_end_date < Carbon::now())
-        //    $message = 'Patron doesn\'t have aproval to use camera equipment';
+        $cameras = $this->filterCheckoutsByGroup($patron, 'camera')->get();
+        $inHouses = $this->filterCheckoutsByGroup($patron, 'in-house')->get();
 
-        return view('equipment.admin.patron.show', compact('patron', 'message', 'equipment'));
+        return view('equipment.admin.patron.show', compact('patron', 'message', 'equipment', 'cameras', 'inHouses'));
     }
 
     /**
@@ -114,7 +114,31 @@ class AdminController extends Controller
         elseif (sizeof($equipment) == 0) {
             $message = 'No equipment found with search: ' . $newSearch;
         }
-        return view('equipment.admin.patron.show', compact('patron', 'message', 'equipment'));
+
+        $cameras = $this->filterCheckoutsByGroup($patron, 'camera')->get();
+        $inHouses = $this->filterCheckoutsByGroup($patron, 'in-house')->get();
+
+        return view('equipment.admin.patron.show', compact('patron', 'message', 'equipment', 'cameras', 'inHouses'));
+    }
+
+    /**
+     * Filters checkouts based on the Patron, Equipment group, and if they are checked out
+     *
+     * @param  Patron  $patron
+     * @param  str $group
+     * @return Collection of Checkouts
+     */
+    private function filterCheckoutsByGroup($patron, $group)
+    {
+        $equipment_ids = Equipment::where('group', $group)->select('id')->get();
+
+        $checkouts = Checkout::with(['patron', 'equipment'])
+        ->orderBy('checked_out_at', 'desc')
+        ->where('patron_id', $patron->id)
+        ->where('checked_in_at', '=', null)
+        ->whereIn('equipment_id', $equipment_ids);
+
+        return $checkouts;
     }
 
     /**

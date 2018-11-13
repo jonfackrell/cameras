@@ -8,76 +8,54 @@
 	<div class="col-12">
 		{!! BootForm::open()->post()->action(route('equipment.admin.checkouts', ['type' => $type])) !!}
 		<div class="row">
-			<div class="col-md-6"> 
+			<div class="col-lg-6 col-md-8"> 
 				{!! BootForm::text('&nbsp', 'search')->placeholder('first name, last name, or i-number') !!}
 			</div>
 		</div>
 		{!! BootForm::close() !!}
 		<div class="row">
-			<div class="col-2">
+			<div class="col-3">
 				<h3>Patron</h3>
 			</div>
-			<div class="col-2">
+			<div class="col-3">
 				<h3>Equipment</h3>
 			</div>
-			<div class="col-2">
+			<div class="col-3">
 				<h3>Out</h3>
 			</div>
-			<div class="col-1">
-				<h3>By</h3>
-			</div>
-			<div class="col-2">
+			<div class="col-3">
 				<h3>Due</h3>
-			</div>
-			<div class="col-2">
-				<h3>In</h3>
-			</div>
-			<div class="col-1">
-				<h3>By</h3>
 			</div>
 		</div>
 
 		@foreach ($checkouts as $checkout)
 			<a class="row mb-2" href="{{ route('equipment.admin.checkout.show', ['checkout' => $checkout->id]) }}">
-				<div class="col-2">
+				<div class="col-3">
 					{{ $checkout->patron->getFullNameAttribute() }}
 				</div>
-				<div class="col-2">
+				<div class="col-3">
 					{{ $checkout->equipment->getDisplayName() }}
 				</div>
-				<div class="col-2">
+				<div class="col-3">
 					{{ $checkout->checked_out_at->tz('America/Denver')->format('M d Y H:i') }}
 				</div>
-				<div class="col-1">
-					{{ $checkout->who_checked_out->getFullNameAttribute() }}
-				</div>
-				<div class="col-2">
-					{{ $checkout->due_at->tz('America/Denver')->format('M d Y H:i') }}
-				</div>
-				@if ($checkout->checked_in_at == NULL && $checkout->isLate())
-				<div class="col-2 late">
+				@if ($checkout->due_at == NULL && $checkout->isLate())
+				<div class="col-3 late">
 					Still out
 				</div>
-				@elseif ($checkout->checked_in_at == NULL)
-				<div class="col-2">
+				@elseif ($checkout->due_at == NULL)
+				<div class="col-3">
 					Still out
 				</div>
 				@elseif ($checkout->isLate())
-				<div class="col-2 late">
-					{{ $checkout->checked_in_at->tz('America/Denver')->format('M d Y H:i') }}
+				<div class="col-3 late">
+					{{ $checkout->due_at->tz('America/Denver')->format('M d Y H:i') }}
 				</div>
 				@else
-				<div class="col-2">
-					{{ $checkout->checked_in_at->tz('America/Denver')->format('M d Y H:i') }}
+				<div class="col-3">
+					{{ $checkout->due_at->tz('America/Denver')->format('M d Y H:i') }}
 				</div>
 				@endif
-				<div class="col-1">
-					@if (!empty($checkout->checked_in_by))
-					{{ $checkout->who_checked_in->getFullNameAttribute() }}
-					@else
-					NA
-					@endif
-				</div>
 			</a>
 		@endforeach
 
