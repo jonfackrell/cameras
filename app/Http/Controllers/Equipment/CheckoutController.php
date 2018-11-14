@@ -67,21 +67,22 @@ class CheckoutController extends Controller
     {
         $type = strtolower($type);
 
-        if (stripos($type, '-in') !== false) { 
+        if (stripos($type, 'in') !== false) { 
             $checkouts = $checkouts->where('checked_in_at', '!=', null);
         }
-        else if (stripos($type, '-out') !== false) {
+        else if (stripos($type, 'out') !== false) {
             $checkouts = $checkouts->where('checked_in_at', '=', null);
         }
 
-        if (stripos($type, 'in-house') !== false) {
-            $equipment_ids = Equipment::where('group', 'in-house')->select('id')->get();
-            $checkouts = $checkouts->whereIn('equipment_id', $equipment_ids);
-        }
-        else if (stripos($type, 'camera') !== false) {
+        if (stripos($type, 'camera') !== false) {
             $equipment_ids = Equipment::where('group', 'camera')->select('id')->get();
             $checkouts = $checkouts->whereIn('equipment_id', $equipment_ids);
         }
+        else if (stripos($type, 'other') !== false) {
+            $equipment_ids = Equipment::where('group', 'other')->select('id')->get();
+            $checkouts = $checkouts->whereIn('equipment_id', $equipment_ids);
+        }
+        
 
         return $checkouts;
     }
@@ -304,11 +305,11 @@ class CheckoutController extends Controller
         $checkout->patron_id = $patron->id;
         $checkout->checked_out_at = Carbon::now();
 
-        if ($equipment->group == 'in-house') { 
-            $checkout->due_at = Carbon::tomorrow('America/Denver')->subMinutes(30)->tz('UTC');
+        if ($equipment->group == 'camera') { 
+            $checkout->due_at = Carbon::now()->addDays($patron->checkout_period);
         }
         else {
-            $checkout->due_at = Carbon::now()->addDays($patron->checkout_period);
+            $checkout->due_at = Carbon::tomorrow('America/Denver')->subMinutes(30)->tz('UTC');
         }
 
         $checkout->checked_out_by = auth()->guard('web')->user()->id;

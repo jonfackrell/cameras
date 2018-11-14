@@ -51,7 +51,7 @@ class Patron extends Authenticatable
         $period = $this->checkout_period . ' days';
 
         if (!$this->canCheckout('camera', true)) {
-            $period = 'In-house Only';
+            $period = 'Other Only';
         }
         else if ($this->checkout_period == 1) {
             $period = '24 Hours';
@@ -97,7 +97,7 @@ class Patron extends Authenticatable
             if ($equipmentGroup == 'camera' && $this->cameras_access_end_at >= \Carbon\Carbon::now()) {
                 return true;
             }
-            else if ($equipmentGroup == 'in-house') {
+            else if ($equipmentGroup == 'other') {
                 return true;
             }
         }

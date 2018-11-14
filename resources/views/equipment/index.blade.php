@@ -49,7 +49,7 @@
 
     <div class="clearfix">&nbsp;</div>
             
-    <h2>IN HOUSE EQUIPMENT</h2>
+    <h2>OTHER EQUIPMENT</h2>
 
     <div class="clearfix">&nbsp;</div>
 

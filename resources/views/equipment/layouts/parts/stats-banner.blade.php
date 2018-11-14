@@ -10,12 +10,12 @@
         </div>
     </a>
 
-    <a href="{{ route('equipment.admin.checkouts', ['type' => 'in-house-out']) }}" class="col-lg-2 col-sm-3 col-6 btn btn-light">
+    <a href="{{ route('equipment.admin.checkouts', ['type' => 'other-out']) }}" class="col-lg-2 col-sm-3 col-6 btn btn-light">
         <div class="clip-wrap stats-btn">
-            {{ count($inHouseOut) }}
+            {{ count($otherOut) }}
         </div>
         <div>
-            <small>IN-HOUSE</small><br/> EQUIPMENT
+            <small>OTHER</small><br/> EQUIPMENT
         </div>
     </a>
 </div>

@@ -54,7 +54,7 @@ class AdminController extends Controller
         $message = '';
         $equipment = [];
 
-        if ($patron->canCheckout('in-house') === false){
+        if ($patron->canCheckout('other') === false){
             $message = 'Patron must agree to terms before checking out any equipment';
         }
         else if ($patron->canCheckout('camera') === false){
@@ -62,9 +62,9 @@ class AdminController extends Controller
         }
 
         $cameras = $this->filterCheckoutsByGroup($patron, 'camera')->get();
-        $inHouses = $this->filterCheckoutsByGroup($patron, 'in-house')->get();
+        $others = $this->filterCheckoutsByGroup($patron, 'other')->get();
 
-        return view('equipment.admin.patron.show', compact('patron', 'message', 'equipment', 'cameras', 'inHouses'));
+        return view('equipment.admin.patron.show', compact('patron', 'message', 'equipment', 'cameras', 'others'));
     }
 
     /**
@@ -82,7 +82,7 @@ class AdminController extends Controller
         $newSearch = $request->get('search');
 
         $canDigital = $patron->canCheckout('camera');
-        $canInHouse = $patron->canCheckout('in-house');
+        $canInHouse = $patron->canCheckout('other');
 
         if ($canInHouse && $canDigital) {
             if (empty($newSearch)) {
@@ -116,9 +116,9 @@ class AdminController extends Controller
         }
 
         $cameras = $this->filterCheckoutsByGroup($patron, 'camera')->get();
-        $inHouses = $this->filterCheckoutsByGroup($patron, 'in-house')->get();
+        $others = $this->filterCheckoutsByGroup($patron, 'other')->get();
 
-        return view('equipment.admin.patron.show', compact('patron', 'message', 'equipment', 'cameras', 'inHouses'));
+        return view('equipment.admin.patron.show', compact('patron', 'message', 'equipment', 'cameras', 'others'));
     }
 
     /**
@@ -187,10 +187,10 @@ class AdminController extends Controller
 
         $cameraOut = Equipment::where('group', 'camera')
         ->where('checked_out_at', '!=', null)->get();
-        $inHouseOut = Equipment::where('group', 'in-house')
+        $otherOut = Equipment::where('group', 'other')
         ->where('checked_out_at', '!=', null)->get();
 
-        return view('equipment.admin.index', compact('patrons', 'message', 'cameraOut', 'inHouseOut'));
+        return view('equipment.admin.index', compact('patrons', 'message', 'cameraOut', 'otherOut'));
     }
 
     /**
@@ -219,9 +219,9 @@ class AdminController extends Controller
 
         $cameraOut = Equipment::where('group', 'camera')
         ->where('checked_out_at', '!=', null)->get();
-        $inHouseOut = Equipment::where('group', 'in-house')
+        $otherOut = Equipment::where('group', 'other')
         ->where('checked_out_at', '!=', null)->get();
 
-        return view('equipment.admin.index', compact('patrons', 'message', 'cameraOut', 'inHouseOut'));
+        return view('equipment.admin.index', compact('patrons', 'message', 'cameraOut', 'otherOut'));
     }
 }

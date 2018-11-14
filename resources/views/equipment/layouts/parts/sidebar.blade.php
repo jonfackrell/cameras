@@ -1,6 +1,6 @@
 <!-- sidebar menu -->
 <div id="menu">
-	<div class="row btn btn-default sidebar-btn"> <span><i class="fa fa-list" aria-hidden="true"></i> Menu <i class="fa fa-chevron-down"></i></span></div>
+	<div class="row btn btn-default sidebar-btn"> <span>Menu <i class="fa fa-chevron-down"></i></span></div>
 </div>
 <div id="menuOpts">
 	<a class="row btn btn-default sidebar-btn" href="{{ route('equipment.admin') }}"><span><i class="fa fa-home" aria-hidden="true"></i> Home</span></a>
@@ -9,7 +9,7 @@
 	<div id="historyOpts">
 		
 		<a class="row btn btn-default sidebar-btn" href="{{ route('equipment.admin.checkouts', ['type' => 'camera-in']) }}"><span>&emsp;<i class="fa fa-camera" aria-hidden="true"></i> Camera</span></a>
-		<a class="row btn btn-default sidebar-btn" href="{{ route('equipment.admin.checkouts', ['type' => 'in-house-in']) }}"><span>&emsp;<i class="fa fa-headphones" aria-hidden="true"></i> In House</span></a>
+		<a class="row btn btn-default sidebar-btn" href="{{ route('equipment.admin.checkouts', ['type' => 'other-in']) }}"><span>&emsp;<i class="fa fa-headphones" aria-hidden="true"></i> Other</span></a>
 
 	</div>
 </div>

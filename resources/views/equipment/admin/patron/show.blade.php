@@ -47,7 +47,7 @@
 			</div>
 			<div class="col-md">
 				
-				@if (sizeof($cameras) > 0 || sizeof($inHouses) > 0)	
+				@if (sizeof($cameras) > 0 || sizeof($others) > 0)	
 					{!! BootForm::open()->post()->action(route('equipment.admin.checkin', $patron->id)) !!}
 
 					@if (sizeof($cameras) > 0)				
@@ -75,11 +75,11 @@
 						</div>
 					@endforeach
 
-					@if (sizeof($inHouses) > 0)	
-						<h3>In House</h3>
+					@if (sizeof($others) > 0)	
+						<h3>Other</h3>
 					@endif
 
-					@foreach ($inHouses as $checkout)
+					@foreach ($others as $checkout)
 						<div class="row">
 							<h5 class="col"> {{ $checkout->equipment->getDisplayName() }}</h5>
 							@if (!is_null($checkout->equipment->barcode))
