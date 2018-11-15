@@ -130,6 +130,8 @@ Route::middleware(['mail'])->group(function () {
             Route::get('/admin/checkouts/{type}', 'CheckoutController@index')->name('admin.checkouts');
             Route::get('/admin/{patron}', 'AdminController@show')->name('admin.patron.show');
             Route::post('/admin/{patron}', 'AdminController@updateShow')->name('admin.patron.show');
+            Route::get('/admin/{patron}/authorize', 'PatronController@authorizeForm')->name('admin.patron.authorize');
+            Route::post('/admin/{patron}/authorize', 'PatronController@authorize')->name('admin.patron.authorize');
             Route::post('/admin/{patron}/checkin', 'CheckoutController@checkin')->name('admin.checkin');
             Route::group(['middleware' => ['checkout.auth']], function() {
                 Route::post('/admin/{patron}/checkout/{equipment}', 'CheckoutController@store')->name('admin.checkout.create');

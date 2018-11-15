@@ -60,7 +60,9 @@
 							@if (!is_null($checkout->equipment->barcode))
 							<h5 class="col"> {{ $checkout->equipment->barcode }}</h5>
 							@endif
-							<div class="col-1"></div>
+							<div class="col-1">
+								<i class="fa fa-edit" aria-hidden="true"></i>
+							</div>
 						</div>
 						<div class="row">
 							<h6 class="col"><strong>Out:</strong> {{ $checkout->checked_out_at->tz('America/Denver')->format('M d Y') }}</h6>

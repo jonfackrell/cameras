@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Equipment;
 
 use App\Models\Patron;
+use App\Models\Equipment;
+use App\Models\Checkout;
 use App\Models\Date;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -86,6 +88,39 @@ class PatronController extends Controller
     }
 
     /**
+     * Authorizes the Patron to checkout Camera Equipment
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Patron  $patron
+     * @return \Illuminate\Http\Response
+     */
+    public function authorize(Request $request, Patron $patron)
+    {
+        $checkout_reason = $request->get('checkout_reason');
+        $checkout_period = $request->get('checkout_period');
+
+        if (!$patron->canCheckout('camera') || 
+            ($patron->canCheckout('camera') && $patron->checkout_period < $checkout_period)) {
+            $patron->checkout_period = $checkout_period;
+            $patron->checkout_reason = $checkout_reason;
+            $patron->cameras_access_end_at = Date::first()->end_at;
+        }
+
+        return redirect()->to( route('equipment.admin.patron.show', $patron->id) );
+    }
+
+    /**
+     * Show the form for autorizing the Patron to checkout cameras
+     *
+     * @param  \App\Patron  $patron
+     * @return \Illuminate\Http\Response
+     */
+    public function authorizeForm(Patron $patron)
+    {
+        //
+    }
+
+    /**
      * Display profile for current patron.
      *
      * @return \Illuminate\Http\Response
@@ -100,7 +135,19 @@ class PatronController extends Controller
 
         $patron->load('checkouts');
 
-        return view('equipment.patron.profile', compact('patron'));
+        $camera_ids = Equipment::where('group', 'camera')->select('id')->get();
+        $other_ids = Equipment::where('group', 'other')->select('id')->get();
+
+        $checkouts = Checkout::with(['patron', 'equipment'])
+        ->orderBy('checked_out_at', 'desc')
+        ->where('patron_id', $patron->id)
+        ->where('checked_in_at', '=', null);
+
+        $cameras = $checkouts->whereIn('equipment_id', $camera_ids)->get();
+        $others = $checkouts->whereIn('equipment_id', $other_ids)->get();
+        
+
+        return view('equipment.patron.profile', compact('patron', 'cameras', 'others'));
     }
 
     /**
