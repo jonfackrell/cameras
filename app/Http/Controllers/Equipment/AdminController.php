@@ -77,34 +77,36 @@ class AdminController extends Controller
     public function updateShow(Request $request, $patron)
     {
         $message = '';
-        $equipment = [];
 
         $newSearch = $request->get('search');
+
+        $equipment = Equipment::where('barcode', 'like', '%' . $newSearch . '%')
+                ->orWhere('item', 'like', '%' . $newSearch . '%')
+                ->orWhere('description', 'like', '%' . $newSearch . '%')
+                ->orWhere('type', 'like', '%' . $newSearch . '%')
+                ->where('checked_out_at', NULL);
+        $allEquipment = Equipment::where('checked_out_at', NULL);
 
         $canDigital = $patron->canCheckout('camera');
         $canInHouse = $patron->canCheckout('other');
 
         if ($canInHouse && $canDigital) {
             if (empty($newSearch)) {
-                $equipment = Equipment::where('checked_out_at', NULL)->get();
-            }
-            else {
-                $equipment = Equipment::where('barcode', 'like', '%' . $newSearch . '%')
-                ->orWhere('item', 'like', '%' . $newSearch . '%')
-                ->where('checked_out_at', NULL)->get();
+                $equipment = $allEquipment;
             }
         }
         else if (!$canDigital) {
             $message = 'Patron doesn\'t have aproval to use camera equipment';
 
             if (empty($newSearch)) {
-                $equipment = Equipment::where('checked_out_at', NULL)->where('group', '!=', 'camera')->get();
+                $equipment = $allEquipment->where('group', '!=', 'camera');
             }
             else {
-                $equipment = Equipment::where('barcode', 'like', '%' . $newSearch . '%')
-                ->orWhere('item', 'like', '%' . $newSearch . '%')->where('checked_out_at', NULL)->where('group', '!=', 'camera')->get();
+                $equipment = $equipment->where('group', '!=', 'camera');
             }
         }
+
+        $equipment = $equipment->get();
         
         
 

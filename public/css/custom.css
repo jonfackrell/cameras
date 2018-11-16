@@ -18,6 +18,12 @@
 	padding: 10px;
 }
 
+.btn.warning:hover {
+	color: #fff;
+	background-color: #d33;
+	opacity: .9;
+}
+
 .green {
 	color: #fff;
 	background-color: #3a3;

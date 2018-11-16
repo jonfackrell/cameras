@@ -50,7 +50,11 @@ class PatronController extends Controller
      */
     public function show(Patron $patron)
     {
-        //
+        $checkouts = Checkout::with(['patron', 'equipment'])->orderBy('checked_out_at', 'desc')->where('patron_id', $patron->id);
+
+        $checkouts = $checkouts->paginate(25);
+
+        return view('equipment.admin.patron.history', compact('checkouts', 'patron'));
     }
 
     /**
@@ -94,7 +98,7 @@ class PatronController extends Controller
      * @param  \App\Patron  $patron
      * @return \Illuminate\Http\Response
      */
-    public function authorize(Request $request, Patron $patron)
+    public function authorizeCameras(Request $request, Patron $patron)
     {
         $checkout_reason = $request->get('checkout_reason');
         $checkout_period = $request->get('checkout_period');
@@ -104,6 +108,7 @@ class PatronController extends Controller
             $patron->checkout_period = $checkout_period;
             $patron->checkout_reason = $checkout_reason;
             $patron->cameras_access_end_at = Date::first()->end_at;
+            $patron->save();
         }
 
         return redirect()->to( route('equipment.admin.patron.show', $patron->id) );
@@ -117,7 +122,7 @@ class PatronController extends Controller
      */
     public function authorizeForm(Patron $patron)
     {
-        //
+        return view('equipment.admin.patron.authorize', compact('patron'));
     }
 
     /**

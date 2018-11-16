@@ -8,12 +8,18 @@
 	<div class="col-12">
 		<div class="row">
 			<div class="col">
+				@if ($patron->canCheckout('camera', true))
+				<h5>Class/Purpose: {{ $patron->checkout_reason }}</h5>
+				@endif
 				<h5>{{ $patron->email }}</h5>
 				<h5>{{ $patron->inumber }}</h5>
 				@if ($patron->areTermsAgreed())
 				<h5 class="green col-3">{{ $patron->getCheckoutPeriodText() }}</h5>
 				@else
 				<h5 class="warning col-3">{{ $patron->getCheckoutPeriodText() }}</h5>
+				@endif
+				@if (!$patron->canCheckout('camera', true))
+				<a href="{{ route('equipment.admin.patron.authorize', $patron->id) }}" class="btn warning col-3">Authorize</a>
 				@endif
 			</div>
 		</div>

@@ -14,11 +14,12 @@
 		</div>
 		<div class="clearfix"></div>
 		<div class="row">
-			<div class="col-md">
-					{!! BootForm::open()->post()->action(route('equipment.admin.patron.authorize', $patron->id)) !!}
-					{!! BootForm::text('&nbsp', 'checkout_reason')->placeholder('item or barcode') !!}
-					{!! BootForm::text('&nbsp', 'checkout_period')->placeholder('item or barcode') !!}
-					{!! BootForm::close() !!}
+			<div class="col-md-8">
+				{!! BootForm::open()->post()->action(route('equipment.admin.patron.authorize', $patron->id)) !!}
+				{!! BootForm::text('Class/Purpose', 'checkout_reason') !!}
+				{!! BootForm::select('Checkout Period', 'checkout_period')->options([1 => '24 Hours', 2 => '48 Hours', 3 => '3 Days', 7 => '1 Week', 14 => '2 Weeks']) !!}
+				{!! BootForm::submit('Authorize') !!}
+				{!! BootForm::close() !!}
 			</div>
 		</div>
 	</div>
