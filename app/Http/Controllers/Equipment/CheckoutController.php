@@ -111,7 +111,15 @@ class CheckoutController extends Controller
         if (sizeof(Equipment::where('type', 'memory')->where('checked_out_at', NULL)->where('description', 'like', '%64GB%')->get()))
             $memory['64GB'] = '64GB';
 
-        return view('equipment.admin.checkout.create', compact('patron', 'equipment', 'tripods', 'memory'));
+        $batteries = Equipment::where('type', str_replace('cam','bat', $equipment->type))->where('checked_out_at', NULL)->get();
+
+        if (!is_null($equipment->checked_out_at)){
+            return redirect()->to( route('equipment.admin.patron.show', $patron->id) );
+        }
+        else {
+            return view('equipment.admin.checkout.create', compact('patron', 'equipment', 'tripods', 'memory', 'batteries'));
+        }
+        
     }
 
     /**
@@ -300,24 +308,57 @@ class CheckoutController extends Controller
      */
     public function checkout($patron, $equipment, $note)
     {
-        $checkout = new Checkout;
-        $checkout->equipment_id = $equipment->id;
-        $checkout->patron_id = $patron->id;
-        $checkout->checked_out_at = Carbon::now();
-
-        if ($equipment->group == 'camera') { 
-            $checkout->due_at = Carbon::now()->addDays($patron->checkout_period);
+        if (!empty($equipment)) {
+            $checkout = new Checkout;
+            $checkout->equipment_id = $equipment->id;
+            $checkout->patron_id = $patron->id;
+            $checkout->checked_out_at = Carbon::now();
+    
+            if ($equipment->group == 'camera') { 
+                $checkout->due_at = Carbon::now()->addDays($patron->checkout_period);
+            }
+            else {
+                $checkout->due_at = Carbon::tomorrow('America/Denver')->subMinutes(30)->tz('UTC');
+            }
+    
+            $checkout->checked_out_by = auth()->guard('web')->user()->id;
+            $checkout->checkout_note = $note;
+            $checkout->save();
+    
+            $equipment->checked_out_at = Carbon::now();
+            $equipment->save();
         }
-        else {
-            $checkout->due_at = Carbon::tomorrow('America/Denver')->subMinutes(30)->tz('UTC');
-        }
 
-        $checkout->checked_out_by = auth()->guard('web')->user()->id;
-        $checkout->checkout_note = $note;
-        $checkout->save();
+    }
 
-        $equipment->checked_out_at = Carbon::now();
-        $equipment->save();
+    /**
+     * Show Checkouts that need approval
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function approvalForm()
+    {
+        $checkouts = Checkout::late()->where('approved_at', NULL)->get();
 
+        $checkouts = $checkouts->filter(function ($value, $key) {
+            return $value->isLate();
+        });
+
+        return view('equipment.admin.checkout.approval', compact('checkouts'));
+    }
+
+    /**
+     * Updated approved_at of each Checkout in Request
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function approval(Request $request)
+    {
+        $checkouts = Checkout::whereIn('id', $request->get('checkouts', []));
+        
+        $checkouts->update(['approved_at' => Carbon::now()]);
+
+        return redirect()->to( route('equipment.admin.checkout.approval') );
     }
 }

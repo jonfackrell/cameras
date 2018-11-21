@@ -50,11 +50,19 @@ class PatronController extends Controller
      */
     public function show(Patron $patron)
     {
-        $checkouts = Checkout::with(['patron', 'equipment'])->orderBy('checked_out_at', 'desc')->where('patron_id', $patron->id);
+        $pageSize = 25;
 
-        $checkouts = $checkouts->paginate(25);
+        $checkouts = Checkout::with(['patron', 'equipment'])->orderBy('checked_out_at', 'desc')->where('patron_id', $patron->id)->paginate($pageSize);
 
-        return view('equipment.admin.patron.history', compact('checkouts', 'patron'));
+        $cameras = $checkouts->filter(function ($value, $key) {
+            return $value->equipment->group == 'camera';
+        });
+
+        $others = $checkouts->filter(function ($value, $key) {
+            return $value->equipment->group == 'other';
+        });
+
+        return view('equipment.admin.patron.history', compact('checkouts', 'patron', 'cameras', 'others', 'pageSize'));
     }
 
     /**

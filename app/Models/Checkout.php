@@ -50,4 +50,15 @@ class Checkout extends Model
         
         return $late;
     }
+
+    /**
+     * Scope a query to only include late checkouts.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeLate($query)
+    {
+        return $query->where('due_at', '<', 'checked_in_at');
+    }
 }

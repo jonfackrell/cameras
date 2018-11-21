@@ -1,21 +1,14 @@
 @extends('equipment.layouts.admin')
 
 @section('title')
-    Checkout History
+    Need Approval
 @endsection
 
 @section('content')
 	<div class="col-12">
-		{!! BootForm::open()->post()->action(route('equipment.admin.checkouts', ['type' => $type])) !!}
-		<div class="row">
-			<div class="col-lg-6 col-md-8"> 
-				{!! BootForm::text('&nbsp', 'search')->placeholder('first name, last name, or i-number') !!}
-			</div>
-		</div>
-		{!! BootForm::close() !!}
-		<div class="list-group mt-2 mb-2">
+		<div class="list-group mt-2"> 
 			<div class="row list-group-item header">
-				<div class="col-3">
+				<div class="col-2">
 					<h3>Patron</h3>
 				</div>
 				<div class="col-3">
@@ -27,11 +20,12 @@
 				<div class="col-3">
 					<h3>Due</h3>
 				</div>
+				<div class="col-1"></div>
 			</div>
-
+			{!! BootForm::open()->post()->action(route('equipment.admin.checkout.approval')) !!}
 			@foreach ($checkouts as $checkout)
 				<a class="row list-group-item" href="{{ route('equipment.admin.checkout.show', ['checkout' => $checkout->id]) }}">
-					<div class="col-3">
+					<div class="col-2">
 						{{ $checkout->patron->getFullNameAttribute() }}
 					</div>
 					<div class="col-3">
@@ -57,11 +51,15 @@
 						{{ $checkout->due_at->tz('America/Denver')->format('M d Y H:i') }}
 					</div>
 					@endif
+
+					<div class="col-1">
+						{!! BootForm::checkbox("", "checkouts[]")->value($checkout->id ) !!}
+					</div>
 				</a>
 			@endforeach
 		</div>
 
-		{{ $checkouts->links() }}
-
+		<div class="row mt-2 justify-content-end"> {!! BootForm::submit('Approve') !!} </div>
+		{!! BootForm::close() !!}
 	</div>
 @endsection
