@@ -7,9 +7,14 @@
 @section('content')
 	<div class="col-12">
 		<div class="row">
-			<h4 class="col">
+			<h4 class="col-3">
 				Patron
 			</h4>
+		
+			<a href="{{ route('equipment.admin.patron.history', ['patron' => $checkout->patron->id]) }}" 
+			   class="col-md-3 btn btn-default">
+				Patron History
+			</a>
 		</div>
 		<div class="row">
 			<div class="col-md-3">

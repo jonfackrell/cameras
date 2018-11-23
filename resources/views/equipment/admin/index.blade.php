@@ -14,7 +14,7 @@
 		{!! BootForm::open()->post()->action(route('equipment.admin')) !!}
 		<div class="row">
 			<div class="col"> 
-				{!! BootForm::text('&nbsp', 'search')->placeholder('first name, last name, or i-number') !!}
+				{!! BootForm::text('', 'search')->placeholder('first name, last name, or i-number') !!}
 			</div>
 		</div>
 		{!! BootForm::close() !!}

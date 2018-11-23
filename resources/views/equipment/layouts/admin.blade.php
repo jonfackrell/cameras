@@ -90,7 +90,7 @@
             <div class="row">
                 <div class="col-12">
                     
-                    <div class="x_title row">
+                    <div class="x_title row mt-4">
                         <h2 class="col">@yield('title')</h2>
 
                     </div>

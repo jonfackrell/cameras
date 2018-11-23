@@ -9,7 +9,7 @@
 		{!! BootForm::open()->post()->action(route('equipment.admin.checkouts', ['type' => $type])) !!}
 		<div class="row">
 			<div class="col-lg-6 col-md-8"> 
-				{!! BootForm::text('&nbsp', 'search')->placeholder('first name, last name, or i-number') !!}
+				{!! BootForm::text('', 'search')->placeholder('first name, last name, or i-number') !!}
 			</div>
 		</div>
 		{!! BootForm::close() !!}

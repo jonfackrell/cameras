@@ -344,7 +344,15 @@ class CheckoutController extends Controller
             return $value->isLate();
         });
 
-        return view('equipment.admin.checkout.approval', compact('checkouts'));
+        $cameras = $checkouts->filter(function ($value, $key) {
+            return $value->equipment->group == 'camera';
+        });
+
+        $others = $checkouts->filter(function ($value, $key) {
+            return $value->equipment->group == 'other';
+        });
+
+        return view('equipment.admin.checkout.approval', compact('checkouts', 'cameras', 'others'));
     }
 
     /**

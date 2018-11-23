@@ -23,13 +23,13 @@
 				@endif
 			</div>
 		</div>
-		<div class="clearfix"></div>
+		<div class="clearfix">&nbsp;</div>
 		<div class="row">
 			<div class="col-md">				
 				@if ($patron->areTermsAgreed())
 					<h3>Check Out</h3>
 					{!! BootForm::open()->post()->action(route('equipment.admin.patron.show', $patron->id)) !!}
-					{!! BootForm::text('&nbsp', 'search')->placeholder('item or barcode') !!}
+					{!! BootForm::text('', 'search')->placeholder('item or barcode') !!}
 					{!! BootForm::close() !!}
 
 					@if (sizeof($equipment) > 0)

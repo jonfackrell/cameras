@@ -23,7 +23,48 @@
 				<div class="col-1"></div>
 			</div>
 			{!! BootForm::open()->post()->action(route('equipment.admin.checkout.approval')) !!}
-			@foreach ($checkouts as $checkout)
+			@if (sizeof($cameras) > 0)
+				<div class="row list-group-item"><h4 class="col-12">CAMERA</h4></div>
+			@endif
+			@foreach ($cameras as $checkout)
+				<a class="row list-group-item" href="{{ route('equipment.admin.checkout.show', ['checkout' => $checkout->id]) }}">
+					<div class="col-2">
+						{{ $checkout->patron->getFullNameAttribute() }}
+					</div>
+					<div class="col-3">
+						{{ $checkout->equipment->getDisplayName() }}
+					</div>
+					<div class="col-3">
+						{{ $checkout->checked_out_at->tz('America/Denver')->format('M d Y H:i') }}
+					</div>
+					@if ($checkout->due_at == NULL && $checkout->isLate())
+					<div class="col-3 late">
+						Still out
+					</div>
+					@elseif ($checkout->due_at == NULL)
+					<div class="col-3">
+						Still out
+					</div>
+					@elseif ($checkout->isLate())
+					<div class="col-3 late">
+						{{ $checkout->due_at->tz('America/Denver')->format('M d Y H:i') }}
+					</div>
+					@else
+					<div class="col-3">
+						{{ $checkout->due_at->tz('America/Denver')->format('M d Y H:i') }}
+					</div>
+					@endif
+
+					<div class="col-1">
+						{!! BootForm::checkbox("", "checkouts[]")->value($checkout->id ) !!}
+					</div>
+				</a>
+			@endforeach
+
+			@if (sizeof($others) > 0)
+				<div class="row list-group-item"><h4 class="col-12">OTHER</h4></div>
+			@endif
+			@foreach ($others as $checkout)
 				<a class="row list-group-item" href="{{ route('equipment.admin.checkout.show', ['checkout' => $checkout->id]) }}">
 					<div class="col-2">
 						{{ $checkout->patron->getFullNameAttribute() }}
