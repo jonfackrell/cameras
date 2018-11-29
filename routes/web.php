@@ -128,6 +128,8 @@ Route::middleware(['mail'])->group(function () {
             Route::post('/admin', 'AdminController@updateHome')->name('admin');
             Route::post('/admin/checkouts/{type}', 'CheckoutController@updateIndex')->name('admin.checkouts');
             Route::get('/admin/checkouts/{type}', 'CheckoutController@index')->name('admin.checkouts');
+            Route::get('/admin/equipment/create', 'EquipmentController@create')->name('admin.equipment.create');
+            Route::post('/admin/equipment/create', 'EquipmentController@store')->name('admin.equipment.create');
             Route::get('/admin/{patron}', 'AdminController@show')->name('admin.patron.show');
             Route::post('/admin/{patron}', 'AdminController@updateShow')->name('admin.patron.show');
             Route::get('/admin/{patron}/history', 'PatronController@show')->name('admin.patron.history');
