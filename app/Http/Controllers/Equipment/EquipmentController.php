@@ -38,30 +38,11 @@ class EquipmentController extends Controller
     {
         $equipment = new Equipment;
 
-        if (empty($request->get('item')))
-            $equipment->item = null;
-        else
-            $equipment->item = $request->get('item');
-
-        if (empty($request->get('barcode')))
-            $equipment->barcode = null;
-        else
-            $equipment->barcode = $request->get('barcode');
-
-        if (empty($request->get('group')))
-            $equipment->group = null;
-        else
-            $equipment->group = $request->get('group');
-
-        if (empty($request->get('type')))
-            $equipment->type = null;
-        else
-            $equipment->type = $request->get('type');
-
-        if (empty($request->get('description')))
-            $equipment->description = null;
-        else
-            $equipment->description = $request->get('description');
+        $equipment->item = $request->get('item');
+        $equipment->barcode = $request->get('barcode');
+        $equipment->group = $request->get('group');
+        $equipment->type = $request->get('type');
+        $equipment->description = $request->get('description');
 
         $equipment->save();
 
