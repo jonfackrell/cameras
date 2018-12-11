@@ -42,7 +42,7 @@
 	color: #e2e6ea;
 }
 
-a.list-group-item:hover {
+a.list-group-item:hover, .list-group-item.link:hover, .list-group-item.link a:hover {
 	color: inherit;
 	background-color: #f8f9fa;
 }

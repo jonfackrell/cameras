@@ -81,10 +81,12 @@ class AdminController extends Controller
         $newSearch = $request->get('search');
 
         $equipment = Equipment::where('checked_out_at', NULL)
-                ->where('barcode', 'like', '%' . $newSearch . '%')
-                ->orWhere('item', 'like', '%' . $newSearch . '%')
-                ->orWhere('description', 'like', '%' . $newSearch . '%')
-                ->orWhere('type', 'like', '%' . $newSearch . '%');
+                ->where(function ($query) use ($newSearch) { 
+                    $query->where('barcode', 'like', '%' . $newSearch . '%')
+                    ->orWhere('item', 'like', '%' . $newSearch . '%')
+                    ->orWhere('description', 'like', '%' . $newSearch . '%')
+                    ->orWhere('type', 'like', '%' . $newSearch . '%'); 
+                });
         $allEquipment = Equipment::where('checked_out_at', NULL);
 
         $canDigital = $patron->canCheckout('camera');

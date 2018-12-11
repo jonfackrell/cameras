@@ -352,7 +352,9 @@ class CheckoutController extends Controller
             return $value->equipment->group == 'other';
         });
 
-        return view('equipment.admin.checkout.approval', compact('checkouts', 'cameras', 'others'));
+        $feeAmount = 10;
+
+        return view('equipment.admin.checkout.approval', compact('checkouts', 'cameras', 'others', 'feeAmount'));
     }
 
     /**
@@ -363,9 +365,25 @@ class CheckoutController extends Controller
      */
     public function approval(Request $request)
     {
-        $checkouts = Checkout::whereIn('id', $request->get('checkouts', []));
+        $feeAmounts = $request->get('feeAmounts', []);
+        //$checkouts = Checkout::whereIn('id', $request->get('checkouts', []));
+        $checkouts = $request->get('checkouts', []);
+
+        for ($i = 0; $i < sizeof($feeAmounts); $i++) {
+            $feeAmount = intval($feeAmounts[$i]) * 100;
+            $checkout = Checkout::where('id', $checkouts[$i])->first();
+
+            $checkout->approved_at = Carbon::now();
+            //$checkout->fee_amount = $feeAmount;
+            $checkout->save();
+
+            if ($feeAmount > 0) {
+                $patron = Patron::where('id', $checkout->patron_id)->first();
+                // TODO: send a late fee notification
+            }
+        }
         
-        $checkouts->update(['approved_at' => Carbon::now()]);
+        //$checkouts->update(['approved_at' => Carbon::now()]);
 
         return redirect()->to( route('equipment.admin.checkout.approval') );
     }
