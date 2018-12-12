@@ -50,9 +50,15 @@ class UserController extends Controller
         $user = new User();
         $user->fill($request->all());
         $user->password = str_random(64);
+
         if(!$request->has('department')){
             $user->department = auth()->guard('web')->user()->department;
         }
+
+        if(!$request->has('send_equipment_notice_email')){
+            $user->send_equipment_notice_email = 0;
+        }
+
         $user->save();
 
         $user->assignRole($request->get('role'));
@@ -105,6 +111,11 @@ class UserController extends Controller
 
         $user = User::find($id);
         $user->fill($request->all());
+
+        if(!$request->has('send_equipment_notice_email')){
+            $user->send_equipment_notice_email = 0;
+        }
+
         $user->save();
 
         $user->assignRole($request->get('role'));
