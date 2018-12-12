@@ -146,21 +146,23 @@ class PatronController extends Controller
             return redirect()->to( route('equipment.patron.terms') );
         }
 
-        $patron->load('checkouts');
-
-        $camera_ids = Equipment::where('group', 'camera')->select('id')->get();
-        $other_ids = Equipment::where('group', 'other')->select('id')->get();
+        $pageSize = 25;
 
         $checkouts = Checkout::with(['patron', 'equipment'])
-        ->orderBy('checked_out_at', 'desc')
-        ->where('patron_id', $patron->id)
-        ->where('checked_in_at', '=', null);
+                     ->orderBy('checked_out_at', 'desc')
+                     ->where('patron_id', $patron->id)
+                     ->where('checked_in_at', '=', null)
+                     ->paginate($pageSize);
 
-        $cameras = $checkouts->whereIn('equipment_id', $camera_ids)->get();
-        $others = $checkouts->whereIn('equipment_id', $other_ids)->get();
-        
+        $cameras = $checkouts->filter(function ($value, $key) {
+            return $value->equipment->group == 'camera';
+        });
 
-        return view('equipment.patron.profile', compact('patron', 'cameras', 'others'));
+        $others = $checkouts->filter(function ($value, $key) {
+            return $value->equipment->group == 'other';
+        });
+
+        return view('equipment.patron.profile', compact('checkouts', 'patron', 'cameras', 'others', 'pageSize'));
     }
 
     /**

@@ -15,6 +15,7 @@ class AddApprovedAtToCheckoutsTable extends Migration
     {
         Schema::table('checkouts', function (Blueprint $table) {
             $table->dateTime('approved_at')->nullable()->default(NULL);
+            $table->integer('fee_amount')->unsigned()->nullable()->default(NULL);
         });
     }
 
@@ -27,6 +28,7 @@ class AddApprovedAtToCheckoutsTable extends Migration
     {
         Schema::table('checkouts', function (Blueprint $table) {
             $table->dropColumn('approved_at');
+            $table->dropColumn('fee_amount');
         });
     }
 }
