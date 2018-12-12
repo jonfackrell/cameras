@@ -20,6 +20,7 @@
 
     {!! BootForm::select('Department', 'department')->options($departments) !!}
 
+    {!! BootForm::checkbox('Should Receive Daily Equipment Email', 'send_equipment_notice_email') !!}
 
     {!! BootForm::submit('Submit') !!}
 
