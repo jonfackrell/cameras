@@ -3,9 +3,11 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Notification;
 
 use App\Notifications\LateEquipmentNotification;
 use App\Models\Patron;
+use App\Models\Checkout;
 
 class SendLateNotice extends Command
 {

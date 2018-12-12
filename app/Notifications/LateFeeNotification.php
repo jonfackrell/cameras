@@ -7,20 +7,22 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-use App\Models\Checkout;
-
-class LateCheckoutsNeedApprovalNotification extends Notification
+class LateFeeNotification extends Notification
 {
     use Queueable;
+
+    private $feeAmount;
+    private $checkout;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($checkout, $feeAmount)
     {
-        //
+        $this->feeAmount = $feeAmount;
+        $this->checkout = $checkout;
     }
 
     /**
@@ -42,17 +44,11 @@ class LateCheckoutsNeedApprovalNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $checkouts = Checkout::where('approved_at', NULL)->get();
-
-        $checkouts = $checkouts->filter(function ($value, $key) {
-            return $value->isLate();
-        });
-
-        $lateCount = count($checkouts);
+        $fee = $this->feeAmount / 100;
 
         return (new MailMessage)
-                    ->line('There is/are ' . $lateCount . 'late checkout(s) pendding approval.')
-                    ->action('View Pendding Approval', route('equipment.admin.checkout.approval'));
+                    ->line('You have been given a fee of $' . $fee . '.')
+                    ->line('This fee is because the equipment you checked out was late.');
     }
 
     /**

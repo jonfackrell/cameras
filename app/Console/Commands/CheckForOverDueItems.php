@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Notification;
 
 use App\Models\Checkout;
 use App\Notifications\LateCheckoutsNeedApprovalNotification;

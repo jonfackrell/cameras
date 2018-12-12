@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Equipment;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use Carbon\Carbon;
 
+use App\Notifications\LateFeeNotification;
 use App\Models\Patron;
 use App\Models\Checkout;
 use App\Models\Equipment;
@@ -374,13 +376,19 @@ class CheckoutController extends Controller
             $checkout = Checkout::where('id', $checkouts[$i])->first();
 
             $checkout->approved_at = Carbon::now();
-            //$checkout->fee_amount = $feeAmount;
-            $checkout->save();
+            
 
             if ($feeAmount > 0) {
+                $checkout->fee_amount = $feeAmount;
+
                 $patron = Patron::where('id', $checkout->patron_id)->first();
-                // TODO: send a late fee notification
+                $patron->notify(new LateFeeNotification($checkout, $feeAmount));
             }
+            else {
+                $checkout->fee_amount = NULL;
+            }
+
+            $checkout->save();
         }
         
         //$checkouts->update(['approved_at' => Carbon::now()]);

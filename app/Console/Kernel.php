@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\CheckForOverDueItems::class, 
-        Commands\LateEquipmentNotification::class
+        Commands\SendLateNotice::class
     ];
 
     /**
