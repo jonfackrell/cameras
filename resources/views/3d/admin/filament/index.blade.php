@@ -104,8 +104,8 @@
                 var printerid = $checkbox.val();
                 $.ajax({
                     type: "POST",
-                    url: '/admin/filament/' + filamentid + '/toggle-printer',
-                    data: {'action': true, 'printerid': printerid},
+                    url: '{{ route('3d.filament.toggle-printer') }}',
+                    data: {'action': true, 'id' : filamentid, 'printerid': printerid},
                     dataType: "json",
                     success: function (data) {
 
@@ -123,8 +123,8 @@
                 var printerid = $checkbox.val();
                 $.ajax({
                     type: "POST",
-                    url: '/admin/filament/' + filamentid + '/toggle-printer',
-                    data: {'action': false, 'printerid': printerid},
+                    url: '{{ route('3d.filament.toggle-printer') }}',
+                    data: {'action': false, 'id' : filamentid, 'printerid': printerid},
                     dataType: "json",
                     success: function (data) {
 
