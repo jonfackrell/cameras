@@ -14,7 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\CheckForOverDueItems::class, 
-        Commands\SendLateNotice::class
+        Commands\SendLateNotice::class,
+        Commands\SendDueNotice::class
     ];
 
     /**
@@ -26,7 +27,11 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('mail:lateNotice')
-                 ->dailyAt('7:00')
+                 ->dailyAt('6:00')
+                 ->timezone('America/Denver');
+
+        $schedule->command('mail:dueNotice')
+                 ->dailyAt('6:00')
                  ->timezone('America/Denver');
 
         $schedule->command('checkouts:overdue')

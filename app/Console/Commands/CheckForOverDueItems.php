@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Notification;
 
 use App\Models\Checkout;
+use App\Models\User;
 use App\Notifications\LateCheckoutsNeedApprovalNotification;
 
 class CheckForOverDueItems extends Command
@@ -48,7 +49,8 @@ class CheckForOverDueItems extends Command
         });
 
         if (sizeof($checkouts) > 0) {
-            Notification::route('mail', 'eng15004@byui.edu')->notify(new LateCheckoutsNeedApprovalNotification());
+            $users = User::where('send_equipment_notice_email', true)->get();
+            Notification::send($users, new LateCheckoutsNeedApprovalNotification());
         }
     }
 }

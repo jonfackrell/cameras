@@ -40,15 +40,25 @@ class Checkout extends Model
         $late = false;
 
         if (empty($this->checked_in_at)){
-            if ($this->due_at < Carbon::now()){
-                $late = true;
-            }
+            $late = $this->due_at < Carbon::now();
         }
-        else if ($this->due_at < $this->checked_in_at){
-            $late = true;
+        else {
+            $late = $this->due_at < $this->checked_in_at;
         }
         
         return $late;
+    }
+
+    public function isDueToday() {
+        $today = Carbon::now()->tz('America/Denver');
+        $due_at = $this->due_at->tz('America/Denver');
+        $due = false;
+
+        if (empty($this->checked_in_at)){
+            $due = $today->isSameDay($due_at);
+        }
+        
+        return $due;
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Equipment;
 
 use App\Models\Equipment;
+use App\Models\EquipmentType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -25,6 +26,15 @@ class EquipmentController extends Controller
      */
     public function create()
     {
+        $equipmentTypes = EquipmentType::all();
+        $equipmentTypesCamera = $equipmentTypes->filter(function ($value, $key) {
+            return $value->group == 'camera';
+        });
+
+        $equipmentTypesOther = $equipmentTypes->filter(function ($value, $key) {
+            return $value->group == 'other';
+        });
+        
         return view('equipment.admin.equipment.create');
     }
 
