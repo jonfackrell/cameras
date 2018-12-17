@@ -49,7 +49,7 @@ class SendLateNotice extends Command
         });
 
         $checkoutsByPatron = $checkouts->groupBy('patron_id');
-        $patrons = Patron::whereIn('id', $checkoutsByPatron->keys()->all());
+        $patrons = Patron::whereIn('id', $checkoutsByPatron->keys()->all())->get();
 
         Notification::send($patrons, new LateEquipmentNotification());
     }

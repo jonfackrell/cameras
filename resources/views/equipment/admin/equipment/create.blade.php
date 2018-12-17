@@ -18,6 +18,7 @@
 @endsection
 
 @push('footer-scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/collect.js/4.0.26/collect.min.js"></script>
 <script type="text/javascript">
 	var camopts = [['ditigal-cam', 'DC Camera'], ['ditigal-bat', 'DC Battery'], 
 				   ['video-cam', 'DVC Camera'], ['video-bat', 'DVC Battery'], 
@@ -30,23 +31,30 @@
 				   ['hdmi', 'HDMI'], ['tablet-sm', 'Tablet, Small'], 
 				   ['tablet-lg', 'Tablet, Large'], ['pen', 'Tablet, Pen']];
 
-	$('#group').change(function() {
+	var equipmentTypes = {!! $equipmentTypes->toJson() !!};
+
+
+	function fillType() {
 		var group = $('#group option:selected').val();
 		var type = $('#type');
 		type.empty();
 
 		if (group == 'camera') {
-			for (i = 0; i < camopts.length; i++) {
-				var opts = '<option value="' + camopts[i][0] + '">' + camopts[i][1] + '</option>';
+			for (i = 0; i < equipmentTypes.camera.length; i++) {
+				var opts = '<option value="' + equipmentTypes.camera[i].id + '">' + equipmentTypes.camera[i].display_name + '</option>';
 				type.append(opts);
 			}
 		}
 		else {
-			for (i = 0; i < otheropts.length; i++) {
-				var opts = '<option value="' + otheropts[i][0] + '">' + otheropts[i][1] + '</option>';
+			for (i = 0; i < equipmentTypes.other.length; i++) {
+				var opts = '<option value="' + equipmentTypes.other[i].id + '">' + equipmentTypes.other[i].display_name + '</option>';
 				type.append(opts);
 			}
 		}
-	});
+	}
+
+	fillType();
+
+	$('#group').change(fillType);
 </script>
 @endpush

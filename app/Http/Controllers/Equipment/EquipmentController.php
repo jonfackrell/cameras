@@ -27,15 +27,10 @@ class EquipmentController extends Controller
     public function create()
     {
         $equipmentTypes = EquipmentType::all();
-        $equipmentTypesCamera = $equipmentTypes->filter(function ($value, $key) {
-            return $value->group == 'camera';
-        });
 
-        $equipmentTypesOther = $equipmentTypes->filter(function ($value, $key) {
-            return $value->group == 'other';
-        });
+        $equipmentTypes = $equipmentTypes->groupBy('group');
         
-        return view('equipment.admin.equipment.create');
+        return view('equipment.admin.equipment.create', compact('equipmentTypes'));
     }
 
     /**
