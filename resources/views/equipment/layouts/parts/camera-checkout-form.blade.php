@@ -1,8 +1,15 @@
 <div class="row">
-	<div class="col"><label>Power Supply</label></div> 
-	<div class="col">
-		{!! BootForm::checkbox("", "power")->value(true) !!}
-	</div>
+	@if (sizeof($powerSupplies) < 1)
+		<div class="col disable"><label>Power Supply</label></div> 
+		<div class="col">
+			{!! BootForm::checkbox("", "power")->value(true)->disable() !!}
+		</div>
+	@else
+		<div class="col"><label>Power Supply</label></div> 
+		<div class="col">
+			{!! BootForm::checkbox("", "power")->value(true) !!}
+		</div>
+	@endif
 </div>
 <div class="row">
 	<div class="col">

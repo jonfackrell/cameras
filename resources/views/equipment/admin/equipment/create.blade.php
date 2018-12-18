@@ -18,7 +18,6 @@
 @endsection
 
 @push('footer-scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/collect.js/4.0.26/collect.min.js"></script>
 <script type="text/javascript">
 	var camopts = [['ditigal-cam', 'DC Camera'], ['ditigal-bat', 'DC Battery'], 
 				   ['video-cam', 'DVC Camera'], ['video-bat', 'DVC Battery'], 

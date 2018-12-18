@@ -115,11 +115,13 @@ class CheckoutController extends Controller
 
         $batteries = Equipment::where('type', str_replace('cam','bat', $equipment->type))->where('checked_out_at', NULL)->get();
 
+        $powerSupplies = Equipment::where('type', str_replace('cam','pow', $equipment->type))->where('checked_out_at', NULL)->get();
+
         if (!is_null($equipment->checked_out_at)){
             return redirect()->to( route('equipment.admin.patron.show', $patron->id) );
         }
         else {
-            return view('equipment.admin.checkout.create', compact('patron', 'equipment', 'tripods', 'memory', 'batteries'));
+            return view('equipment.admin.checkout.create', compact('patron', 'equipment', 'tripods', 'memory', 'batteries', 'powerSupplies'));
         }
         
     }
