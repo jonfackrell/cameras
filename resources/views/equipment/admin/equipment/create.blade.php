@@ -40,13 +40,13 @@
 
 		if (group == 'camera') {
 			for (i = 0; i < equipmentTypes.camera.length; i++) {
-				var opts = '<option value="' + equipmentTypes.camera[i].id + '">' + equipmentTypes.camera[i].display_name + '</option>';
+				var opts = '<option value="' + equipmentTypes.camera[i].type + '">' + equipmentTypes.camera[i].display_name + '</option>';
 				type.append(opts);
 			}
 		}
 		else {
 			for (i = 0; i < equipmentTypes.other.length; i++) {
-				var opts = '<option value="' + equipmentTypes.other[i].id + '">' + equipmentTypes.other[i].display_name + '</option>';
+				var opts = '<option value="' + equipmentTypes.other[i].type + '">' + equipmentTypes.other[i].display_name + '</option>';
 				type.append(opts);
 			}
 		}

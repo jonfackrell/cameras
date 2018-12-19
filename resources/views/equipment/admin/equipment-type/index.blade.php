@@ -68,6 +68,7 @@
 	$('#add').click(function() {
 		$(this).hide();
 		$('#form').show();
+		$('#type').focus();
 	});
 </script>
 @endpush
