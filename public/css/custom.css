@@ -6,3 +6,43 @@
 	background-color: #17A9E0;
 	min-height: 100%;
 }
+
+.late {
+	color: #c33;
+	font-weight: bolder;
+}
+
+.warning {
+	color: #fff;
+	background-color: #c33;
+	padding: 10px;
+}
+
+.btn.warning:hover {
+	color: #fff;
+	background-color: #d33;
+	opacity: .9;
+}
+
+.green {
+	color: #fff;
+	background-color: #3a3;
+	padding: 10px;
+}
+
+.stats-btn {
+	font-size: 3em;
+}
+
+.light {
+	background-color: #f8f9fa;
+}
+
+.disable {
+	color: #e2e6ea;
+}
+
+a.list-group-item:hover, .list-group-item.link:hover, .list-group-item.link a:hover {
+	color: inherit;
+	background-color: #f8f9fa;
+}

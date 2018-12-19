@@ -13,7 +13,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\CheckForOverDueItems::class, 
+        Commands\SendLateNotice::class,
+        Commands\SendDueNotice::class
     ];
 
     /**
@@ -24,8 +26,18 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command('mail:lateNotice')
+                 ->dailyAt('6:00')
+                 ->timezone('America/Denver');
+
+        $schedule->command('mail:dueNotice')
+                 ->dailyAt('6:00')
+                 ->timezone('America/Denver');
+
+        $schedule->command('checkouts:overdue')
+                 ->weekdays()
+                 ->dailyAt('7:00')
+                 ->timezone('America/Denver');
     }
 
     /**

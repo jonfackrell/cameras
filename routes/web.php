@@ -117,7 +117,37 @@ Route::middleware(['mail'])->group(function () {
 
         Route::view('/', 'equipment.index')->name('home');
 
-        Route::get('/admin', 'AdminController@home')->name('admin');
+        Route::group(['middleware' => ['cas.auth', 'patron.auth']], function() {
+            Route::get('/terms', 'PatronController@terms')->name('patron.terms');
+            Route::post('/terms', 'PatronController@updateTerms')->name('patron.terms');
+            Route::get('/profile', 'PatronController@profile')->name('patron.profile');
+        });
+
+        Route::group(['middleware' => ['auth']], function() {
+            Route::get('/admin', 'AdminController@home')->name('admin');
+            Route::post('/admin', 'AdminController@updateHome')->name('admin');
+            Route::get('/admin/equipment-type', 'EquipmentTypeController@index')->name('admin.equipment-type.index');
+            Route::post('/admin/equipment-type/create', 'EquipmentTypeController@store')->name('admin.equipment-type.create');
+            Route::post('/admin/checkouts/{type}', 'CheckoutController@updateIndex')->name('admin.checkouts');
+            Route::get('/admin/checkouts/{type}', 'CheckoutController@index')->name('admin.checkouts');
+            Route::get('/admin/equipment/create', 'EquipmentController@create')->name('admin.equipment.create');
+            Route::post('/admin/equipment/create', 'EquipmentController@store')->name('admin.equipment.create');
+            Route::get('/admin/{patron}', 'AdminController@show')->name('admin.patron.show');
+            Route::post('/admin/{patron}', 'AdminController@updateShow')->name('admin.patron.show');
+            Route::get('/admin/{patron}/history', 'PatronController@show')->name('admin.patron.history');
+            Route::get('/admin/{patron}/authorize', 'PatronController@authorizeForm')->name('admin.patron.authorize');
+            Route::post('/admin/{patron}/authorize', 'PatronController@authorizeCameras')->name('admin.patron.authorize');
+            Route::post('/admin/{patron}/checkin', 'CheckoutController@checkin')->name('admin.checkin');
+
+            Route::group(['middleware' => ['checkout.auth']], function() {
+                Route::post('/admin/{patron}/checkout/{equipment}', 'CheckoutController@store')->name('admin.checkout.create');
+                Route::get('/admin/{patron}/checkout/{equipment}', 'CheckoutController@create')->name('admin.checkout.create');
+            });
+
+            Route::get('/admin/checkout/approval', 'CheckoutController@approvalForm')->name('admin.checkout.approval');
+            Route::post('/admin/checkout/approval', 'CheckoutController@approval')->name('admin.checkout.approval');
+            Route::get('/admin/checkout/{checkout}', 'CheckoutController@show')->name('admin.checkout.show');
+        });
         // TODO: Add Camera Checkout system here
 
     });
