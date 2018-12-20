@@ -46,7 +46,7 @@ class EquipmentController extends Controller
         $equipment->item = $request->get('item');
         $equipment->barcode = $request->get('barcode');
         $equipment->group = $request->get('group');
-        $equipment->type = $request->get('type');
+        $equipment->equipment_type_id = $request->get('type');
         $equipment->description = $request->get('description');
 
         $equipment->save();
