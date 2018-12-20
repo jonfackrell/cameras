@@ -132,6 +132,11 @@ Route::middleware(['mail'])->group(function () {
             Route::get('/admin/checkouts/{type}', 'CheckoutController@index')->name('admin.checkouts');
             Route::get('/admin/equipment/create', 'EquipmentController@create')->name('admin.equipment.create');
             Route::post('/admin/equipment/create', 'EquipmentController@store')->name('admin.equipment.create');
+
+            Route::get('/admin/reports', 'CheckoutReportController@index')->name('admin.report.index');
+            Route::post('/admin/reports/export', 'CheckoutReportController@export')->name('admin.report.export');
+
+
             Route::get('/admin/{patron}', 'AdminController@show')->name('admin.patron.show');
             Route::post('/admin/{patron}', 'AdminController@updateShow')->name('admin.patron.show');
             Route::get('/admin/{patron}/history', 'PatronController@show')->name('admin.patron.history');
@@ -147,6 +152,8 @@ Route::middleware(['mail'])->group(function () {
             Route::get('/admin/checkout/approval', 'CheckoutController@approvalForm')->name('admin.checkout.approval');
             Route::post('/admin/checkout/approval', 'CheckoutController@approval')->name('admin.checkout.approval');
             Route::get('/admin/checkout/{checkout}', 'CheckoutController@show')->name('admin.checkout.show');
+
+
         });
         // TODO: Add Camera Checkout system here
 

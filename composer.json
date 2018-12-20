@@ -19,6 +19,7 @@
         "laravel/horizon": "^2.0",
         "laravel/tinker": "^1.0",
         "league/oauth2-client": "^2.3",
+        "maatwebsite/excel": "^3.1",
         "pusher/pusher-php-server": "~3.0",
         "spatie/eloquent-sortable": "^3.3",
         "subfission/cas": "dev-master"
