@@ -16,6 +16,7 @@
         "h4cc/wkhtmltopdf-amd64": "0.12.x",
         "laracasts/utilities": "^2.1",
         "laravel/framework": "5.7.*",
+        "laravel/horizon": "^2.0",
         "laravel/tinker": "^1.0",
         "league/oauth2-client": "^2.3",
         "pusher/pusher-php-server": "~3.0",
@@ -23,6 +24,7 @@
         "subfission/cas": "dev-master"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.2",
         "beyondcode/laravel-dump-server": "^1.0",
         "filp/whoops": "^2.0",
         "fzaninotto/faker": "^1.4",

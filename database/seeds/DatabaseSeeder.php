@@ -257,8 +257,112 @@ class DatabaseSeeder extends Seeder
             }
         }
 
+
+        $semesterDate                    = new \App\Models\Dates();
+        $semesterDate->description       = 'semester end date';
+        $semesterDate->end_at            = Carbon\Carbon::now()->addDays(90);
+        $semesterDate->save();
+        
+
         $equipment = factory(App\Models\Equipment::class, 100)->create();
         $checkouts = factory(App\Models\Checkout::class, 20)->create();
+
+
+        $equipmentType                   = new \App\Models\EquipmentType();
+        $equipmentType->type             = 'headphone';
+        $equipmentType->group            = 'other';
+        $equipmentType->display_name     = 'Headphone';
+        $equipmentType->save();
+
+        $equipmentType                   = new \App\Models\EquipmentType();
+        $equipmentType->type             = 'digital-cam';
+        $equipmentType->group            = 'camera';
+        $equipmentType->display_name     = 'DC Camera';
+        $equipmentType->save();
+
+        $equipmentType                   = new \App\Models\EquipmentType();
+        $equipmentType->type             = 'microphone';
+        $equipmentType->group            = 'other';
+        $equipmentType->display_name     = 'Microphone';
+        $equipmentType->save();
+
+        $equipmentType                   = new \App\Models\EquipmentType();
+        $equipmentType->type             = 'video-cam';
+        $equipmentType->group            = 'camera';
+        $equipmentType->display_name     = 'DVC Camera';
+        $equipmentType->save();
+
+        $equipmentType                   = new \App\Models\EquipmentType();
+        $equipmentType->type             = 'dslr-cam';
+        $equipmentType->group            = 'camera';
+        $equipmentType->display_name     = 'DSLR Camera';
+        $equipmentType->save();
+
+        $equipmentType                   = new \App\Models\EquipmentType();
+        $equipmentType->type             = 'video-bat';
+        $equipmentType->group            = 'camera';
+        $equipmentType->display_name     = 'DVC Battery';
+        $equipmentType->save();
+
+        $equipmentType                   = new \App\Models\EquipmentType();
+        $equipmentType->type             = 'digital-bat';
+        $equipmentType->group            = 'camera';
+        $equipmentType->display_name     = 'DC Battery';
+        $equipmentType->save();
+
+        $equipmentType                   = new \App\Models\EquipmentType();
+        $equipmentType->type             = 'memory';
+        $equipmentType->group            = 'camera';
+        $equipmentType->display_name     = 'SD Card';
+        $equipmentType->save();
+
+        $equipmentType                   = new \App\Models\EquipmentType();
+        $equipmentType->type             = 'tripod';
+        $equipmentType->group            = 'camera';
+        $equipmentType->display_name     = 'Tripod';
+        $equipmentType->save();
+
+        $equipmentType                   = new \App\Models\EquipmentType();
+        $equipmentType->type             = 'usb';
+        $equipmentType->group            = 'camera';
+        $equipmentType->display_name     = 'USB Cable';
+        $equipmentType->save();
+
+        $equipmentType                   = new \App\Models\EquipmentType();
+        $equipmentType->type             = 'tripod-head';
+        $equipmentType->group            = 'camera';
+        $equipmentType->display_name     = 'Tripod, Head';
+        $equipmentType->save();
+
+        $equipmentType                   = new \App\Models\EquipmentType();
+        $equipmentType->type             = 'tripod-hand';
+        $equipmentType->group            = 'camera';
+        $equipmentType->display_name     = 'Tripod, Handle';
+        $equipmentType->save();
+
+        $equipmentType                   = new \App\Models\EquipmentType();
+        $equipmentType->type             = 'dslr-bat';
+        $equipmentType->group            = 'camera';
+        $equipmentType->display_name     = 'DSLR Battery';
+        $equipmentType->save();
+
+        $equipmentType                   = new \App\Models\EquipmentType();
+        $equipmentType->type             = 'dslr-pow';
+        $equipmentType->group            = 'camera';
+        $equipmentType->display_name     = 'DSLR Power Supply';
+        $equipmentType->save();
+
+        $equipmentType                   = new \App\Models\EquipmentType();
+        $equipmentType->type             = 'digital-pow';
+        $equipmentType->group            = 'camera';
+        $equipmentType->display_name     = 'DC Power Supply';
+        $equipmentType->save();
+
+        $equipmentType                   = new \App\Models\EquipmentType();
+        $equipmentType->type             = 'dslr-pow';
+        $equipmentType->group            = 'camera';
+        $equipmentType->display_name     = 'DSLR Power Supply';
+        $equipmentType->save();
 
     }
 }

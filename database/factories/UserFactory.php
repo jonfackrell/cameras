@@ -36,8 +36,9 @@ $factory->define(App\Models\Patron::class, function (Faker\Generator $faker) {
         'netid' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
-        'roles' => $faker->randomElement($array = array ('STU', 'FAC')),
-        'cameras_access_end_date' => $faker->optional()->dateTimeInInterval($startDate = 'now', $interval = '+ 5 years', $timezone = 'UTC')
+        'roles' => $faker->randomElement($array = array ('Student|TraditionalStudent|OnTrackStudent|CurrentStudent|EnrolledStudent', 'FAC')),
+        'cameras_access_end_at' => $faker->optional()->dateTimeInInterval($startDate = 'now', $interval = '+ 5 months', $timezone = 'UTC'), 
+        'term_agreement_end_at' => $faker->optional()->dateTimeInInterval($startDate = 'now', $interval = '+ 5 months', $timezone = 'UTC')
     ];
 });
 
@@ -55,6 +56,7 @@ $factory->define(App\Models\Checkout::class, function (Faker\Generator $faker) {
 $factory->define(App\Models\Equipment::class, function (Faker\Generator $faker) {
     return [
         'barcode' => $faker->unique()->ean8,
-        'item' => $faker->unique()->bothify('???-###')
+        'item' => $faker->unique()->bothify('???-###'),
+        'group' => $faker->randomElement($array = array ('camera', 'other'))
     ];
 });
