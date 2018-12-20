@@ -12,6 +12,7 @@
 		<a class="row btn btn-default sidebar-btn" href="{{ route('equipment.admin.checkouts', ['type' => 'other-in']) }}"><span>&emsp;<i class="fa fa-headphones" aria-hidden="true"></i> Other</span></a>
 
 	</div>
+	<a class="row btn btn-default sidebar-btn" href="{{ route('equipment.admin.report.index') }}"><span><i class="fa fa-table" aria-hidden="true"></i> Report Export</span></a>
 </div>
 
 <!-- end sidebar menu -->
