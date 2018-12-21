@@ -5,6 +5,11 @@
 @endsection
 
 @section('content')
+    <div class="col-md-12">
+        <p class="alert alert-info">
+            Due to the Holidays, 3D Printing will resume on January 3rd, 2019. 
+        </p>
+    </div>
     <div class="col-xs-3">
         <!-- required for floating -->
         <!-- Nav tabs -->
