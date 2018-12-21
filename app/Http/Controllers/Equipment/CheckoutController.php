@@ -102,35 +102,14 @@ class CheckoutController extends Controller
 
         $tripods = Equipment::whereIn('equipment_type_id', $equipmentTypeTripodIds)
                     ->where('checked_out_at', NULL)->get();
-        
-        $memory = [];
 
-        $equipmentTypeMemoryIds = EquipmentType::where('type', 'memory')->select('id');
-
-        if (sizeof(Equipment::whereIn('equipment_type_id', $equipmentTypeMemoryIds)
-                    ->where('checked_out_at', NULL)
-                    ->where('description', 'like', '%2GB%')->get()))
-            $memory['2GB'] = '2GB';
-        if (sizeof(Equipment::whereIn('equipment_type_id', $equipmentTypeMemoryIds)
-                    ->where('checked_out_at', NULL)
-                    ->where('description', 'like', '%4GB%')->get()))
-            $memory['4GB'] = '4GB';
-        if (sizeof(Equipment::whereIn('equipment_type_id', $equipmentTypeMemoryIds)
-                    ->where('checked_out_at', NULL)
-                    ->where('description', 'like', '%8GB%')->get()))
-            $memory['8GB'] = '8GB';
-        if (sizeof(Equipment::whereIn('equipment_type_id', $equipmentTypeMemoryIds)
-                    ->where('checked_out_at', NULL)
-                    ->where('description', 'like', '%16GB%')->get()))
-            $memory['16GB'] = '16GB';
-        if (sizeof(Equipment::whereIn('equipment_type_id', $equipmentTypeMemoryIds)
-                    ->where('checked_out_at', NULL)
-                    ->where('description', 'like', '%32GB%')->get()))
-            $memory['32GB'] = '32GB';
-        if (sizeof(Equipment::whereIn('equipment_type_id', $equipmentTypeMemoryIds)
-                    ->where('checked_out_at', NULL)
-                    ->where('description', 'like', '%64GB%')->get()))
-            $memory['64GB'] = '64GB';
+        $memory = Equipment::where('checked_out_at', NULL)
+                                ->whereHas('equipment_type', function ($query) {
+                                    $query->where('type', 'memory');
+                                })
+                                ->groupBy('description')
+                                ->OrderBy('description', 'ASC')
+                                ->pluck('description', 'description');
 
         $equipmentTypeBatIds = EquipmentType::where('type', str_replace('cam','bat', $equipment->equipment_type->type))->select('id');
 
@@ -177,7 +156,7 @@ class CheckoutController extends Controller
 
             $memory = Equipment::whereIn('equipment_type_id', $equipmentTypeMemoryIds)
                         ->where('checked_out_at', NULL)
-                        ->where('description', 'like', '%' . $request->get('size') . '%')
+                        ->where('description', $request->get('size'))
                         ->first();
 
             $this->checkout($patron, $memory, $note);
