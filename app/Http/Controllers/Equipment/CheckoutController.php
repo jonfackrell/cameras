@@ -10,6 +10,7 @@ use App\Notifications\LateFeeNotification;
 use App\Models\Patron;
 use App\Models\Checkout;
 use App\Models\Equipment;
+use App\Models\EquipmentType;
 
 class CheckoutController extends Controller
 {
@@ -97,25 +98,28 @@ class CheckoutController extends Controller
      */
     public function create($patron, $equipment)
     {
-        $tripods = Equipment::where('type', 'tripod')->where('checked_out_at', NULL)->get();
-        $memory = [];
+        $equipmentTypeTripodIds = EquipmentType::where('type', 'tripod')->select('id');
 
-        if (sizeof(Equipment::where('type', 'memory')->where('checked_out_at', NULL)->where('description', 'like', '%2GB%')->get()))
-            $memory['2GB'] = '2GB';
-        if (sizeof(Equipment::where('type', 'memory')->where('checked_out_at', NULL)->where('description', 'like', '%4GB%')->get()))
-            $memory['4GB'] = '4GB';
-        if (sizeof(Equipment::where('type', 'memory')->where('checked_out_at', NULL)->where('description', 'like', '%8GB%')->get()))
-            $memory['8GB'] = '8GB';
-        if (sizeof(Equipment::where('type', 'memory')->where('checked_out_at', NULL)->where('description', 'like', '%16GB%')->get()))
-            $memory['16GB'] = '16GB';
-        if (sizeof(Equipment::where('type', 'memory')->where('checked_out_at', NULL)->where('description', 'like', '%32GB%')->get()))
-            $memory['32GB'] = '32GB';
-        if (sizeof(Equipment::where('type', 'memory')->where('checked_out_at', NULL)->where('description', 'like', '%64GB%')->get()))
-            $memory['64GB'] = '64GB';
+        $tripods = Equipment::whereIn('equipment_type_id', $equipmentTypeTripodIds)
+                    ->where('checked_out_at', NULL)->get();
 
-        $batteries = Equipment::where('type', str_replace('cam','bat', $equipment->type))->where('checked_out_at', NULL)->get();
+        $memory = Equipment::where('checked_out_at', NULL)
+                                ->whereHas('equipment_type', function ($query) {
+                                    $query->where('type', 'memory');
+                                })
+                                ->groupBy('description')
+                                ->OrderBy('description', 'ASC')
+                                ->pluck('description', 'description');
 
-        $powerSupplies = Equipment::where('type', str_replace('cam','pow', $equipment->type))->where('checked_out_at', NULL)->get();
+        $equipmentTypeBatIds = EquipmentType::where('type', str_replace('cam','bat', $equipment->equipment_type->type))->select('id');
+
+        $batteries = Equipment::whereIn('equipment_type_id', $equipmentTypeBatIds)
+                        ->where('checked_out_at', NULL)->get();
+
+        $equipmentTypePowIds = EquipmentType::where('type', str_replace('cam','pow', $equipment->equipment_type->type))->select('id');
+
+        $powerSupplies = Equipment::whereIn('equipment_type_id', $equipmentTypePowIds)
+                            ->where('checked_out_at', NULL)->get();
 
         if (!is_null($equipment->checked_out_at)){
             return redirect()->to( route('equipment.admin.patron.show', $patron->id) );
@@ -138,69 +142,78 @@ class CheckoutController extends Controller
 
         $this->checkout($patron, $equipment, $note);
 
-        if ($request->get('power')){
-            $power = Equipment::where('type', 'power')->where('checked_out_at', NULL)->first();
+        if ($request->get('power')) {
+            $equipmentTypePowIds = EquipmentType::where('type', str_replace('cam','pow', $equipment->equipment_type->type))->select('id');
+
+            $power = Equipment::whereIn('equipment_type_id', $equipmentTypePowIds)
+                        ->where('checked_out_at', NULL)->first();
+
             $this->checkout($patron, $power, $note);
         }
 
-        if ($request->get('memory')){
-            $memory = Equipment::where('type', 'memory')->where('checked_out_at', NULL)->where('description', 'like', '%' . $request->get('size') . '%')->first();
+        if ($request->get('memory')) {
+            $equipmentTypeMemoryIds = EquipmentType::where('type', 'memory')->select('id');
+
+            $memory = Equipment::whereIn('equipment_type_id', $equipmentTypeMemoryIds)
+                        ->where('checked_out_at', NULL)
+                        ->where('description', $request->get('size'))
+                        ->first();
+
             $this->checkout($patron, $memory, $note);
         }
 
-        if ($request->get('usb')){
-            $usb = Equipment::where('type', 'usb')->where('checked_out_at', NULL)->first();
+        if ($request->get('usb')) {
+            $equipmentTypeUsbIds = EquipmentType::where('type', 'usb')->select('id');
+
+            $usb = Equipment::whereIn('equipment_type_id', $equipmentTypeUsbIds)
+                    ->where('checked_out_at', NULL)->first();
+
             $this->checkout($patron, $usb, $note);
         }
 
-        if ($request->get('tripods')){
+        if ($request->get('tripods')) {
             $tripod = Equipment::where('id', $request->get('tripod'))->first();
+
             $this->checkout($patron, $tripod, $note);
         }
         
-        if ($request->get('head')){
-            $head = Equipment::where('type', 'tripod-head')->where('checked_out_at', NULL)->first();
+        if ($request->get('head')) {
+            $equipmentTypeHeadIds = EquipmentType::where('type', 'tripod-head')->select('id');
+
+            $head = Equipment::whereIn('equipment_type_id', $equipmentTypeHeadIds)
+                    ->where('checked_out_at', NULL)->first();
+
             $this->checkout($patron, $head, $note);
         }
 
-        if ($request->get('hand')){
-            $hand = Equipment::where('type', 'tripod-hand')->where('checked_out_at', NULL)->first();
+        if ($request->get('hand')) {
+            $equipmentTypeHandIds = EquipmentType::where('type', 'tripod-hand')->select('id');
+
+            $hand = Equipment::whereIn('equipment_type_id', $equipmentTypeHandIds)
+                    ->where('checked_out_at', NULL)->first();
+
             $this->checkout($patron, $hand, $note);
         }
         
-        if ($equipment->type == 'video-cam') {
-            if ($request->get('battery')){
-                $battery = Equipment::where('type', 'video-bat')->where('checked_out_at', NULL)->first();
-                $this->checkout($patron, $battery, $note);
-            }
+        
+        if ($request->get('battery')) {
+            $equipmentTypeBatIds = EquipmentType::where('type', str_replace('cam','bat', $equipment->equipment_type->type))->select('id');
 
-            if ($request->get('battery-ex')){
-                $batteryEx = Equipment::where('type', 'video-bat')->where('checked_out_at', NULL)->first();
-                $this->checkout($patron, $batteryEx, $note);
-            }
-        }
-        else if ($equipment->type == 'digital-cam') {
-            if ($request->get('battery')){
-                $battery = Equipment::where('type', 'digital-bat')->where('checked_out_at', NULL)->first();
-                $this->checkout($patron, $battery, $note);
-            }
+            $battery = Equipment::whereIn('equipment_type_id', $equipmentTypeBatIds)
+                        ->where('checked_out_at', NULL)->first();
 
-            if ($request->get('battery-ex')){
-                $batteryEx = Equipment::where('type', 'digital-bat')->where('checked_out_at', NULL)->first();
-                $this->checkout($patron, $batteryEx, $note);
-            }
+            $this->checkout($patron, $battery, $note);
         }
-        else if ($equipment->type == 'dslr-cam') {
-            if ($request->get('battery')){
-                $battery = Equipment::where('type', 'dslr-bat')->where('checked_out_at', NULL)->first();
-                $this->checkout($patron, $battery, $note);
-            }
 
-            if ($request->get('battery-ex')){
-                $batteryEx = Equipment::where('type', 'dslr-bat')->where('checked_out_at', NULL)->first();
-                $this->checkout($patron, $batteryEx, $note);
-            }
+        if ($request->get('battery-ex')) {
+            $equipmentTypeBatIds = EquipmentType::where('type', str_replace('cam','bat', $equipment->equipment_type->type))->select('id');
+
+            $batteryEx = Equipment::whereIn('equipment_type_id', $equipmentTypeBatIds)
+                            ->where('checked_out_at', NULL)->first();
+                            
+            $this->checkout($patron, $batteryEx, $note);
         }
+        
 
         return redirect()->to( route('equipment.admin.patron.show', $patron->id) );
     }

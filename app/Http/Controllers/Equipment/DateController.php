@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Equipment;
 
-use App\Models\Equipment;
-use App\Models\EquipmentType;
+use App\Models\Date;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class EquipmentController extends Controller
+class DateController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,9 @@ class EquipmentController extends Controller
      */
     public function index()
     {
-        //
+        $dates = Date::all();
+
+        return view('equipment.admin.date.index', compact('dates'));
     }
 
     /**
@@ -26,11 +27,7 @@ class EquipmentController extends Controller
      */
     public function create()
     {
-        $equipmentTypes = EquipmentType::all();
-
-        $equipmentTypes = $equipmentTypes->groupBy('group');
-        
-        return view('equipment.admin.equipment.create', compact('equipmentTypes'));
+        //
     }
 
     /**
@@ -41,26 +38,16 @@ class EquipmentController extends Controller
      */
     public function store(Request $request)
     {
-        $equipment = new Equipment;
-
-        $equipment->item = $request->get('item');
-        $equipment->barcode = $request->get('barcode');
-        $equipment->group = $request->get('group');
-        $equipment->equipment_type_id = $request->get('type');
-        $equipment->description = $request->get('description');
-
-        $equipment->save();
-
-        return redirect()->to( route('equipment.admin') );
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Equipment  $equipment
+     * @param  \App\Models\Date  $date
      * @return \Illuminate\Http\Response
      */
-    public function show(Equipment $equipment)
+    public function show(Date $date)
     {
         //
     }
@@ -68,33 +55,37 @@ class EquipmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Equipment  $equipment
+     * @param  \App\Models\Date  $date
      * @return \Illuminate\Http\Response
      */
-    public function edit(Equipment $equipment)
+    public function edit(Date $date)
     {
-        //
+        return view('equipment.admin.date.edit', compact('date'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Equipment  $equipment
+     * @param  \App\Models\Date  $date
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Equipment $equipment)
+    public function update(Request $request, Date $date)
     {
-        //
+        $date->description = $request->get('description');
+        $date->end_at = $request->get('end_at');
+        $date->save();
+
+        return redirect()->to( route('equipment.admin.date.index') );
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Equipment  $equipment
+     * @param  \App\Models\Date  $date
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Equipment $equipment)
+    public function destroy(Date $date)
     {
         //
     }
