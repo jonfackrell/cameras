@@ -35,7 +35,7 @@ class Patron extends Authenticatable
 	}
 
     public function getRole() {
-        $role = 'NA';
+        $role = '';
 
         if (in_array('Employee', $this->roles)) {
             $role = 'FAC';

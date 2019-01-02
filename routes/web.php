@@ -121,6 +121,7 @@ Route::middleware(['mail'])->group(function () {
             Route::get('/terms', 'PatronController@terms')->name('patron.terms');
             Route::post('/terms', 'PatronController@updateTerms')->name('patron.terms');
             Route::get('/profile', 'PatronController@profile')->name('patron.profile');
+            Route::post('/autorize', 'PatronController@selfAuthorizeCameras')->name('patron.authorize');
         });
 
         Route::group(['middleware' => ['auth']], function() {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Equipment;
 
 use App\Models\Patron;
 use App\Models\Equipment;
+use App\Models\EquipmentType;
 use App\Models\Checkout;
 use App\Models\Date;
 use Illuminate\Http\Request;
@@ -162,7 +163,39 @@ class PatronController extends Controller
             return $value->equipment->group == 'other';
         });
 
-        return view('equipment.patron.profile', compact('checkouts', 'patron', 'cameras', 'others', 'pageSize'));
+        $types = EquipmentType::where('display_name', '!=', NULL);
+
+        if ($patron->getRole() != 'FAC') {
+            $types = $types->where('faculty_only', false);
+        }
+
+        if (!$patron->canCheckout('camera')) {
+            $types = $types->where('group', '!=', 'camera');
+        }
+
+        $types = $types->get()->sortBy('group');
+
+        return view('equipment.patron.profile', compact('checkouts', 'patron', 'cameras', 'others', 'pageSize', 'types'));
+    }
+
+
+    /**
+     * Allows the Patron to Self Authorize checking out Camera Equipment
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Patron  $patron
+     * @return \Illuminate\Http\Response
+     */
+    public function selfAuthorizeCameras(Request $request)
+    {
+        
+        $patron = Patron::where('id', auth()->guard('patrons')->user()->id)->first();
+        $patron->checkout_reason = $request->get('checkout_reason');
+        $patron->cameras_access_end_at = Date::first()->end_at;
+        $patron->save();
+        
+
+        return redirect()->to( route('equipment.patron.profile') );
     }
 
     /**

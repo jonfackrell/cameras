@@ -5,6 +5,9 @@
 @endsection
 
 @section('content')
+	<div class="row"><div class="col-12">Welcome <a href="{{ route('equipment.patron.profile') }}">{{ $patron->getFullNameAttribute() }}</a></div></div>
+	<div class="clear-fix">&nbsp;</div>
+	
 	<h2>Terms and Conditions</h2>
 
 	@if (!auth()->guard('patrons')->user()->areTermsAgreed())
