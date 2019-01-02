@@ -6,6 +6,8 @@ use App\Models\Date;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use Carbon\Carbon;
+
 class DateController extends Controller
 {
     /**
@@ -73,7 +75,7 @@ class DateController extends Controller
     public function update(Request $request, Date $date)
     {
         $date->description = $request->get('description');
-        $date->end_at = $request->get('end_at');
+        $date->end_at = Carbon::createFromFormat('m/d/Y', $request->get('end_at'));
         $date->save();
 
         return redirect()->to( route('equipment.admin.date.index') );

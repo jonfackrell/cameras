@@ -18,6 +18,7 @@
 	<div class="row btn btn-default sidebar-btn" id="settings"><span><i class="fa fa-cog" aria-hidden="true"></i> Settings <i class="fa fa-chevron-down"></i></span></div>
 	<div id="settingsOpts">
 		
+		<a class="row btn btn-default sidebar-btn" href="{{ route('equipment.admin.date.index') }}"><span>&emsp; Dates</span></a>
 		<a class="row btn btn-default sidebar-btn" href="{{ route('equipment.admin.equipment.create') }}"><span>&emsp; Equipment</span></a>
 		<a class="row btn btn-default sidebar-btn" href="{{ route('equipment.admin.equipment-type.index') }}"><span>&emsp; Types</span></a>
 

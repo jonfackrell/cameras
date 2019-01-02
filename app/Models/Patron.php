@@ -37,10 +37,10 @@ class Patron extends Authenticatable
     public function getRole() {
         $role = 'NA';
 
-        if (in_array('FAC', $this->roles)) {
+        if (in_array('Employee', $this->roles)) {
             $role = 'FAC';
         }
-        else if (in_array('CurrentStudent', $this->roles)) {
+        else if (in_array('Student', $this->roles)) {
             $role = 'STU';
         }
 
