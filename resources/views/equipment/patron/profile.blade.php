@@ -6,10 +6,10 @@
 
 
 @section('content')
-	<div class="row"><div class="col-12">Welcome <a href="{{ route('equipment.patron.profile') }}">{{ $patron->getFullNameAttribute() }}</a></div></div>
+	<div class="row"><h2 class="col-12">Welcome <a href="{{ route('equipment.patron.profile') }}" style="font-family: inherit;">{{ $patron->getFullNameAttribute() }}</a></h2></div>
 	<div class="clear-fix">&nbsp;</div>
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-5">
 			<h4>You can checkout the following types of equipment:</h4>
 			<ul class="bullets row">
 				@foreach ($types as $type)
@@ -18,7 +18,7 @@
 			</ul>
 
 			@if (!$patron->canCheckout('camera'))
-				<p>You are not currently authorized to use camera equipment. You can self authorize by filling out the accademic purpose you need the camera equipment for, and then hitting "Self Authorize". By hitting "Self Authorize" you agree that you need camera equipment for an accademic purpose and that you will follow the terms and conditions of use for the equipment.</p>
+				<p>You are not currently authorized to use camera equipment. You can self authorize by filling out the academic purpose you need the camera equipment for, and then hitting "Self Authorize". By hitting "Self Authorize" you agree that you need camera equipment for an academic purpose and that you will follow the terms and conditions of use for the equipment.</p>
 
 				{!! BootForm::open()->post()->action(route('equipment.patron.authorize')) !!}
 				{!! BootForm::text('Class/Purpose', 'checkout_reason') !!}
@@ -31,6 +31,7 @@
 			<a href="{{ route('equipment.patron.terms') }}">View Terms and Conditions</a>
 
 		</div>
+		<div class="col-md-1"></div> 
 		@if (sizeof($checkouts) > 0)
 		<div class="col-md-6 list-group">
 			<div class="row list-group-item header">
@@ -105,3 +106,12 @@
 	</div>
 	
 @endsection
+
+@push('styles')
+	<style type="text/css">
+		label {
+			font-family: 'Oswald', sans-serif;
+			font-size: 1.5em;
+		}
+	</style>
+@endpush

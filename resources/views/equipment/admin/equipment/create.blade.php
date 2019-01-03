@@ -5,13 +5,24 @@
 @endsection
 
 @section('content')
-	<div class="col-12">
+	<div class="col-6">
+		<h3>Single</h3>
 		{!! BootForm::open()->post()->action(route('equipment.admin.equipment.create')) !!}
 		{!! BootForm::text('Item', 'item')->placeholder('only if applicable') !!}
 		{!! BootForm::text('Barcode', 'barcode')->placeholder('only if applicable') !!}
 		{!! BootForm::select('Group', 'group')->options(['camera'=>'Camera', 'other'=>'Other']) !!}
 		{!! BootForm::select('Type', 'type')->options(['ditigal-cam'=>'DC Camera', 'ditigal-bat'=>'DC Battery', 'video-cam'=>'DVC Camera', 'video-bat'=>'DVC Battery', 'dslr-cam'=>'DSLR Camera', 'dslr-bat'=>'DSLR Battery', 'memory'=>'SD Card', 'usb'=>'USB Cable', 'tripod'=>'Tripod', 'tripod-head'=>'Tripod Head', 'tripod-hand'=>'Tripod Handle']) !!}
 		{!! BootForm::text('Description', 'description') !!}
+		{!! BootForm::submit('Add Equipment') !!}
+		{!! BootForm::close() !!}
+	</div>
+	<div class="col-6">
+		<h3>Multiple</h3>
+		{!! BootForm::open()->post()->action(route('equipment.admin.equipment.multiply')) !!}
+		{!! BootForm::select('Multiplier', 'multiplier')->options([5=>'5', 10=>'10']) !!}
+		{!! BootForm::select('Group', 'group_multi')->options(['camera'=>'Camera', 'other'=>'Other']) !!}
+		{!! BootForm::select('Type', 'type_multi')->options(['ditigal-cam'=>'DC Camera', 'ditigal-bat'=>'DC Battery', 'video-cam'=>'DVC Camera', 'video-bat'=>'DVC Battery', 'dslr-cam'=>'DSLR Camera', 'dslr-bat'=>'DSLR Battery', 'memory'=>'SD Card', 'usb'=>'USB Cable', 'tripod'=>'Tripod', 'tripod-head'=>'Tripod Head', 'tripod-hand'=>'Tripod Handle']) !!}
+		{!! BootForm::text('Description', 'description_multi') !!}
 		{!! BootForm::submit('Add Equipment') !!}
 		{!! BootForm::close() !!}
 	</div>
@@ -31,6 +42,8 @@
 				   ['tablet-lg', 'Tablet, Large'], ['pen', 'Tablet, Pen']];
 
 	var equipmentTypes = {!! $equipmentTypes->toJson() !!};
+
+	var equipmentTypesDuplicable = {!! $equipmentTypesDuplicable->toJson() !!};
 
 
 	function fillType() {
@@ -52,8 +65,31 @@
 		}
 	}
 
+
+	function fillTypeMultiply() {
+		var group = $('#group_multi option:selected').val();
+		var type = $('#type_multi');
+		type.empty();
+
+		if (group == 'camera') {
+			for (i = 0; i < equipmentTypesDuplicable.camera.length; i++) {
+				var opts = '<option value="' + equipmentTypesDuplicable.camera[i].id + '">' + equipmentTypesDuplicable.camera[i].display_name + '</option>';
+				type.append(opts);
+			}
+		}
+		else {
+			for (i = 0; i < equipmentTypesDuplicable.other.length; i++) {
+				var opts = '<option value="' + equipmentTypesDuplicable.other[i].id + '">' + equipmentTypesDuplicable.other[i].display_name + '</option>';
+				type.append(opts);
+			}
+		}
+	}
+
+
 	fillType();
+	fillTypeMultiply()
 
 	$('#group').change(fillType);
+	$('#group_multi').change(fillTypeMultiply);
 </script>
 @endpush

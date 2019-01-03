@@ -136,6 +136,7 @@ Route::middleware(['mail'])->group(function () {
             Route::get('/admin/checkouts/{type}', 'CheckoutController@index')->name('admin.checkouts');
             Route::get('/admin/equipment/create', 'EquipmentController@create')->name('admin.equipment.create');
             Route::post('/admin/equipment/create', 'EquipmentController@store')->name('admin.equipment.create');
+            Route::post('/admin/equipment/multiply', 'EquipmentController@multiply')->name('admin.equipment.multiply');
 
             Route::get('/admin/reports', 'CheckoutReportController@index')->name('admin.report.index');
             Route::post('/admin/reports/export', 'CheckoutReportController@export')->name('admin.report.export');

@@ -29,8 +29,12 @@ class EquipmentController extends Controller
         $equipmentTypes = EquipmentType::all();
 
         $equipmentTypes = $equipmentTypes->groupBy('group');
+
+        $equipmentTypesDuplicable = EquipmentType::where('duplicable', true)->get();
+
+        $equipmentTypesDuplicable = $equipmentTypesDuplicable->groupBy('group');
         
-        return view('equipment.admin.equipment.create', compact('equipmentTypes'));
+        return view('equipment.admin.equipment.create', compact('equipmentTypes', 'equipmentTypesDuplicable'));
     }
 
     /**
@@ -50,6 +54,31 @@ class EquipmentController extends Controller
         $equipment->description = $request->get('description');
 
         $equipment->save();
+
+        return redirect()->to( route('equipment.admin') );
+    }
+
+    /**
+     * Store multiple newly created resources in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function multiply(Request $request)
+    {
+        $group = $request->get('group_multi');
+        $type_id = $request->get('type_multi');
+        $description = $request->get('description_multi');
+
+        for ($i=0; $i < $request->get('multiplier'); $i++) { 
+            $equipment = new Equipment;
+
+            $equipment->group = $group;
+            $equipment->equipment_type_id = $type_id;
+            $equipment->description = $description;
+
+            $equipment->save();
+        }
 
         return redirect()->to( route('equipment.admin') );
     }
