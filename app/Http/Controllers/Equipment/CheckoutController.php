@@ -136,7 +136,15 @@ class CheckoutController extends Controller
     {
         $note = $request->get('note');
 
-        $this->checkout($patron, $equipment, $note);
+
+        $checkout = $this->checkout($patron, $equipment, $note);
+
+        if($request->has('file')){
+            /*$path = $request->file('file')->store(
+                'checkouts/'.$checkout->id, 'spaces'
+            );*/
+            $checkout->addMediaFromRequest('file')->toMediaCollection('checkouts');
+        }
 
         if ($request->get('power')){
             $power = Equipment::where('type', 'power')->where('checked_out_at', NULL)->first();
@@ -331,6 +339,7 @@ class CheckoutController extends Controller
     
             $equipment->checked_out_at = Carbon::now();
             $equipment->save();
+            return $checkout;
         }
 
     }

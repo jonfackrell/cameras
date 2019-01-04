@@ -81,6 +81,11 @@
 								{!! BootForm::checkbox("&nbsp;", "equipment[]")->value($checkout->id ) !!}
 							</div>
 						</div>
+						@foreach($checkout->getMedia('checkouts') as $image)
+							<div class="col">
+								<img src="{{ $image->getUrl('thumb') }}" style="height: 80px; width: auto;"/>
+							</div>
+						@endforeach
 					@endforeach
 
 					@if (sizeof($others) > 0)	
