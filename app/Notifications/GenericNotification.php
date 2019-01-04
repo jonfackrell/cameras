@@ -68,7 +68,7 @@ class GenericNotification extends Notification implements ShouldQueue
 
         Config::set('mail', $conf);
 
-        $app = App\::getInstance();
+        $app = App::getInstance();
         $app->register('Illuminate\Mail\MailServiceProvider');
 
         return (new MailMessage)
