@@ -156,6 +156,8 @@ Route::middleware(['mail'])->group(function () {
 
             Route::get('/admin/checkout/approval', 'CheckoutController@approvalForm')->name('admin.checkout.approval');
             Route::post('/admin/checkout/approval', 'CheckoutController@approval')->name('admin.checkout.approval');
+            Route::get('/admin/checkout/edit/{checkout}', 'CheckoutController@edit')->name('admin.checkout.edit');
+            Route::post('/admin/checkout/edit/{checkout}', 'CheckoutController@update')->name('admin.checkout.edit');
             Route::get('/admin/checkout/{checkout}', 'CheckoutController@show')->name('admin.checkout.show');
 
 
