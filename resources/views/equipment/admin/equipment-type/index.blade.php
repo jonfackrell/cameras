@@ -43,7 +43,7 @@
 						{!! BootForm::text('Type', 'type') !!}
 					</div>
 					<div class="col-4"> 
-						{!! BootForm::text('Group', 'group') !!}
+						{!! BootForm::select('Group', 'group')->options(['camera' => 'Camera', 'other' => 'Other']) !!}
 					</div>
 					<div class="col-4"> 
 						{!! BootForm::text('Display Name', 'display_name') !!}

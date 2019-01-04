@@ -36,7 +36,7 @@ $factory->define(App\Models\Patron::class, function (Faker\Generator $faker) {
         'netid' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
-        'roles' => $faker->randomElement($array = array ('Student|TraditionalStudent|OnTrackStudent|CurrentStudent|EnrolledStudent', 'FAC')),
+        'roles' => $faker->randomElement($array = array ('Student|TraditionalStudent|OnTrackStudent|CurrentStudent|EnrolledStudent', 'Employee')),
         'cameras_access_end_at' => $faker->optional()->dateTimeInInterval($startDate = 'now', $interval = '+ 5 months', $timezone = 'UTC'), 
         'term_agreement_end_at' => $faker->optional()->dateTimeInInterval($startDate = 'now', $interval = '+ 5 months', $timezone = 'UTC')
     ];
