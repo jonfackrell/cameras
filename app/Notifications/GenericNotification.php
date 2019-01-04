@@ -12,6 +12,9 @@ class GenericNotification extends Notification implements ShouldQueue
     use Queueable;
 
     public $id;
+    public $printJob;
+    public $subject;
+    public $message;
 
     /**
      * Create a new notification instance.
