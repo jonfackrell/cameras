@@ -38,6 +38,8 @@ class Kernel extends ConsoleKernel
                  ->weekdays()
                  ->dailyAt('7:00')
                  ->timezone('America/Denver');
+
+        $schedule->command('horizon:snapshot')->everyFiveMinutes();
     }
 
     /**
