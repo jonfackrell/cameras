@@ -244,21 +244,24 @@ class CheckoutController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $checkout
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $checkout)
     {
-        //
+        $checkout->due_at = Carbon::createFromFormat('m/d/Y', $request->get('due_at'));
+        $checkout->save();
+
+        return redirect()->to( route('equipment.admin.patron.show', $checkout->patron->id) );
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $checkout
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($checkout)
     {
         //
     }

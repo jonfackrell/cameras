@@ -52,10 +52,10 @@ class EquipmentTypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $equipmentType
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($equipmentType)
     {
         //
     }
@@ -63,33 +63,49 @@ class EquipmentTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $equipmentType
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($equipmentType)
     {
-        //
+        return view('equipment.admin.equipment-type.edit', compact('equipmentType'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $equipmentType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $equipmentType)
     {
-        //
+        $equipmentType->type = $request->get('type');
+        $equipmentType->group = $request->get('group');
+        $equipmentType->display_name = $request->get('display_name');
+
+        if ($request->get('duplicable'))
+            $equipmentType->duplicable = $request->get('duplicable');
+        else
+            $equipmentType->duplicable = false;
+
+        if ($request->get('faculty_only'))
+            $equipmentType->faculty_only = $request->get('faculty_only');
+        else
+            $equipmentType->faculty_only = false;
+
+        $equipmentType->save();
+
+        return redirect()->to( route('equipment.admin.equipment-type.index') );
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $equipmentType
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($equipmentType)
     {
         //
     }

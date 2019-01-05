@@ -132,6 +132,8 @@ Route::middleware(['mail'])->group(function () {
             Route::post('/admin/date/edit/{date}', 'DateController@update')->name('admin.date.edit');
             Route::get('/admin/equipment-type', 'EquipmentTypeController@index')->name('admin.equipment-type.index');
             Route::post('/admin/equipment-type/create', 'EquipmentTypeController@store')->name('admin.equipment-type.create');
+            Route::get('/admin/equipment-type/edit/{equipmentType}', 'EquipmentTypeController@edit')->name('admin.equipment-type.edit');
+            Route::post('/admin/equipment-type/edit/{equipmentType}', 'EquipmentTypeController@update')->name('admin.equipment-type.edit');
             Route::post('/admin/checkouts/{type}', 'CheckoutController@updateIndex')->name('admin.checkouts');
             Route::get('/admin/checkouts/{type}', 'CheckoutController@index')->name('admin.checkouts');
             Route::get('/admin/equipment/create', 'EquipmentController@create')->name('admin.equipment.create');
@@ -156,6 +158,8 @@ Route::middleware(['mail'])->group(function () {
 
             Route::get('/admin/checkout/approval', 'CheckoutController@approvalForm')->name('admin.checkout.approval');
             Route::post('/admin/checkout/approval', 'CheckoutController@approval')->name('admin.checkout.approval');
+            Route::get('/admin/checkout/edit/{checkout}', 'CheckoutController@edit')->name('admin.checkout.edit');
+            Route::post('/admin/checkout/edit/{checkout}', 'CheckoutController@update')->name('admin.checkout.edit');
             Route::get('/admin/checkout/{checkout}', 'CheckoutController@show')->name('admin.checkout.show');
 
 

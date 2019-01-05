@@ -67,7 +67,7 @@
 							<h5 class="col"> {{ $checkout->equipment->barcode }}</h5>
 							@endif
 							<div class="col-1">
-								<i class="fa fa-edit" aria-hidden="true"></i>
+								<a href="{{ route('equipment.admin.checkout.edit', $checkout->id) }}"><i class="fa fa-edit" aria-hidden="true"></i></a>
 							</div>
 						</div>
 						<div class="row">
