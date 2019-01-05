@@ -19,7 +19,7 @@
 	<div id="settingsOpts">
 		
 		<a class="row btn btn-default sidebar-btn" href="{{ route('equipment.admin.date.index') }}"><span>&emsp; Dates</span></a>
-		<a class="row btn btn-default sidebar-btn" href="{{ route('equipment.admin.equipment.create') }}"><span>&emsp; Equipment</span></a>
+		<a class="row btn btn-default sidebar-btn" href="{{ route('equipment.admin.equipment.index') }}"><span>&emsp; Equipment</span></a>
 		<a class="row btn btn-default sidebar-btn" href="{{ route('equipment.admin.equipment-type.index') }}"><span>&emsp; Types</span></a>
 
 	</div>

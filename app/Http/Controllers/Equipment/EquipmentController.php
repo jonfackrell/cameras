@@ -20,15 +20,7 @@ class EquipmentController extends Controller
 
         $equipment = Equipment::where('equipment_type_id', '!=', NULL)->orderBy('item')->paginate($pageSize);
 
-        $cameras = $equipment->filter(function ($value, $key) {
-            return $value->group == 'camera';
-        });
-
-        $others = $equipment->filter(function ($value, $key) {
-            return $value->group == 'other';
-        });
-
-        return view('equipment.admin.equipment.index', compact('equipment', 'cameras', 'others', 'pageSize'));
+        return view('equipment.admin.equipment.index', compact('equipment', 'pageSize'));
     }
 
     /**
@@ -67,7 +59,7 @@ class EquipmentController extends Controller
 
         $equipment->save();
 
-        return redirect()->to( route('equipment.admin') );
+        return redirect()->to( route('equipment.admin.equipment.index') );
     }
 
     /**
@@ -92,7 +84,7 @@ class EquipmentController extends Controller
             $equipment->save();
         }
 
-        return redirect()->to( route('equipment.admin') );
+        return redirect()->to( route('equipment.admin.equipment.index') );
     }
 
     /**
