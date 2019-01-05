@@ -80,7 +80,23 @@ class EquipmentTypeController extends Controller
      */
     public function update(Request $request, $equipmentType)
     {
-        //
+        $equipmentType->type = $request->get('type');
+        $equipmentType->group = $request->get('group');
+        $equipmentType->display_name = $request->get('display_name');
+
+        if ($request->get('duplicable'))
+            $equipmentType->duplicable = $request->get('duplicable');
+        else
+            $equipmentType->duplicable = false;
+
+        if ($request->get('faculty_only'))
+            $equipmentType->faculty_only = $request->get('faculty_only');
+        else
+            $equipmentType->faculty_only = false;
+
+        $equipmentType->save();
+
+        return redirect()->to( route('equipment.admin.equipment-type.index') );
     }
 
     /**

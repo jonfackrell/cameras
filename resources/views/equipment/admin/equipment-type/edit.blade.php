@@ -14,7 +14,7 @@
 				{!! BootForm::text('Type', 'type')->value($equipmentType->type) !!}
 			</div>
 			<div class="col-2"> 
-				{!! BootForm::select('Group', 'group')->options(['camera' => 'Camera', 'other' => 'Other'])->value($equipmentType->group) !!}
+				{!! BootForm::select('Group', 'group')->options(['camera' => 'Camera', 'other' => 'Other'])->select($equipmentType->group) !!}
 			</div>
 			<div class="col-3"> 
 				{!! BootForm::text('Display Name', 'display_name')->value($equipmentType->display_name) !!}
@@ -24,7 +24,11 @@
 					<label class="col-12">Faculty Only</label>
 				</div> 
 				<div class="row">
+					@if ($equipmentType->faculty_only)
+					{!! BootForm::checkbox("&nbsp;", "faculty_only")->check() !!}
+					@else
 					{!! BootForm::checkbox("&nbsp;", "faculty_only") !!}
+					@endif
 				</div>
 			</div>
 			<div class="col-2"> 
@@ -32,7 +36,11 @@
 					<label class="col-12">Duplicable</label>
 				</div> 
 				<div class="row">
+					@if ($equipmentType->duplicable)
+					{!! BootForm::checkbox("&nbsp;", "duplicable")->check() !!}
+					@else
 					{!! BootForm::checkbox("&nbsp;", "duplicable") !!}
+					@endif
 				</div>
 			</div>
 

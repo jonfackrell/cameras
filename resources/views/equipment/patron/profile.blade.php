@@ -113,5 +113,6 @@
 			font-family: 'Oswald', sans-serif;
 			font-size: 1.5em;
 		}
+		.late { color: #a5216f; }
 	</style>
 @endpush
