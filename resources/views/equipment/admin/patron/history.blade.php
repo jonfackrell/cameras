@@ -100,7 +100,7 @@
 			@endforeach
 		@endif
 
-		@if (sizeof($checkouts) > $pageSize)
+		@if ($checkouts->total() > $pageSize)
 			<div class="row list-group-item"> {{ $checkouts->links() }} </div>
 		@endif
 

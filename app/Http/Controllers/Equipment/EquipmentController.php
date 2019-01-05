@@ -16,7 +16,11 @@ class EquipmentController extends Controller
      */
     public function index()
     {
-        //
+        $pageSize = 25;
+
+        $equipment = Equipment::where('equipment_type_id', '!=', NULL)->orderBy('item')->paginate($pageSize);
+
+        return view('equipment.admin.equipment.index', compact('equipment', 'pageSize'));
     }
 
     /**
@@ -55,7 +59,7 @@ class EquipmentController extends Controller
 
         $equipment->save();
 
-        return redirect()->to( route('equipment.admin') );
+        return redirect()->to( route('equipment.admin.equipment.index') );
     }
 
     /**
@@ -80,7 +84,7 @@ class EquipmentController extends Controller
             $equipment->save();
         }
 
-        return redirect()->to( route('equipment.admin') );
+        return redirect()->to( route('equipment.admin.equipment.index') );
     }
 
     /**
