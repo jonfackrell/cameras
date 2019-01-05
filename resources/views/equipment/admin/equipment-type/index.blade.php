@@ -19,7 +19,7 @@
 		</div>
 
 		@foreach ($equipmentTypes as $equipmentType)
-			<a class="row list-group-item" href="{{ route('equipment.admin.checkout.show', ['checkout' => $equipmentType->id]) }}">
+			<a class="row list-group-item" href="{{ route('equipment.admin.equipment-type.edit', ['checkout' => $equipmentType->id]) }}">
 				<div class="col-4">
 					{{ $equipmentType->type }}
 				</div>
