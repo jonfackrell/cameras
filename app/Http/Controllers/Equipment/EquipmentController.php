@@ -21,6 +21,7 @@ class EquipmentController extends Controller
         $equipment = Equipment::whereNotNull('equipment_type_id')
                                     ->orderBy('item')
                                     ->paginate($pageSize);
+        
 
         return view('equipment.admin.equipment.index', compact('equipment', 'pageSize'));
     }
