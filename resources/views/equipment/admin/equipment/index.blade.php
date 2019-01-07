@@ -1,13 +1,14 @@
 @extends('equipment.layouts.admin')
 
 @section('title')
+    <a class="btn btn-default pull-right" href="{{ route('equipment.admin.equipment.create') }}">Add New Equiment</a>
     Equipment
 @endsection
 
 @section('content')
 	
 @if (sizeof($equipment) > 0)
-	<div class="col-md-8 list-group">
+	<div class="col-md-12 list-group">
 		<div class="row list-group-item header">
 			<div class="col-3">
 				<h3>Item</h3>
@@ -47,5 +48,5 @@
 	</div>
 @endif
 
-<div class="col-md"><a class="btn btn-default" href="{{ route('equipment.admin.equipment.create') }}">Add New Equiment</a></div>
+
 @endsection
