@@ -1,26 +1,42 @@
 @extends('equipment.layouts.admin')
 
 @section('title')
-    {{ $patron->getFullNameAttribute() }}
+
 @endsection
 
 @section('content')
 	<div class="col-12">
 		<div class="row">
 			<div class="col">
-				@if ($patron->canCheckout('camera', true))
-				<h5>Class/Purpose: {{ $patron->checkout_reason }}</h5>
-				@endif
-				<h5>{{ $patron->email }}</h5>
-				<h5>{{ $patron->inumber }}</h5>
-				@if ($patron->areTermsAgreed())
-				<h5 class="green col-3">{{ $patron->getCheckoutPeriodText() }}</h5>
-				@else
-				<h5 class="warning col-3">{{ $patron->getCheckoutPeriodText() }}</h5>
-				@endif
-				@if (!$patron->canCheckout('camera', true))
-				<a href="{{ route('equipment.admin.patron.authorize', $patron->id) }}" class="btn warning col-3">Authorize</a>
-				@endif
+				<div class="media">
+					<img src="https://via.placeholder.com/80" class="mr-3" alt="Photo">
+					<div class="media-body">
+						<div class="row">
+							<div class="col-md-8">
+								<h5 class="mt-0">{{ $patron->getFullNameAttribute() }}</h5>
+								<div>
+									{{ $patron->email }}
+								</div>
+								<div>
+									{{ $patron->inumber }}
+								</div>
+							</div>
+							<div class="col-md-4">
+								@if ($patron->canCheckout('camera', true))
+									<h5>Class/Purpose: {{ $patron->checkout_reason }}</h5>
+								@endif
+								@if (!$patron->canCheckout('camera', true))
+									<a href="{{ route('equipment.admin.patron.authorize', $patron->id) }}" class="btn warning">Authorize</a>
+								@endif
+								@if ($patron->areTermsAgreed())
+									<h5 class="green">{{ $patron->getCheckoutPeriodText() }}</h5>
+								@else
+									<h5 class="warning">{{ $patron->getCheckoutPeriodText() }}</h5>
+								@endif
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="clearfix">&nbsp;</div>
@@ -81,6 +97,13 @@
 								{!! BootForm::checkbox("&nbsp;", "equipment[]")->value($checkout->id ) !!}
 							</div>
 						</div>
+						<div class="row">
+							@foreach($checkout->getMedia('checkouts') as $image)
+								<div class="col-2">
+									<img class="checkout-thumbnail" src="{{ $image->getUrl('thumb') }}" data-full="{{ $image->getUrl() }}" style="height: 40px; width: auto;"/>
+								</div>
+							@endforeach
+						</div>
 					@endforeach
 
 					@if (sizeof($others) > 0)	
@@ -115,4 +138,36 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="modal fade" id="enlargeImageModal" tabindex="-1" role="dialog" aria-labelledby="enlargeImageModal" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+				</div>
+				<div class="modal-body">
+					<img src="" class="enlargeImageModalSource" style="width: 100%;">
+				</div>
+			</div>
+		</div>
+	</div>
 @endsection
+
+@push('styles')
+	<style>
+		img.checkout-thumbnail {
+			cursor: zoom-in;
+		}
+	</style>
+@endpush
+
+@push('footer-scripts')
+	<script>
+		$(function() {
+			$('img.checkout-thumbnail').on('click', function() {
+				$('.enlargeImageModalSource').attr('src', $(this).data('full'));
+				$('#enlargeImageModal').modal('show');
+			});
+		});
+	</script>
+@endpush
