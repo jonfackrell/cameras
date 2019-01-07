@@ -126,10 +126,13 @@
 			}
 		}
 		else {
-			for (i = 0; i < equipmentTypesDuplicable.other.length; i++) {
-				var opts = '<option value="' + equipmentTypesDuplicable.other[i].id + '">' + equipmentTypesDuplicable.other[i].display_name + '</option>';
-				type.append(opts);
-			}
+		    if(equipmentTypesDuplicable.hasOwnProperty('other')){
+                for (i = 0; i < equipmentTypesDuplicable.other.length; i++) {
+                    var opts = '<option value="' + equipmentTypesDuplicable.other[i].id + '">' + equipmentTypesDuplicable.other[i].display_name + '</option>';
+                    type.append(opts);
+                }
+            }
+
 		}
 	}
 
