@@ -6,6 +6,10 @@
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
             </div>
 
+            <ul class="nav navbar-nav">
+                <li><a href="{{ route('equipment.admin') }}"><i class="fa fa-camera"></i>&nbsp;&nbsp;Equipment</a></li>
+            </ul>
+
             <ul class="nav navbar-nav navbar-right">
                 <li class="">
                     {!! BootForm::open()->action(route('logout'))->post() !!}
