@@ -40,13 +40,13 @@
 				<div class="row"> 
 					
 					<div class="col-4"> 
-						{!! BootForm::text('Type', 'type') !!}
+						{!! BootForm::text('Type', 'type')->required() !!}
 					</div>
 					<div class="col-4"> 
-						{!! BootForm::select('Group', 'group')->options(['camera' => 'Camera', 'other' => 'Other']) !!}
+						{!! BootForm::select('Group', 'group')->options([null => '-- Select One--', 'camera' => 'Camera', 'other' => 'Other'])->required() !!}
 					</div>
 					<div class="col-4"> 
-						{!! BootForm::text('Display Name', 'display_name') !!}
+						{!! BootForm::text('Display Name', 'display_name')->required() !!}
 					</div>
 					
 				</div>
