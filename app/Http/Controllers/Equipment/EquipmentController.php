@@ -63,6 +63,12 @@ class EquipmentController extends Controller
 
         $equipment->save();
 
+        if($request->has('file')){
+            $equipment->addAllMediaFromRequest()->each(function ($fileAdder) {
+                $fileAdder->toMediaCollection('equipment');
+            });
+        }
+
         return redirect()->to( route('equipment.admin.equipment.index') );
     }
 
@@ -86,6 +92,12 @@ class EquipmentController extends Controller
             $equipment->description = $description;
 
             $equipment->save();
+
+            if($request->has('file')){
+                $equipment->addAllMediaFromRequest()->each(function ($fileAdder) {
+                    $fileAdder->toMediaCollection('equipment');
+                });
+            }
         }
 
         return redirect()->to( route('equipment.admin.equipment.index') );

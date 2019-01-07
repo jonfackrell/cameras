@@ -41,11 +41,11 @@
 		</div>
 		<div class="clearfix">&nbsp;</div>
 		<div class="row">
-			<div class="col-md">				
+			<div class="col-md-12">
 				@if ($patron->areTermsAgreed())
 					<h3>Check Out</h3>
 					{!! BootForm::open()->post()->action(route('equipment.admin.patron.show', $patron->id)) !!}
-					{!! BootForm::text('', 'search')->placeholder('item or barcode') !!}
+						{!! BootForm::text('', 'search')->placeholder('Item or Barcode') !!}
 					{!! BootForm::close() !!}
 
 					@if (sizeof($equipment) > 0)
@@ -67,12 +67,64 @@
 					<p class="warning">{{ $message }}</p>
 				@endif
 			</div>
-			<div class="col-md">
-				
-				@if (sizeof($cameras) > 0 || sizeof($others) > 0)	
+			<div class="col-md-12">
+
+				@if(isset($checkouts) && $checkouts->count() > 0)
+
+					<hr />
+
 					{!! BootForm::open()->post()->action(route('equipment.admin.checkin', $patron->id)) !!}
 
-					@if (sizeof($cameras) > 0)				
+						@foreach ($checkouts->groupBy('equipment.group') as $key => $groups)
+
+							<h3>{{ strtoupper($key) }}</h3>
+
+							@foreach($groups as $checkout)
+
+							<div class="row">
+								<h5 class="col"> {{ $checkout->equipment->getDisplayName() }}</h5>
+								@if (!is_null($checkout->equipment->barcode))
+									<h5 class="col"> {{ $checkout->equipment->barcode }}</h5>
+								@endif
+								<div class="col-1">
+									<a href="{{ route('equipment.admin.checkout.edit', $checkout->id) }}"><i class="fa fa-edit" aria-hidden="true"></i></a>
+								</div>
+							</div>
+							<div class="row">
+								<h6 class="col"><strong>Out:</strong> {{ $checkout->checked_out_at->tz('America/Denver')->format('M d Y') }}</h6>
+								@if ($checkout->isLate())
+									<h6 class="col late"><strong>Due:</strong> {{ $checkout->due_at->tz('America/Denver')->format('M d Y') }}</h6>
+								@else
+									<h6 class="col"><strong>Due:</strong> {{ $checkout->due_at->tz('America/Denver')->format('M d Y') }}</h6>
+								@endif
+								<div class="col-1">
+									{!! BootForm::checkbox("&nbsp;", "equipment[]")->value($checkout->id ) !!}
+								</div>
+							</div>
+							<div class="row">
+								@foreach($checkout->getMedia('checkouts') as $image)
+									<div class="col-2">
+										<img class="checkout-thumbnail" src="{{ $image->getUrl('thumb') }}" data-full="{{ $image->getUrl() }}" style="height: 40px; width: auto;"/>
+									</div>
+								@endforeach
+							</div>
+
+							@endforeach
+
+						@endforeach
+
+						{!! BootForm::textarea("&nbsp;", 'note')->rows(3) !!}
+						{!! BootForm::submit('Check In') !!}
+
+					{!! BootForm::close() !!}
+
+				@endif
+
+				{{--
+				@if (sizeof($cameras) > 0 || sizeof($others) > 0)
+					{!! BootForm::open()->post()->action(route('equipment.admin.checkin', $patron->id)) !!}
+
+					@if (sizeof($cameras) > 0)
 						<h3>Camera</h3>
 					@endif
 
@@ -92,8 +144,8 @@
 							<h6 class="col late"><strong>Due:</strong> {{ $checkout->due_at->tz('America/Denver')->format('M d Y') }}</h6>
 							@else
 							<h6 class="col"><strong>Due:</strong> {{ $checkout->due_at->tz('America/Denver')->format('M d Y') }}</h6>
-							@endif				
-							<div class="col-1"> 
+							@endif
+							<div class="col-1">
 								{!! BootForm::checkbox("&nbsp;", "equipment[]")->value($checkout->id ) !!}
 							</div>
 						</div>
@@ -106,7 +158,7 @@
 						</div>
 					@endforeach
 
-					@if (sizeof($others) > 0)	
+					@if (sizeof($others) > 0)
 						<h3>Other</h3>
 					@endif
 
@@ -124,8 +176,8 @@
 							<h6 class="col late"><strong>Due:</strong> {{ $checkout->due_at->tz('America/Denver')->format('M d Y') }}</h6>
 							@else
 							<h6 class="col"><strong>Due:</strong> {{ $checkout->due_at->tz('America/Denver')->format('M d Y') }}</h6>
-							@endif				
-							<div class="col-1"> 
+							@endif
+							<div class="col-1">
 								{!! BootForm::checkbox("&nbsp;", "equipment[]")->value($checkout->id ) !!}
 							</div>
 						</div>
@@ -135,6 +187,7 @@
 					{!! BootForm::submit('Check In') !!}
 					{!! BootForm::close() !!}
 				@endif
+				--}}
 			</div>
 		</div>
 	</div>

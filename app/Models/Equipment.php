@@ -3,9 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
-class Equipment extends Model
+class Equipment extends Model implements HasMedia
 {
+
+    use HasMediaTrait;
+
     public function checkouts() {
         return $this->hasMany('App\Models\Checkout');
     }
@@ -27,5 +33,10 @@ class Equipment extends Model
     	}
     	
         return $displayName;
+    }
+
+    public function registerMediaConversions(Media $media = null)
+    {
+        $this->addMediaConversion('thumb');
     }
 }

@@ -18,7 +18,7 @@
 		<div class="tab-content" id="myTabContent" style="padding-top: 12px;">
 
 			<div class="tab-pane fade show active" id="single" role="tabpanel" aria-labelledby="single-tab">
-				{!! BootForm::open()->post()->action(route('equipment.admin.equipment.create')) !!}
+				{!! BootForm::open()->post()->action(route('equipment.admin.equipment.create'))->enctype("multipart/form-data") !!}
 				{!! BootForm::text('Item', 'item')->placeholder('only if applicable') !!}
 				{!! BootForm::text('Barcode', 'barcode')->placeholder('only if applicable') !!}
 				{!! BootForm::select('Group', 'group')->options([
@@ -41,11 +41,17 @@
 						'tripod-hand' => 'Tripod Handle'
 					])->required() !!}
 				{!! BootForm::text('Description', 'description') !!}
+				<div class="row" style="margin: 10px -15px 15px;">
+					<div class="col">
+						<label class="control-label" for="file">Image</label>
+						<input type="file" name="file[]" id="file" accept="image/*"/>
+					</div>
+				</div>
 				{!! BootForm::submit('Add Equipment') !!}
 				{!! BootForm::close() !!}
 			</div>
 			<div class="tab-pane fade" id="multiple" role="tabpanel" aria-labelledby="multiple-tab">
-				{!! BootForm::open()->post()->action(route('equipment.admin.equipment.multiply')) !!}
+				{!! BootForm::open()->post()->action(route('equipment.admin.equipment.multiply'))->enctype("multipart/form-data") !!}
 				{!! BootForm::select('Multiplier', 'multiplier')->options([5=>'5', 10=>'10']) !!}
 				{!! BootForm::select('Group', 'group_multi')->options([
 						null => '-- Select One--',
@@ -67,6 +73,12 @@
 						'tripod-hand' => 'Tripod Handle'
 					])->required() !!}
 				{!! BootForm::text('Description', 'description_multi') !!}
+				<div class="row" style="margin: 10px -15px 15px;">
+					<div class="col">
+						<label class="control-label" for="file">Image</label>
+						<input type="file" name="file[]" id="file" accept="image/*"/>
+					</div>
+				</div>
 				{!! BootForm::submit('Add Equipment') !!}
 				{!! BootForm::close() !!}
 			</div>
