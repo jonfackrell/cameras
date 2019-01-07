@@ -36,9 +36,9 @@ class EquipmentController extends Controller
         // TODO: This can be cleaned up
         $equipmentTypes = EquipmentType::all();
 
-        $equipmentTypes = $equipmentTypes->groupBy('group');
+        $equipmentTypesDuplicable = $equipmentTypes->where('duplicable', true);
 
-        $equipmentTypesDuplicable = EquipmentType::where('duplicable', true)->get();
+        $equipmentTypes = $equipmentTypes->groupBy('group');        
 
         $equipmentTypesDuplicable = $equipmentTypesDuplicable->groupBy('group');
         
