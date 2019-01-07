@@ -4,9 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
-class Checkout extends Model
+class Checkout extends Model implements HasMedia
 {
+
+    use HasMediaTrait;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -70,5 +76,11 @@ class Checkout extends Model
     public function scopeWasLate($query)
     {
         return $query->whereNotNull('checked_in_at')->whereColumn('due_at', '<', 'checked_in_at');
+    }
+
+
+    public function registerMediaConversions(Media $media = null)
+    {
+        $this->addMediaConversion('thumb');
     }
 }

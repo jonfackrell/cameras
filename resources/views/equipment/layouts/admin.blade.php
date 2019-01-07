@@ -19,14 +19,15 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://library.byui.edu/assets/css/main.css?id=7723330db7716c52a0d2">
-    <link rel="stylesheet" href="https://content.byui.edu/file/0af2f055-7202-403e-9894-bb80478aa98c/1/macLab.css">
+    {{--<link rel="stylesheet" href="https://content.byui.edu/file/0af2f055-7202-403e-9894-bb80478aa98c/1/macLab.css">--}}
     
     <!-- Custom Theme Style -->
     <link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/macLab.css') }}" rel="stylesheet">
 
     <style>
-        body { padding: 30px; }
+        body { padding: 0px; }
+        nav li{ padding-top: 0px; }
         a { color: inherit; } 
         a.sidebar-btn { text-align: left; }
         #adminOpts { display: none; }
@@ -38,6 +39,10 @@
         @media only screen and (max-width: 767px) {
             #menu { display: block; }
             #menuOpts { display: none; }
+        }
+        footer{
+            position: fixed;
+            bottom: 0px;
         }
     </style>
 
@@ -56,74 +61,102 @@
 
 </head>
 
-<body class="container">
+<body>
 
-    <div class="row">
-        <div class="col-lg-2 col-md-3 sidebar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 15px;">
+        <div class="container">
+            <a class="navbar-brand" href="{{ route('equipment.admin') }}">Equipment Checkout</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li>
+                        <a href="{{ route('3d.admin') }}">
+                            <i class="fa fa-cube" aria-hidden="true"></i>
+                            3D Printing
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav navbar-right" style="margin-right: 0px !important;">
+                    <li class="nav-item" style="line-height: 42px; margin-right: 20px;">
+                        Welcome, {{ auth()->guard('web')->user()->first_name }}
+                    </li>
+                    <li class="nav-item">
+                        {!! BootForm::open()->action(route('logout'))->post() !!}
+                        {!! BootForm::submit('Logout')->class('btn warning') !!}
+                        {!! BootForm::close() !!}
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-            <div class="navbar nav_title" style="border: 0;">
-                <a href="{{ route('equipment.admin') }}" class="site_title"><h3>Equipment</h3></a>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2 col-md-3 sidebar">
+
+                <div class="navbar nav_title" style="border: 0;">
+                    <a href="{{ route('equipment.admin') }}" class="site_title"><h3>Equipment</h3></a>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <br />
+
+                @include('equipment.layouts.parts.sidebar')
+
+
+
             </div>
 
+
+
+            <!-- page content -->
+            <div class="main_col col-md" role="main">
+                <div class="row light">
+                    <div class="col-12">
+
+                        @yield('banner')
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="x_title row mt-4">
+                            <h2 class="col">@yield('title')</h2>
+
+                        </div>
+
+                        <div class="x_content row">
+
+                            @yield('content')
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <br />
+
+
+            </div>
+
+
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer class="row container justify-content-end">
+            <div class="col-4">
+                {{ env('APP_NAME') }}
+            </div>
             <div class="clearfix"></div>
-
-            <br />
-
-            @include('equipment.layouts.parts.sidebar')
-
-
-
-        </div>
-
-
-
-        <!-- page content -->
-        <div class="main_col col-md" role="main">
-            <div class="row light">
-                <div class="col-12">
-
-                    @include('equipment.layouts.parts.header')
-
-                    @yield('banner')
-
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    
-                    <div class="x_title row mt-4">
-                        <h2 class="col">@yield('title')</h2>
-
-                    </div>
-
-                    <div class="x_content row">
-
-                        @yield('content')
-
-                    </div>
-                    
-                </div>
-
-            </div>
-            <br />
-
-
-        </div>
-
-
+        </footer>
+        <!-- /footer content -->
     </div>
-    <!-- /page content -->
-
-    <!-- footer content -->
-    <footer class="row justify-content-end">
-        <div class="col-4">
-            {{ env('APP_NAME') }}
-        </div>
-        <div class="clearfix"></div>
-    </footer>
-    <!-- /footer content -->
-
 
 @stack('footer-scripts')
 

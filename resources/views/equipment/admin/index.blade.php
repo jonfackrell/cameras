@@ -1,7 +1,7 @@
 @extends('equipment.layouts.admin')
 
 @section('title')
-    Search
+    Search Patrons
 @endsection
 
 @section('banner')
@@ -14,7 +14,7 @@
 		{!! BootForm::open()->post()->action(route('equipment.admin')) !!}
 		<div class="row">
 			<div class="col"> 
-				{!! BootForm::text('', 'search')->placeholder('first name, last name, or i-number') !!}
+				{!! BootForm::text('', 'search')->placeholder('First name, Last name, or I-Number') !!}
 			</div>
 		</div>
 		{!! BootForm::close() !!}

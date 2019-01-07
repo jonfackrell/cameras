@@ -62,10 +62,17 @@ class AdminController extends Controller
             $message = 'Patron doesn\'t have aproval to use camera equipment';
         }
 
-        $cameras = $this->filterCheckoutsByGroup($patron, 'camera')->get();
-        $others = $this->filterCheckoutsByGroup($patron, 'other')->get();
+        /*$cameras = $this->filterCheckoutsByGroup($patron, 'camera')->get();
+        $others = $this->filterCheckoutsByGroup($patron, 'other')->get();*/
 
-        return view('equipment.admin.patron.show', compact('patron', 'message', 'equipment', 'cameras', 'others'));
+        $checkouts = Checkout::with(['patron', 'equipment'])
+            ->orderBy('checked_out_at', 'desc')
+            ->where('patron_id', $patron->id)
+            ->whereNull('checked_in_at')
+            ->get();
+
+
+        return view('equipment.admin.patron.show', compact('patron', 'message', 'equipment', 'checkouts'));
     }
 
     /**
@@ -126,10 +133,11 @@ class AdminController extends Controller
             $message = 'No equipment found with search: ' . $newSearch;
         }
 
-        $cameras = $this->filterCheckoutsByGroup($patron, 'camera')->get();
-        $others = $this->filterCheckoutsByGroup($patron, 'other')->get();
+       /* $cameras = $this->filterCheckoutsByGroup($patron, 'camera')->get();
+        $others = $this->filterCheckoutsByGroup($patron, 'other')->get();*/
 
-        return view('equipment.admin.patron.show', compact('patron', 'message', 'equipment', 'cameras', 'others'));
+
+        return view('equipment.admin.patron.show', compact('patron', 'message', 'equipment'));
     }
 
     /**

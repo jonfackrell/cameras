@@ -1,6 +1,10 @@
 @extends('equipment.layouts.admin')
 
 @section('title')
+	<a href="{{ route('equipment.admin.patron.history', ['patron' => $checkout->patron->id]) }}"
+	   class="col-md-3 btn btn-default pull-right">
+		Patron History
+	</a>
     Checkout Details
 @endsection
 
@@ -11,10 +15,7 @@
 				Patron
 			</h4>
 		
-			<a href="{{ route('equipment.admin.patron.history', ['patron' => $checkout->patron->id]) }}" 
-			   class="col-md-3 btn btn-default">
-				Patron History
-			</a>
+
 		</div>
 		<div class="row">
 			<div class="col-md-3">
@@ -188,6 +189,50 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="row">
+			<h5 class="col-12">Images</h5>
+		</div>
+		<div class="row">
+			@foreach($checkout->getMedia('checkouts') as $image)
+				<div class="col-2">
+					<img class="checkout-thumbnail" src="{{ $image->getUrl('thumb') }}" data-full="{{ $image->getUrl() }}" style="height: 80px; width: auto;"/>
+				</div>
+			@endforeach
+		</div>
 				
 	</div>
+
+	<div class="modal fade" id="enlargeImageModal" tabindex="-1" role="dialog" aria-labelledby="enlargeImageModal" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+				</div>
+				<div class="modal-body">
+					<img src="" class="enlargeImageModalSource" style="width: 100%;">
+				</div>
+			</div>
+		</div>
+	</div>
+
 @endsection
+
+@push('styles')
+	<style>
+		img.checkout-thumbnail {
+			cursor: zoom-in;
+		}
+	</style>
+@endpush
+
+@push('footer-scripts')
+	<script>
+		$(function() {
+			$('img.checkout-thumbnail').on('click', function() {
+				$('.enlargeImageModalSource').attr('src', $(this).data('full'));
+				$('#enlargeImageModal').modal('show');
+			});
+		});
+	</script>
+@endpush

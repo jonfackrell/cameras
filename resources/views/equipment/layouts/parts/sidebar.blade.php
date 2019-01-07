@@ -4,7 +4,6 @@
 </div>
 <div id="menuOpts">
 	<a class="row btn btn-default sidebar-btn" href="{{ route('equipment.admin') }}"><span><i class="fa fa-home" aria-hidden="true"></i> Home</span></a>
-	<a class="row btn btn-default sidebar-btn" href="{{ route('3d.admin') }}"><span><i class="fa fa-cube" aria-hidden="true"></i> 3d Printing</span></a>
 	<!-- history dropdown -->
 	<div class="row btn btn-default sidebar-btn" id="history"><span><i class="fa fa-history" aria-hidden="true"></i> History <i class="fa fa-chevron-down"></i></span></div>
 	<div id="historyOpts">
