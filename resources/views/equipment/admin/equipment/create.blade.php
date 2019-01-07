@@ -5,27 +5,75 @@
 @endsection
 
 @section('content')
-	<div class="col-6">
-		<h3>Single</h3>
-		{!! BootForm::open()->post()->action(route('equipment.admin.equipment.create')) !!}
-		{!! BootForm::text('Item', 'item')->placeholder('only if applicable') !!}
-		{!! BootForm::text('Barcode', 'barcode')->placeholder('only if applicable') !!}
-		{!! BootForm::select('Group', 'group')->options(['camera'=>'Camera', 'other'=>'Other']) !!}
-		{!! BootForm::select('Type', 'type')->options(['ditigal-cam'=>'DC Camera', 'ditigal-bat'=>'DC Battery', 'video-cam'=>'DVC Camera', 'video-bat'=>'DVC Battery', 'dslr-cam'=>'DSLR Camera', 'dslr-bat'=>'DSLR Battery', 'memory'=>'SD Card', 'usb'=>'USB Cable', 'tripod'=>'Tripod', 'tripod-head'=>'Tripod Head', 'tripod-hand'=>'Tripod Handle']) !!}
-		{!! BootForm::text('Description', 'description') !!}
-		{!! BootForm::submit('Add Equipment') !!}
-		{!! BootForm::close() !!}
+
+	<div class="col-12">
+		<ul class="nav nav-tabs" id="myTab" role="tablist">
+			<li class="nav-item">
+				<a class="nav-link active" id="single-tab" data-toggle="tab" href="#single" role="tab" aria-controls="single" aria-selected="true">Single Item</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" id="multiple-tab" data-toggle="tab" href="#multiple" role="tab" aria-controls="multiple" aria-selected="false">Multiple Items</a>
+			</li>
+		</ul>
+		<div class="tab-content" id="myTabContent" style="padding-top: 12px;">
+
+			<div class="tab-pane fade show active" id="single" role="tabpanel" aria-labelledby="single-tab">
+				{!! BootForm::open()->post()->action(route('equipment.admin.equipment.create')) !!}
+				{!! BootForm::text('Item', 'item')->placeholder('only if applicable') !!}
+				{!! BootForm::text('Barcode', 'barcode')->placeholder('only if applicable') !!}
+				{!! BootForm::select('Group', 'group')->options([
+						null => '-- Select One--',
+						'camera' => 'Camera',
+						'other' => 'Other'
+					])->required() !!}
+				{!! BootForm::select('Type', 'type')->options([
+						null => '-- Select One--',
+						'ditigal-cam' => 'DC Camera',
+						'ditigal-bat' => 'DC Battery',
+						'video-cam' => 'DVC Camera',
+						'video-bat' => 'DVC Battery',
+						'dslr-cam' => 'DSLR Camera',
+						'dslr-bat' => 'DSLR Battery',
+						'memory' => 'SD Card',
+						'usb' => 'USB Cable',
+						'tripod' => 'Tripod',
+						'tripod-head' => 'Tripod Head',
+						'tripod-hand' => 'Tripod Handle'
+					])->required() !!}
+				{!! BootForm::text('Description', 'description') !!}
+				{!! BootForm::submit('Add Equipment') !!}
+				{!! BootForm::close() !!}
+			</div>
+			<div class="tab-pane fade" id="multiple" role="tabpanel" aria-labelledby="multiple-tab">
+				{!! BootForm::open()->post()->action(route('equipment.admin.equipment.multiply')) !!}
+				{!! BootForm::select('Multiplier', 'multiplier')->options([5=>'5', 10=>'10']) !!}
+				{!! BootForm::select('Group', 'group_multi')->options([
+						null => '-- Select One--',
+						'camera' => 'Camera',
+						'other' => 'Other'
+					])->required() !!}
+				{!! BootForm::select('Type', 'type_multi')->options([
+						null => '-- Select One--',
+						'ditigal-cam' => 'DC Camera',
+						'ditigal-bat' => 'DC Battery',
+						'video-cam' => 'DVC Camera',
+						'video-bat' => 'DVC Battery',
+						'dslr-cam' => 'DSLR Camera',
+						'dslr-bat' => 'DSLR Battery',
+						'memory' => 'SD Card',
+						'usb' => 'USB Cable',
+						'tripod' => 'Tripod',
+						'tripod-head' => 'Tripod Head',
+						'tripod-hand' => 'Tripod Handle'
+					])->required() !!}
+				{!! BootForm::text('Description', 'description_multi') !!}
+				{!! BootForm::submit('Add Equipment') !!}
+				{!! BootForm::close() !!}
+			</div>
+
+		</div>
 	</div>
-	<div class="col-6">
-		<h3>Multiple</h3>
-		{!! BootForm::open()->post()->action(route('equipment.admin.equipment.multiply')) !!}
-		{!! BootForm::select('Multiplier', 'multiplier')->options([5=>'5', 10=>'10']) !!}
-		{!! BootForm::select('Group', 'group_multi')->options(['camera'=>'Camera', 'other'=>'Other']) !!}
-		{!! BootForm::select('Type', 'type_multi')->options(['ditigal-cam'=>'DC Camera', 'ditigal-bat'=>'DC Battery', 'video-cam'=>'DVC Camera', 'video-bat'=>'DVC Battery', 'dslr-cam'=>'DSLR Camera', 'dslr-bat'=>'DSLR Battery', 'memory'=>'SD Card', 'usb'=>'USB Cable', 'tripod'=>'Tripod', 'tripod-head'=>'Tripod Head', 'tripod-hand'=>'Tripod Handle']) !!}
-		{!! BootForm::text('Description', 'description_multi') !!}
-		{!! BootForm::submit('Add Equipment') !!}
-		{!! BootForm::close() !!}
-	</div>
+
 @endsection
 
 @push('footer-scripts')

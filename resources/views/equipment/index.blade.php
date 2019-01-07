@@ -23,26 +23,14 @@
 
 
     <div class="row">
-        <div class="col-md-6">
-
-            
+        <div class="col-md-12">
             
             <div class="infographic">
-                <img class="img-fluid" src="{{ asset('/img/stu-check-out-info.png') }}" alt="Student Check Out Inforgraphic"></a>
-            </div>
-            <div class="clearfix">&nbsp;</div>
-
-        </div>
-        <div class="col-md-6">
-
-            
-            
-            <div class="infographic">
-                <img class="img-fluid" src="{{ asset('/img/fac-check-out-info.png') }}" alt="Faculty Check Out Inforgraphic"></a>
+                <img class="img-fluid" src="{{ asset('/img/check-out-info.png') }}" alt="Equipment Check Out Inforgraphic"></a>
             </div>
             <div class="clearfix">&nbsp;</div>
             <div class="row justify-content-center">
-                <a class="btn" href="https://abish.byui.edu/cameras/index.cfm/authorize"><button id='authorization' class="btn btn-default authorization">Click Here for Authorization</button></a>
+                <a class="btn" href="{{ route('equipment.patron.profile') }}"><button id='authorization' class="btn btn-default authorization">View Checkout Profile</button></a>
             </div>
         </div>
     </div>
@@ -89,6 +77,13 @@
             </div>
             <button class="slideShowButton left">&#10094;</button>
             <button class="slideShowButton right">&#10095;</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="clearfix">&nbsp;</div>
+        <div class="row justify-content-center">
+            <a class="btn" href="{{ route('equipment.patron.profile') }}"><button id='authorization' class="btn btn-default authorization">View Checkout Profile</button></a>
         </div>
     </div>
 @endsection

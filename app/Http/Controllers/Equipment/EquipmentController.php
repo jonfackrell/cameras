@@ -18,7 +18,10 @@ class EquipmentController extends Controller
     {
         $pageSize = 25;
 
-        $equipment = Equipment::where('equipment_type_id', '!=', NULL)->orderBy('item')->paginate($pageSize);
+        $equipment = Equipment::whereNotNull('equipment_type_id')
+                                    ->orderBy('item')
+                                    ->paginate($pageSize);
+        
 
         return view('equipment.admin.equipment.index', compact('equipment', 'pageSize'));
     }
@@ -30,6 +33,7 @@ class EquipmentController extends Controller
      */
     public function create()
     {
+        // TODO: This can be cleaned up
         $equipmentTypes = EquipmentType::all();
 
         $equipmentTypes = $equipmentTypes->groupBy('group');
