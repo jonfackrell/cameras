@@ -29,7 +29,19 @@
 
 				<div class="row" style="margin: 10px -15px 15px;">
 					<div class="col">
-						<input type="file" name="file" id="file" accept="image/*"/>
+						<input type="file" name="file[]" id="file" accept="image/*"/>
+					</div>
+				</div>
+
+				<div class="row" style="margin: 10px -15px 15px;">
+					<div class="col">
+						<input type="file" name="file[]" id="file" accept="image/*"/>
+					</div>
+				</div>
+
+				<div class="row" style="margin: 10px -15px 15px;">
+					<div class="col">
+						<input type="file" name="file[]" id="file" accept="image/*"/>
 					</div>
 				</div>
 

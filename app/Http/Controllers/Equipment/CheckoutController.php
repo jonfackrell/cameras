@@ -147,7 +147,9 @@ class CheckoutController extends Controller
             /*$path = $request->file('file')->store(
                 'checkouts/'.$checkout->id, 'spaces'
             );*/
-            $checkout->addMediaFromRequest('file')->toMediaCollection('checkouts');
+            $checkout->addAllMediaFromRequest()->each(function ($fileAdder) {
+                $fileAdder->toMediaCollection('checkouts');
+            });
         }
 
         if ($request->get('power')) {
