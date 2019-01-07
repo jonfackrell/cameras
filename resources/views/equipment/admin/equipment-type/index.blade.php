@@ -19,7 +19,7 @@
 		</div>
 
 		@foreach ($equipmentTypes as $equipmentType)
-			<a class="row list-group-item" href="{{ route('equipment.admin.checkout.show', ['checkout' => $equipmentType->id]) }}">
+			<a class="row list-group-item" href="{{ route('equipment.admin.equipment-type.edit', ['checkout' => $equipmentType->id]) }}">
 				<div class="col-4">
 					{{ $equipmentType->type }}
 				</div>
@@ -40,13 +40,13 @@
 				<div class="row"> 
 					
 					<div class="col-4"> 
-						{!! BootForm::text('Type', 'type') !!}
+						{!! BootForm::text('Type', 'type')->required() !!}
 					</div>
 					<div class="col-4"> 
-						{!! BootForm::text('Group', 'group') !!}
+						{!! BootForm::select('Group', 'group')->options([null => '-- Select One--', 'camera' => 'Camera', 'other' => 'Other'])->required() !!}
 					</div>
 					<div class="col-4"> 
-						{!! BootForm::text('Display Name', 'display_name') !!}
+						{!! BootForm::text('Display Name', 'display_name')->required() !!}
 					</div>
 					
 				</div>

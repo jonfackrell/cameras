@@ -121,17 +121,25 @@ Route::middleware(['mail'])->group(function () {
             Route::get('/terms', 'PatronController@terms')->name('patron.terms');
             Route::post('/terms', 'PatronController@updateTerms')->name('patron.terms');
             Route::get('/profile', 'PatronController@profile')->name('patron.profile');
+            Route::post('/autorize', 'PatronController@selfAuthorizeCameras')->name('patron.authorize');
         });
 
         Route::group(['middleware' => ['auth']], function() {
             Route::get('/admin', 'AdminController@home')->name('admin');
             Route::post('/admin', 'AdminController@updateHome')->name('admin');
+            Route::get('/admin/date', 'DateController@index')->name('admin.date.index');
+            Route::get('/admin/date/edit/{date}', 'DateController@edit')->name('admin.date.edit');
+            Route::post('/admin/date/edit/{date}', 'DateController@update')->name('admin.date.edit');
             Route::get('/admin/equipment-type', 'EquipmentTypeController@index')->name('admin.equipment-type.index');
             Route::post('/admin/equipment-type/create', 'EquipmentTypeController@store')->name('admin.equipment-type.create');
+            Route::get('/admin/equipment-type/edit/{equipmentType}', 'EquipmentTypeController@edit')->name('admin.equipment-type.edit');
+            Route::post('/admin/equipment-type/edit/{equipmentType}', 'EquipmentTypeController@update')->name('admin.equipment-type.edit');
             Route::post('/admin/checkouts/{type}', 'CheckoutController@updateIndex')->name('admin.checkouts');
             Route::get('/admin/checkouts/{type}', 'CheckoutController@index')->name('admin.checkouts');
+            Route::get('/admin/equipment', 'EquipmentController@index')->name('admin.equipment.index');
             Route::get('/admin/equipment/create', 'EquipmentController@create')->name('admin.equipment.create');
             Route::post('/admin/equipment/create', 'EquipmentController@store')->name('admin.equipment.create');
+            Route::post('/admin/equipment/multiply', 'EquipmentController@multiply')->name('admin.equipment.multiply');
 
             Route::get('/admin/reports', 'CheckoutReportController@index')->name('admin.report.index');
             Route::post('/admin/reports/export', 'CheckoutReportController@export')->name('admin.report.export');
@@ -151,6 +159,8 @@ Route::middleware(['mail'])->group(function () {
 
             Route::get('/admin/checkout/approval', 'CheckoutController@approvalForm')->name('admin.checkout.approval');
             Route::post('/admin/checkout/approval', 'CheckoutController@approval')->name('admin.checkout.approval');
+            Route::get('/admin/checkout/edit/{checkout}', 'CheckoutController@edit')->name('admin.checkout.edit');
+            Route::post('/admin/checkout/edit/{checkout}', 'CheckoutController@update')->name('admin.checkout.edit');
             Route::get('/admin/checkout/{checkout}', 'CheckoutController@show')->name('admin.checkout.show');
 
 

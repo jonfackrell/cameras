@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Models\Patron;
 use App\Models\Checkout;
 use App\Models\Equipment;
+use App\Models\EquipmentType;
 
 class AdminController extends Controller
 {
@@ -80,12 +81,18 @@ class AdminController extends Controller
 
         $newSearch = $request->get('search');
 
+        $equipment_type_ids = EquipmentType::where('type', 'like', '%' . $newSearch . '%')
+                              ->orWhere('display_name', 'like', '%' . $newSearch . '%')
+                              ->select('id');
+
         $equipment = Equipment::where('checked_out_at', NULL)
-                ->where(function ($query) use ($newSearch) { 
+                ->where(function ($query) use ($newSearch, $equipment_type_ids) { 
                     $query->where('barcode', 'like', '%' . $newSearch . '%')
                     ->orWhere('item', 'like', '%' . $newSearch . '%')
                     ->orWhere('description', 'like', '%' . $newSearch . '%')
-                    ->orWhere('type', 'like', '%' . $newSearch . '%'); 
+                    ->orWhere(function ($query) use ($equipment_type_ids) {
+                        $query->whereIn('equipment_type_id', $equipment_type_ids);
+                    }); 
                 });
         $allEquipment = Equipment::where('checked_out_at', NULL);
 

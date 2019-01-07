@@ -22,7 +22,7 @@
 				!!}
 				@if($equipment->type == 'tripod')
 					@include('equipment.layouts.parts.tripod-checkout-form')
-				@elseif($equipment->type == 'video-cam' || $equipment->type == 'digital-cam' || $equipment->type == 'dslr-cam')
+				@elseif($equipment->equipment_type->type == 'video-cam' || $equipment->equipment_type->type == 'digital-cam' || $equipment->equipment_type->type == 'dslr-cam')
 					@include('equipment.layouts.parts.camera-checkout-form')
 				@endif
 				{!! BootForm::textarea("&nbsp;", 'note')->rows(3) !!}

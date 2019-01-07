@@ -29,7 +29,9 @@
         body { padding: 30px; }
         a { color: inherit; } 
         a.sidebar-btn { text-align: left; }
+        #adminOpts { display: none; }
         #historyOpts { display: none; }
+        #settingsOpts { display: none; }
         #menu { display: none; }
         #menuOpts { display: block; }
 
@@ -130,8 +132,16 @@
 <script>
 
     $(function(){
+        $('#admin').click(function() {
+            $('#adminOpts').toggle('slow');
+        });
+
         $('#history').click(function() {
             $('#historyOpts').toggle('slow');
+        });
+
+        $('#settings').click(function() {
+            $('#settingsOpts').toggle('slow');
         });
 
         $('#menu').click(function() {

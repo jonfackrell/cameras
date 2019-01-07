@@ -27,9 +27,11 @@ class RouteServiceProvider extends ServiceProvider
 
         parent::boot();
 
+        Route::model('date', \App\Models\Date::class);
         Route::model('patron', \App\Models\Patron::class);
         Route::model('checkout', \App\Models\Checkout::class);
         Route::model('equipment', \App\Models\Equipment::class);
+        Route::model('equipmentType', \App\Models\EquipmentType::class);
     }
 
     /**
