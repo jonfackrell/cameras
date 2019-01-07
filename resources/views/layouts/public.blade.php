@@ -155,7 +155,8 @@
 <div class="clearfix">&nbsp;</div>
 
 <div class="container event-cards" id='workshops'>
-    <div class="row event-header">
+    <!-- Workshops banner commented out until workshops are needed again -->
+    <!-- <div class="row event-header">
         <div class="col-md-9">
             <h2 class='events-title' style="font-size: 18px; line-height: 2em; padding-left: 12px;">
                 UPCOMING WORKSHOPS
@@ -164,7 +165,7 @@
         <div class="col-md-3 green" style="text-align: right; padding-top: 9px;">
             <a href="https://byui.libcal.com/calendar/events/?ct=36359" style="padding: 4px 12px 4px 6px;">SEE ALL EVENTS</a>
         </div>
-    </div>
+    </div> -->
     <div class="row events-body"></div>
 </div>
 
