@@ -358,23 +358,11 @@ class CheckoutController extends Controller
      */
     public function approvalForm()
     {
-        $checkouts = Checkout::late()->where('approved_at', NULL)->get();
-
-        $checkouts = $checkouts->filter(function ($value, $key) {
-            return $value->isLate();
-        });
-
-        $cameras = $checkouts->filter(function ($value, $key) {
-            return $value->equipment->group == 'camera';
-        });
-
-        $others = $checkouts->filter(function ($value, $key) {
-            return $value->equipment->group == 'other';
-        });
+        $checkouts = Checkout::wasLate()->where('approved_at', NULL)->get();
 
         $feeAmount = 10;
 
-        return view('equipment.admin.checkout.approval', compact('checkouts', 'cameras', 'others', 'feeAmount'));
+        return view('equipment.admin.checkout.approval', compact('checkouts', 'feeAmount'));
     }
 
     /**

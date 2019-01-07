@@ -1,7 +1,7 @@
 @extends('equipment.layouts.admin')
 
 @section('title')
-    Checkout History
+    Checkout History    
 @endsection
 
 @section('content')

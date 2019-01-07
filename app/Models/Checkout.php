@@ -47,7 +47,7 @@ class Checkout extends Model
         }
         
         return $late;
-    }
+    } 
 
     public function isDueToday() {
         $today = Carbon::now()->tz('America/Denver');
@@ -67,8 +67,8 @@ class Checkout extends Model
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeLate($query)
+    public function scopeWasLate($query)
     {
-        return $query->where('due_at', '<', 'checked_in_at');
+        return $query->whereNotNull('checked_in_at')->whereColumn('due_at', '<', 'checked_in_at');
     }
 }
