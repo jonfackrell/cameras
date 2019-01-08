@@ -40,7 +40,7 @@ class InvoicePaid extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('mail.payment');
+        return (new MailMessage)->markdown('3d.mail.payment');
     }
 
     /**
