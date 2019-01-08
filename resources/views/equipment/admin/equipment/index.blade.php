@@ -8,50 +8,51 @@
 @section('content')
 	
 @if (sizeof($equipment) > 0)
-	<div class="col-md-12 list-group">
-		<div class="row list-group-item header">
-			<div class="col-1">
+	<div class="col-md-12">
 
-			</div>
-			<div class="col-2">
-				<h3>Item</h3>
-			</div>
-			<div class="col-3">
-				<h3>Barcode</h3>
-			</div>
-			<div class="col-3">
-				<h3>Type</h3>
-			</div>
-			<div class="col-3">
-				<h3>Group</h3>
-			</div>
-		</div>
+		<table class="table">
+			<thead>
+			<tr>
+				<th scope="col"></th>
+				<th scope="col">Group</th>
+				<th scope="col">Type</th>
+				<th scope="col">Item</th>
+				<th scope="col">Barcode</th>
+			</tr>
+			</thead>
+			<tbody>
+			@foreach ($equipment as $equipment1)
+				<tr>
+					<td>
+						@foreach($equipment1->equipment_type->getMedia('equipment-type') as $image)
+							<img class="checkout-thumbnail" src="{{ $image->getUrl('thumb') }}" data-full="{{ $image->getUrl() }}" style="height: 30px; width: auto;"/>
+						@endforeach
+					</td>
+					<td>
+						{{ $equipment1->group }}
+					</td>
+					<td>
+						{{ $equipment1->equipment_type->display_name }}
+					</td>
+					<td>
+						{{ $equipment1->item }}
+					</td>
+					<td>
+						{{ $equipment1->barcode }}
+					</td>
+				</tr>
+			@endforeach
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="5">
+						{{ $equipment->links()  }}
+					</td>
+				</tr>
+			</tfoot>
+		</table>
 
-		@foreach ($equipment as $equipment1)
-			<div class="row list-group-item">
-				<div class="col-1">
-					@foreach($equipment1->getMedia('equipment') as $image)
-						<img class="checkout-thumbnail" src="{{ $image->getUrl('thumb') }}" data-full="{{ $image->getUrl() }}" style="height: 30px; width: auto;"/>
-					@endforeach
-				</div>
-				<div class="col-1">
-					{{ $equipment1->item }}
-				</div>
-				<div class="col-3">
-					{{ $equipment1->barcode }}
-				</div>
-				<div class="col-3">
-					{{ $equipment1->equipment_type->display_name }}
-				</div>
-				<div class="col-3">
-					{{ $equipment1->group }}
-				</div>
-			</div>				
-		@endforeach
 
-		@if ($equipment->total() > $pageSize)
-			<div class="row list-group-item"> {{ $equipment->links() }} </div>
-		@endif
 
 	</div>
 @endif

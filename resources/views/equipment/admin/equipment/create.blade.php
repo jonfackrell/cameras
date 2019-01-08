@@ -73,12 +73,6 @@
 						'tripod-hand' => 'Tripod Handle'
 					])->required() !!}
 				{!! BootForm::text('Description', 'description_multi') !!}
-				<div class="row" style="margin: 10px -15px 15px;">
-					<div class="col">
-						<label class="control-label" for="file">Image</label>
-						<input type="file" name="file[]" id="file" accept="image/*"/>
-					</div>
-				</div>
 				{!! BootForm::submit('Add Equipment') !!}
 				{!! BootForm::close() !!}
 			</div>
