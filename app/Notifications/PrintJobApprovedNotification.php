@@ -47,7 +47,7 @@ class PrintJobApprovedNotification extends Notification
         return (new MailMessage)
                     ->subject('Your Order was approved')
                     ->line('The file you sent met the criteria. Please wait for further notifications on when to pick up your order.')
-                    ->action('View Printjob', url('/uploadfile/'. $this->printJob->id . '/edit'));
+                    ->action('View Printjob', url('/3d/uploadfile/'. $this->printJob->id . '/edit'));
     }
 
     /**

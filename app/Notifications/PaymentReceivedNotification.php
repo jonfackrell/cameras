@@ -46,7 +46,7 @@ class PaymentReceivedNotification extends Notification
                     ->subject('Payment Received for 3D printing')
                     ->line('Thank you! We have received your payment.')
                     ->line('You should have or will receive an email when your model is done printing.')
-                    ->action('Check status', url('/history/'. $this->printJob->id));
+                    ->action('Check status', url('/3d/history/'. $this->printJob->id));
     }
 
     /**

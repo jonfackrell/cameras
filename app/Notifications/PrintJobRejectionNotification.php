@@ -47,7 +47,7 @@ class PrintJobRejectionNotification extends Notification
         return (new MailMessage)
                     ->subject('Your Order was not approved')
                     ->line('The file you sent failed the criteria. Please upload a different file to be approved')
-                    ->action('Edit Printjob', url('/uploadfile/'. $this->printJob->id . '/edit'));
+                    ->action('Edit Printjob', url('/3d/uploadfile/'. $this->printJob->id . '/edit'));
     }
 
     /**
