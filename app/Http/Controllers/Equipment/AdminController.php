@@ -53,7 +53,7 @@ class AdminController extends Controller
     {
         $patron->load('checkouts');
         $message = '';
-        $equipment = [];
+        $equipment = collect([]);
 
         if ($patron->canCheckout('other') === false){
             $message = 'Patron must agree to terms before checking out any equipment';

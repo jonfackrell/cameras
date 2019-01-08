@@ -42,22 +42,57 @@
 				@if ($patron->areTermsAgreed())
 					<h3>Check Out</h3>
 					{!! BootForm::open()->post()->action(route('equipment.admin.patron.show', $patron->id)) !!}
-						{!! BootForm::text('', 'search')->placeholder('Item or Barcode') !!}
+						{!! BootForm::text('', 'search')->placeholder('Item or Barcode')->value(request()->get('search'))->autofocus() !!}
 					{!! BootForm::close() !!}
 
-					@if (sizeof($equipment) > 0)
-						<div class="row">
-							<h5 class="col">Item</h5>
-							<h5 class="col">Barcode</h5>
-						</div>
+					@if(isset($equipment) && $equipment->count() > 0)
+						<h3>Available Items</h3>
+						<table class="table table-striped table-hover">
+							<thead>
+							<tr>
+								<th scope="col">
+
+								</th>
+								<th scope="col">Group</th>
+								<th scope="col">Type</th>
+								<th scope="col">Item</th>
+								<th scope="col">Barcode</th>
+							</tr>
+							</thead>
+							<tbody>
+							@foreach ($equipment as $equipment1)
+								<tr onclick="javascript: location.href = '{{ route('equipment.admin.checkout.create', ['patron' => $patron->id, 'equipment' => $equipment1->id]) }}';">
+									<td>
+										@foreach($equipment1->equipment_type->getMedia('equipment-type') as $image)
+											<img class="checkout-thumbnail" src="{{ $image->getUrl('thumb') }}" data-full="{{ $image->getUrl() }}" style="height: 30px; width: auto;"/>
+										@endforeach
+									</td>
+									<td>
+										{{ $equipment1->group }}
+									</td>
+									<td>
+										{{ $equipment1->equipment_type->display_name }}
+									</td>
+									<td>
+										{{ $equipment1->item }}
+									</td>
+									<td>
+										{{ $equipment1->barcode }}
+									</td>
+								</tr>
+							@endforeach
+							</tbody>
+							<tfoot>
+							<tr>
+								<td colspan="5">
+
+								</td>
+							</tr>
+							</tfoot>
+						</table>
 					@endif
-					
-					@foreach ( $equipment as $equipmenti )
-						<a class="row" id="{{ $equipmenti->id }}" href="{{ route('equipment.admin.checkout.create', ['patron' => $patron->id, 'equipment' => $equipmenti->id]) }}">
-							<h6 class="col">{{ $equipmenti->getDisplayName() }}</h6>
-							<h6 class="col">{{ $equipmenti->barcode }}</h6>
-						</a>
-					@endforeach
+
+
 				@endif
 
 				@if (!empty($message))
@@ -93,11 +128,11 @@
 								</div>
 							</div>
 							<div class="row">
-								<h6 class="col"><strong>Out:</strong> {{ $checkout->checked_out_at->tz('America/Denver')->format('M d Y') }}</h6>
+								<h6 class="col"><strong>Out:</strong> {{ $checkout->checked_out_at->tz('America/Denver')->toDayDateTimeString() }}</h6>
 								@if ($checkout->isLate())
-									<h6 class="col late"><strong>Due:</strong> {{ $checkout->due_at->tz('America/Denver')->format('M d Y') }}</h6>
+									<h6 class="col late"><strong>Due:</strong> {{ $checkout->due_at->tz('America/Denver')->toDayDateTimeString() }}</h6>
 								@else
-									<h6 class="col"><strong>Due:</strong> {{ $checkout->due_at->tz('America/Denver')->format('M d Y') }}</h6>
+									<h6 class="col"><strong>Due:</strong> {{ $checkout->due_at->tz('America/Denver')->toDayDateTimeString() }}</h6>
 								@endif
 								<div class="col-1">
 									{!! BootForm::checkbox("&nbsp;", "equipment[]")->value($checkout->id ) !!}
@@ -122,74 +157,6 @@
 
 				@endif
 
-				{{--
-				@if (sizeof($cameras) > 0 || sizeof($others) > 0)
-					{!! BootForm::open()->post()->action(route('equipment.admin.checkin', $patron->id)) !!}
-
-					@if (sizeof($cameras) > 0)
-						<h3>Camera</h3>
-					@endif
-
-					@foreach ($cameras as $checkout)
-						<div class="row">
-							<h5 class="col"> {{ $checkout->equipment->getDisplayName() }}</h5>
-							@if (!is_null($checkout->equipment->barcode))
-							<h5 class="col"> {{ $checkout->equipment->barcode }}</h5>
-							@endif
-							<div class="col-1">
-								<a href="{{ route('equipment.admin.checkout.edit', $checkout->id) }}"><i class="fa fa-edit" aria-hidden="true"></i></a>
-							</div>
-						</div>
-						<div class="row">
-							<h6 class="col"><strong>Out:</strong> {{ $checkout->checked_out_at->tz('America/Denver')->format('M d Y') }}</h6>
-							@if ($checkout->isLate())
-							<h6 class="col late"><strong>Due:</strong> {{ $checkout->due_at->tz('America/Denver')->format('M d Y') }}</h6>
-							@else
-							<h6 class="col"><strong>Due:</strong> {{ $checkout->due_at->tz('America/Denver')->format('M d Y') }}</h6>
-							@endif
-							<div class="col-1">
-								{!! BootForm::checkbox("&nbsp;", "equipment[]")->value($checkout->id ) !!}
-							</div>
-						</div>
-						<div class="row">
-							@foreach($checkout->getMedia('checkouts') as $image)
-								<div class="col-2">
-									<img class="checkout-thumbnail" src="{{ $image->getUrl('thumb') }}" data-full="{{ $image->getUrl() }}" style="height: 40px; width: auto;"/>
-								</div>
-							@endforeach
-						</div>
-					@endforeach
-
-					@if (sizeof($others) > 0)
-						<h3>Other</h3>
-					@endif
-
-					@foreach ($others as $checkout)
-						<div class="row">
-							<h5 class="col"> {{ $checkout->equipment->getDisplayName() }}</h5>
-							@if (!is_null($checkout->equipment->barcode))
-							<h5 class="col"> {{ $checkout->equipment->barcode }}</h5>
-							@endif
-							<div class="col-1"></div>
-						</div>
-						<div class="row">
-							<h6 class="col"><strong>Out:</strong> {{ $checkout->checked_out_at->tz('America/Denver')->format('M d Y') }}</h6>
-							@if ($checkout->isLate())
-							<h6 class="col late"><strong>Due:</strong> {{ $checkout->due_at->tz('America/Denver')->format('M d Y') }}</h6>
-							@else
-							<h6 class="col"><strong>Due:</strong> {{ $checkout->due_at->tz('America/Denver')->format('M d Y') }}</h6>
-							@endif
-							<div class="col-1">
-								{!! BootForm::checkbox("&nbsp;", "equipment[]")->value($checkout->id ) !!}
-							</div>
-						</div>
-					@endforeach
-
-					{!! BootForm::textarea("&nbsp;", 'note')->rows(3) !!}
-					{!! BootForm::submit('Check In') !!}
-					{!! BootForm::close() !!}
-				@endif
-				--}}
 			</div>
 		</div>
 	</div>
@@ -213,6 +180,7 @@
 		img.checkout-thumbnail {
 			cursor: zoom-in;
 		}
+		table.table tr{cursor:pointer;}
 	</style>
 @endpush
 

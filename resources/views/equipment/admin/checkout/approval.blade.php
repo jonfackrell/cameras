@@ -1,7 +1,7 @@
 @extends('equipment.layouts.admin')
 
 @section('title')
-    Need Approval
+    Late Fee Email Notifications (Approval Required)
 @endsection
 
 @section('content')

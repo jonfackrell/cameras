@@ -47,10 +47,22 @@
 
 		</div>
 		<div class="row">
-			<div class="col-6">
+			<div class="col-4">
+				{!! BootForm::select('Loan Type', 'loan_type')
+								->options([
+									null => '-- Select One--',
+									'CAMERA' => 'Camera',
+									'DAILY' => 'Due End-of-Day',
+									'CUSTOM' => 'Determined by Equipment Type',
+								])
+								->select($equipmentType->loan_type)
+								->required()
+				!!}
+			</div>
+			<div class="col-4">
 				{!! BootForm::text('Loan Period', 'loan_period')->value($equipmentType->loan_period)->helpBlock('Should be input as hours') !!}
 			</div>
-			<div class="col-6">
+			<div class="col-4">
 				{!! BootForm::text('Fine Amount', 'fine_amount')->value($equipmentType->fine_amount)->helpBlock('Should be input as cents') !!}
 			</div>
 		</div>
