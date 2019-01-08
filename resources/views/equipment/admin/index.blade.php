@@ -14,7 +14,7 @@
 		{!! BootForm::open()->post()->action(route('equipment.admin')) !!}
 		<div class="row">
 			<div class="col-md-6">
-				{!! BootForm::text('', 'search')->placeholder('First name, Last name, or I-Number')->value(request()->get('search')) !!}
+				{!! BootForm::text('', 'search')->placeholder('First name, Last name, or I-Number')->value(request()->get('search'))->autofocus() !!}
 			</div>
 		</div>
 		{!! BootForm::close() !!}
