@@ -1,7 +1,6 @@
 @extends('equipment.layouts.admin')
 
 @section('title')
-    <a class="btn btn-default pull-right" href="{{ route('equipment.admin.equipment.create') }}">Add New Equiment</a>
     Equipment
 @endsection
 
@@ -13,7 +12,12 @@
 		<table class="table">
 			<thead>
 			<tr>
-				<th scope="col"></th>
+				<th scope="col" style="width: 30px;">
+					<a class="btn btn-default btn-sm" href="{{ route('equipment.admin.equipment.create') }}">
+						<i class="fa fa-plus" aria-hidden="true"></i>
+						Add
+					</a>
+				</th>
 				<th scope="col">Group</th>
 				<th scope="col">Type</th>
 				<th scope="col">Item</th>

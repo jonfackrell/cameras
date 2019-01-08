@@ -43,6 +43,8 @@ class EquipmentTypeController extends Controller
         $equipmentType->type = $request->get('type');
         $equipmentType->group = $request->get('group');
         $equipmentType->display_name = $request->get('display_name');
+        $equipmentType->loan_type = $request->get('loan_type', 'DAILY');
+        $equipmentType->fine_amount = $request->get('fine_amount', 10);
 
         $equipmentType->save();
 
@@ -86,8 +88,9 @@ class EquipmentTypeController extends Controller
         $equipmentType->duplicable = $request->get('duplicable', false);
         $equipmentType->faculty_only = $request->get('faculty_only', false);
         $equipmentType->description = $request->get('description');
+        $equipmentType->loan_type = $request->get('loan_type', 'DAILY');
         $equipmentType->loan_period = $request->get('loan_period', 0);
-        $equipmentType->fine_amount = $request->get('fine_amount', 0);
+        $equipmentType->fine_amount = $request->get('fine_amount', 10);
 
         $equipmentType->save();
 

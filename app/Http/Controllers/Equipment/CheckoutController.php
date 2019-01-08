@@ -98,6 +98,11 @@ class CheckoutController extends Controller
      */
     public function create($patron, $equipment)
     {
+
+        $equipment->load('equipment_type');
+
+        $due_at = $equipment->calculateDueAt();
+
         $equipmentTypeTripodIds = EquipmentType::where('type', 'tripod')->select('id');
 
         $tripods = Equipment::whereIn('equipment_type_id', $equipmentTypeTripodIds)
@@ -125,7 +130,7 @@ class CheckoutController extends Controller
             return redirect()->to( route('equipment.admin.patron.show', $patron->id) );
         }
         else {
-            return view('equipment.admin.checkout.create', compact('patron', 'equipment', 'tripods', 'memory', 'batteries', 'powerSupplies'));
+            return view('equipment.admin.checkout.create', compact('patron', 'equipment', 'due_at', 'tripods', 'memory', 'batteries', 'powerSupplies'));
         }
         
     }
@@ -259,7 +264,7 @@ class CheckoutController extends Controller
      */
     public function update(Request $request, $checkout)
     {
-        $checkout->due_at = Carbon::createFromFormat('m/d/Y', $request->get('due_at'));
+        $checkout->due_at = Carbon::createFromFormat('m/d/Y g:i A', $request->get('due_at'), 'America/Denver')->tz('UTC');
         $checkout->save();
 
         return redirect()->to( route('equipment.admin.patron.show', $checkout->patron->id) );
@@ -344,12 +349,14 @@ class CheckoutController extends Controller
             $checkout->patron_id = $patron->id;
             $checkout->checked_out_at = Carbon::now();
     
-            if ($equipment->group == 'camera') { 
+            /*if ($equipment->group == 'camera') {
                 $checkout->due_at = Carbon::now()->addDays($patron->checkout_period);
             }
             else {
                 $checkout->due_at = Carbon::tomorrow('America/Denver')->subMinutes(30)->tz('UTC');
-            }
+            }*/
+
+            $checkout->due_at = Carbon::createFromFormat('m/d/Y g:i A', request()->get('due_at'), 'America/Denver')->tz('UTC');
     
             $checkout->checked_out_by = auth()->guard('web')->user()->id;
             $checkout->checkout_note = $note;
