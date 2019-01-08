@@ -201,7 +201,7 @@ class AdminController extends Controller
      */
     public function home()
     {
-        $patrons = [];
+        $patrons = collect([]);
         $message = '';
 
         $cameraOut = Equipment::where('group', 'camera')

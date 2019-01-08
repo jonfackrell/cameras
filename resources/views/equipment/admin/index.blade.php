@@ -9,33 +9,66 @@
 @endsection
 
 @section('content')
-	<div id="patron_search" class="col-lg-6">
+	<div id="patron_search" class="col-lg-12">
         
 		{!! BootForm::open()->post()->action(route('equipment.admin')) !!}
 		<div class="row">
-			<div class="col"> 
-				{!! BootForm::text('', 'search')->placeholder('First name, Last name, or I-Number') !!}
+			<div class="col-md-6">
+				{!! BootForm::text('', 'search')->placeholder('First name, Last name, or I-Number')->value(request()->get('search')) !!}
 			</div>
 		</div>
 		{!! BootForm::close() !!}
-		@if (sizeof($patrons) > 0)
-			<div class="row">
-				<h5 class="col-2">Role</h5>
-				<h5 class="col-5">Name</h5>
-				<h5 class="col-5">Email</h5>
-			</div>
-		@endif
-		
-		@foreach ( $patrons as $patron )
-			<a class="row" id="{{ $patron->id }}" href="{{ route('equipment.admin.patron.show', $patron->id) }}">
-				<h6 class="col-2">{{ $patron->getRole() }}</h6>
-				<h6 class="col-5">{{ $patron->getFullNameAttribute() }}</h6>
-				<h6 class="col-5">{{ $patron->email }}</h6>
-			</a>
-		@endforeach
-
-		@if (!empty($message))
-			<p>{{ $message }}</p>
-		@endif
 	</div>
+    <div class="clearfix">&nbsp;</div>
+    @if (!empty($message))
+        <p>{{ $message }}</p>
+    @endif
+    <div class="clearfix">&nbsp;</div>
+    <div class="clearfix">&nbsp;</div>
+
+    @if(isset($patrons) && $patrons->count() > 0)
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">I-Number</th>
+                <th scope="col">Email</th>
+                <th scope="col">Role</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach ($patrons as $patron)
+                <tr onclick="javascript: location.href = '{{ route('equipment.admin.patron.show', $patron->id) }}';">
+                    <td>
+                        {{ $patron->getFullNameAttribute() }}
+                    </td>
+                    <td>
+                        {{ $patron->inumber }}
+                    </td>
+                    <td>
+                        {{ $patron->email }}
+                    </td>
+                    <td>
+                        {{ $patron->getRole() }}
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5">
+
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+    @endif
+    <div class="col-md-12">
 @endsection
+
+@push('styles')
+    <style>
+        table.table tr{cursor:pointer;}
+    </style>
+@endpush
