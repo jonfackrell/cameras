@@ -226,20 +226,25 @@ class AdminController extends Controller
         $newSearch = $request->get('search');
 
         $patrons = Patron::where('first_name', 'like', '%' . $newSearch . '%')
-        ->orWhere('last_name', 'like', '%' . $newSearch . '%')
-        ->orWhere('inumber', 'like', '%' . $newSearch . '%')->get();
+                            ->orWhere('last_name', 'like', '%' . $newSearch . '%')
+                            ->orWhere('inumber', 'like', '%' . $newSearch . '%')
+                            ->orderBy('last_name', 'ASC')
+                            ->get();
 
-        if (sizeof($patrons) == 1) {
-            return redirect()->to( route('equipment.admin.patron.show', $patrons[0]->id) );
+        if ($patrons->count() == 1) {
+            return redirect()->to( route('equipment.admin.patron.show', $patrons->first()->id) );
         }
-        elseif (sizeof($patrons) == 0) {
-            $message = 'No patron found with search: ' . $newSearch;
+        elseif ($patrons->count() < 1) {
+            $message = 'No patrons found with search: ' . $newSearch;
         }
 
         $cameraOut = Equipment::where('group', 'camera')
-        ->where('checked_out_at', '!=', null)->get();
+                                    ->whereNotNull('checked_out_at')
+                                    ->get();
+
         $otherOut = Equipment::where('group', 'other')
-        ->where('checked_out_at', '!=', null)->get();
+                                    ->whereNotNull('checked_out_at')
+                                    ->get();
 
         return view('equipment.admin.index', compact('patrons', 'message', 'cameraOut', 'otherOut'));
     }
