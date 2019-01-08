@@ -13,7 +13,7 @@
 					<div class="media-body">
 						<div class="row">
 							<div class="col-md-8">
-								<h5 class="mt-0">{{ $patron->getFullNameAttribute() }}</h5>
+								<h5 class="mt-0" style="font-weight: bold;">{{ $patron->getFullNameAttribute() }}</h5>
 								<div>
 									{{ $patron->email }}
 								</div>
@@ -24,9 +24,6 @@
 							<div class="col-md-4">
 								@if ($patron->canCheckout('camera', true))
 									<h5>Class/Purpose: {{ $patron->checkout_reason }}</h5>
-								@endif
-								@if (!$patron->canCheckout('camera', true))
-									<a href="{{ route('equipment.admin.patron.authorize', $patron->id) }}" class="btn warning">Authorize</a>
 								@endif
 								@if ($patron->areTermsAgreed())
 									<h5 class="green">{{ $patron->getCheckoutPeriodText() }}</h5>
@@ -64,7 +61,12 @@
 				@endif
 
 				@if (!empty($message))
-					<p class="warning">{{ $message }}</p>
+					<p class="alert alert-danger">{{ $message }}</p>
+				@endif
+			</div>
+			<div class="col-md-12">
+				@if (!$patron->canCheckout('camera', true))
+					<a href="{{ route('equipment.admin.patron.authorize', $patron->id) }}" class="btn warning btn-block">Authorize</a>
 				@endif
 			</div>
 			<div class="col-md-12">

@@ -83,18 +83,19 @@ class EquipmentTypeController extends Controller
         $equipmentType->type = $request->get('type');
         $equipmentType->group = $request->get('group');
         $equipmentType->display_name = $request->get('display_name');
-
-        if ($request->get('duplicable'))
-            $equipmentType->duplicable = $request->get('duplicable');
-        else
-            $equipmentType->duplicable = false;
-
-        if ($request->get('faculty_only'))
-            $equipmentType->faculty_only = $request->get('faculty_only');
-        else
-            $equipmentType->faculty_only = false;
+        $equipmentType->duplicable = $request->get('duplicable', false);
+        $equipmentType->faculty_only = $request->get('faculty_only', false);
+        $equipmentType->description = $request->get('description');
+        $equipmentType->loan_period = $request->get('loan_period', 0);
+        $equipmentType->fine_amount = $request->get('fine_amount', 0);
 
         $equipmentType->save();
+
+        if($request->has('file')){
+            $equipmentType->addAllMediaFromRequest()->each(function ($fileAdder) {
+                $fileAdder->toMediaCollection('equipment-type');
+            });
+        }
 
         return redirect()->to( route('equipment.admin.equipment-type.index') );
     }
