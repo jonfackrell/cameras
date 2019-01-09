@@ -11,7 +11,9 @@ margin: auto;
 .row {
     display: flex;
 }
-
+.clip-wrap img{
+    width: 100%
+}
 
 .column {
     flex: 50%;
