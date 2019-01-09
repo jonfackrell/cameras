@@ -101,7 +101,7 @@ class CheckoutController extends Controller
 
         $equipment->load('equipment_type');
 
-        $due_at = $equipment->calculateDueAt();
+        $due_at = $equipment->calculateDueAt($patron);
 
         $equipmentTypeTripodIds = EquipmentType::where('type', 'tripod')->select('id');
 
