@@ -42,7 +42,7 @@ class LateEquipmentNotification extends Notification
     {
         return (new MailMessage)
                     ->subject('Late Equipment Notice')
-                    ->line('You have equipment from the Mac Lab that is late and needs turned in.')
+                    ->line('You have equipment from the Mac Lab that is late and needs to be returned.')
                     ->line('For a reminder of the equipment you checked out:')
                     ->action('View Equipment Checked Out', route('equipment.patron.profile'))
                     ->line('Please return this equipment to the Mac Lab.');

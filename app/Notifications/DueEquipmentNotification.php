@@ -41,7 +41,7 @@ class DueEquipmentNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Due Equipment Notice')
+                    ->subject('Equipment Due Today')
                     ->line('You have equipment from the Mac Lab that is due today.')
                     ->line('For a reminder of the equipment you checked out:')
                     ->action('View Equipment Checked Out', route('equipment.patron.profile'))

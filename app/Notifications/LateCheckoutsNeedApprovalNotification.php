@@ -13,14 +13,17 @@ class LateCheckoutsNeedApprovalNotification extends Notification
 {
     use Queueable;
 
+    public $checkouts;
+
     /**
      * Create a new notification instance.
      *
+     * @param  mixed  $checkouts
      * @return void
      */
-    public function __construct()
+    public function __construct($checkouts)
     {
-        //
+        $this->checkouts = $checkouts;
     }
 
     /**
@@ -42,17 +45,10 @@ class LateCheckoutsNeedApprovalNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $checkouts = Checkout::where('approved_at', NULL)->get();
-
-        $checkouts = $checkouts->filter(function ($value, $key) {
-            return $value->isLate();
-        });
-
-        $lateCount = count($checkouts);
 
         return (new MailMessage)
-                    ->line('There is/are ' . $lateCount . 'late checkout(s) pendding approval.')
-                    ->action('View Pendding Approval', route('equipment.admin.checkout.approval'));
+                    ->line('There is/are ' . $this->checkouts->count() . ' late checkout(s) pending approval.')
+                    ->action('View Pending Approval(s)', route('equipment.admin.checkout.approval'));
     }
 
     /**
