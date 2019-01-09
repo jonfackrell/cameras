@@ -42,15 +42,14 @@ class CheckForOverDueItems extends Command
      */
     public function handle()
     {
-        $checkouts = Checkout::late()->where('approved_at', NULL)->where('checked_in_at', '!=', NULL)->get();
+        $checkouts = Checkout::whereNotNull('checked_in_at')
+                                ->whereNull('approved_at')
+                                ->whereColumn('due_at', '<', 'checked_in_at')
+                                ->get();
 
-        $checkouts = $checkouts->filter(function ($value, $key) {
-            return $value->isLate();
-        });
-
-        if (sizeof($checkouts) > 0) {
+        if ($checkouts->count() > 0) {
             $users = User::where('send_equipment_notice_email', true)->get();
-            Notification::send($users, new LateCheckoutsNeedApprovalNotification());
+            Notification::send($users, new LateCheckoutsNeedApprovalNotification($checkouts));
         }
     }
 }

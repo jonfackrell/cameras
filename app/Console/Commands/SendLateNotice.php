@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Notification;
 
@@ -42,11 +43,9 @@ class SendLateNotice extends Command
      */
     public function handle()
     {
-        $checkouts = Checkout::late()->where('checked_in_at', NULL)->get();
-
-        $checkouts = $checkouts->filter(function ($value, $key) {
-            return $value->isLate();
-        });
+        $checkouts = Checkout::whereNull('checked_in_at')
+                                ->where('due_at', '<', Carbon::now())
+                                ->get();
 
         $checkoutsByPatron = $checkouts->groupBy('patron_id');
         $patrons = Patron::whereIn('id', $checkoutsByPatron->keys()->all())->get();

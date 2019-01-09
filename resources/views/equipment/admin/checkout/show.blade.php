@@ -1,206 +1,201 @@
 @extends('equipment.layouts.admin')
 
 @section('title')
-	<a href="{{ route('equipment.admin.patron.history', ['patron' => $checkout->patron->id]) }}"
-	   class="col-md-3 btn btn-default pull-right">
-		Patron History
-	</a>
     Checkout Details
 @endsection
 
 @section('content')
+	<div class="clearfix">&nbsp;</div>
 	<div class="col-12">
-		<div class="row">
-			<h4 class="col-3">
-				Patron
-			</h4>
-		
+		<div class="card bg-light mb-3" style="">
+			<div class="card-header" style="line-height: 2.3;">
+				<div class="row">
+					<div class="col-md-9">
+						Patron Information ({{ $checkout->patron->getRole() }})
+					</div>
+					<div class="col-md-3">
+						<a href="{{ route('equipment.admin.patron.history', ['patron' => $checkout->patron->id]) }}"
+						   class="btn btn-default btn-block">
+							History
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-4">
+						<h5 class="card-title">Name</h5>
+						<div class="card-text">
+							{{ $checkout->patron->getFullNameAttribute() }}
+						</div>
+					</div>
+					<div class="col-md-4">
+						<h5 class="card-title">I-Number</h5>
+						<div class="card-text">
+							{{ $checkout->patron->inumber }}
+						</div>
+					</div>
+					<div class="col-md-4">
+						<h5 class="card-title">Email</h5>
+						<div class="card-text">
+							{{ $checkout->patron->email }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-12">
+		<div class="card bg-light mb-3" style="">
+			<div class="card-header" style="line-height: 2.3;">
+				<div class="row">
+					<div class="col-md-9">
+						Equipment
+					</div>
+					<div class="col-md-3">
 
-		</div>
-		<div class="row">
-			<div class="col-md-3">
-				<div class="row">
-					<h5 class="col-12">Name</h5>
-				</div>
-				<div class="row">
-					<div class="col-12">
-						{{ $checkout->patron->getFullNameAttribute() }}
 					</div>
 				</div>
 			</div>
-			<div class="col-md-3">
+			<div class="card-body">
 				<div class="row">
-					<h5 class="col-12">Role</h5>
-				</div>
-				<div class="row">
-					<div class="col-12">
-						{{ $checkout->patron->getRole() }}
+					<div class="col-md-4">
+						<h5 class="card-title">Item</h5>
+						<div class="card-text">
+							{{ $checkout->equipment->item }}
+						</div>
 					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="row">
-					<h5 class="col-12">I-number</h5>
-				</div>
-				<div class="row">
-					<div class="col-12">
-						{{ $checkout->patron->inumber }}
+					<div class="col-md-4">
+						<h5 class="card-title">Barcode</h5>
+						<div class="card-text">
+							{{ $checkout->equipment->barcode }}
+						</div>
 					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="row">
-					<h5 class="col-12">Email</h5>
-				</div>
-				<div class="row">
-					<div class="col-12">
-						{{ $checkout->patron->email }}
+					<div class="col-md-4">
+						<h5 class="card-title">Description</h5>
+						<div class="card-text">
+							{{ $checkout->equipment->description }}
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<div class="row mt-2">
-			<h4 class="col">
-				Equipment
-			</h4>
-		</div>
-		<div class="row">
-			@if (!is_null($checkout->equipment->item))
-			<div class="col-md-3">
+	<div class="col-12">
+		<div class="card bg-light mb-3" style="">
+			<div class="card-header" style="line-height: 2.3;">
 				<div class="row">
-					<h5 class="col-12">Item</h5>
-				</div>
-				<div class="row">
-					<div class="col-12">
-						{{ $checkout->equipment->item }}
+					<div class="col-md-9">
+						Images
 					</div>
-				</div>
-			</div>
-			@endif
-			@if (!is_null($checkout->equipment->barcode))
-			<div class="col-md-3">
-				<div class="row">
-					<h5 class="col-12">Barcode</h5>
-				</div>
-				<div class="row">
-					<div class="col-12">
-						{{ $checkout->equipment->barcode }}
-					</div>
-				</div>
-			</div>
-			@endif
-			<div class="col-md">
-				<div class="row">
-					<h5 class="col-12">Description</h5>
-				</div>
-				<div class="row">
-					<div class="col-12">
-						{{ $checkout->equipment->description }}
-					</div>
-				</div>
-			</div>
-		</div>
+					<div class="col-md-3">
 
-		<div class="row mt-2">
-			<h4 class="col">
-				Checkout
-			</h4>
-		</div><div class="row">
-			<div class="col-md-3">
-				<div class="row">
-					<h5 class="col-12">Out</h5>
-				</div>
-				<div class="row">
-					<div class="col-12">
-						{{ $checkout->checked_out_at->tz('America/Denver')->format('M d Y H:i') }}
 					</div>
 				</div>
 			</div>
-			<div class="col-md-3">
+			<div class="card-body">
 				<div class="row">
-					<h5 class="col-12">Due</h5>
-				</div>
-				<div class="row">
-					<div class="col-12">
-						{{ $checkout->due_at->tz('America/Denver')->format('M d Y H:i') }}
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="row">
-					<h5 class="col-12">In</h5>
-				</div>
-				<div class="row">
-					<div class="col-12">
-						@if ($checkout->checked_in_at == NULL)
-							Still out
-						@else
-							{{ $checkout->checked_in_at->tz('America/Denver')->format('M d Y H:i') }}
-						@endif
-					</div>
+					@foreach($checkout->getMedia('checkouts') as $image)
+						<div class="col-2">
+							<img class="checkout-thumbnail" src="{{ $image->getUrl('thumb') }}" data-full="{{ $image->getUrl() }}" style="height: 80px; width: auto;"/>
+						</div>
+					@endforeach
 				</div>
 			</div>
 		</div>
-		
-		<div class="row mt-2">
-			<div class="col-md-3">
-				<div class="row">
-					<h5 class="col-12">Out By</h5>
-				</div>
-				<div class="row">
-					<div class="col-12">
-						{{ $checkout->who_checked_out->getFullNameAttribute() }}
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="row">
-					<h5 class="col-12">In By</h5>
-				</div>
-				<div class="row">
-					<div class="col-12">
-						@if (!empty($checkout->checked_in_by))
-							{{ $checkout->who_checked_in->getFullNameAttribute() }}
-						@endif
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row mt-2">
-			<div class="col-md-6">
-				<div class="row">
-					<h5 class="col-12">Checkout Note</h5>
-				</div>
-				<div class="row">
-					<div class="col-12">
-						{{ $checkout->checkout_note }}
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="row">
-					<h5 class="col-12">Checkin Note</h5>
-				</div>
-				<div class="row">
-					<div class="col-12">
-						{{ $checkout->checkin_note }}
-					</div>
-				</div>
-			</div>
-		</div>
+	</div>
 
-		<div class="row">
-			<h5 class="col-12">Images</h5>
-		</div>
-		<div class="row">
-			@foreach($checkout->getMedia('checkouts') as $image)
-				<div class="col-2">
-					<img class="checkout-thumbnail" src="{{ $image->getUrl('thumb') }}" data-full="{{ $image->getUrl() }}" style="height: 80px; width: auto;"/>
+	<div class="col-12">
+		<div class="card bg-light mb-3" style="">
+			<div class="card-header" style="line-height: 2.3;">
+				<div class="row">
+					<div class="col-md-9">
+						Checkout Information
+					</div>
+					<div class="col-md-3">
+
+					</div>
 				</div>
-			@endforeach
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-4">
+						<h5 class="card-title">Out</h5>
+						<div class="card-text">
+							{{ $checkout->checked_out_at->tz('America/Denver')->toDayDateTimeString()}}
+						</div>
+					</div>
+					<div class="col-md-4">
+						<h5 class="card-title">Due</h5>
+						<div class="card-text">
+							{{ $checkout->due_at->tz('America/Denver')->toDayDateTimeString() }}
+						</div>
+					</div>
+					<div class="col-md-4">
+						<h5 class="card-title">Checked Out By</h5>
+						<div class="card-text">
+							{{ $checkout->who_checked_out->getFullNameAttribute() }}
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						{!! $checkout->checkout_note !!}
+					</div>
+				</div>
+			</div>
 		</div>
-				
+	</div>
+
+	<div class="col-12">
+		<div class="card bg-light mb-3" style="">
+			<div class="card-header" style="line-height: 2.3;">
+				<div class="row">
+					<div class="col-md-9">
+						Checkin Information
+					</div>
+					<div class="col-md-3">
+
+					</div>
+				</div>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-4">
+						<h5 class="card-title">In</h5>
+						<div class="card-text">
+							@if (is_null($checkout->checked_in_at))
+								Checked Out
+							@else
+								{{ $checkout->checked_in_at->tz('America/Denver')->toDayDateTimeString() }}
+							@endif
+						</div>
+					</div>
+					<div class="col-md-4">
+						<h5 class="card-title">&nbsp;</h5>
+						<div class="card-text">
+							@if (is_null($checkout->checked_in_at) && $checkout->due_at < now())
+								Due {{ str_replace( [' before', ' after'], '', now()->diffForHumans($checkout->due_at)) }} ago
+							@endif
+						</div>
+					</div>
+					<div class="col-md-4">
+						<h5 class="card-title">Checked In By</h5>
+						<div class="card-text">
+							@if (!empty($checkout->checked_in_by))
+								{{ $checkout->who_checked_in->getFullNameAttribute() }}
+							@endif
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						{!! $checkout->checkin_note !!}
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<div class="modal fade" id="enlargeImageModal" tabindex="-1" role="dialog" aria-labelledby="enlargeImageModal" aria-hidden="true">

@@ -42,10 +42,13 @@ class Equipment extends Model implements HasMedia
     public function calculateDueAt()
     {
         if($this->group == 'camera'){
+            // Normal checkout period for cameras is 24 hours
             return now()->addHours(24);
         }else if($this->equipment_type->loan_type == 'CUSTOM'){
+            // Checkout period is determined by the equipment type
             return now()->addHours($this->equipment_type->loan_period);
         }else{
+            // Checkout period is typically only until the end of current day
             return Carbon::tomorrow('America/Denver')->subMinutes(30)->tz('UTC');
         }
     }

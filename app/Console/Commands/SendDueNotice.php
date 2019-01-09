@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class SendDueNotice extends Command
@@ -37,13 +38,12 @@ class SendDueNotice extends Command
      */
     public function handle()
     {
-        $checkouts = Checkout::late()->where('checked_in_at', NULL)->get();
-
-        $checkouts = $checkouts->filter(function ($value, $key) {
-            return $value->isDueToday();
-        });
+        $checkouts = Checkout::whereNull('checked_in_at')
+                                ->whereDate('due_at', Carbon::now()->toDateString())
+                                ->get();
 
         $checkoutsByPatron = $checkouts->groupBy('patron_id');
+
         $patrons = Patron::whereIn('id', $checkoutsByPatron->keys()->all())->get();
 
         Notification::send($patrons, new DueEquipmentNotification());
