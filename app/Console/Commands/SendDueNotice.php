@@ -2,6 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Checkout;
+use App\Models\Patron;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\DueEquipmentNotification;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 

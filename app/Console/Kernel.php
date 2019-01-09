@@ -27,17 +27,20 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('mail:lateNotice')
-                 ->dailyAt('6:00')
-                 ->timezone('America/Denver');
+                    ->dailyAt('06:00')
+                    ->timezone('America/Denver')
+                    ->thenPing('http://beats.envoyer.io/heartbeat/rI4WtTDiUlirfXa');
 
         $schedule->command('mail:dueNotice')
-                 ->dailyAt('6:00')
-                 ->timezone('America/Denver');
+                    ->dailyAt('06:00')
+                    ->timezone('America/Denver')
+                    ->thenPing('http://beats.envoyer.io/heartbeat/9hVl1DP5F2G3NHR');
 
         $schedule->command('checkouts:overdue')
-                 ->weekdays()
-                 ->dailyAt('7:00')
-                 ->timezone('America/Denver');
+                    ->weekdays()
+                    ->dailyAt('07:00')
+                    ->timezone('America/Denver')
+                    ->thenPing('http://beats.envoyer.io/heartbeat/LsJx6s3yrGLPVu0');
 
         $schedule->command('horizon:snapshot')->everyFiveMinutes();
     }
