@@ -9,7 +9,7 @@
 		<div class="row">
 			<div class="col">
 				<div class="media">
-					<img src="https://via.placeholder.com/80" class="mr-3" alt="Photo">
+					<img src="https://web.byui.edu/Directory/Student/{{ explode('@', $patron->email)[0] }}.jpg" class="mr-3" alt="Photo" style="width: 80px; height: 80px;">
 					<div class="media-body">
 						<div class="row">
 							<div class="col-md-8">
@@ -173,6 +173,7 @@
 			</div>
 		</div>
 	</div>
+	<iframe src="https://web.byui.edu/Directory/Support/Login?returnUrl=https%3A%2F%2Fweb.byui.edu%2FDirectory%2FStudent%2F" style="border: none; width: 1px; height: 1px;"></iframe>
 @endsection
 
 @push('styles')
