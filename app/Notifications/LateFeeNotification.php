@@ -11,7 +11,6 @@ class LateFeeNotification extends Notification
 {
     use Queueable;
 
-    private $feeAmount;
     private $checkout;
 
     /**
@@ -19,9 +18,8 @@ class LateFeeNotification extends Notification
      *
      * @return void
      */
-    public function __construct($checkout, $feeAmount)
+    public function __construct($checkout)
     {
-        $this->feeAmount = $feeAmount;
         $this->checkout = $checkout;
     }
 
@@ -44,11 +42,10 @@ class LateFeeNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $fee = $this->feeAmount / 100;
 
         return (new MailMessage)
-                    ->line('You have been given a fee of $' . $fee . '.')
-                    ->line('This fee is because the equipment you checked out was late.');
+                    ->line('You have been charged a fee of $' . intval($this->checkout->fee_amount / 100) . '.00 for returning equipment late to the McKay Library Mac Lab.')
+                    ->line('If you have any questions, please refer to our checkout policy.');
     }
 
     /**
