@@ -96,13 +96,8 @@
         <div class="row">
             <div class="col-lg-2 col-md-3 sidebar">
 
-                <div class="navbar nav_title" style="border: 0;">
-                    <a href="{{ route('equipment.admin') }}" class="site_title"><h3>Equipment</h3></a>
-                </div>
-
-                <div class="clearfix"></div>
-
-                <br />
+                <div class="clearfix">&nbsp;</div>
+                <div class="clearfix">&nbsp;</div>
 
                 @include('equipment.layouts.parts.sidebar')
 

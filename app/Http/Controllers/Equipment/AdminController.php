@@ -205,9 +205,23 @@ class AdminController extends Controller
         $message = '';
 
         $cameraOut = Equipment::where('group', 'camera')
-        ->where('checked_out_at', '!=', null)->get();
+                                    ->whereNotNull('checked_out_at')->count();
+
         $otherOut = Equipment::where('group', 'other')
-        ->where('checked_out_at', '!=', null)->get();
+                                    ->whereNotNull('checked_out_at')->count();
+
+        if(request()->has('equipment_group')){
+
+            $patrons = Patron::whereHas('checkouts', function ($query) {
+                $query->whereNull('checked_in_at');
+
+            })
+            ->whereHas('checkouts.equipment', function ($query) {
+                $query->where('group', request()->get('equipment_group'));
+            })
+            ->get();
+
+        }
 
         return view('equipment.admin.index', compact('patrons', 'message', 'cameraOut', 'otherOut'));
     }
@@ -239,12 +253,10 @@ class AdminController extends Controller
         }
 
         $cameraOut = Equipment::where('group', 'camera')
-                                    ->whereNotNull('checked_out_at')
-                                    ->get();
+                                    ->whereNotNull('checked_out_at')->count();
 
         $otherOut = Equipment::where('group', 'other')
-                                    ->whereNotNull('checked_out_at')
-                                    ->get();
+                                ->whereNotNull('checked_out_at')->count();
 
         return view('equipment.admin.index', compact('patrons', 'message', 'cameraOut', 'otherOut'));
     }

@@ -9,7 +9,12 @@
 		<div class="row">
 			<div class="col">
 				<div class="media">
-					<img src="https://web.byui.edu/Directory/Student/{{ explode('@', $patron->email)[0] }}.jpg" class="mr-3" alt="Photo" style="width: 80px; height: 80px;">
+					@if(in_array('Employee', $patron->roles))
+						<img src="https://web.byui.edu/Directory/Employee/{{ explode('@', $patron->email)[0] }}.jpg" class="mr-3" alt="Photo" style="width: 80px; height: auto;">
+					@else
+						<img src="https://web.byui.edu/Directory/Student/{{ explode('@', $patron->email)[0] }}.jpg" class="mr-3" alt="Photo" style="width: 80px; height: auto;">
+					@endif
+
 					<div class="media-body">
 						<div class="row">
 							<div class="col-md-8">
