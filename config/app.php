@@ -160,6 +160,10 @@ return [
 
         ConsoleTVs\Charts\ChartsServiceProvider::class,
 
+        /*
+         * Custom Service Providers...
+         */
+        App\Providers\CollectionExtensions::class,
 
         /*
          * Application Service Providers...

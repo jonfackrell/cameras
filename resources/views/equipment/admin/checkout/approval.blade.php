@@ -6,75 +6,107 @@
 
 @section('content')
 	<div class="col-12">
-		<div class="list-group mt-2"> 
-			<div class="row list-group-item header">
-				<div class="col">
-					<h3>Patron</h3>
-				</div>
-				<div class="col">
-					<h3>Equipment</h3>
-				</div>
-				<div class="col">
-					<h3>Late By</h3>
-				</div>
-				<div class="col-4"></div>
-			</div>
-			{!! BootForm::open()->post()->action(route('equipment.admin.checkout.approval')) !!}
-			
 
+		{!! BootForm::open()->post()->action(route('equipment.admin.checkout.approval')) !!}
 
-			@foreach ($checkouts->groupBy('equipment.group') as $key => $groups)
+			<table class="table">
+				<thead>
+				<tr>
+					<th scope="col">Patron</th>
+					<th scope="col">Equipment</th>
+					<th scope="col">Late By</th>
+					<th scope="col" style="width: 175px;">Fee</th>
+					<th scope="col">Action</th>
+				</tr>
+				</thead>
+				<tbody>
+					@foreach ($checkouts->groupBy('equipment.group') as $key => $groups)
 
+						<tr class="table-dark">
+							<td colspan="5" style="font-weight: bold;">
+								{{ strtoupper($key) }}
+							</td>
+						</tr>
 
-				<div class="row list-group-item"><h4 class="col-12">{{ strtoupper($key) }}</h4></div>
-				
-				@foreach($groups as $checkout)
+						@foreach($groups as $checkout)
 
-				<div class="row list-group-item link">
-					<a class="col-8" href="{{ route('equipment.admin.checkout.show', ['checkout' => $checkout->id]) }}"><div class="row">
-						<div class="col">
-							{{ $checkout->patron->getFullNameAttribute() }}
-						</div>
-						<div class="col">
-							{{ $checkout->equipment->getDisplayName() }}
-						</div>						
-						<div class="col late">
-							{{ str_replace(' after', '', $checkout->checked_in_at->diffForHumans($checkout->due_at)) }}
-						</div>
-					</div></a>
+							<tr style="line-height: 2.5;">
+								<td>
+									{{ $checkout->patron->getFullNameAttribute() }}
+									{!! BootForm::hidden("checkouts[]")->value($checkout->id) !!}
+								</td>
+								<td>
+									{{ $checkout->equipment->getDisplayName() }}
+								</td>
+								<td>
+									{{ str_replace(' after', '', $checkout->checked_in_at->diffForHumans($checkout->due_at)) }}
+								</td>
+								<td>
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text">$</span>
+										</div>
+										<input type="text" name="fees[]" id="fees[]" value="{{ $checkout->calculateLateFee() }}" class="form-control">
+										<div class="input-group-append">
+											<span class="input-group-text">.00</span>
+										</div>
+									</div>
+								</td>
+								<td>
+									{!! BootForm::select("Action", "actions[]")
+													->options([
+														'notify' => 'Notify',
+														'remove' => 'Remove',
+														'pending' => 'Pending',
+													])
+													->select('notify')->hideLabel();
+									!!}
+								</td>
+							</tr>
 
-					<div class="col-1" style="text-align: right;">$</div>
-					<div class="col-2">
-						{!! BootForm::text("", "feeAmounts[]")->value($feeAmount )->hideLabel()->disable() !!}
-					</div>
-					<div class="col-1">
-						{!! BootForm::checkbox("", "checkouts[]")->value($checkout->id ) !!}
-					</div>
-				</div>
+						@endforeach
 
-			
-				@endforeach
-			@endforeach
-	
+					@endforeach
+				</tbody>
+				<tfoot>
+				<tr>
+					<td colspan="5">
+
+					</td>
+				</tr>
+				</tfoot>
+			</table>
 
 			<div class="row mt-2 justify-content-end"> {!! BootForm::submit('Approve') !!} </div>
+
 		{!! BootForm::close() !!}
-		</div>
+
 	</div>
 @endsection
 
 @push('footer-scripts')
 <script type="text/javascript">
-	$('input:checkbox').change(function() {
-		var parent = $(this).parents('.list-group-item');
-		var cousin = parent.find('input:text')
-		if (this.checked) {
-			cousin.prop( 'disabled', false );
-		}
-		else {
-			cousin.prop( 'disabled', true );
-		}
+	$(function () {
+
+		$('input:checkbox').change(function() {
+			var parent = $(this).parents('.list-group-item');
+			var cousin = parent.find('input:text')
+			if (this.checked) {
+				cousin.prop( 'disabled', false );
+			}
+			else {
+				cousin.prop( 'disabled', true );
+			}
+		});
+
+		$(document).on('click', 'button[type="submit"]', function(){
+			$(this).prop('disabled', true);
+			$(this).closest('form').submit();
+		});
 	});
+
+
+
 	
 </script>
 @endpush

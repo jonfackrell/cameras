@@ -30,7 +30,9 @@ class Equipment extends Model implements HasMedia
     	if (empty($this->item) || $this->item == 'NULL') {
     		if (!empty($this->description)) {
     			$displayName = $this->description;
-    		}
+    		}else{
+    		    $displayName = $this->equipment_type->display_name;
+            }
     	}
     	else {
     		$displayName = $this->item;

@@ -376,11 +376,11 @@ class CheckoutController extends Controller
      */
     public function approvalForm()
     {
-        $checkouts = Checkout::wasLate()->where('approved_at', NULL)->get();
+        $checkouts = Checkout::wasLate()
+                                ->whereNull('approved_at')
+                                ->get();
 
-        $feeAmount = 10;
-
-        return view('equipment.admin.checkout.approval', compact('checkouts', 'feeAmount'));
+        return view('equipment.admin.checkout.approval', compact('checkouts'));
     }
 
     /**
@@ -391,31 +391,43 @@ class CheckoutController extends Controller
      */
     public function approval(Request $request)
     {
-        $feeAmounts = $request->get('feeAmounts', []);
-        //$checkouts = Checkout::whereIn('id', $request->get('checkouts', []));
-        $checkouts = $request->get('checkouts', []);
+        $requestData = collect($request->only('checkouts', 'fees', 'actions'));
 
-        for ($i = 0; $i < sizeof($feeAmounts); $i++) {
-            $feeAmount = intval($feeAmounts[$i]) * 100;
-            $checkout = Checkout::where('id', $checkouts[$i])->first();
+        $approvals = $requestData->transpose()->map(function ($approvalData) {
+            return [
+                'id' => $approvalData[0],
+                'fee' => $approvalData[1],
+                'action' => $approvalData[2],
+            ];
+        });
 
-            $checkout->approved_at = Carbon::now();
-            
+        foreach ($approvals as $key => $approval){
 
-            if ($feeAmount > 0) {
-                $checkout->fee_amount = $feeAmount;
+            $checkout = Checkout::where('id', $approval['id'])->first();
 
-                $patron = Patron::where('id', $checkout->patron_id)->first();
-                $patron->notify(new LateFeeNotification($checkout, $feeAmount));
+            switch($approval['action']){
+
+                case 'remove':
+
+                    $checkout->approved_at = Carbon::now();
+                    $checkout->save();
+
+                    break;
+
+                case 'notify':
+
+                    $checkout->approved_at = Carbon::now();
+                    $checkout->fee_amount = (intval($approval['fee'])*100);
+                    $checkout->save();
+
+                    $patron = Patron::where('id', $checkout->patron_id)->first();
+                    $patron->notify(new LateFeeNotification($checkout));
+
+                    break;
+
             }
-            else {
-                $checkout->fee_amount = NULL;
-            }
 
-            $checkout->save();
         }
-        
-        //$checkouts->update(['approved_at' => Carbon::now()]);
 
         return redirect()->to( route('equipment.admin.checkout.approval') );
     }
