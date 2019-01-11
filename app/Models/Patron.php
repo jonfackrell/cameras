@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\EquipmentNotification;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -84,6 +85,10 @@ class Patron extends Authenticatable
 
     public function checkouts() {
         return $this->hasMany('App\Models\Checkout');
+    }
+
+    public function emails() {
+        return $this->belongsTo(EquipmentNotification::class);
     }
 
     public function canCheckout($equipmentGroup, $skipTerms = false) {

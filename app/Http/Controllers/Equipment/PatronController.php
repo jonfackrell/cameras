@@ -7,6 +7,7 @@ use App\Models\Equipment;
 use App\Models\EquipmentType;
 use App\Models\Checkout;
 use App\Models\Date;
+use App\Notifications\LinkToTermsConditions;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -118,6 +119,10 @@ class PatronController extends Controller
             $patron->checkout_reason = $checkout_reason;
             $patron->cameras_access_end_at = Date::first()->end_at;
             $patron->save();
+        }
+
+        if($request->has('send_terms_email')){
+            $patron->notify(new LinkToTermsConditions());
         }
 
         return redirect()->to( route('equipment.admin.patron.show', $patron->id) );

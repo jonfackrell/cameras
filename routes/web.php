@@ -12,7 +12,7 @@
 */
 
 /** Publicly Available Routes **/
-Route::view('/', 'home');
+Route::view('/', 'home')->name('maclab.home');
 Route::view('/policies', 'policies')->name('maclab-policies');
 Route::view('/contacts', 'contacts')->name('maclab-contacts');
 
@@ -115,13 +115,15 @@ Route::middleware(['mail'])->group(function () {
 
     Route::prefix('equipment')->name('equipment.')->namespace('Equipment')->group(function () {
 
-        Route::view('/', 'equipment.index')->name('home');
-
         Route::group(['middleware' => ['cas.auth', 'patron.auth']], function() {
+            Route::get('/', 'PublicController@index')->name('home');
+
+
             Route::get('/terms', 'PatronController@terms')->name('patron.terms');
             Route::post('/terms', 'PatronController@updateTerms')->name('patron.terms');
             Route::get('/profile', 'PatronController@profile')->name('patron.profile');
             Route::post('/autorize', 'PatronController@selfAuthorizeCameras')->name('patron.authorize');
+            Route::get('/type/{equipmentType}', 'PublicController@show')->name('show');
         });
 
         Route::group(['middleware' => ['auth']], function() {
@@ -162,6 +164,7 @@ Route::middleware(['mail'])->group(function () {
             Route::get('/admin/checkout/edit/{checkout}', 'CheckoutController@edit')->name('admin.checkout.edit');
             Route::post('/admin/checkout/edit/{checkout}', 'CheckoutController@update')->name('admin.checkout.edit');
             Route::get('/admin/checkout/{checkout}', 'CheckoutController@show')->name('admin.checkout.show');
+            Route::get('/admin/checkout/email/{email}', 'CheckoutController@showEmail')->name('admin.checkout.email.show');
 
 
         });

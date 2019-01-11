@@ -198,6 +198,45 @@
 		</div>
 	</div>
 
+	@if($checkout->emails->count() > 0)
+		<div class="col-12">
+			<table class="table">
+				<thead>
+				<tr>
+					<th scope="col">Subject</th>
+					<th scope="col">Email</th>
+					<th scope="col">Sent</th>
+				</tr>
+				</thead>
+				<tbody>
+				@foreach ($checkout->emails as $message)
+					<tr>
+						<td>
+							<a href="{{ route('equipment.admin.checkout.email.show', ['email' => $message]) }}" target="_blank">
+								{{ $message->subject }}
+							</a>
+						</td>
+						<td>
+							{{ $message->email }}
+						</td>
+						<td>
+							{{ $message->created_at->tz('America/Denver')->toDayDateTimeString() }}
+						</td>
+					</tr>
+				@endforeach
+				</tbody>
+				<tfoot>
+				<tr>
+					<td colspan="5">
+
+					</td>
+				</tr>
+				</tfoot>
+			</table>
+		</div>
+	@endif
+
+
 	<div class="modal fade" id="enlargeImageModal" tabindex="-1" role="dialog" aria-labelledby="enlargeImageModal" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">

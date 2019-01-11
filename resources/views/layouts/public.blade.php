@@ -46,7 +46,7 @@
 
     <!-- Custom Website Style -->
     <link rel="stylesheet" href="https://library.byui.edu/assets/css/main.css?id=7723330db7716c52a0d2">
-    <link rel='stylesheet' href='{{ asset("/css/macLab.css") }}'>
+    {{--<link rel='stylesheet' href='{{ asset("/css/macLab.css") }}'>--}}
 
     <style>
         a.btn.btn-light { background-color: inherit; border: inherit; }
@@ -122,7 +122,8 @@
     </div>
 </div>
 <div class="clearfix">&nbsp;</div>
-<div class="container-fluid" id="ml-header">
+
+{{--<div class="container-fluid" id="ml-header">
     <div class="container">
         <a href="/" class="row justify-content-center">
             <span class="col-lg-5 col-md-7 col-sm-9 col-10">  
@@ -133,7 +134,7 @@
             </span>
         </a>
     </div>
-</div>
+</div>--}}
 
 @yield('nav')
 

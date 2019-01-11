@@ -83,6 +83,14 @@
 				sideBySide: true,
 				debug: true
 			});
+
+			$(document).on('click', 'button[type="submit"]', function(){
+				$(this).prop('disabled', true);
+				$(this).closest('form').submit();
+			});
+
+
 		});
 	</script>
 @endpush
+

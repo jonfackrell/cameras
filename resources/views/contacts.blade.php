@@ -5,6 +5,8 @@
 @endsection
 
 @section('breadcrumbs')
+    <a href="{{ route('maclab.home') }}">MAC LAB</a>
+    /
     <span> CONTACT US</span>
 @endsection
 
@@ -17,7 +19,7 @@
             <div class="clearfix">&nbsp;</div> 
             <div class="row">
                 <p class="col-12">
-                    <a href='mailto:mckaymaclab@byui.edu'>mckaymaclab@byui.edu</a>
+                    <a href="mailto:&#109;&#099;&#107;&#097;&#121;&#109;&#097;&#099;&#108;&#097;&#098;&#064;&#098;&#121;&#117;&#105;&#046;&#101;&#100;&#117;">&#109;&#099;&#107;&#097;&#121;&#109;&#097;&#099;&#108;&#097;&#098;&#064;&#098;&#121;&#117;&#105;&#046;&#101;&#100;&#117;</a>
                 </p>
             </div>
         </div>
@@ -26,7 +28,7 @@
             <div class="clearfix">&nbsp;</div> 
             <div class="row">
                 <p class="col-12">
-                    208.496.9550
+                    (208) 496-9550
                 </p>
             </div>
         </div>
@@ -37,13 +39,6 @@
                 <p class="col-12">
                     MCK 140A
                 </p>
-            </div>
-        </div>
-        <div class="col-md col-sm-6 contact">
-            <i class="fab fa-instagram fa-3x green"></i>
-            <div class="clearfix">&nbsp;</div> 
-            <div class="row">
-                <a href="https://www.instagram.com/byui.maclab" class="col-12">Follow Us</a>
             </div>
         </div>
         <div id="hours-container" class="col-md col-sm-6 contact">

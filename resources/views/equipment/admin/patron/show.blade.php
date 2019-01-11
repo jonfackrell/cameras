@@ -41,7 +41,15 @@
 				</div>
 			</div>
 		</div>
-		<div class="clearfix">&nbsp;</div>
+
+		<div class="row" style="margin-top: 12px; margin-bottom: 12px;">
+			<div class="col-md-12">
+				@if (!$patron->canCheckout('camera', true))
+					<a href="{{ route('equipment.admin.patron.authorize', $patron->id) }}" class="btn warning btn-block">Authorize</a>
+				@endif
+			</div>
+		</div>
+
 		<div class="row">
 			<div class="col-md-12">
 				@if ($patron->areTermsAgreed())
@@ -104,11 +112,7 @@
 					<p class="alert alert-danger">{{ $message }}</p>
 				@endif
 			</div>
-			<div class="col-md-12">
-				@if (!$patron->canCheckout('camera', true))
-					<a href="{{ route('equipment.admin.patron.authorize', $patron->id) }}" class="btn warning btn-block">Authorize</a>
-				@endif
-			</div>
+
 			<div class="col-md-12">
 
 				@if(isset($checkouts) && $checkouts->count() > 0)

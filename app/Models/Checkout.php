@@ -42,6 +42,10 @@ class Checkout extends Model implements HasMedia
         return $this->belongsTo('App\Models\User', 'checked_in_by');
     }
 
+    public function emails() {
+        return $this->hasMany(EquipmentNotification::class);
+    }
+
     public function isLate() {
         $late = false;
 

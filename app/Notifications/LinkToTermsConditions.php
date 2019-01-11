@@ -7,20 +7,18 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class LateFeeNotification extends Notification
+class LinkToTermsConditions extends Notification
 {
     use Queueable;
-
-    public $checkout;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($checkout)
+    public function __construct()
     {
-        $this->checkout = $checkout;
+        //
     }
 
     /**
@@ -42,10 +40,11 @@ class LateFeeNotification extends Notification
      */
     public function toMail($notifiable)
     {
-
         return (new MailMessage)
-                    ->line('You have been charged a fee of $' . intval($this->checkout->fee_amount / 100) . '.00 for returning equipment late to the McKay Library Mac Lab.')
-                    ->line('If you have any questions, please refer to our checkout policy.');
+                    ->subject('Link to Mac Lab Terms & Conditions')
+                    ->line('Before you can checkout equipment from the Mac Lab, you must accept the Terms & Conditions.')
+                    ->action('Accept Terms & Conditions Now', route('equipment.patron.terms'))
+                    ->line('Thank you for using the MacKay Mac Lab!');
     }
 
     /**

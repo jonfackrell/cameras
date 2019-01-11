@@ -21,6 +21,8 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\UpdateFilament',
         ],'App\Events\PrintJobCreated' => [
             'App\Listeners\PrintJob@created',
+        ],'Illuminate\Notifications\Events\NotificationSent' => [
+            'App\Listeners\LogLateFeeEmailSentNotification',
         ],
     ];
 

@@ -63,12 +63,6 @@
                         </h2>
                     </section>
                     <div class="social-media-icons" style="margin-bottom: 14px;">
-                        <a href="https://www.instagram.com/byui.maclab">
-                            <i class="fab fa-instagram"></i>
-                            <span class="sr-only">Follow the Mac Lab on Instagram</span>
-                        </a>
-
-
                         <a href="https://www.facebook.com/mckaylibrary">
                             <i class="fab fa-facebook-f"></i>
                             <span class="sr-only">Follow the McKay Library on Facebook</span>
