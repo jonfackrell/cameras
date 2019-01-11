@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Equipment;
 
+use App\Models\EquipmentNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 use Carbon\Carbon;
@@ -430,5 +431,10 @@ class CheckoutController extends Controller
         }
 
         return redirect()->to( route('equipment.admin.checkout.approval') );
+    }
+
+    public function showEmail(EquipmentNotification $email)
+    {
+        return $email->body;
     }
 }

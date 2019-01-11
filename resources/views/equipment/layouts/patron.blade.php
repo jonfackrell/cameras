@@ -77,18 +77,26 @@
 
 
 <div class="clearfix">&nbsp;</div>
-<div class="container-fluid" id="ml-header">
-    <div class="container">
-        <a href="/" class="row justify-content-center">
-            <span class="col-lg-5 col-md-7 col-sm-9 col-10">  
-                <span class="row justify-content-center">
-                <span class="col-12">
-                    <img class="img-fluid" src="{{ asset('/img/ml-logo.png') }}" alt="Mac Lab: MCK 140A">
-                </span></span>
-            </span>
-        </a>
+
+<div class="container breadcrumbs">
+    <div class="row">
+        <div class="col-md-6">
+            <a href="/">HOME</a> / @yield('breadcrumbs')
+        </div>
+        <div class="col-md-6">
+            <form id="website-search-form">
+                <div class="row">
+                    <div class="col-md-9">
+                        <input type="text" name="q" id="search-input" class="form-control" aria-label="" placeholder="Search the website...">
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-default btn-block">SEARCH</button>
+                    </div>
+                </div>
+            </form>            </div>
     </div>
 </div>
+<div class="clearfix">&nbsp;</div>
 
 @yield('nav')
 

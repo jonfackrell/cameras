@@ -78,19 +78,50 @@
             <img class="img-fluid" src="{{ asset('/img/what-we-do-info.png') }}" alt="What We Do Inforgraphic" style="max-height: 375px; width: auto;"></a>
         </div>
     </div>
+
     <div class="clearfix">&nbsp;</div>
 
-    <!--<h2>OPEN COMPUTER LAB</h2>-->
-    <p>The purpose of David O. McKay Library Mac Lab is to provide students with a creative space to help them in their academic pursuits by providing access to software, hardware, and trained lab assistants. The Mac Lab provides access to several programs, both commercial and free, that facilitate the creation of digital media, 3D models, and software applications. Some of which are included below. This list is constantly changing to adapt to faculty requirements.</p>
-    <ul>
-        <li><h4>Adobe Creative Cloud Applications:</h4>Illustrator, Photoshop, InDesign, Premiere Pro, Acrobat, XD, and many others.</li>
-        <li><h4>3D Printing:</h4>Cura, Maya, Inventor</li>
-        <li><h4>Microsoft Office:</h4>Word, PowerPoint, Excel</li>
-        <li><h4>Software Development:</h4>XCode, BBEdit, RStudio, NetBeans, Cyberduck</li>
-    </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <h2 style="border-bottom: 2px solid #A5216F; font-size: 20px; font-family: 'Oswald', sans-serif; letter-spacing: 1.5px;">
+                SOFTWARE &nbsp;&nbsp;&nbsp;<small>(This list is constantly changing to adapt to faculty requirements.)</small>
+            </h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Adobe Creative Cloud Applications</h4>
+            <p>
+                Illustrator, Photoshop, InDesign, Premiere Pro, Acrobat, XD, and more
+                <br />
+                <br />
+            </p>
+            <h4>Microsoft Office</h4>
+            <p>
+                Word, PowerPoint, Excel
+            </p>
+        </div>
+        <div class="col-md-6">
+            <h4>3D Printing</h4>
+            <p>
+                Cura, Maya, Inventor
+                <br />
+                <br />
+            </p>
+            <h4>Software Development</h4>
+            <p>
+                XCode, BBEdit, RStudio, NetBeans, Cyberduck
+            </p>
+        </div>
+    </div>
          
     
 @endsection
+
+@push('styles')
+    <link rel='stylesheet' href='{{ asset("/css/macLab.css") }}'>
+@endpush
 
 
 

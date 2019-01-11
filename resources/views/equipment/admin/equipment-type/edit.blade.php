@@ -7,7 +7,7 @@
 @section('content')
 	<div class="col-lg-12 mt-2 mb-2">
 		
-		{!! BootForm::open()->post()->action(route('equipment.admin.equipment-type.edit', ['equipmentType' => $equipmentType->id])) !!}
+		{!! BootForm::open()->post()->action(route('equipment.admin.equipment-type.edit', ['equipmentType' => $equipmentType->id]))->enctype("multipart/form-data") !!}
 		<div class="row"> 
 			
 			<div class="col-3"> 

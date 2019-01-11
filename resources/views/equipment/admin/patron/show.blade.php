@@ -9,7 +9,12 @@
 		<div class="row">
 			<div class="col">
 				<div class="media">
-					<img src="https://web.byui.edu/Directory/Student/{{ explode('@', $patron->email)[0] }}.jpg" class="mr-3" alt="Photo" style="width: 80px; height: 80px;">
+					@if(in_array('Employee', $patron->roles))
+						<img src="https://web.byui.edu/Directory/Employee/{{ explode('@', $patron->email)[0] }}.jpg" class="mr-3" alt="Photo" style="width: 80px; height: auto;">
+					@else
+						<img src="https://web.byui.edu/Directory/Student/{{ explode('@', $patron->email)[0] }}.jpg" class="mr-3" alt="Photo" style="width: 80px; height: auto;">
+					@endif
+
 					<div class="media-body">
 						<div class="row">
 							<div class="col-md-8">
@@ -36,7 +41,15 @@
 				</div>
 			</div>
 		</div>
-		<div class="clearfix">&nbsp;</div>
+
+		<div class="row" style="margin-top: 12px; margin-bottom: 12px;">
+			<div class="col-md-12">
+				@if (!$patron->canCheckout('camera', true))
+					<a href="{{ route('equipment.admin.patron.authorize', $patron->id) }}" class="btn warning btn-block">Authorize</a>
+				@endif
+			</div>
+		</div>
+
 		<div class="row">
 			<div class="col-md-12">
 				@if ($patron->areTermsAgreed())
@@ -99,11 +112,7 @@
 					<p class="alert alert-danger">{{ $message }}</p>
 				@endif
 			</div>
-			<div class="col-md-12">
-				@if (!$patron->canCheckout('camera', true))
-					<a href="{{ route('equipment.admin.patron.authorize', $patron->id) }}" class="btn warning btn-block">Authorize</a>
-				@endif
-			</div>
+
 			<div class="col-md-12">
 
 				@if(isset($checkouts) && $checkouts->count() > 0)

@@ -4,19 +4,41 @@
     Terms and Conditions
 @endsection
 
+@section('breadcrumbs')
+	<a href="{{ route('maclab.home') }}">MAC LAB</a>
+	/
+	<a href="{{ route('equipment.home') }}">EQUIPMENT</a>
+	/
+	<span> TERMS & CONDITIONS</span>
+@endsection
+
 @section('content')
-	<div class="row"><h2 class="col-12">Welcome <a href="{{ route('equipment.patron.profile') }}" style="font-family: inherit;">{{ $patron->getFullNameAttribute() }}</a></h2></div>
+
 	<div class="clear-fix">&nbsp;</div>
-	
-	<h3>Terms and Conditions</h3>
+
+	<div class="row">
+		<div class="col-md-12">
+			<h2 style="border-bottom: 2px solid #A5216F; font-size: 20px; font-family: 'Oswald', sans-serif; letter-spacing: 1.5px;">
+				TERMS & CONDITIONS
+			</h2>
+		</div>
+	</div>
+	<div class="clearfix">&nbsp;</div>
 
 	@if (!auth()->guard('patrons')->user()->areTermsAgreed())
-		<p>Please read and agree to all of the following terms and conditions. Terms and conditions apply to all renters (students and employees). This agreement will be valid until {{ $date->tz('America/Denver')->format('M d Y') }}. </p>
+		<p>Please read and agree to all of the following terms and conditions. Terms and conditions apply to all patrons (students and employees). This agreement will be valid until <strong>{{ $date->tz('America/Denver')->format('M d Y') }}</strong>. </p>
 	@else
-		<p>This agreement will need to be renewed after {{ $date->tz('America/Denver')->format('M d Y') }}. </p>
+		<p>This agreement will need to be renewed after <strong>{{ $date->tz('America/Denver')->format('M d Y') }}</strong>. </p>
 	@endif
 
-	<h4>Camera Equipment</h4>
+	<div class="clearfix">&nbsp;</div>
+	<div class="row">
+		<div class="col-md-12">
+			<h2 style="font-size: 18px; font-family: 'Oswald', sans-serif; letter-spacing: 1.5px;">
+				CAMERA EQUIPMENT
+			</h2>
+		</div>
+	</div>
 
 	<ul class="bullets">
 		<li>Equipment is for academic use only.</li>
@@ -28,7 +50,14 @@
 		<li>A fee of $10 per day will be charged to your acount for any late items.</li>
 	</ul>
 
-	<h4>Other Equipment</h4>
+	<div class="clearfix">&nbsp;</div>
+	<div class="row">
+		<div class="col-md-12">
+			<h2 style="font-size: 18px; font-family: 'Oswald', sans-serif; letter-spacing: 1.5px;">
+				OTHER EQUIPMENT
+			</h2>
+		</div>
+	</div>
 
 	<ul class="bullets">
 		<li>The equipment must stay in the Library at all times.</li> 

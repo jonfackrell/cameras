@@ -32,6 +32,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::model('checkout', \App\Models\Checkout::class);
         Route::model('equipment', \App\Models\Equipment::class);
         Route::model('equipmentType', \App\Models\EquipmentType::class);
+        Route::model('email', \App\Models\EquipmentNotification::class);
     }
 
     /**
