@@ -64,7 +64,7 @@
                                 <a href="#" class="a-link-normal">
                                     <span class="zg-text-center-align">
                                         <div class="a-section a-spacing-small">
-                                            <img alt="" src="{{ ((count($equipment->getMedia('equipment-type')) > 0)?$equipment->getMedia('equipment-type')[0]->getUrl('thumb'):'') }}">
+                                            <img alt="" src="{{ ((count($equipment->getMedia('equipment-type')) > 0)?$equipment->getMedia('equipment-type')[0]->getUrl('thumb'):'') }}" style="max-height: 200px;">
                                         </div>
                                     </span>
                                     <div aria-hidden="true" data-rows="" title="{{ $equipment->display_name }}" class="p13n-sc-truncated">
