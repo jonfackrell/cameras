@@ -64,7 +64,7 @@
                                 <a href="#" class="a-link-normal">
                                     <span class="zg-text-center-align">
                                         <div class="a-section a-spacing-small">
-                                            <img alt="" src="{{ ((count($equipment->getMedia('equipment-type')) > 0)?$equipment->getMedia('equipment-type')[0]->getUrl('thumb'):'') }}" height="200" width="150">
+                                            <img alt="" src="{{ ((count($equipment->getMedia('equipment-type')) > 0)?$equipment->getMedia('equipment-type')[0]->getUrl('thumb'):'') }}">
                                         </div>
                                     </span>
                                     <div aria-hidden="true" data-rows="" title="{{ $equipment->display_name }}" class="p13n-sc-truncated">
@@ -186,6 +186,8 @@
         .zg-item {
             padding: 15px 15px 22px 15px;
             width: 278px;
+            height: 250px;
+            position: relative;
         }
         #books a{
             text-transform: capitalize;
@@ -202,6 +204,8 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            position: absolute;
+            bottom: 0px;
         }
         .zg-badge-body.zg-badge-color {
             background-color: #525252;
