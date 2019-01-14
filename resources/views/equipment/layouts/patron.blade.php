@@ -52,10 +52,11 @@
         a.btn.btn-light { background-color: inherit; border: inherit; }
         #ml-header { background-color: #ebebeb; }
         img.nav-icon { position: relative; z-index: 10; }
+        div.clip-wrap div.clip-each.border-style-thin { background-color: #00A6DC !important; }
         .clip-each.border-style-thin:hover { background-color: #00A6DC; }
         img#chat-image { width: initial; }
         .green { color: #a9d04c; }
-        div#button-container { background-color: transparent; }
+        /*div#button-container { background-color: transparent; }*/
         /*.infographic { border: #525252 solid; }*/
     </style>
 

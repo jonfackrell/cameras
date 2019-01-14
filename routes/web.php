@@ -15,6 +15,7 @@
 Route::view('/', 'home')->name('maclab.home');
 Route::view('/policies', 'policies')->name('maclab-policies');
 Route::view('/contacts', 'contacts')->name('maclab-contacts');
+Route::view('/one-on-one-help', 'one-on-one-help')->name('one-on-one-help');
 
 Route::group(['middleware' => ['mail']], function() {
     Auth::routes();
