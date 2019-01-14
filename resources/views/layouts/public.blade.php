@@ -52,11 +52,15 @@
         a.btn.btn-light { background-color: inherit; border: inherit; }
         #ml-header { background-color: #ebebeb; }
         img.nav-icon { position: relative; z-index: 10; }
-        .clip-each.border-style-thin:hover { background-color: #00A6DC; }
+        .border-style-thin { background-color: #00A6DC !important; }
+        /*.clip-each.border-style-thin:hover { background-color: #00A6DC; }*/
         img#chat-image { width: initial; }
         .green { color: #a9d04c; }
-        div#button-container { background-color: transparent; }
+        /*div#button-container { background-color: transparent; }*/
         /*.infographic { border: #525252 solid; }*/
+        a.btn.btn-light[id^="button-link-"]:hover .border-style-thin {
+            background-color: #A5216F !important;
+        }
     </style>
 
     @stack('styles')
@@ -106,7 +110,7 @@
 <div class="container breadcrumbs">
     <div class="row">
         <div class="col-md-6">
-            <a href="/">HOME</a> / @yield('breadcrumbs')
+            <a href="http://library.byui.edu">HOME</a> / @yield('breadcrumbs')
         </div>
         <div class="col-md-6">
             <form id="website-search-form">

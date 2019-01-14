@@ -17,13 +17,29 @@
 
 
     <div class="row">
-        <div class="col-md-3">
-            <image class="thumbnail" src="{{ $equipmentType->getMedia('equipment-type')[0]->getUrl() }}" alt=""/>
-        </div>
-        <div class="col-md-9">
-            <h2>{{ $equipmentType->display_name }}</h2>
+        <div class="col-md-12">
+            <div class="media">
+                <img src="{{ $equipmentType->getMedia('equipment-type')[0]->getUrl() }}" alt="" style="height: 150px; width: 150px;" class="mr-3">
+                <div class="media-body">
+                    <h2 class="mt-0">{{ $equipmentType->display_name }}</h2>
+                     <div class="row">
+                         <div class="col-md-6">
+                             Checkout Period:
+                             @if($equipmentType->loan_type == 'CAMERA')
+                                {{ ((!is_null(auth()->guard('patrons')->user()->checkout_period))?'24 Hours':auth()->guard('patrons')->user()->checkout_period) }}
+                             @elseif($equipmentType->loan_type == 'CUSTOM')
+                                {{ $equipmentType->loan_period }} Hours
+                             @elseif($equipmentType->loan_type == 'DAILY')
+                                Due same day before closing
+                             @endif
+                         </div>
+                     </div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <div class="clearfix">&nbsp;</div>
 
     <div class="row">
         <div class="col-md-12">
@@ -64,6 +80,8 @@
         </div>
     </div>
 
+
+
     <div class="row">
         <div class="col-md-12">
             <h2 style="border-bottom: 2px solid #A5216F; font-size: 20px; font-family: 'Oswald', sans-serif; letter-spacing: 1.5px;">
@@ -72,7 +90,13 @@
         </div>
     </div>
 
-    {!! $equipmentType->description !!}
+    <div class="row">
+        <div class="col-md-12">
+            {!! $equipmentType->description !!}
+        </div>
+    </div>
+
+
     
 
 @endsection

@@ -5,6 +5,8 @@
 @endsection
 
 @section('breadcrumbs')
+    <a href="{{ route('maclab.home') }}">MAC LAB</a>
+    /
     <span> MAC LAB</span>
 @endsection
 
@@ -13,8 +15,19 @@
     <div class="container-fluid"  id="button-container">
         <div class="container">
             <div class="row justify-content-center">
-                
-                    <a href="{{ route('equipment.home') }}" class="col-lg-2 col-sm-3 col-6 btn btn-light">
+
+                    <a href="{{ route('one-on-one-help') }}" class="col-lg-2 col-sm-3 col-6 btn btn-light" id="button-link-1">
+                        <div class="clip-wrap">
+                            <div class="clip-each border-style-thin">
+                                <img src="{{ asset('/img/one-on-one-help.png') }}" class="nav-icon">
+                            </div>
+                        </div>
+                        <div>
+                            <small>1 ON 1</small><br/> HELP
+                        </div>
+                    </a>
+
+                    <a href="{{ route('equipment.home') }}" class="col-lg-2 col-sm-3 col-6 btn btn-light" id="button-link-2">
                         <div class="clip-wrap">
                             <div class="clip-each border-style-thin">
                                 <img src="{{ asset('/img/equipment.png') }}" class="nav-icon">
@@ -24,21 +37,20 @@
                             <small>DIGITAL</small><br/> EQUIPMENT
                         </div>
                     </a>
-                
-                
-                    <a href="{{ route('3d.home') }}" class="col-lg-2 col-sm-3 col-6 btn btn-light">
+
+                    <a href="{{ route('3d.home') }}" class="col-lg-2 col-sm-3 col-6 btn btn-light" id="button-link-3">
                         <div class="clip-wrap">
                             <div class="clip-each border-style-thin">
-                                <img src="{{ asset('/img/3dPrinting.png') }}" class="nav-icon">
+                                <img src="{{ asset('/img/3d-printing.png') }}" class="nav-icon">
                             </div>
                         </div>
                         <div>
                             <small>3D</small><br/> PRINTING
                         </div>
                     </a>
-                
-                
-                    <a href="{{ route('maclab-policies') }}" class="col-lg-2 col-sm-3 col-6 btn btn-light">
+
+
+                    <a href="{{ route('maclab-policies') }}" class="col-lg-2 col-sm-3 col-6 btn btn-light" id="button-link-4">
                         <div class="clip-wrap">
                             <div class="clip-each border-style-thin">
                                 <img src="{{ asset('/img/policies.png') }}" class="nav-icon">
@@ -50,36 +62,50 @@
                     </a>
 
 
-                    <a href="{{ route('maclab-contacts') }}" class="col-lg-2 col-sm-3 col-6 btn btn-light">
+                    <a href="{{ route('maclab-contacts') }}" class="col-lg-2 col-sm-3 col-6 btn btn-light" id="button-link-5">
                         <div class="clip-wrap">
                             <div class="clip-each border-style-thin">
-                                <img src="{{ asset('/img/contacts.png') }}" class="nav-icon">
+                                <img src="{{ asset('/img/contact-us.png') }}" class="nav-icon">
                             </div>
                         </div>
                         <div>
                             <small>CONTACT</small><br/> US
                         </div>
                     </a>
-               
+
             </div>
         </div>
     </div>
+
+    <svg class="clip-svg">
+        <defs>
+            <clipPath id="octagon-clip" clipPathUnits="objectBoundingBox">
+                <polygon points="0.2 0, 1 0, 1 .8, .8 1, 0 1, 0 .2" />
+            </clipPath>
+        </defs>
+    </svg>
 @endsection
 
 @section('content')
 
-    
-    
     <div class="clearfix">&nbsp;</div>
 
-    <!-- TODO: add What we do infographic -->
+    <div id="hours-container" class="container" style="text-align: center; display: none;">
+        <a href="https://byui.libcal.com/hours/">
+            <h2 id="hours-button"></h2>
+        </a>
+    </div>
+    <div class="clearfix">&nbsp;</div>
+    <div class="clearfix">&nbsp;</div>
+
+    {{--<!-- TODO: add What we do infographic -->
     <div class="row justify-content-center infographic">
         <div class="col-lg-10 col-12">
             <img class="img-fluid" src="{{ asset('/img/what-we-do-info.png') }}" alt="What We Do Inforgraphic" style="max-height: 375px; width: auto;"></a>
         </div>
     </div>
 
-    <div class="clearfix">&nbsp;</div>
+    <div class="clearfix">&nbsp;</div>--}}
 
     <div class="row">
         <div class="col-md-12">
