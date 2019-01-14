@@ -5,8 +5,6 @@
 @endsection
 
 @section('breadcrumbs')
-    <a href="{{ route('maclab.home') }}">MAC LAB</a>
-    /
     <span> MAC LAB</span>
 @endsection
 
