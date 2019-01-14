@@ -60,8 +60,8 @@
                                 <span class="aok-float-left zg-badge-triangle zg-badge-color"></span>
                             </div>
                             <span class="aok-inline-block zg-item">
-                                {{--<a href="{{ route('equipment.show', ['equipmentType' => $equipment]) }}" class="a-link-normal">--}}
-                                <a href="#" class="a-link-normal">
+                                <a href="{{ route('equipment.show', ['equipmentType' => $equipment]) }}" class="a-link-normal">
+                                {{--<a href="#" class="a-link-normal">--}}
                                     <span class="zg-text-center-align">
                                         <div class="a-section a-spacing-small">
                                             <img alt="" src="{{ ((count($equipment->getMedia('equipment-type')) > 0)?$equipment->getMedia('equipment-type')[0]->getUrl('thumb'):'') }}" style="max-height: 200px;">
