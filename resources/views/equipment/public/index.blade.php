@@ -16,7 +16,12 @@
     <div class="row">
         <div class="col-md-12">
             <div class="infographic">
-                <img class="img-fluid" src="{{ asset('/img/check-out-info.png') }}" alt="Equipment Check Out Inforgraphic"></a>
+                <img class="img-fluid" src="{{ asset('/img/check-out-info.jpg') }}" alt="Equipment Checkout: 1. Agree to Terms and Conditions, 2. Pick up in McKay 140A, 3. Return Equipment on time. Reminder: Each day late can incur a $10 late fee."></a>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="text-align: center;">
+                    Reminder: A fine of up to $10 / day may be incurred for each day equipment is returned late.  Please refer to the item's information page for loan periods and late fine amounts.
+                </div>
             </div>
         </div>
     </div>
