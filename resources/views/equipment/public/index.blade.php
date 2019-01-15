@@ -52,7 +52,8 @@
 
                 <li role="gridCell" class="zg-item-immersion">
                     <span class="a-list-item">
-                        <div class="a-section a-spacing-none aok-relative">
+                        <div class="a-section a-spacing-none aok-relative" style="position: relative;">
+                            <span style="margin: 2px 6px; position: absolute; right: 0px; font-weight: bold; color: #525252;">{{ $equipment->available_count }} / {{ $equipment->equipment_count }}</span>
                             <div class="a-row a-spacing-none aok-inline-block">
                                 <span class="a-size-small aok-float-left zg-badge-body zg-badge-color">
                                     <span class="zg-badge-text">{{ strtoupper($equipment->group) }}</span>

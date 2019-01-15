@@ -16,9 +16,9 @@ class PublicController extends Controller
     public function index()
     {
         if(auth()->guard('patrons')->user()->canCheckout('camera')){
-            $equipmentTypes = EquipmentType::where('public_display', true)->get();
+            $equipmentTypes = EquipmentType::withCount('equipment', 'available')->where('public_display', true)->get();
         }else{
-            $equipmentTypes = EquipmentType::where('group', 'other')->where('public_display', true)->get();
+            $equipmentTypes = EquipmentType::withCount('equipment', 'available')->where('group', 'other')->where('public_display', true)->get();
         }
 
         return view('equipment.public.index', compact('equipmentTypes'));
