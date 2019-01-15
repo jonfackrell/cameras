@@ -13,6 +13,10 @@ class Equipment extends Model implements HasMedia
 
     use HasMediaTrait;
 
+    protected $dates = [
+        'checked_out_at',
+    ];
+
     public function checkouts()
     {
         return $this->hasMany('App\Models\Checkout');

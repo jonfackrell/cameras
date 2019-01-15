@@ -53,6 +53,7 @@ class PublicController extends Controller
      */
     public function show($equipmentType)
     {
+        $equipmentType->load('equipment');
 
         return view('equipment.public.show', compact('equipmentType'));
     }

@@ -19,19 +19,24 @@
     <div class="row">
         <div class="col-md-12">
             <div class="media">
-                <img src="{{ $equipmentType->getMedia('equipment-type')[0]->getUrl() }}" alt="" style="height: 150px; width: 150px;" class="mr-3">
+                <img src="{{ $equipmentType->getMedia('equipment-type')[0]->getUrl() }}" alt="" style="height: 150px; width: auto;" class="mr-3">
                 <div class="media-body">
                     <h2 class="mt-0">{{ $equipmentType->display_name }}</h2>
                      <div class="row">
                          <div class="col-md-6">
-                             Checkout Period:
-                             @if($equipmentType->loan_type == 'CAMERA')
-                                {{ ((!is_null(auth()->guard('patrons')->user()->checkout_period))?'24 Hours':auth()->guard('patrons')->user()->checkout_period) }}
-                             @elseif($equipmentType->loan_type == 'CUSTOM')
-                                {{ $equipmentType->loan_period }} Hours
-                             @elseif($equipmentType->loan_type == 'DAILY')
-                                Due same day before closing
-                             @endif
+                             <div>
+                                 <span style="font-weight: bold;">Checkout Period:</span>
+                                 @if($equipmentType->loan_type == 'CAMERA')
+                                    {{ ((!is_null(auth()->guard('patrons')->user()->checkout_period))?'24 Hours':auth()->guard('patrons')->user()->checkout_period) }}
+                                 @elseif($equipmentType->loan_type == 'CUSTOM')
+                                    {{ $equipmentType->loan_period }} Hours
+                                 @elseif($equipmentType->loan_type == 'DAILY')
+                                    Due same day before closing
+                                 @endif
+                             </div>
+                             <div>
+                                 <span style="font-weight: bold;">Late Fee: ${{ ($equipmentType->fine_amount)/100 }} / day</span>
+                             </div>
                          </div>
                      </div>
                 </div>
@@ -49,11 +54,11 @@
                     <tr>
                         <th scope="col">Item #</th>
                         <th scope="col">Description</th>
-                        <th scope="col">Due</th>
+                        <th scope="col">Status</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($equipmentType->equipment as $equipment)
+                    @foreach ($equipmentType->equipment->sortBy('item') as $equipment)
                         <tr>
                             <td>
                                 {{ $equipment->item }}
@@ -62,7 +67,7 @@
                                 {{ $equipment->description }}
                             </td>
                             <td>
-                                {{ ((!is_null($equipment->due_at))?$equipment->due_at->toDayDateTimeString():'Checked In') }}
+                                {{ ((!is_null($equipment->checked_out_at))?('Checked out on '. $equipment->checked_out_at->tz('America/Denver')->format('m-d-Y')):'Checked In') }}
                             </td>
                         </tr>
                     @endforeach
