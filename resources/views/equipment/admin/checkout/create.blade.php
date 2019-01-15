@@ -23,7 +23,7 @@
 
 
 				<div class="row">
-					<div class="col-6">
+					<div class="col-12">
 						<div class="form-group">
 							<label class="control-label" for="due_at">Due</label>
 							<div class="input-group date" id="datetimepicker1" data-target-input="nearest">
@@ -79,9 +79,9 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
 	<script>
 		$(function(){
-			$('#datetimepicker1').datetimepicker({
+			var $datepicker = $('#datetimepicker1').datetimepicker({
 				sideBySide: true,
-				debug: true
+				debug: false
 			});
 
 			$(document).on('click', 'button[type="submit"]', function(){
