@@ -17,6 +17,10 @@ class EquipmentType extends Model implements HasMedia
         return $this->hasMany('App\Models\Equipment');
     }
 
+    public function available() {
+        return $this->hasMany('App\Models\Equipment')->whereNull('checked_out_at');
+    }
+
 
     public function registerMediaConversions(Media $media = null)
     {
