@@ -41,13 +41,15 @@
 	</div>
 
 	<ul class="bullets">
-		<li>Equipment is for academic use only.</li>
 
-		<li>You are responsible for any repair / replacement if any items you checkout are damaged.</li>
+		<li>Camera equipment is for academic use only.</li>
+
+		<li>You are responsible for any repair / replacement of any items that are damaged while checked out to you.</li>
 
 		<li>You can only check out and return equipment for yourself.</li>
 
-		<li>A fee of $10 per day will be charged to your acount for any late items.</li>
+		<li>A fee of $10 per day will be charged to your account for any late items.</li>
+
 	</ul>
 
 	<div class="clearfix">&nbsp;</div>
@@ -60,13 +62,19 @@
 	</div>
 
 	<ul class="bullets">
-		<li>The equipment must stay in the Library at all times.</li> 
 
-		<li>The equimpent may be on any floor in the Library. This exclude any tablets and their pens.</li>
+		<li>You are responsible for any repair / replacement of any items that are damaged while checked out to you.</li>
 
-		<li>All tablets and pens must stay in the Mac Lab.</li>
+		<li>Tablets and tablet pens must remain in the Mac Lab.</li>
 
-		<li>The equipment is due back 15 minutes before the Library closes.</li>
+		<li>Headphones should remain in the McKay Library.</li>
+
+		<li>Other equipment such as cricuts, projectors, adapters, and microphones can be taken out of the library.</li>
+
+		<li>All equipment should be returned at least 15 minutes prior to the library closing to allow sufficient time to get it checked back in.</li>
+
+		<li>To view loan periods and late fees, please refer to the item's information page (see the list of <a href="{{ url(route('equipment.home')) }}">Available Equipment</a>)</li>
+
 	</ul>
 	@if (!auth()->guard('patrons')->user()->areTermsAgreed())
 	{!! BootForm::open()->post()->action(route('equipment.patron.terms')) !!}
