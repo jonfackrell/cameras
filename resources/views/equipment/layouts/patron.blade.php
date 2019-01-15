@@ -82,19 +82,11 @@
 <div class="container breadcrumbs">
     <div class="row">
         <div class="col-md-6">
-            <a href="/">HOME</a> / @yield('breadcrumbs')
+            <a href="http://library.byui.edu">HOME</a> / @yield('breadcrumbs')
         </div>
         <div class="col-md-6">
-            <form id="website-search-form">
-                <div class="row">
-                    <div class="col-md-9">
-                        <input type="text" name="q" id="search-input" class="form-control" aria-label="" placeholder="Search the website...">
-                    </div>
-                    <div class="col-md-3">
-                        <button type="submit" class="btn btn-default btn-block">SEARCH</button>
-                    </div>
-                </div>
-            </form>            </div>
+
+        </div>
     </div>
 </div>
 <div class="clearfix">&nbsp;</div>
