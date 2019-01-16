@@ -221,12 +221,16 @@ class PatronController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function updateTerms()
+    public function updateTerms(Request $request)
     {
         $patron = Patron::where('id', auth()->guard('patrons')->user()->id)->first();
         $patron->term_agreement_end_at = Date::first()->end_at;
+        if($request->has('checkout_reason')){
+            $patron->checkout_reason = $request->get('checkout_reason');
+            $patron->cameras_access_end_at = Date::first()->end_at;
+        }
         $patron->save();
 
-        return redirect()->to( route('equipment.patron.profile') );
+        return redirect()->to( route('equipment.home') );
     }
 }
