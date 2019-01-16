@@ -67,6 +67,8 @@
 
 					<li>You are responsible for any repair / replacement of any items that are damaged while checked out to you.</li>
 
+					<li>Chargers are provided as a courtesy and should be used at your own risk. The McKay Library is not responsible for any damages caused to personal equipment they are used with. </li>
+
 					<li>Tablets and tablet pens must remain in the Mac Lab.</li>
 
 					<li>Headphones should remain in the McKay Library.</li>

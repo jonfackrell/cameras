@@ -80,8 +80,7 @@
                     </tr>
                     </tfoot>
                 </table>
-        </div>
-        @endif
+            @endif
         </div>
     </div>
 
