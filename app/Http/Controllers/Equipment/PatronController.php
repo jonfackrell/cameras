@@ -225,7 +225,7 @@ class PatronController extends Controller
     {
         $patron = Patron::where('id', auth()->guard('patrons')->user()->id)->first();
         $patron->term_agreement_end_at = Date::first()->end_at;
-        if($request->has('checkout_reason')){
+        if($request->has('checkout_reason') && strlen($request->get('checkout_reason')) > 2){
             $patron->checkout_reason = $request->get('checkout_reason');
             $patron->cameras_access_end_at = Date::first()->end_at;
         }
