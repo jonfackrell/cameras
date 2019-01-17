@@ -87,6 +87,10 @@ class Patron extends Authenticatable
         return $this->hasMany('App\Models\Checkout');
     }
 
+    public function current() {
+        return $this->hasMany('App\Models\Checkout')->whereNull('checked_in_at');
+    }
+
     public function emails() {
         return $this->belongsTo(EquipmentNotification::class);
     }

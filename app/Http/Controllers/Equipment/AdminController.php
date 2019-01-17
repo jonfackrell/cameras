@@ -226,7 +226,7 @@ class AdminController extends Controller
 
         if(request()->has('equipment_group')){
 
-            $patrons = Patron::whereHas('checkouts', function ($query) {
+            $patrons = Patron::with('checkouts', 'checkouts.equipment')->whereHas('checkouts', function ($query) {
                 $query->whereNull('checked_in_at')->whereHas('equipment', function ($query) {
                     $query->where('group', request()->get('equipment_group'));
                 });
