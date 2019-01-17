@@ -6,7 +6,7 @@
             {{ $cameraOut }}
         </div>
         <div>
-            <small>CAMERA</small><br/> EQUIPMENT
+            <small>CAMERA</small>
         </div>
     </a>
 
@@ -15,7 +15,7 @@
             {{ $otherOut }}
         </div>
         <div>
-            <small>OTHER</small><br/> EQUIPMENT
+            <small>OTHER</small>
         </div>
     </a>
 </div>
