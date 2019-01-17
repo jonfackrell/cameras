@@ -19,10 +19,13 @@
 		</div>
 		{!! BootForm::close() !!}
 	</div>
+
     <div class="clearfix">&nbsp;</div>
+
     @if (!empty($message))
         <p>{{ $message }}</p>
     @endif
+
     <div class="clearfix">&nbsp;</div>
     <div class="clearfix">&nbsp;</div>
 
@@ -62,9 +65,8 @@
             </tr>
             </tfoot>
         </table>
-    </div>
     @endif
-    <div class="col-md-12">
+
 @endsection
 
 @push('styles')
