@@ -72,7 +72,7 @@ class CheckoutController extends Controller
         $type = strtolower($type);
 
         if (stripos($type, 'in') !== false) { 
-            $checkouts = $checkouts->where('checked_in_at', '!=', null);
+            $checkouts = $checkouts->where('checked_in_at', '=', null);
         }
         else if (stripos($type, 'out') !== false) {
             $checkouts = $checkouts->where('checked_in_at', '=', null);
@@ -127,11 +127,15 @@ class CheckoutController extends Controller
         $powerSupplies = Equipment::whereIn('equipment_type_id', $equipmentTypePowIds)
                             ->where('checked_out_at', NULL)->get();
 
+        $equipmentTypeTablets = EquipmentType::whereIn('type', ['tablet-lg', 'tablet-cintiq'])->select('id');
+        $tablets = Equipment::whereIn('equipment_type_id', $equipmentTypeTablets)
+                                ->whereNull('checked_out_at')->pluck('description', 'id');
+
         if (!is_null($equipment->checked_out_at)){
             return redirect()->to( route('equipment.admin.patron.show', $patron->id) );
         }
         else {
-            return view('equipment.admin.checkout.create', compact('patron', 'equipment', 'due_at', 'tripods', 'memory', 'batteries', 'powerSupplies'));
+            return view('equipment.admin.checkout.create', compact('patron', 'equipment', 'due_at', 'tripods', 'memory', 'batteries', 'powerSupplies', 'tablets'));
         }
         
     }
@@ -228,6 +232,11 @@ class CheckoutController extends Controller
                             ->where('checked_out_at', NULL)->first();
                             
             $this->checkout($patron, $batteryEx, $note);
+        }
+
+        if ($request->has('tablet')) {
+            $tablet = Equipment::where('id', $request->get('tablet_id'))->first();
+            $this->checkout($patron, $tablet, $note);
         }
         
 

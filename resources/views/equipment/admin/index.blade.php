@@ -49,6 +49,18 @@
                         {{ $patron->getRole() }}
                     </td>
                 </tr>
+                @if(request()->has('equipment_group'))
+                    <tr>
+                        <th>
+                            &nbsp;&nbsp;&nbsp;&nbsp;Items Checked Out:
+                        </th>
+                        <td colspan="3">
+                            @foreach ($patron->current as $pequipment)
+                                <span class=" btn btn-default btn-sm equipment">{{ $pequipment->equipment->item }}</span>
+                            @endforeach
+                        </td>
+                    </tr>
+                @endif
             @endforeach
             </tbody>
             <tfoot>

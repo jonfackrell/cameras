@@ -19,7 +19,7 @@
 				{!! BootForm::text('Class/Purpose', 'checkout_reason') !!}
 				{!! BootForm::select('Checkout Period', 'checkout_period')->options([1 => '24 Hours', 2 => '48 Hours', 3 => '3 Days', 7 => '1 Week', 14 => '2 Weeks']) !!}
 				@if(is_null($patron->term_agreement_end_at))
-					{!! BootForm::checkbox(" Email Link to Terms", "send_terms_email")->value(true) !!}
+					{!! BootForm::checkbox(" Email Link to Terms", "send_terms_email")->value(true)->checked() !!}
 				@endif
 				{!! BootForm::submit('Authorize') !!}
 				{!! BootForm::close() !!}
