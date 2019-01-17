@@ -209,7 +209,7 @@ class AdminController extends Controller
         /*$cameraOut = Equipment::where('group', 'camera')
                                     ->whereNotNull('checked_out_at')->count();*/
 
-        $otherOut = Checkout::whereNull('checked_in_at')
+        $cameraOut = Checkout::whereNull('checked_in_at')
                                 ->whereHas('equipment', function ($query) {
                                     $query->where('group', 'camera');
                                 })
@@ -218,7 +218,7 @@ class AdminController extends Controller
         /*$otherOut = Equipment::where('group', 'other')
                                     ->whereNotNull('checked_out_at')->count();*/
 
-        $cameraOut = Checkout::whereNull('checked_in_at')
+        $otherOut = Checkout::whereNull('checked_in_at')
                         ->whereHas('equipment', function ($query) {
                             $query->where('group', 'other');
                         })
@@ -266,14 +266,14 @@ class AdminController extends Controller
             return redirect()->to( route('equipment.admin.patron.show', $patrons->first()->id) );
         }
 
-        $otherOut = Checkout::whereNull('checked_in_at')
+        $cameraOut = Checkout::whereNull('checked_in_at')
                                 ->whereHas('equipment', function ($query) {
                                     $query->where('group', 'camera');
                                 })
                                 ->pluck('patron_id')->unique()->count();
 
 
-        $cameraOut = Checkout::whereNull('checked_in_at')
+        $otherOut = Checkout::whereNull('checked_in_at')
                                 ->whereHas('equipment', function ($query) {
                                     $query->where('group', 'other');
                                 })
