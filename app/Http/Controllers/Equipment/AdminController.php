@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Equipment;
 
+use App\Notifications\LinkToTermsConditions;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -9,6 +10,7 @@ use App\Models\Patron;
 use App\Models\Checkout;
 use App\Models\Equipment;
 use App\Models\EquipmentType;
+use Illuminate\Support\Facades\Notification;
 
 class AdminController extends Controller
 {
@@ -244,7 +246,6 @@ class AdminController extends Controller
     public function updateHome(Request $request)
     {
         $patrons = [];
-        $message = '';
 
         $newSearch = $request->get('search');
 
@@ -254,11 +255,15 @@ class AdminController extends Controller
                             ->orderBy('last_name', 'ASC')
                             ->get();
 
+        if($patrons->count() < 1){
+            $patrons = Patron::whereHas('checkouts.equipment', function ($query) use($newSearch) {
+                                        $query->where('item',  'like', '%' . $newSearch . '%');
+                                    })
+                                    ->get();
+        }
+
         if ($patrons->count() == 1) {
             return redirect()->to( route('equipment.admin.patron.show', $patrons->first()->id) );
-        }
-        elseif ($patrons->count() < 1) {
-            $message = 'No patrons found with search: ' . $newSearch;
         }
 
         $otherOut = Checkout::whereNull('checked_in_at')
@@ -274,6 +279,20 @@ class AdminController extends Controller
                                 })
                                 ->pluck('patron_id')->unique()->count();
 
-        return view('equipment.admin.index', compact('patrons', 'message', 'cameraOut', 'otherOut'));
+        return view('equipment.admin.index', compact('patrons', 'cameraOut', 'otherOut'));
+    }
+
+    /**
+     * Update the home page.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function emailTerms(Request $request)
+    {
+        Notification::route('mail', $request->get('email'))
+                        ->notify(new LinkToTermsConditions());
+
+        return redirect()->back();
     }
 }
