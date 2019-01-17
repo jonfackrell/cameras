@@ -204,17 +204,28 @@ class AdminController extends Controller
         $patrons = collect([]);
         $message = '';
 
-        $cameraOut = Equipment::where('group', 'camera')
-                                    ->whereNotNull('checked_out_at')->count();
+        /*$cameraOut = Equipment::where('group', 'camera')
+                                    ->whereNotNull('checked_out_at')->count();*/
 
-        $otherOut = Equipment::where('group', 'other')
-                                    ->whereNotNull('checked_out_at')->count();
+        $otherOut = Checkout::whereNull('checked_in_at')
+                                ->whereHas('equipment', function ($query) {
+                                    $query->where('group', 'camera');
+                                })
+                                ->pluck('patron_id')->unique()->count();
+
+        /*$otherOut = Equipment::where('group', 'other')
+                                    ->whereNotNull('checked_out_at')->count();*/
+
+        $cameraOut = Checkout::whereNull('checked_in_at')
+                        ->whereHas('equipment', function ($query) {
+                            $query->where('group', 'other');
+                        })
+                        ->pluck('patron_id')->unique()->count();
 
         if(request()->has('equipment_group')){
 
             $patrons = Patron::whereHas('checkouts', function ($query) {
                 $query->whereNull('checked_in_at');
-
             })
             ->whereHas('checkouts.equipment', function ($query) {
                 $query->where('group', request()->get('equipment_group'));
@@ -252,11 +263,18 @@ class AdminController extends Controller
             $message = 'No patrons found with search: ' . $newSearch;
         }
 
-        $cameraOut = Equipment::where('group', 'camera')
-                                    ->whereNotNull('checked_out_at')->count();
+        $otherOut = Checkout::whereNull('checked_in_at')
+                                ->whereHas('equipment', function ($query) {
+                                    $query->where('group', 'camera');
+                                })
+                                ->pluck('patron_id')->unique()->count();
 
-        $otherOut = Equipment::where('group', 'other')
-                                ->whereNotNull('checked_out_at')->count();
+
+        $cameraOut = Checkout::whereNull('checked_in_at')
+                                ->whereHas('equipment', function ($query) {
+                                    $query->where('group', 'other');
+                                })
+                                ->pluck('patron_id')->unique()->count();
 
         return view('equipment.admin.index', compact('patrons', 'message', 'cameraOut', 'otherOut'));
     }
