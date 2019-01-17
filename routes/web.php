@@ -130,6 +130,7 @@ Route::middleware(['mail'])->group(function () {
         Route::group(['middleware' => ['auth']], function() {
             Route::get('/admin', 'AdminController@home')->name('admin');
             Route::post('/admin', 'AdminController@updateHome')->name('admin');
+            Route::post('/admin/email/terms', 'AdminController@emailterms')->name('admin.email.terms');
             Route::get('/admin/date', 'DateController@index')->name('admin.date.index');
             Route::get('/admin/date/edit/{date}', 'DateController@edit')->name('admin.date.edit');
             Route::post('/admin/date/edit/{date}', 'DateController@update')->name('admin.date.edit');
