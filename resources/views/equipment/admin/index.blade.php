@@ -50,13 +50,15 @@
                     </td>
                 </tr>
                 @if(request()->has('equipment_group'))
-                    <tr>
+                    <tr onclick="javascript: location.href = '{{ route('equipment.admin.patron.show', $patron->id) }}';">
                         <th>
                             &nbsp;&nbsp;&nbsp;&nbsp;Items Checked Out:
                         </th>
                         <td colspan="3">
                             @foreach ($patron->current as $pequipment)
-                                <span class=" btn btn-default btn-sm equipment">{{ $pequipment->equipment->item }}</span>
+                                @if(strlen($pequipment->equipment->item) > 1)
+                                    <span class=" btn btn-default btn-sm equipment">{{ $pequipment->equipment->item }}</span>
+                                @endif
                             @endforeach
                         </td>
                     </tr>
