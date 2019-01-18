@@ -131,11 +131,15 @@ class CheckoutController extends Controller
         $tablets = Equipment::whereIn('equipment_type_id', $equipmentTypeTablets)
                                 ->whereNull('checked_out_at')->pluck('description', 'id');
 
+        $equipmentTypeTabletPens = EquipmentType::whereIn('type', ['tablet-pen'])->select('id');
+        $tabletPens = Equipment::whereIn('equipment_type_id', $equipmentTypeTabletPens)
+                                ->whereNull('checked_out_at')->pluck('description', 'id');
+
         if (!is_null($equipment->checked_out_at)){
             return redirect()->to( route('equipment.admin.patron.show', $patron->id) );
         }
         else {
-            return view('equipment.admin.checkout.create', compact('patron', 'equipment', 'due_at', 'tripods', 'memory', 'batteries', 'powerSupplies', 'tablets'));
+            return view('equipment.admin.checkout.create', compact('patron', 'equipment', 'due_at', 'tripods', 'memory', 'batteries', 'powerSupplies', 'tablets', 'tabletPens'));
         }
         
     }
@@ -237,6 +241,11 @@ class CheckoutController extends Controller
         if ($request->has('tablet')) {
             $tablet = Equipment::where('id', $request->get('tablet_id'))->first();
             $this->checkout($patron, $tablet, $note);
+        }
+
+        if ($request->has('tablet_pen')) {
+            $tabletPen = Equipment::where('id', $request->get('pen_id'))->first();
+            $this->checkout($patron, $tabletPen, $note);
         }
         
 
