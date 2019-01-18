@@ -5,11 +5,11 @@
 @endsection
 
 @section('content')
-	<div class="col-lg-8 mt-2 mb-2">
+	<div class="col-lg-12">
 		
 		{!! BootForm::open()->post()->action(route('equipment.admin.checkout.edit', ['checkout' => $checkout->id])) !!}
 		<div class="row">
-			<div class="col-6">
+			<div class="col-md-12 col-lg-8">
 				<div class="form-group">
 					<label class="control-label" for="due_at">Due</label>
 					<div class="input-group date" id="datetimepicker1" data-target-input="nearest">
