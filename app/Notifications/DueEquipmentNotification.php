@@ -41,6 +41,7 @@ class DueEquipmentNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+                    ->bcc(['fackrellj@byui.edu', 'caglek@byui.edu'])
                     ->subject('Equipment Due Today')
                     ->line('This is just a friendly reminder that you have equipment checked out from the Mac Lab that is due today.')
                     ->line('Please return the equipment to the Mac Lab to avoid any late fees.')

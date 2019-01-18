@@ -44,6 +44,7 @@ class LateFeeNotification extends Notification
     {
 
         return (new MailMessage)
+                    ->bcc(['fackrellj@byui.edu', 'caglek@byui.edu'])
                     ->line('You have been charged a fee of $' . intval($this->checkout->fee_amount / 100) . '.00 for returning equipment late to the McKay Library Mac Lab.')
                     ->line('If you have any questions, please refer to our checkout policy.');
     }

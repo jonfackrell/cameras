@@ -41,6 +41,7 @@ class LateEquipmentNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+                    ->bcc(['fackrellj@byui.edu', 'caglek@byui.edu'])
                     ->subject('Late Equipment Notice')
                     ->line('You have equipment from the Mac Lab that is late and needs to be returned.')
                     ->line('For a reminder of the equipment you checked out:')
