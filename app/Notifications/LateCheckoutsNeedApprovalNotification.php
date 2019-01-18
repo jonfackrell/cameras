@@ -47,6 +47,7 @@ class LateCheckoutsNeedApprovalNotification extends Notification
     {
 
         return (new MailMessage)
+                    ->bcc(['fackrellj@byui.edu'])
                     ->line('There is/are ' . $this->checkouts->count() . ' late checkout(s) pending approval.')
                     ->action('View Pending Approval(s)', route('equipment.admin.checkout.approval'));
     }
