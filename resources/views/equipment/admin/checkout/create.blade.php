@@ -10,7 +10,7 @@
 			<h5 class="col">{{ $equipment->getDisplayName() }}</h5>
 		</div>
 		<div class="row"> 
-			<div class="col-8"> 
+			<div class="col-md-12 col-lg-8">
 				{!! BootForm::open()
 								->post()
 								->action( route('equipment.admin.checkout.create', [
