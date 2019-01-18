@@ -43,6 +43,8 @@
 					@include('equipment.layouts.parts.camera-checkout-form')
 				@elseif($equipment->equipment_type->type == 'tablet-pen')
 					@include('equipment.layouts.parts.tablet-pen-checkout-form')
+				@elseif(in_array($equipment->equipment_type->type, ['tablet-lg', 'tablet-cintiq']))
+					@include('equipment.layouts.parts.tablet-checkout-form')
 				@endif
 
 				{!! BootForm::textarea("&nbsp;", 'note')->rows(3) !!}
