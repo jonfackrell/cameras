@@ -420,7 +420,6 @@ class CheckoutController extends Controller
     public function approvalForm()
     {
         $checkouts = Checkout::wasLate()
-                                ->orWhereNull('checked_in_at')
                                 ->whereNull('approved_at')
                                 ->get();
 
