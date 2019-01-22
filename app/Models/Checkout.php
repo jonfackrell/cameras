@@ -73,7 +73,12 @@ class Checkout extends Model implements HasMedia
 
     public function calculateLateFee() {
 
-	    $fee = (($this->equipment->equipment_type->fine_amount * $this->checked_in_at->diffInWeekdays($this->due_at)) / 100);
+	    if(is_null($this->checked_in_at)){
+            $date = now();
+        }else{
+	        $date = $this->checked_in_at;
+        }
+	    $fee = (($this->equipment->equipment_type->fine_amount * $date->diffInWeekdays($this->due_at)) / 100);
 
         return $fee;
     }

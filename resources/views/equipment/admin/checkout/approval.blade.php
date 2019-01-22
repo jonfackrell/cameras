@@ -38,8 +38,8 @@
 								<td>
 									{{ $checkout->equipment->getDisplayName() }}
 								</td>
-								<td>
-									{{ str_replace(' after', '', $checkout->checked_in_at->diffForHumans($checkout->due_at)) }}
+								<td style="@if(is_null($checkout->checked_in_at)) color:red; @endif">
+									{{ str_replace(' after', '', (is_null($checkout->checked_in_at))?now()->diffForHumans($checkout->due_at):$checkout->checked_in_at->diffForHumans($checkout->due_at)) }}
 								</td>
 								<td>
 									<div class="input-group mb-3">
@@ -53,13 +53,20 @@
 									</div>
 								</td>
 								<td>
+									@php
+										if(is_null($checkout->checked_in_at)){
+											$checkout->status = 'pending';
+										}else{
+											$checkout->status = 'notify';
+										}
+									@endphp
 									{!! BootForm::select("Action", "actions[]")
 													->options([
 														'notify' => 'Notify',
 														'remove' => 'Remove',
 														'pending' => 'Pending',
 													])
-													->select('notify')->hideLabel();
+													->select($checkout->status)->hideLabel();
 									!!}
 								</td>
 							</tr>
