@@ -20,7 +20,7 @@
 						{!! BootForm::radio(' All', 'equipment_type')->value('all')->{(request()->get('equipment_type', 'all') == 'all')?'check':'uncheck'}() !!}
 					</div>
 					<div class="col">
-						{!! BootForm::radio(' Cameras', 'equipment_type')->value('cameras')->{(request()->get('equipment_type') == 'cameras')?'check':'uncheck'}() !!}
+						{!! BootForm::radio(' Cameras', 'equipment_type')->value('camera')->{(request()->get('equipment_type') == 'camera')?'check':'uncheck'}() !!}
 					</div>
 					<div class="col">
 						{!! BootForm::radio(' Other', 'equipment_type')->value('other')->{(request()->get('equipment_type') == 'other')?'check':'uncheck'}() !!}
