@@ -31,7 +31,7 @@ class CheckoutsExport implements FromCollection, WithMapping, WithHeadings
         $start = Carbon::createFromFormat('m/d/Y', trim(explode('-', $this->request->get('range'))[0]))->startOfDay();
         $end = Carbon::createFromFormat('m/d/Y', trim(explode('-', $this->request->get('range'))[1]))->endOfDay();
         
-        return Checkout::with('patron', 'equipment')
+        return Checkout::with('patron', 'equipment', 'equipment.equipment_type')
                     ->whereBetween('created_at', [
                         $start,
                         $end
@@ -52,7 +52,7 @@ class CheckoutsExport implements FromCollection, WithMapping, WithHeadings
             $checkout->checked_out_at->tz('America/Denver')->format('h:m:s A'),
             (!is_null($checkout->checked_in_at))?$checkout->checked_in_at->tz('America/Denver')->format('h:m:s A'):'',
             $checkout->equipment->item,
-            //$checkout->equipment->group,
+            $checkout->equipment->equipment_type->display_name,
             $checkout->checkout_note,
             $checkout->checkin_note,
         ];
@@ -67,7 +67,7 @@ class CheckoutsExport implements FromCollection, WithMapping, WithHeadings
             'Checkout Time',
             'Checkin time',
             'Item',
-            //'Type',
+            'Type',
             'Checkout Note',
             'Checkin Note',
         ];
