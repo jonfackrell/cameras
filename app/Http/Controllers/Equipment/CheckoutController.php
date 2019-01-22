@@ -20,15 +20,39 @@ class CheckoutController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($type = 'all')
+    public function index(Request $request)
     {
         $checkouts = Checkout::with(['patron', 'equipment'])->orderBy('checked_out_at', 'desc');
 
-        $checkouts = $this->filterCheckoutsByType($checkouts, $type);
+        if($request->has('status')){
+            switch($request->get('status')){
+                case 'in':
+                    $checkouts = $checkouts->whereNotNull('checked_in_at');
+                    break;
+                case 'out':
+                    $checkouts = $checkouts->whereNull('checked_in_at');
+                    break;
+            }
+        }
+
+        if($request->has('equipment_type') && ($request->get('equipment_type') != 'all')){
+            $checkouts = $checkouts->whereHas('equipment', function ($query) use ($request) {
+                $query->where('group', $request->get('equipment_type'));
+            });
+        }
+
+        if($request->has('search') && !empty($request->get('search'))){
+            $checkouts = $checkouts->whereHas('patron', function ($query) use ($request) {
+                $query->where('first_name', 'like', '%' . $request->get('search') . '%')
+                        ->orWhere('last_name', 'like', '%' . $request->get('search') . '%')
+                        ->orWhere('inumber', 'like', '%' . $request->get('search') . '%');
+            });
+        }
+
 
         $checkouts = $checkouts->paginate(25);
 
-        return view('equipment.admin.history', compact('checkouts', 'type'));
+        return view('equipment.admin.history', compact('checkouts'));
     }
 
     /**
@@ -37,15 +61,15 @@ class CheckoutController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function updateIndex(Request $request, $type = 'all')
+    /*public function updateIndex(Request $request, $type = 'all')
     {
         // TODO: FIX THE SEARCH FUNCTION
         $newSearch = $request->get('search');
 
         $patron_ids = Patron::where('first_name', 'like', '%' . $newSearch . '%')
-        ->orWhere('last_name', 'like', '%' . $newSearch . '%')
-        ->orWhere('inumber', 'like', '%' . $newSearch . '%')
-        ->select('id')->get();
+                                ->orWhere('last_name', 'like', '%' . $newSearch . '%')
+                                ->orWhere('inumber', 'like', '%' . $newSearch . '%')
+                                ->select('id')->get();
         
         $checkouts = [];
 
@@ -58,7 +82,7 @@ class CheckoutController extends Controller
         $checkouts = $checkouts->paginate(25);
 
         return view('equipment.admin.history', compact('checkouts', 'type'));
-    }
+    }*/
 
     /**
      * Filters checkouts based on the Collection of Checkouts and type
@@ -67,7 +91,7 @@ class CheckoutController extends Controller
      * @param  str $type
      * @return Collection of Checkouts
      */
-    private function filterCheckoutsByType($checkouts, $type)
+    /*private function filterCheckoutsByType($checkouts, $type)
     {
         $type = strtolower($type);
 
@@ -89,7 +113,7 @@ class CheckoutController extends Controller
         
 
         return $checkouts;
-    }
+    }*/
 
     /**
      * Show the form for creating a new resource.

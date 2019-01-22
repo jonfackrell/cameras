@@ -6,10 +6,43 @@
 
 @section('content')
 	<div class="col-12">
-		{!! BootForm::open()->post()->action(route('equipment.admin.checkouts', ['type' => $type])) !!}
+		{!! BootForm::open()->get()->action(route('equipment.admin.checkouts.history')) !!}
 		<div class="row">
-			<div class="col-lg-6 col-md-8"> 
-				{!! BootForm::text('', 'search')->placeholder('first name, last name, or i-number') !!}
+			<div class="col-lg-12 col-md-12">
+				{!! BootForm::text('', 'search')->placeholder('First Name, Last Name, or I-Number')->autofocus() !!}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-6 col-md-6">
+				<legend style="font-size: 14px; font-weight: bold;">Equipment Type</legend>
+				<div class="row">
+					<div class="col">
+						{!! BootForm::radio(' All', 'equipment_type')->value('all')->{(request()->get('equipment_type', 'all') == 'all')?'check':'uncheck'}() !!}
+					</div>
+					<div class="col">
+						{!! BootForm::radio(' Cameras', 'equipment_type')->value('cameras')->{(request()->get('equipment_type') == 'cameras')?'check':'uncheck'}() !!}
+					</div>
+					<div class="col">
+						{!! BootForm::radio(' Other', 'equipment_type')->value('other')->{(request()->get('equipment_type') == 'other')?'check':'uncheck'}() !!}
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-1 col-md-1">
+
+			</div>
+			<div class="col-lg-5 col-md-5">
+				<legend style="font-size: 14px; font-weight: bold;">Status</legend>
+				<div class="row">
+					<div class="col">
+						{!! BootForm::radio(' All', 'status')->value('all')->{(request()->get('status', 'all') == 'all')?'check':'uncheck'}() !!}
+					</div>
+					<div class="col">
+						{!! BootForm::radio(' In', 'status')->value('in')->{(request()->get('status') == 'in')?'check':'uncheck'}() !!}
+					</div>
+					<div class="col">
+						{!! BootForm::radio(' Out', 'status')->value('out')->{(request()->get('status') == 'out')?'check':'uncheck'}() !!}
+					</div>
+				</div>
 			</div>
 		</div>
 		{!! BootForm::close() !!}
@@ -65,3 +98,15 @@
 
 	</div>
 @endsection
+
+@push('footer-scripts')
+	<script>
+		$(function(){
+
+			$(document).on('change', 'input[name="equipment_type"], input[name="status"]', function(){
+				$(this).closest('form').submit();
+			});
+
+		});
+	</script>
+@endpush

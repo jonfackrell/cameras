@@ -138,8 +138,9 @@ Route::middleware(['mail'])->group(function () {
             Route::post('/admin/equipment-type/create', 'EquipmentTypeController@store')->name('admin.equipment-type.create');
             Route::get('/admin/equipment-type/edit/{equipmentType}', 'EquipmentTypeController@edit')->name('admin.equipment-type.edit');
             Route::post('/admin/equipment-type/edit/{equipmentType}', 'EquipmentTypeController@update')->name('admin.equipment-type.edit');
-            Route::post('/admin/checkouts/{type}', 'CheckoutController@updateIndex')->name('admin.checkouts');
-            Route::get('/admin/checkouts/{type}', 'CheckoutController@index')->name('admin.checkouts');
+            
+            Route::get('/admin/checkouts/history', 'CheckoutController@index')->name('admin.checkouts.history');
+
             Route::get('/admin/equipment', 'EquipmentController@index')->name('admin.equipment.index');
             Route::get('/admin/equipment/create', 'EquipmentController@create')->name('admin.equipment.create');
             Route::post('/admin/equipment/create', 'EquipmentController@store')->name('admin.equipment.create');
