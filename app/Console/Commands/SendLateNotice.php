@@ -45,6 +45,7 @@ class SendLateNotice extends Command
     {
         $checkouts = Checkout::whereNull('checked_in_at')
                                 ->where('due_at', '<', Carbon::now())
+                                ->whereNull('approved_at')
                                 ->get();
 
         $checkoutsByPatron = $checkouts->groupBy('patron_id');
