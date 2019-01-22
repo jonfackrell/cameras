@@ -91,7 +91,7 @@ class Checkout extends Model implements HasMedia
      */
     public function scopeWasLate($query)
     {
-        if(is_null('checked_in_at')){
+        if(is_null($this->checked_in_at)){
             return $query->where('due_at', '<', now());
         }else{
             return $query->whereNotNull('checked_in_at')->whereColumn('due_at', '<', 'checked_in_at');
