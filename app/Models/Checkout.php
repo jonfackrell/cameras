@@ -95,7 +95,7 @@ class Checkout extends Model implements HasMedia
         return $query->where(function ($query) {
             $query->whereNotNull('checked_in_at')
                     ->whereColumn('due_at', '<', 'checked_in_at');
-        })->orWwhere(function ($query) {
+        })->orWhere(function ($query) {
             $query->whereNull('checked_in_at')
                     ->where('due_at', '<', now());
         });
