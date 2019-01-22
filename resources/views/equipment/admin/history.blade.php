@@ -9,7 +9,7 @@
 		{!! BootForm::open()->get()->action(route('equipment.admin.checkouts.history')) !!}
 		<div class="row">
 			<div class="col-lg-12 col-md-12">
-				{!! BootForm::text('', 'search')->placeholder('First Name, Last Name, or I-Number')->autofocus() !!}
+				{!! BootForm::text('', 'search')->placeholder('First Name, Last Name, or I-Number')->value(request()->get('search', ''))->autofocus() !!}
 			</div>
 		</div>
 		<div class="row">
