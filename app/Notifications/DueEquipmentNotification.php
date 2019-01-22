@@ -45,7 +45,7 @@ class DueEquipmentNotification extends Notification
                     ->subject('Equipment Due Today')
                     ->line('This is just a friendly reminder that you have equipment checked out from the Mac Lab that is due today.')
                     ->line('Please return the equipment to the Mac Lab to avoid any late fees.')
-                    ->line('To view a list of the equipment, click teh button below.')
+                    ->line('To view a list of the equipment, click the button below.')
                     ->action('View Checked Out Equipment', route('equipment.patron.profile'));
     }
 
