@@ -5,13 +5,14 @@
 <div id="menuOpts">
 	<a class="row btn btn-default sidebar-btn" href="{{ route('equipment.admin') }}"><span><i class="fa fa-home" aria-hidden="true"></i> Home</span></a>
 	<!-- history dropdown -->
-	<div class="row btn btn-default sidebar-btn" id="history"><span><i class="fa fa-history" aria-hidden="true"></i> History <i class="fa fa-chevron-down"></i></span></div>
+	<a class="row btn btn-default sidebar-btn" href="{{ route('equipment.admin.checkouts.history') }}"><span><i class="fa fa-history" aria-hidden="true"></i> History</span></a>
+	{{--<div class="row btn btn-default sidebar-btn" id="history"><span><i class="fa fa-history" aria-hidden="true"></i> History <i class="fa fa-chevron-down"></i></span></div>
 	<div id="historyOpts">
 		
 		<a class="row btn btn-default sidebar-btn" href="{{ route('equipment.admin.checkouts', ['type' => 'camera-in']) }}"><span>&emsp;<i class="fa fa-camera" aria-hidden="true"></i> Camera</span></a>
 		<a class="row btn btn-default sidebar-btn" href="{{ route('equipment.admin.checkouts', ['type' => 'other-in']) }}"><span>&emsp;<i class="fa fa-headphones" aria-hidden="true"></i> Other</span></a>
 
-	</div>
+	</div>--}}
 	<!-- end history dropdown -->
 	<!-- settings dropdown -->
 	<div class="row btn btn-default sidebar-btn" id="settings"><span><i class="fa fa-cog" aria-hidden="true"></i> Settings <i class="fa fa-chevron-down"></i></span></div>
