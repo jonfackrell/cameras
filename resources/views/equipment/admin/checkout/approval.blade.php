@@ -53,20 +53,13 @@
 									</div>
 								</td>
 								<td>
-									@php
-										if(is_null($checkout->checked_in_at)){
-											$checkout->status = 'pending';
-										}else{
-											$checkout->status = 'notify';
-										}
-									@endphp
 									{!! BootForm::select("Action", "actions[]")
 													->options([
 														'notify' => 'Notify',
 														'remove' => 'Remove',
 														'pending' => 'Pending',
 													])
-													->select($checkout->status)->hideLabel();
+													->select('pending')->hideLabel();
 									!!}
 								</td>
 							</tr>
