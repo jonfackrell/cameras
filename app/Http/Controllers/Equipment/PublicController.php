@@ -15,11 +15,20 @@ class PublicController extends Controller
      */
     public function index()
     {
+        $equipmentTypes = EquipmentType::withCount('equipment', 'available')->where('public_display', true);
         if(auth()->guard('patrons')->user()->canCheckout('camera')){
-            $equipmentTypes = EquipmentType::withCount('equipment', 'available')->where('public_display', true)->get();
+            $equipmentTypes = $equipmentTypes->whereIn('group', ['camera', 'other']);
         }else{
-            $equipmentTypes = EquipmentType::withCount('equipment', 'available')->where('group', 'other')->where('public_display', true)->get();
+            $equipmentTypes = $equipmentTypes->whereIn('group', ['other']);
         }
+
+        if(auth()->guard('patrons')->user()->getRole() == 'FAC'){
+            // return all
+        }else{
+            $equipmentTypes = $equipmentTypes->where('faculty_only', '!=', 1);
+        }
+
+        $equipmentTypes = $equipmentTypes->get();
 
         return view('equipment.public.index', compact('equipmentTypes'));
     }
