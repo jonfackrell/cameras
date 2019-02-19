@@ -90,6 +90,7 @@ class Printer extends Model implements Sortable
             ->all();
 
         $time = PrintJob::select(\DB::raw('SUM(time) as total'))
+                    ->where('printer', $this->attributes['id'])
                     ->whereIn('status', $statuses)->first()->total + 30;
 
         return $date->addMinutes($time);
