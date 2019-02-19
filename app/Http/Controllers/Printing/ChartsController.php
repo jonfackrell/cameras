@@ -25,7 +25,7 @@ class ChartsController extends Controller
                                         ->where('department', auth()->guard('web')->user()->department)->get()
                                     , 'line', 'highcharts')
                                 ->title('Prints by Month')
-                                ->lastByMonth(12, true)
+                                ->lastByMonth(18, true)
 
                                 ->elementLabel("Printed 3D Objects")
                                 ->dimensions(0,500);
