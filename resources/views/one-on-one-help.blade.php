@@ -28,7 +28,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-10 col-12">
             <p>
-                The Mac Lab Assistants come from a variety of majors and help students with anything from design projects created in Illustrator to setting a 3D model created and printing it for a design course.
+                The Mac Lab student assistants are available during the libraries hours of operation. Students are hired with previous knowledge and experience in several of the applications that the lab supports and provided with time for professional development to further their technical skill in areas they are expected to support. They strive to give high quality professional customer service as they help groups and provide one-on-one help.
             </p>
         </div>
     </div>
