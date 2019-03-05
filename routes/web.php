@@ -49,6 +49,7 @@ Route::middleware(['mail'])->group(function () {
             Route::post('/admin/settings', 'SettingsController@update')->name('settings.update');
 
             Route::resource('/admin/user', 'UserController');
+            Route::resource('/admin/page', 'PageController');
             Route::post('/admin/color/sort', 'ColorController@sort')->name('color.sort');
             Route::resource('/admin/color', 'ColorController');
             Route::post('/admin/notification/sort', 'NotificationController@sort')->name('notification.sort');

@@ -1,40 +1,37 @@
 @extends('3d.layouts.admin')
 
+@section('title')
+    Pages
+@endsection
+
+
 @section('content')
 
-    @if(auth()->guard('web')->user()->isSuperUser() || auth()->guard('web')->user()->can('create-colors'))
-        {!! BootForm::open()->action(route('3d.color.index'))->post() !!}
+    @if(auth()->guard('web')->user()->isSuperUser() || auth()->guard('web')->user()->can('create-pages'))
+        {!! BootForm::open()->action(route('3d.page.index'))->post() !!}
         {!! BootForm::text('Name', 'name')->required() !!}
-        {!! BootForm::select('Printer', 'printer')->options($printers->pluck('name', 'id')) !!}
-        <div id="cp2" class="input-group colorpicker-component">
-            <input type="text" value="#00AABB" class="form-control" id="hex_code" name="hex_code"/>
-            <span class="input-group-addon"><i></i></span>
-        </div>
+        {!! BootForm::text('Slug', 'slug')->required() !!}
         {!! BootForm::submit('Submit') !!}
         {!! BootForm::close() !!}
     @endif
 
-    @if($colors->count() > 0)
+    @if($pages->count() > 0)
         <table class="table table-striped sorted_table">
             <thead>
             <tr>
-                <th>Color</th>
-                <th>Printer</th>
+                <th>Name</th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
-            @foreach($colors as $color)
-                <tr data-id="{{ $color->id }}">
+            @foreach($pages as $page)
+                <tr data-id="{{ $page->id }}">
                     <th>
-                        <a href="{{ route('3d.color.edit', ['color' => $color]) }}">{{ $color->name }}</a>
+                        <a href="{{ route('3d.page.edit', ['page' => $page]) }}">{{ $page->name }}</a>
                     </th>
                     <td>
-                        {{ $color->owningPrinter->name }}
-                    </td>
-                    <td>
-                        @if(auth()->guard('web')->user()->isSuperUser() || auth()->guard('web')->user()->can('delete-colors'))
-                            {!! BootForm::open()->action(route('3d.color.destroy', $color->id))->delete() !!}
+                        @if(auth()->guard('web')->user()->isSuperUser() || auth()->guard('web')->user()->can('delete-page'))
+                            {!! BootForm::open()->action(route('3d.page.destroy', $page->id))->delete() !!}
                             {!! BootForm::submit('Delete', 'delete')->class('btn btn-danger btn-xs delete') !!}
                             {!! BootForm::close() !!}
                         @endif
@@ -47,7 +44,7 @@
     @else
         <div class="alert alert-danger" style="margin-top: 10px;">
             <p>
-                You currently do not have any Filament Colors setup in your system.
+                You currently do not have any Pages setup in your system.
             </p>
         </div>
     @endif

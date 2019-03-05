@@ -1,7 +1,7 @@
 @extends('3d.layouts.public')
 
 @section('title')
-    3D Printing
+    {{ $page->name }}
 @endsection
 
 @section('content')
@@ -10,7 +10,10 @@
             Due to the Holidays, 3D Printing will resume on January 3rd, 2019. 
         </p>
     </div>--}}
-    <div class="col-xs-3">
+
+    {!! $page->content !!}
+
+    {{--<div class="col-xs-3">
         <!-- required for floating -->
         <!-- Nav tabs -->
         <ul class="nav nav-tabs tabs-left">
@@ -142,5 +145,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>--}}
+
+
 @endsection

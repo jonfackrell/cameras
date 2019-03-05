@@ -5,6 +5,7 @@
 	{!! BootForm::open()->action(route('3d.color.update', $color))->put() !!}
 	  {!! BootForm::bind($color) !!}
 	  {!! BootForm::text('Name', 'name') !!}
+	  {!! BootForm::select('Printer', 'printer')->options($printers->pluck('name', 'id')) !!}
 	  <div id="cp2" class="input-group colorpicker-component">
 	  {!! BootForm::text('Color', 'hex_code') !!}
   		

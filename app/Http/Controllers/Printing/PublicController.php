@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Printing;
 
+use App\Models\Page;
 use App\Models\Patron;
 use App\Models\Printer;
 use App\Models\Setting;
@@ -19,7 +20,8 @@ class PublicController extends Controller
     public function index()
     {
         $public = Setting::where('group', 'PUBLIC')->get();
-        return view('3d.public.index', compact('public'));
+        $page = Page::where('slug', '3d-printing-home')->first();
+        return view('3d.public.index', compact('public', 'page'));
     }
 
     /**

@@ -29,6 +29,9 @@
                     @can('view-notifications')
                         <li><a href="{{ route('3d.notification.index') }}">Notifications</a></li>
                     @endcan
+                    @if(auth()->guard('web')->user()->can('view-pages'))
+                        <li><a href="{{ route('3d.page.index') }}">Pages</a></li>
+                    @endcan
                     @if(auth()->guard('web')->user()->isSuperUser())
                         <li><a href="{{ route('3d.admin.patron.index') }}">Patrons</a></li>
                     @endcan

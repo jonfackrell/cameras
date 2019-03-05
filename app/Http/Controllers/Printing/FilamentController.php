@@ -167,6 +167,7 @@ class FilamentController extends Controller
                     ->join('filaments_colors', 'colors.id', '=', 'filaments_colors.color')
                     ->where('filaments_colors.filament', $filament->id)
                     ->where('filaments_colors.department', auth()->guard('web')->user()->department)
+                    ->where('filaments_colors.printer', $printerid)
                     ->get();
         return view('3d.admin.filament.color-manager', compact('printer', 'filament', 'colors'));
     }
@@ -189,6 +190,7 @@ class FilamentController extends Controller
                 $color = explode('_', $key)[1];
                 $filament_color = FilamentColor::findOrFail(intval($color));
                 $filament_color->quantity = $value;
+                $filament_color->printer = $printerid;
                 $filament_color->save();
             }
         }
