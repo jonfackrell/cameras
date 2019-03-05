@@ -17,8 +17,9 @@ class ColorController extends Controller
      */
     public function index()
     {
-        $colors = Color::orderBy('order_column')->get();
-        return view('3d.admin.color.index', compact('colors'));
+        $colors = Color::with('owningPrinter')->orderBy('order_column')->get();
+        $printers = Printer::all();
+        return view('3d.admin.color.index', compact('colors', 'printers'));
         // $colors = Color::all()->pluck('name','id')->all();
         // return view('3d.admin.color.index', compact('colors'));
     }
@@ -43,13 +44,15 @@ class ColorController extends Controller
     {
         $color = new Color();
         $color->fill($request->all());
+        $color->hex_code = trim($request->get('hex_code'), '#');
         $color->save();
 
         foreach (Filament::all() as $filament){
             foreach(Department::all() as $department){
                 $filament->colors()->attach($color->id, [
                     'quantity' => 0,
-                    'department' => $department->id
+                    'department' => $department->id,
+                    'printer' => $request->get('printer')
                 ]);
             }
         }
@@ -77,8 +80,9 @@ class ColorController extends Controller
     public function edit($id)
     {
         $color = Color::find($id);
+        $printers = Printer::all();
 
-            return view('3d.admin.color.edit', compact('color'));
+        return view('3d.admin.color.edit', compact('color', 'printers'));
     }
 
     /**
@@ -92,6 +96,7 @@ class ColorController extends Controller
     {
         $color = Color::find($id);
         $color->fill($request->all());
+        $color->hex_code = trim($request->get('hex_code'), '#');
         $color->save();
 
         return redirect()->route('3d.color.index');

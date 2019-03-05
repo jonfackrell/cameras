@@ -5,6 +5,7 @@
     @if(auth()->guard('web')->user()->isSuperUser() || auth()->guard('web')->user()->can('create-colors'))
         {!! BootForm::open()->action(route('3d.color.index'))->post() !!}
         {!! BootForm::text('Name', 'name')->required() !!}
+        {!! BootForm::select('Printer', 'printer')->options($printers->pluck('name', 'id')) !!}
         <div id="cp2" class="input-group colorpicker-component">
             <input type="text" value="#00AABB" class="form-control" id="hex_code" name="hex_code"/>
             <span class="input-group-addon"><i></i></span>
@@ -18,6 +19,7 @@
             <thead>
             <tr>
                 <th>Color</th>
+                <th>Printer</th>
                 <th></th>
             </tr>
             </thead>
@@ -27,6 +29,9 @@
                     <th>
                         <a href="{{ route('3d.color.edit', ['color' => $color]) }}">{{ $color->name }}</a>
                     </th>
+                    <td>
+                        {{ $color->owningPrinter->name }}
+                    </td>
                     <td>
                         @if(auth()->guard('web')->user()->isSuperUser() || auth()->guard('web')->user()->can('delete-colors'))
                             {!! BootForm::open()->action(route('3d.color.destroy', $color->id))->delete() !!}
