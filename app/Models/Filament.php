@@ -24,7 +24,7 @@ class Filament extends Model implements Sortable
         else{
             return $this->belongsToMany('App\Models\Color', 'filaments_colors', 'filament', 'color')
                 ->where('department', $department)
-                ->where('printer', $printer)
+                ->where('filaments_colors.printer', $printer)
                 ->where('quantity', '>', $weight)
                 ->get();
         }
