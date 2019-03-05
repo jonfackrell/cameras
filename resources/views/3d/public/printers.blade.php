@@ -29,7 +29,7 @@
                                 <p>{!! $filament->description !!}</p>
                                 <div>
                                     <div style="font-weight: bolder; display: inline-block; vertical-align: top; padding-top: 1px; padding-left: 18px;">Filament Colors: </div>
-                                    @foreach($filament->colors($printer->departmentOwner->id) as $color)
+                                    @foreach($filament->colors($printer->departmentOwner->id, 0, $printer->id) as $color)
                                         <div style="height: 20px; width: 20px; display: inline-block; background-color: #{{ $color->hex_code }}" title="{{ $color->name }}"></div>
                                     @endforeach
                                 </div>
