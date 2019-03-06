@@ -23,7 +23,7 @@
                 {!! $printer->description !!}
                 <div class="row">
                     @foreach($printer->filaments as $filament)
-                        @if($filament->colors($printer->departmentOwner->id)->count() > 0)
+                        @if($filament->colors($printer->departmentOwner->id, 0, $printer->id)->count() > 0)
                             <div class="col-md-12" style="padding-left: 24px;">
                                 <h3><small>{{ $filament->name }}</small></h3>
                                 <p>{!! $filament->description !!}</p>
