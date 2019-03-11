@@ -144,6 +144,8 @@ Route::middleware(['mail'])->group(function () {
 
             Route::get('/admin/equipment', 'EquipmentController@index')->name('admin.equipment.index');
             Route::get('/admin/equipment/create', 'EquipmentController@create')->name('admin.equipment.create');
+            Route::get('/admin/equipment/{equipment}/edit', 'EquipmentController@edit')->name('admin.equipment.edit');
+            Route::put('/admin/equipment/{equipment}', 'EquipmentController@update')->name('admin.equipment.update');
             Route::post('/admin/equipment/create', 'EquipmentController@store')->name('admin.equipment.create');
             Route::post('/admin/equipment/multiply', 'EquipmentController@multiply')->name('admin.equipment.multiply');
 

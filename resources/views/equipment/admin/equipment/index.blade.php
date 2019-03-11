@@ -26,7 +26,7 @@
 			</thead>
 			<tbody>
 			@foreach ($equipment as $equipment1)
-				<tr>
+				<tr onclick="javascript: window.location.href = '{{ route('equipment.admin.equipment.edit', ['equipment' => $equipment1]) }}'" style="cursor: pointer;">
 					<td>
 						@foreach($equipment1->equipment_type->getMedia('equipment-type') as $image)
 							<img class="checkout-thumbnail" src="{{ $image->getUrl('thumb') }}" data-full="{{ $image->getUrl() }}" style="height: 30px; width: auto;"/>

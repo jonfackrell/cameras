@@ -122,7 +122,15 @@ class EquipmentController extends Controller
      */
     public function edit(Equipment $equipment)
     {
-        //
+        $equipmentTypes = EquipmentType::all();
+
+        $equipmentTypesDuplicable = $equipmentTypes->where('duplicable', true);
+
+        $equipmentTypes = $equipmentTypes->groupBy('group');
+
+        $equipmentTypesDuplicable = $equipmentTypesDuplicable->groupBy('group');
+
+        return view('equipment.admin.equipment.edit', compact('equipment', 'equipmentTypes', 'equipmentTypesDuplicable'));
     }
 
     /**
@@ -134,7 +142,21 @@ class EquipmentController extends Controller
      */
     public function update(Request $request, Equipment $equipment)
     {
-        //
+        $equipment->item = $request->get('item');
+        $equipment->barcode = $request->get('barcode');
+        $equipment->group = $request->get('group');
+        $equipment->equipment_type_id = $request->get('type');
+        $equipment->description = $request->get('description');
+
+        $equipment->save();
+
+        if($request->has('file')){
+            $equipment->addAllMediaFromRequest()->each(function ($fileAdder) {
+                $fileAdder->toMediaCollection('equipment');
+            });
+        }
+
+        return redirect()->to( route('equipment.admin.equipment.index') );
     }
 
     /**
