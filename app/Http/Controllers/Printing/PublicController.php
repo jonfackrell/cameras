@@ -44,7 +44,8 @@ class PublicController extends Controller
     public function policy()
     {
         $public = Setting::where('group', 'PUBLIC')->get();
-        return view('3d.public.policy', compact('public'));
+        $page = Page::where('slug', 'policy')->first();
+        return view('3d.public.index', compact('public', 'page'));
     }
 
     /**
