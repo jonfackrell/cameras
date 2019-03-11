@@ -35,11 +35,11 @@ class Checkout extends Model implements HasMedia
     }
 
     public function who_checked_out() {
-        return $this->belongsTo('App\Models\User', 'checked_out_by');
+        return $this->belongsTo('App\Models\User', 'checked_out_by')->withTrashed();
     }
 
     public function who_checked_in() {
-        return $this->belongsTo('App\Models\User', 'checked_in_by');
+        return $this->belongsTo('App\Models\User', 'checked_in_by')->withTrashed();
     }
 
     public function emails() {
