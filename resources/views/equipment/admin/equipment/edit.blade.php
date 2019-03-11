@@ -39,7 +39,7 @@
 				<input type="file" name="file[]" id="file" accept="image/*"/>
 			</div>
 		</div>
-		{!! BootForm::submit('Add Equipment') !!}
+		{!! BootForm::submit('Save Changes') !!}
 		{!! BootForm::close() !!}
 	</div>
 
