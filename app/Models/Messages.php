@@ -24,6 +24,6 @@ class Messages extends Model
      */
     public function employee()
     {
-        return $this->belongsTo(User::class, 'user', 'id');
+        return $this->belongsTo(User::class, 'user', 'id')->withTrashed();
     }
 }
