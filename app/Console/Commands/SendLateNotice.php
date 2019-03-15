@@ -44,7 +44,7 @@ class SendLateNotice extends Command
     public function handle()
     {
         $checkouts = Checkout::whereNull('checked_in_at')
-                                ->where('due_at', '<', Carbon::now())
+                                ->where('due_at', '<', Carbon::now('America/Denver')->tz('UTC'))
                                 ->whereNull('approved_at')
                                 ->get();
 
