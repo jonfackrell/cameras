@@ -49,7 +49,7 @@ class UserController extends Controller
 
         $user = new User();
         $user->fill($request->all());
-        $user->password = str_random(64);
+        $user->password = bcrypt(str_random(16));
 
         if(!$request->has('department')){
             $user->department = auth()->guard('web')->user()->department;
