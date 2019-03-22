@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -28,11 +29,17 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('mail:lateNotice')
                     ->dailyAt('06:00')
+                    ->when(function(){
+                        return Carbon::now()->tz('America/Denver')->englishDayOfWeek != 'Sunday';
+                    })
                     ->timezone('America/Denver')
                     ->thenPing('http://beats.envoyer.io/heartbeat/rI4WtTDiUlirfXa');
 
         $schedule->command('mail:dueNotice')
                     ->dailyAt('06:00')
+                    ->when(function(){
+                        return Carbon::now()->tz('America/Denver')->englishDayOfWeek != 'Sunday';
+                    })
                     ->timezone('America/Denver')
                     ->thenPing('http://beats.envoyer.io/heartbeat/9hVl1DP5F2G3NHR');
 
