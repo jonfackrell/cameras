@@ -12,6 +12,7 @@ use App\Models\Patron;
 use App\Models\Checkout;
 use App\Models\Equipment;
 use App\Models\EquipmentType;
+use phpDocumentor\Reflection\Types\Null_;
 
 class CheckoutController extends Controller
 {
@@ -371,7 +372,12 @@ class CheckoutController extends Controller
     {
         $checkouts = Checkout::whereIn('id', $request->get('equipment', []));
         
-        $checkouts->update(['checked_in_at' => Carbon::now(), 'checked_in_by' => auth()->guard('web')->user()->id, 'checkin_note' => $request->get('note')]);
+        $checkouts->update([
+            'approved_at' => NULL,
+            'checked_in_at' => Carbon::now(),
+            'checked_in_by' => auth()->guard('web')->user()->id,
+            'checkin_note' => $request->get('note')
+        ]);
 
         Equipment::whereIn('id', $checkouts->pluck('equipment_id'))->update(['checked_out_at' => NULL]);
         

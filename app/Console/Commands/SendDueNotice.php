@@ -43,7 +43,7 @@ class SendDueNotice extends Command
     public function handle()
     {
         $checkouts = Checkout::whereNull('checked_in_at')
-                                ->whereDate('due_at', Carbon::now('America/Denver')->tz('UTC')->toDateString())
+                                ->whereDate('due_at', Carbon::now()->toDateString())
                                 ->get();
 
         $checkoutsByPatron = $checkouts->groupBy('patron_id');
