@@ -32,7 +32,7 @@
                 'tripod-head' => 'Tripod Head',
                 'tripod-hand' => 'Tripod Handle'
             ])->required() !!}
-		{!! BootForm::text('Description', 'description') !!}
+		{!! BootForm::text('Serial Number', 'description') !!}
 		<div class="row" style="margin: 10px -15px 15px;">
 			<div class="col">
 				<label class="control-label" for="file">Image</label>
