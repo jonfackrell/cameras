@@ -151,6 +151,7 @@ Route::middleware(['mail'])->group(function () {
 
             Route::get('/admin/reports', 'CheckoutReportController@index')->name('admin.report.index');
             Route::post('/admin/reports/export', 'CheckoutReportController@export')->name('admin.report.export');
+            Route::post('/admin/reports/equipment/export', 'CheckoutReportController@equipmentExport')->name('admin.report.equipment.export');
 
 
             Route::get('/admin/{patron}', 'AdminController@show')->name('admin.patron.show');

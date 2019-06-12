@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Equipment;
 
 use App\Exports\CheckoutsExport;
+use App\Exports\EquipmentExport;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -30,6 +31,18 @@ class CheckoutReportController extends Controller
     {
 
         return Excel::download(new CheckoutsExport($request), 'checkouts.xlsx');
+    }
+
+
+    /**
+     * Export equipment list.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function equipmentExport(Request $request)
+    {
+
+        return Excel::download(new EquipmentExport($request), 'equipment.xlsx');
     }
 
 }
