@@ -20,6 +20,18 @@
             </div>
         {!! BootForm::close() !!}
     </div>
+    <div class="clearfix">&nbsp;</div>
+    <div class="clearfix">&nbsp;</div>
+    <h2>Export Equipment</h2>
+    <div class="col-12">
+        {!! BootForm::open()->action(route('equipment.admin.report.equipment.export'))->post() !!}
+        <div class="row">
+            <div class="col">
+                {!! BootForm::submit('Submit') !!}
+            </div>
+        </div>
+        {!! BootForm::close() !!}
+    </div>
 @endsection
 
 
